@@ -459,8 +459,16 @@
         // === Gemini AI Integration ===
         
         async function callGemini(prompt) {
-            const apiKey = "AIzaSyAn3y0qPbMJkwS77_iRgVNv2gGi72nilmk"; // API key is provided by the execution environment
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            // החלף את המרכאות הריקות במפתח ה-API שלך
+            const apiKey = ""; 
+            
+            if (!apiKey) {
+                alert("נא להגדיר מפתח API בקובץ הקוד (שורה 800 בערך) כדי שהבינה המלאכותית תעבוד.");
+                return "AIzaSyAn3y0qPbMJkwS77_iRgVNv2gGi72nilmk";
+            }
+
+            // שיניתי למודל הציבורי הסטנדרטי שעובד עם מפתחות אישיים (Flash 1.5)
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
             try {
                 const response = await fetch(url, {
@@ -477,12 +485,16 @@
                     })
                 });
 
-                if (!response.ok) throw new Error('Network response was not ok');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('API Error:', errorData);
+                    throw new Error('Network response was not ok');
+                }
                 const data = await response.json();
                 return data.candidates[0].content.parts[0].text;
             } catch (error) {
                 console.error('Error:', error);
-                return "אופס, נראה שהייתה שגיאה בתקשורת. אנא נסה שוב מאוחר יותר.";
+                return "אופס, נראה שהייתה שגיאה בתקשורת עם ה-AI. אנא וודא שהמפתח תקין.";
             }
         }
 
