@@ -52,6 +52,42 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* אנימציות לתרשים זרימה (Scenario) */
+        .scenario-bg {
+            background-color: #1e1e2e;
+            background-image: radial-gradient(#3b3b4f 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .node {
+            transition: all 0.3s ease;
+        }
+        .node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        .connection-line {
+            position: absolute;
+            height: 4px;
+            background: #4b5563;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .connection-dot {
+            position: absolute;
+            width: 20px;
+            height: 4px;
+            background: #60a5fa;
+            border-radius: 2px;
+            animation: flow 2s infinite linear;
+            box-shadow: 0 0 10px #60a5fa;
+        }
+        @keyframes flow {
+            0% { left: -20%; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { left: 120%; opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -62,10 +98,6 @@
             <div class="flex justify-between h-20 items-center">
                 <!-- אזור הלוגו החכם -->
                 <div class="flex items-center gap-2">
-                    <!-- 
-                        אפשרות 1: תמונה (מוסתרת כברירת מחדל עד שתיטען בהצלחה)
-                        נסיון לטעון דרך שרת חלופי של גוגל, או הקובץ המקומי שלך
-                    -->
                     <img id="logo-img" 
                          src="https://lh3.googleusercontent.com/d/1CKR9NBQiGagmDJ-SIFRYl1DDqwTFws82" 
                          alt="AutoMaster Logo" 
@@ -73,10 +105,6 @@
                          onload="this.classList.remove('hidden'); document.getElementById('fallback-logo').classList.add('hidden');"
                          onerror="this.classList.add('hidden'); document.getElementById('fallback-logo').classList.remove('hidden');">
                     
-                    <!-- 
-                        אפשרות 2: לוגו חלופי (מוצג כברירת מחדל או אם התמונה נכשלת)
-                        זה מבטיח שלא יראו אייקון שבור לעולם!
-                    -->
                     <div id="fallback-logo" class="flex items-center gap-2">
                         <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
                             <i class="fas fa-robot"></i>
@@ -92,7 +120,7 @@
                     <a href="#what-is" class="text-slate-600 hover:text-blue-600 font-medium">מה זה?</a>
                     <a href="#ai-tools" class="text-blue-600 font-bold hover:text-blue-800">נסה בעצמך ✨</a>
                     <a href="#sectors" class="text-slate-600 hover:text-blue-600 font-medium">פתרונות</a>
-                    <a href="#benefits" class="text-slate-600 hover:text-blue-600 font-medium">למה אנחנו</a>
+                    <a href="#how-it-works" class="text-slate-600 hover:text-blue-600 font-medium">איך זה קורה</a>
                 </div>
                 <!-- כפתור עם קישור לפתיחת הצ'אט -->
                 <button onclick="handleChatButtonClick()" class="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-md">
@@ -109,7 +137,6 @@
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
         <div class="max-w-5xl mx-auto text-center relative z-10">
-            <!-- כותרת ראשית מעודכנת -->
             <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                 העסק שלך יכול לרוץ לבד.<br>
                 <span class="text-blue-400">אוטומציה עסקית שמחליפה עבודה ידנית.</span>
@@ -186,7 +213,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- AI Tool 1: Idea Generator -->
+                <!-- AI Tool 1 -->
                 <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl ai-glow">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white text-2xl shadow-lg">
@@ -207,15 +234,13 @@
                             <div id="ideaSpinner" class="loading-spinner hidden border-white border-t-transparent"></div>
                         </button>
                     </div>
-                    
-                    <!-- Result Area -->
                     <div id="ideaResult" class="mt-6 p-4 bg-slate-800/50 rounded-lg border border-white/10 hidden text-right">
                         <h4 class="font-bold text-yellow-400 mb-2 border-b border-white/10 pb-2">ההצעות שלי:</h4>
                         <div id="ideaContent" class="text-sm space-y-2 leading-relaxed whitespace-pre-line"></div>
                     </div>
                 </div>
 
-                <!-- AI Tool 2: Email Generator -->
+                <!-- AI Tool 2 -->
                 <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl ai-glow">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white text-2xl shadow-lg">
@@ -236,8 +261,6 @@
                             <div id="emailSpinner" class="loading-spinner hidden border-white border-t-transparent"></div>
                         </button>
                     </div>
-                    
-                    <!-- Result Area -->
                     <div id="emailResult" class="mt-6 p-4 bg-slate-800/50 rounded-lg border border-white/10 hidden text-right">
                         <h4 class="font-bold text-green-400 mb-2 border-b border-white/10 pb-2">הנוסח המוצע:</h4>
                         <div class="relative">
@@ -261,8 +284,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- חנויות ואיקומרס -->
+                <!-- חנויות -->
                 <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
                     <div class="icon-wrapper w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600 text-2xl">
                         <i class="fas fa-shopping-cart"></i>
@@ -276,7 +298,7 @@
                     </ul>
                 </div>
 
-                <!-- בתי ספר ומוסדות -->
+                <!-- בתי ספר -->
                 <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-orange-500">
                     <div class="icon-wrapper w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-6 text-orange-600 text-2xl">
                         <i class="fas fa-graduation-cap"></i>
@@ -290,7 +312,7 @@
                     </ul>
                 </div>
 
-                <!-- משרדים ומזכירות -->
+                <!-- משרדים -->
                 <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-purple-500">
                     <div class="icon-wrapper w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600 text-2xl">
                         <i class="fas fa-briefcase"></i>
@@ -303,7 +325,6 @@
                         <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול משימות צוות ופולו-אפ ללקוחות.</li>
                     </ul>
                 </div>
-
             </div>
             
             <div class="text-center mt-12">
@@ -311,6 +332,88 @@
                 <button onclick="handleChatButtonClick()" class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-slate-700 transition shadow-lg flex items-center mx-auto gap-2">
                     <i class="fas fa-paper-plane"></i> שלח לי הודעה בצ'אט
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: How It Works / Behind the Scenes -->
+    <section id="how-it-works" class="py-24 bg-slate-900 text-white relative overflow-hidden scenario-bg">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">מאחורי הקלעים: איך הקסם קורה?</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    אנחנו בונים עבורך "מוח" דיגיטלי שמחבר בין כל האפליקציות שלך. הנה הצצה לתוך המערכת שחוסכת לך זמן.
+                </p>
+                <div class="mt-6 flex justify-center gap-4 text-sm font-bold tracking-wider text-gray-500">
+                    <span class="flex items-center gap-2"><i class="fas fa-project-diagram text-purple-500"></i> MAKE (INTEGROMAT)</span>
+                    <span class="text-gray-700">|</span>
+                    <span class="flex items-center gap-2"><i class="fas fa-share-alt text-pink-500"></i> N8N AUTOMATION</span>
+                </div>
+            </div>
+
+            <!-- Scenario Visualization Container -->
+            <div class="relative max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                
+                <!-- תרשים הזרימה -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 relative z-10">
+                    
+                    <!-- Node 1: Trigger -->
+                    <div class="node flex flex-col items-center gap-3 relative z-10 w-full md:w-auto">
+                        <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] border-2 border-green-500">
+                            <i class="fab fa-wpforms text-4xl text-green-600"></i>
+                        </div>
+                        <div class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-600 text-center">
+                            <span class="text-xs text-gray-400 block">טריגר</span>
+                            <span class="font-bold text-sm">ליד חדש נכנס</span>
+                        </div>
+                    </div>
+
+                    <!-- Connection Line 1 -->
+                    <div class="hidden md:block flex-1 h-[2px] bg-gray-600 relative overflow-hidden mx-4">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent w-1/2 animate-[flow_1.5s_infinite_linear]"></div>
+                    </div>
+                    <!-- Mobile Arrow -->
+                    <i class="fas fa-arrow-down text-gray-600 text-2xl md:hidden"></i>
+
+                    <!-- Node 2: Logic (Make/N8N) -->
+                    <div class="node flex flex-col items-center gap-3 relative z-10 w-full md:w-auto">
+                        <div class="w-24 h-24 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(124,58,237,0.4)] border-4 border-gray-800 animate-pulse">
+                            <i class="fas fa-brain text-5xl text-white"></i>
+                        </div>
+                        <div class="bg-gray-800 px-4 py-2 rounded-lg border border-purple-500/50 text-center">
+                            <span class="text-xs text-purple-400 block">המוח (Make/N8N)</span>
+                            <span class="font-bold text-sm">עיבוד נתונים חכם</span>
+                        </div>
+                    </div>
+
+                    <!-- Connection Line 2 -->
+                    <div class="hidden md:block flex-1 h-[2px] bg-gray-600 relative overflow-hidden mx-4">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent w-1/2 animate-[flow_1.5s_infinite_linear] delay-75"></div>
+                    </div>
+                    <!-- Mobile Arrow -->
+                    <i class="fas fa-arrow-down text-gray-600 text-2xl md:hidden"></i>
+
+                    <!-- Node 3: Actions (Split) -->
+                    <div class="node flex flex-col items-center gap-4 relative z-10 w-full md:w-auto">
+                        <!-- Action A -->
+                        <div class="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 w-full">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+                            </div>
+                            <span class="text-sm font-bold">הודעה ללקוח</span>
+                        </div>
+                        <!-- Action B -->
+                        <div class="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 w-full">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-blue-600 text-xl"></i>
+                            </div>
+                            <span class="text-sm font-bold">חשבונית במייל</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Background glow effect -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-500/10 filter blur-[100px] rounded-full pointer-events-none"></div>
             </div>
         </div>
     </section>
