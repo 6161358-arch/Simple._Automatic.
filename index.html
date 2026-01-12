@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אוטומציה עסקית מתקדמת | לייעל את העסק שלך</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+        body { font-family: 'Rubik', sans-serif; }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* אנימציה עדינה לאייקונים */
+        .feature-card:hover .icon-wrapper {
+            transform: scale(1.1) rotate(5deg);
+            transition: all 0.3s ease;
+        }
+
+        /* אנימציה למודל הנחיה */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-animate {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* סגנונות לאזור ה-AI */
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+            transition: all 0.3s ease;
+        }
+        .ai-glow:hover {
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+            transform: translateY(-2px);
+        }
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- אזור הלוגו החכם -->
+                <div class="flex items-center gap-2">
+                    <!-- 
+                        אפשרות 1: תמונה (מוסתרת כברירת מחדל עד שתיטען בהצלחה)
+                        נסיון לטעון דרך שרת חלופי של גוגל, או הקובץ המקומי שלך
+                    -->
+                    <img id="logo-img" 
+                         src="https://lh3.googleusercontent.com/d/1CKR9NBQiGagmDJ-SIFRYl1DDqwTFws82" 
+                         alt="AutoMaster Logo" 
+                         class="h-16 w-auto object-contain hidden"
+                         onload="this.classList.remove('hidden'); document.getElementById('fallback-logo').classList.add('hidden');"
+                         onerror="this.classList.add('hidden'); document.getElementById('fallback-logo').classList.remove('hidden');">
+                    
+                    <!-- 
+                        אפשרות 2: לוגו חלופי (מוצג כברירת מחדל או אם התמונה נכשלת)
+                        זה מבטיח שלא יראו אייקון שבור לעולם!
+                    -->
+                    <div id="fallback-logo" class="flex items-center gap-2">
+                        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="font-bold text-xl text-slate-800 leading-none">AutoMaster</span>
+                            <span class="text-xs text-slate-500">פתרונות אוטומציה</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex space-x-8 space-x-reverse">
+                    <a href="#what-is" class="text-slate-600 hover:text-blue-600 font-medium">מה זה?</a>
+                    <a href="#ai-tools" class="text-blue-600 font-bold hover:text-blue-800">נסה בעצמך ✨</a>
+                    <a href="#sectors" class="text-slate-600 hover:text-blue-600 font-medium">פתרונות</a>
+                    <a href="#benefits" class="text-slate-600 hover:text-blue-600 font-medium">למה אנחנו</a>
+                </div>
+                <!-- כפתור עם קישור לפתיחת הצ'אט -->
+                <button onclick="handleChatButtonClick()" class="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-md">
+                    דבר איתנו
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white py-24 px-4 relative overflow-hidden">
+        <!-- אלמנטים דקורטיביים ברקע -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <!-- כותרת ראשית מעודכנת -->
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                העסק שלך יכול לרוץ לבד.<br>
+                <span class="text-blue-400">אוטומציה עסקית שמחליפה עבודה ידנית.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto">
+                אוטומציה עסקית חוסכת לך שעות של עבודה שחורה, מונעת טעויות אנוש ומגדילה את הרווחיות.
+                אנחנו נחבר בין המערכות שלך כדי שהכל יעבוד מעצמו.
+            </p>
+            <div class="flex justify-center gap-4 flex-col sm:flex-row">
+                <button onclick="handleChatButtonClick()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition transform hover:-translate-y-1 text-lg">
+                    <i class="fas fa-comments ml-2"></i> התחל ייעוץ
+                </button>
+                <a href="#ai-tools" class="bg-white text-blue-900 border-2 border-white hover:bg-slate-100 font-bold py-4 px-10 rounded-lg transition text-lg flex items-center gap-2">
+                    <i class="fas fa-magic"></i> בוא לנסות בחינם
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- מה זה אוטומציה? -->
+    <section id="what-is" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">רגע, איך זה עובד בעצם?</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+                    אוטומציה היא החיבור החכם בין המערכות שאתה כבר עובד איתן (כמו אימייל, וואטסאפ, CRM, אקסל) כדי לבצע פעולות באופן עצמאי.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 text-3xl">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">טריגר (פעולה ראשונית)</h3>
+                    <p class="text-slate-600">לקוח ממלא טופס, מייל נכנס, או תשלום התקבל.</p>
+                </div>
+                <div class="hidden md:flex items-center justify-center text-slate-300 text-4xl">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="p-6">
+                    <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 text-3xl">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">הקסם קורה</h3>
+                    <p class="text-slate-600">המערכת מעבדת את המידע ללא מגע יד אדם.</p>
+                </div>
+                <div class="hidden md:flex items-center justify-center text-slate-300 text-4xl">
+                    <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="p-6">
+                    <div class="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-6 text-purple-600 text-3xl">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">תוצאה (פעולה סופית)</h3>
+                    <p class="text-slate-600">נשלחת חשבונית, נוצר קשר בוואטסאפ, הלקוח נכנס ליומן.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Gemini AI Tools -->
+    <section id="ai-tools" class="py-20 bg-gradient-to-br from-slate-900 to-blue-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')] opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="bg-blue-500/20 text-blue-200 text-sm font-bold px-4 py-1 rounded-full border border-blue-400/30 inline-block mb-4">
+                    <i class="fas fa-sparkles mr-2"></i> מופעל ע"י Gemini AI
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">מעבדת האוטומציה החכמה</h2>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto">
+                    רוצה לראות מה אוטומציה יכולה לעשות בשבילך? תן לבינה המלאכותית שלנו להציע לך רעיונות ופתרונות ברגע.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- AI Tool 1: Idea Generator -->
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl ai-glow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white text-2xl shadow-lg">
+                            <i class="far fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">יועץ אוטומציה אישי</h3>
+                    </div>
+                    <p class="text-blue-100 mb-6">ספר לי מה העסק שלך, ואני אמצא לך 3 תהליכים שכדאי לך לאטמט כדי לחסוך זמן וכסף.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-blue-200">סוג העסק שלך</label>
+                            <input type="text" id="businessInput" placeholder="לדוגמה: משרד רואי חשבון, חנות פרחים, מאמן כושר..." 
+                                class="w-full px-4 py-3 rounded-lg bg-white/90 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 border-0">
+                        </div>
+                        <button onclick="generateIdeas()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg transition shadow-lg flex items-center justify-center gap-2">
+                            <span id="ideaBtnText">תן לי רעיונות ✨</span>
+                            <div id="ideaSpinner" class="loading-spinner hidden border-white border-t-transparent"></div>
+                        </button>
+                    </div>
+                    
+                    <!-- Result Area -->
+                    <div id="ideaResult" class="mt-6 p-4 bg-slate-800/50 rounded-lg border border-white/10 hidden text-right">
+                        <h4 class="font-bold text-yellow-400 mb-2 border-b border-white/10 pb-2">ההצעות שלי:</h4>
+                        <div id="ideaContent" class="text-sm space-y-2 leading-relaxed whitespace-pre-line"></div>
+                    </div>
+                </div>
+
+                <!-- AI Tool 2: Email Generator -->
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl ai-glow">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white text-2xl shadow-lg">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">מחולל הודעות אוטומטי</h3>
+                    </div>
+                    <p class="text-blue-100 mb-6">צריך לשלוח הודעה אוטומטית ללקוחות? כתוב לי את הנושא, ואני אנסח לך הודעה מקצועית.</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-blue-200">נושא ההודעה</label>
+                            <input type="text" id="emailInput" placeholder="לדוגמה: תזכורת לתור מחר, תודה על קנייה, עגלה נטושה..." 
+                                class="w-full px-4 py-3 rounded-lg bg-white/90 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-400 border-0">
+                        </div>
+                        <button onclick="generateEmail()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition shadow-lg flex items-center justify-center gap-2">
+                            <span id="emailBtnText">נסח לי הודעה ✨</span>
+                            <div id="emailSpinner" class="loading-spinner hidden border-white border-t-transparent"></div>
+                        </button>
+                    </div>
+                    
+                    <!-- Result Area -->
+                    <div id="emailResult" class="mt-6 p-4 bg-slate-800/50 rounded-lg border border-white/10 hidden text-right">
+                        <h4 class="font-bold text-green-400 mb-2 border-b border-white/10 pb-2">הנוסח המוצע:</h4>
+                        <div class="relative">
+                            <div id="emailContent" class="text-sm leading-relaxed whitespace-pre-line bg-slate-900/50 p-3 rounded border border-white/5 select-all"></div>
+                            <button onclick="copyToClipboard('emailContent')" class="absolute top-0 left-0 text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded text-white transition">
+                                <i class="far fa-copy"></i> העתק
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- סקטורים ורעיונות -->
+    <section id="sectors" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">איך אני יכול לעזור לעסק שלך?</h2>
+                <p class="text-slate-600 mt-2">דוגמאות אמיתיות מהשטח</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- חנויות ואיקומרס -->
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
+                    <div class="icon-wrapper w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600 text-2xl">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">חנויות ומסחר אלקטרוני</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> שליחת חשבונית אוטומטית ברגע הרכישה.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הודעת וואטסאפ ללקוח: "ההזמנה בדרך!".</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> התראה למנהל המלאי כשמוצר עומד להיגמר.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> <strong>שחזור עגלה נטושה:</strong> מייל אוטומטי ללקוח שלא סיים קנייה.</li>
+                    </ul>
+                </div>
+
+                <!-- בתי ספר ומוסדות -->
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-orange-500">
+                    <div class="icon-wrapper w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-6 text-orange-600 text-2xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">בתי ספר ומוסדות לימוד</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הרשמה באתר -> יצירת תיק תלמיד במערכת.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> תזכורות תשלום אוטומטיות להורים.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הפקת תעודות וסנכרון ציונים בלחיצת כפתור.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול ימי הורים ושיבוץ תורים אוטומטי.</li>
+                    </ul>
+                </div>
+
+                <!-- משרדים ומזכירות -->
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-purple-500">
+                    <div class="icon-wrapper w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600 text-2xl">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">משרדים ומזכירות</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> מיון אוטומטי של מיילים והפנייה לגורם מטפל.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> <strong>תיאום פגישות:</strong> הלקוח בוחר זמן, היומן מתעדכן, וזום נשלח לבד.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> יצירת חוזים ומסמכים מתוך טופס פרטים.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול משימות צוות ופולו-אפ ללקוחות.</li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-xl font-medium text-slate-700 mb-6">יש לך רעיון אחר? בוא נבדוק אם אפשר להפוך אותו לאוטומטי.</p>
+                <button onclick="handleChatButtonClick()" class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-slate-700 transition shadow-lg flex items-center mx-auto gap-2">
+                    <i class="fas fa-paper-plane"></i> שלח לי הודעה בצ'אט
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">AutoMaster</h2>
+            <p class="mb-8">הופכים טכנולוגיה לשקט נפשי.</p>
+            <div class="flex justify-center gap-6 mb-8">
+                <a href="#" class="hover:text-blue-500 transition"><i class="fab fa-facebook fa-lg"></i></a>
+                <a href="#" class="hover:text-pink-500 transition"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+            <p class="text-sm">© 2026 כל הזכויות שמורות פשוט. אוטומט..</p>
+        </div>
+    </footer>
+
+    <!-- Chat Widget Integration -->
+    <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
+    <script>ktt10.setup({id:"NYJSD4N2WeSFBFnY51h",accountId:"1133996",color:"#2563eb"})</script>
+
+    <!-- מודל הנחיה במקרה שהצ'אט לא נפתח אוטומטית -->
+    <div id="chatGuidanceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeChatGuidance()">
+        <div class="bg-white rounded-xl p-6 max-w-sm mx-4 text-center shadow-2xl modal-animate relative" onclick="event.stopPropagation()">
+            <button onclick="closeChatGuidance()" class="absolute top-2 right-3 text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-3xl">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">אנחנו זמינים כאן!</h3>
+            <p class="text-slate-600 mb-6">
+                כדי להתחיל לשוחח איתנו, אנא לחצו על <strong>העיגול הכחול</strong> המופיע בתחתית המסך.
+            </p>
+            <div class="animate-bounce text-blue-600 text-2xl">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // === Gemini AI Integration ===
+        
+        async function callGemini(prompt) {
+            const apiKey = "AIzaSyAn3y0qPbMJkwS77_iRgVNv2gGi72nilmk"; // API key is provided by the execution environment
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('Error:', error);
+                return "אופס, נראה שהייתה שגיאה בתקשורת. אנא נסה שוב מאוחר יותר.";
+            }
+        }
+
+        // כלי 1: יועץ אוטומציה
+        async function generateIdeas() {
+            const input = document.getElementById('businessInput').value;
+            if (!input) {
+                alert('אנא הכנס סוג עסק');
+                return;
+            }
+
+            // UI Loading State
+            document.getElementById('ideaSpinner').classList.remove('hidden');
+            document.getElementById('ideaBtnText').textContent = 'חושב...';
+            
+            const prompt = `הצע 3 רעיונות פרקטיים וקצרים לאוטומציה עסקית עבור עסק מסוג: ${input}. כתוב בעברית, ברשימת תבליטים, בטון מקצועי ושיווקי.`;
+            
+            const result = await callGemini(prompt);
+            
+            // UI Reset State
+            document.getElementById('ideaSpinner').classList.add('hidden');
+            document.getElementById('ideaBtnText').textContent = 'תן לי רעיונות ✨';
+            
+            const resultDiv = document.getElementById('ideaResult');
+            document.getElementById('ideaContent').textContent = result;
+            resultDiv.classList.remove('hidden');
+        }
+
+        // כלי 2: מחולל אימיילים
+        async function generateEmail() {
+            const input = document.getElementById('emailInput').value;
+            if (!input) {
+                alert('אנא הכנס נושא להודעה');
+                return;
+            }
+
+            // UI Loading State
+            document.getElementById('emailSpinner').classList.remove('hidden');
+            document.getElementById('emailBtnText').textContent = 'מנסח...';
+            
+            const prompt = `כתוב נוסח קצר ומקצועי להודעת וואטסאפ או אימייל אוטומטית ללקוח בנושא: ${input}. כתוב בעברית, ללא כותרות מיותרות, רק הטקסט לשליחה.`;
+            
+            const result = await callGemini(prompt);
+            
+            // UI Reset State
+            document.getElementById('emailSpinner').classList.add('hidden');
+            document.getElementById('emailBtnText').textContent = 'נסח לי הודעה ✨';
+            
+            const resultDiv = document.getElementById('emailResult');
+            document.getElementById('emailContent').textContent = result;
+            resultDiv.classList.remove('hidden');
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('הטקסט הועתק ללוח!');
+            });
+        }
+
+
+        // === Chat Widget Logic ===
+        function handleChatButtonClick() {
+            let widgetOpened = false;
+
+            // 1. נסיון לפתוח דרך פקודות JS מוכרות
+            if (typeof ktt10 !== 'undefined') {
+                try {
+                    if (typeof ktt10.openWidget === 'function') {
+                        ktt10.openWidget();
+                        widgetOpened = true;
+                    } else if (typeof ktt10.open === 'function') {
+                        ktt10.open();
+                        widgetOpened = true;
+                    } else if (typeof ktt10.toggle === 'function') {
+                        ktt10.toggle();
+                        widgetOpened = true;
+                    }
+                } catch (e) {
+                    console.log("JS open failed");
+                }
+            }
+
+            // 2. אם לא הצליח דרך JS, ננסה למצוא את האלמנט ב-DOM וללחוץ עליו
+            if (!widgetOpened) {
+                const selectors = [
+                    'iframe[title*="chat"]', 
+                    'iframe[src*="chatrace"]',
+                    '#ktt10-widget', 
+                    '.ktt10-launcher'
+                ];
+
+                for (let selector of selectors) {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.click(); 
+                        widgetOpened = true; 
+                        break;
+                    }
+                }
+            }
+
+            // 3. אם שום דבר לא עבד (Fallback)
+            if (!widgetOpened) {
+                showChatGuidance();
+            }
+        }
+
+        function showChatGuidance() {
+            const modal = document.getElementById('chatGuidanceModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeChatGuidance() {
+            const modal = document.getElementById('chatGuidanceModal');
+            modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
