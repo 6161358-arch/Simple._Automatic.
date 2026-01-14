@@ -21,15 +21,6 @@
             transition: all 0.3s ease;
         }
 
-        /* אנימציה למודל הנחיה */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .modal-animate {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-
         /* סגנונות לאזור ה-AI */
         .ai-glow {
             box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
@@ -53,40 +44,69 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* אנימציות לתרשים זרימה (Scenario) */
-        .scenario-bg {
-            background-color: #1e1e2e;
-            background-image: radial-gradient(#3b3b4f 1px, transparent 1px);
-            background-size: 20px 20px;
+        /* עיצוב הדגמה חיה (Live Demo) - גרסה נקייה */
+        .type-btn {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
         }
-        .node {
-            transition: all 0.3s ease;
+        .type-btn:hover {
+            background: #f1f5f9;
         }
-        .node:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        .type-btn.active {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #2563eb;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
         }
-        .connection-line {
-            position: absolute;
-            height: 4px;
-            background: #4b5563;
-            z-index: 0;
-            overflow: hidden;
+
+        .process-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: all 0.5s ease;
         }
-        .connection-dot {
-            position: absolute;
-            width: 20px;
-            height: 4px;
-            background: #60a5fa;
-            border-radius: 2px;
-            animation: flow 2s infinite linear;
-            box-shadow: 0 0 10px #60a5fa;
+        .process-dot.active {
+            background: #3b82f6;
+            box-shadow: 0 0 10px #3b82f6;
+            transform: scale(1.2);
         }
-        @keyframes flow {
-            0% { left: -20%; opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { left: 120%; opacity: 0; }
+        
+        /* Toast Notification */
+        #demo-toast {
+            visibility: hidden;
+            min-width: 300px;
+            background-color: #1e293b;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 12px 24px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        #demo-toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 4s;
+        }
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
         }
     </style>
 </head>
@@ -95,13 +115,13 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-sm sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
+            <div class="flex justify-between h-auto py-2 items-center">
                 <!-- אזור הלוגו החכם -->
                 <div class="flex items-center gap-2">
                     <img id="logo-img" 
                          src="https://lh3.googleusercontent.com/d/1CKR9NBQiGagmDJ-SIFRYl1DDqwTFws82" 
                          alt="AutoMaster Logo" 
-                         class="h-16 w-auto object-contain hidden"
+                         class="h-24 w-auto object-contain hidden"
                          onload="this.classList.remove('hidden'); document.getElementById('fallback-logo').classList.add('hidden');"
                          onerror="this.classList.add('hidden'); document.getElementById('fallback-logo').classList.remove('hidden');">
                     
@@ -116,11 +136,12 @@
                     </div>
                 </div>
                 
-                <div class="hidden md:flex space-x-8 space-x-reverse">
+                <!-- תפריט ניווט מסודר לפי הבקשה החדשה -->
+                <div class="hidden md:flex space-x-8 space-x-reverse items-center">
                     <a href="#what-is" class="text-slate-600 hover:text-blue-600 font-medium">מה זה?</a>
-                    <a href="#ai-tools" class="text-blue-600 font-bold hover:text-blue-800">נסה בעצמך ✨</a>
+                    <a href="#live-demo" class="text-green-600 font-bold hover:text-green-800">הדגמה חיה 🟢</a>
                     <a href="#sectors" class="text-slate-600 hover:text-blue-600 font-medium">פתרונות</a>
-                    <a href="#how-it-works" class="text-slate-600 hover:text-blue-600 font-medium">איך זה קורה</a>
+                    <a href="#ai-tools" class="text-blue-600 font-bold hover:text-blue-800">נסה בעצמך ✨</a>
                 </div>
                 <!-- כפתור עם קישור לפתיחת הצ'אט -->
                 <button onclick="handleChatButtonClick()" class="hidden md:block bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-md">
@@ -137,68 +158,231 @@
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
 
         <div class="max-w-5xl mx-auto text-center relative z-10">
+            <!-- כותרת ראשית מעודכנת - קצרה וקולעת -->
             <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                העסק שלך יכול לרוץ לבד.<br>
-                <span class="text-blue-400">אוטומציה עסקית שמחליפה עבודה ידנית.</span>
+                לתת לעסק לרוץ לבד.<br>
+                <span class="text-blue-400">פשוט. אוטומט.</span>
             </h1>
+            <!-- טקסט משנה קליל יותר -->
             <p class="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto">
-                אוטומציה עסקית חוסכת לך שעות של עבודה שחורה, מונעת טעויות אנוש ומגדילה את הרווחיות.
-                אנחנו נחבר בין המערכות שלך כדי שהכל יעבוד מעצמו.
+                במקום לבזבז זמן על משימות שחוזרות על עצמן, תן למערכת לעבוד בשבילך. 
+                אנחנו נחבר הכל מאחורי הקלעים, כדי שתוכל להתמקד במה שחשוב באמת.
             </p>
             <div class="flex justify-center gap-4 flex-col sm:flex-row">
                 <button onclick="handleChatButtonClick()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-lg shadow-lg transition transform hover:-translate-y-1 text-lg">
                     <i class="fas fa-comments ml-2"></i> התחל ייעוץ
                 </button>
-                <a href="#ai-tools" class="bg-white text-blue-900 border-2 border-white hover:bg-slate-100 font-bold py-4 px-10 rounded-lg transition text-lg flex items-center gap-2">
-                    <i class="fas fa-magic"></i> בוא לנסות בחינם
+                <a href="#live-demo" class="bg-white text-blue-900 border-2 border-white hover:bg-slate-100 font-bold py-4 px-10 rounded-lg transition text-lg flex items-center gap-2">
+                    <i class="fas fa-play-circle"></i> הדגמה חיה
                 </a>
             </div>
         </div>
     </header>
 
     <!-- מה זה אוטומציה? -->
-    <section id="what-is" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">רגע, איך זה עובד בעצם?</h2>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto">
-                    אוטומציה היא החיבור החכם בין המערכות שאתה כבר עובד איתן (כמו אימייל, וואטסאפ, CRM, אקסל) כדי לבצע פעולות באופן עצמאי.
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-30"></div>
+            <div class="absolute top-1/2 right-0 w-64 h-64 bg-purple-50 rounded-full blur-3xl opacity-30"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-blue-600 font-bold tracking-wider text-sm uppercase bg-blue-50 px-4 py-1 rounded-full border border-blue-100">העתיד כבר כאן</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mt-4 mb-6">מה זה בעצם אוטומציה?</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    דמיין עובד מסור שעובד 24/7, לא מתעייף, לא שוכח משימות ולא מבקש העלאה. 
+                    אוטומציה היא הטכנולוגיה שמחברת בין האפליקציות שלך ומבצעת פעולות משעממות באופן עצמאי לחלוטין.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-6">
-                    <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-600 text-3xl">
-                        <i class="fas fa-bolt"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- קו מחבר ברקע למחשב (נעלם במובייל) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-100 via-purple-100 to-blue-100 -translate-y-1/2 z-0"></div>
+
+                <!-- שלב 1 -->
+                <div class="relative z-10 group">
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl text-center h-full">
+                        <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-blue-600 text-3xl shadow-sm group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">1. הטריגר</h3>
+                        <p class="text-slate-600">משהו קורה בעסק: שיחה נכנסת, טופס נשלח, או לקוח שילם באשראי.</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">טריגר (פעולה ראשונית)</h3>
-                    <p class="text-slate-600">לקוח ממלא טופס, מייל נכנס, או תשלום התקבל.</p>
                 </div>
-                <div class="hidden md:flex items-center justify-center text-slate-300 text-4xl">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <div class="p-6">
-                    <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 text-3xl">
-                        <i class="fas fa-magic"></i>
+
+                <!-- שלב 2 -->
+                <div class="relative z-10 group">
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl text-center h-full">
+                        <div class="w-20 h-20 bg-purple-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-purple-600 text-3xl shadow-sm group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">2. הפעולה</h3>
+                        <p class="text-slate-600">המערכת מעבדת את המידע, מקבלת החלטות ומעבירה נתונים בין תוכנות באופן אוטומטי.</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">הקסם קורה</h3>
-                    <p class="text-slate-600">המערכת מעבדת את המידע ללא מגע יד אדם.</p>
                 </div>
-                <div class="hidden md:flex items-center justify-center text-slate-300 text-4xl">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <div class="p-6">
-                    <div class="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-6 text-purple-600 text-3xl">
-                        <i class="fas fa-check-circle"></i>
+
+                <!-- שלב 3 -->
+                <div class="relative z-10 group">
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl text-center h-full">
+                        <div class="w-20 h-20 bg-green-50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-green-600 text-3xl shadow-sm group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">3. התוצאה</h3>
+                        <p class="text-slate-600">הקסם קרה! הלקוח קיבל מייל, החשבונית הופקה, והיומן התעדכן – בלי שנגעת בעכבר.</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">תוצאה (פעולה סופית)</h3>
-                    <p class="text-slate-600">נשלחת חשבונית, נוצר קשר בוואטסאפ, הלקוח נכנס ליומן.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#live-demo" class="inline-flex items-center justify-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition group">
+                    רוצה לראות דוגמה חיה?
+                    <i class="fas fa-arrow-down transform group-hover:translate-y-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Live Demo Simulator (Redesigned) -->
+    <section id="live-demo" class="py-20 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
+        <!-- רקע עדין -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
+            <div class="absolute top-10 right-10 w-40 h-40 bg-blue-200 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 left-10 w-40 h-40 bg-purple-200 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-2">תראה איך זה עובד בפועל</h2>
+                <p class="text-slate-500">בחר תחום, הכנס שם וראה את המערכת בפעולה</p>
+            </div>
+
+            <!-- Main Interactive Card -->
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 md:p-10 flex flex-col md:flex-row gap-8 items-center justify-between">
+                
+                <!-- 1. Input Area -->
+                <div class="w-full md:w-5/12 space-y-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-slate-700 block mb-2">שם מלא</label>
+                            <input type="text" id="demoName" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 transition text-slate-800" placeholder="למשל: דניאל כהן">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-slate-700 block mb-2">בחר סוג עסק</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="selectType(this, 'ecom')" class="type-btn active rounded-xl py-3 text-sm font-medium transition flex flex-col items-center gap-1">
+                                    <i class="fas fa-store"></i> חנות
+                                </button>
+                                <button type="button" onclick="selectType(this, 'consulting')" class="type-btn rounded-xl py-3 text-sm font-medium transition flex flex-col items-center gap-1">
+                                    <i class="fas fa-briefcase"></i> ייעוץ
+                                </button>
+                                <button type="button" onclick="selectType(this, 'education')" class="type-btn rounded-xl py-3 text-sm font-medium transition flex flex-col items-center gap-1">
+                                    <i class="fas fa-graduation-cap"></i> קורס
+                                </button>
+                                <input type="hidden" id="demoService" value="ecom">
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="runSimulation()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 flex items-center justify-center gap-3 text-lg">
+                        <span>הפעל אוטומציה</span>
+                        <i class="fas fa-magic text-yellow-400"></i>
+                    </button>
+                </div>
+
+                <!-- 2. Abstract Process (Middle) -->
+                <div class="hidden md:flex flex-col items-center justify-center w-2/12 h-full">
+                    <div class="h-full flex flex-col items-center gap-1 opacity-50">
+                        <div class="process-dot active"></div>
+                        <div class="w-0.5 h-10 bg-slate-200"></div>
+                        <div id="dot-process" class="process-dot"></div>
+                        <div class="w-0.5 h-10 bg-slate-200"></div>
+                        <div id="dot-end" class="process-dot"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Output Area (Clean Card) -->
+                <div class="w-full md:w-5/12">
+                   <div id="email-card" class="bg-slate-50 rounded-2xl border border-slate-200 p-8 min-h-[320px] flex items-center justify-center relative transition-all duration-500 shadow-inner">
+                       
+                       <!-- Placeholder State -->
+                       <div id="email-placeholder" class="text-center text-slate-400">
+                           <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                               <i class="fas fa-robot text-3xl text-slate-300"></i>
+                           </div>
+                           <p class="font-medium">המערכת ממתינה לנתונים...</p>
+                       </div>
+
+                       <!-- Loading State -->
+                       <div id="process-loader" class="hidden text-center absolute inset-0 flex flex-col items-center justify-center bg-white/90 backdrop-blur-sm rounded-2xl z-10">
+                           <div class="loading-spinner w-10 h-10 border-blue-500 mb-3"></div>
+                           <p class="text-sm font-bold text-blue-600 animate-pulse">מעבד נתונים במייק או N8N...</p>
+                       </div>
+
+                       <!-- Result Content -->
+                       <div id="email-content" class="hidden w-full opacity-0 transition-opacity duration-500 text-left" dir="rtl">
+                           <!-- Email content injected here -->
+                       </div>
+                   </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. פתרונות (Sectors) -->
+    <section id="sectors" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">איך אני יכול לעזור לעסק שלך?</h2>
+                <p class="text-slate-600 mt-2">דוגמאות אמיתיות מהשטח</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- חנויות -->
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
+                    <div class="icon-wrapper w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600 text-2xl">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">חנויות ומסחר אלקטרוני</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> שליחת חשבונית אוטומטית ברגע הרכישה.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הודעת וואטסאפ ללקוח: "ההזמנה בדרך!".</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> התראה למנהל המלאי כשמוצר עומד להיגמר.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> <strong>שחזור עגלה נטושה:</strong> מייל אוטומטי ללקוח שלא סיים קנייה.</li>
+                    </ul>
+                </div>
+
+                <!-- בתי ספר -->
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-orange-500">
+                    <div class="icon-wrapper w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-6 text-orange-600 text-2xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">בתי ספר ומוסדות לימוד</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הרשמה באתר -> יצירת תיק תלמיד במערכת.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> תזכורות תשלום אוטומטיות להורים.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הפקת תעודות וסנכרון ציונים בלחיצת כפתור.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול ימי הורים ושיבוץ תורים אוטומטי.</li>
+                    </ul>
+                </div>
+
+                <!-- משרדים -->
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-purple-500">
+                    <div class="icon-wrapper w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600 text-2xl">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">משרדים ומזכירות</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> מיון אוטומטי של מיילים והפנייה לגורם מטפל.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> <strong>תיאום פגישות:</strong> הלקוח בוחר זמן, היומן מתעדכן, וזום נשלח לבד.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> יצירת חוזים ומסמכים מתוך טופס פרטים.</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול משימות צוות ופולו-אפ ללקוחות.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION: Gemini AI Tools -->
+    <!-- 4. נסה בעצמך (AI Tools) -->
     <section id="ai-tools" class="py-20 bg-gradient-to-br from-slate-900 to-blue-900 text-white relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')] opacity-10"></div>
         <div class="max-w-7xl mx-auto px-4 relative z-10">
@@ -275,149 +459,6 @@
         </div>
     </section>
 
-    <!-- סקטורים ורעיונות -->
-    <section id="sectors" class="py-20 bg-slate-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900">איך אני יכול לעזור לעסק שלך?</h2>
-                <p class="text-slate-600 mt-2">דוגמאות אמיתיות מהשטח</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- חנויות -->
-                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-blue-500">
-                    <div class="icon-wrapper w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600 text-2xl">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">חנויות ומסחר אלקטרוני</h3>
-                    <ul class="space-y-3 text-slate-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> שליחת חשבונית אוטומטית ברגע הרכישה.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הודעת וואטסאפ ללקוח: "ההזמנה בדרך!".</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> התראה למנהל המלאי כשמוצר עומד להיגמר.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> <strong>שחזור עגלה נטושה:</strong> מייל אוטומטי ללקוח שלא סיים קנייה.</li>
-                    </ul>
-                </div>
-
-                <!-- בתי ספר -->
-                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-orange-500">
-                    <div class="icon-wrapper w-14 h-14 bg-orange-100 rounded-lg flex items-center justify-center mb-6 text-orange-600 text-2xl">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">בתי ספר ומוסדות לימוד</h3>
-                    <ul class="space-y-3 text-slate-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הרשמה באתר -> יצירת תיק תלמיד במערכת.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> תזכורות תשלום אוטומטיות להורים.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> הפקת תעודות וסנכרון ציונים בלחיצת כפתור.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול ימי הורים ושיבוץ תורים אוטומטי.</li>
-                    </ul>
-                </div>
-
-                <!-- משרדים -->
-                <div class="feature-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-t-4 border-purple-500">
-                    <div class="icon-wrapper w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600 text-2xl">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">משרדים ומזכירות</h3>
-                    <ul class="space-y-3 text-slate-600">
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> מיון אוטומטי של מיילים והפנייה לגורם מטפל.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> <strong>תיאום פגישות:</strong> הלקוח בוחר זמן, היומן מתעדכן, וזום נשלח לבד.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> יצירת חוזים ומסמכים מתוך טופס פרטים.</li>
-                        <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 ml-2"></i> ניהול משימות צוות ופולו-אפ ללקוחות.</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <p class="text-xl font-medium text-slate-700 mb-6">יש לך רעיון אחר? בוא נבדוק אם אפשר להפוך אותו לאוטומטי.</p>
-                <button onclick="handleChatButtonClick()" class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-slate-700 transition shadow-lg flex items-center mx-auto gap-2">
-                    <i class="fas fa-paper-plane"></i> שלח לי הודעה בצ'אט
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW: How It Works / Behind the Scenes -->
-    <section id="how-it-works" class="py-24 bg-slate-900 text-white relative overflow-hidden scenario-bg">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">מאחורי הקלעים: איך הקסם קורה?</h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                    אנחנו בונים עבורך "מוח" דיגיטלי שמחבר בין כל האפליקציות שלך. הנה הצצה לתוך המערכת שחוסכת לך זמן.
-                </p>
-                <div class="mt-6 flex justify-center gap-4 text-sm font-bold tracking-wider text-gray-500">
-                    <span class="flex items-center gap-2"><i class="fas fa-project-diagram text-purple-500"></i> MAKE (INTEGROMAT)</span>
-                    <span class="text-gray-700">|</span>
-                    <span class="flex items-center gap-2"><i class="fas fa-share-alt text-pink-500"></i> N8N AUTOMATION</span>
-                </div>
-            </div>
-
-            <!-- Scenario Visualization Container -->
-            <div class="relative max-w-5xl mx-auto bg-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 md:p-12 shadow-2xl overflow-hidden">
-                
-                <!-- תרשים הזרימה -->
-                <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 relative z-10">
-                    
-                    <!-- Node 1: Trigger -->
-                    <div class="node flex flex-col items-center gap-3 relative z-10 w-full md:w-auto">
-                        <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] border-2 border-green-500">
-                            <i class="fab fa-wpforms text-4xl text-green-600"></i>
-                        </div>
-                        <div class="bg-gray-800 px-4 py-2 rounded-lg border border-gray-600 text-center">
-                            <span class="text-xs text-gray-400 block">טריגר</span>
-                            <span class="font-bold text-sm">ליד חדש נכנס</span>
-                        </div>
-                    </div>
-
-                    <!-- Connection Line 1 -->
-                    <div class="hidden md:block flex-1 h-[2px] bg-gray-600 relative overflow-hidden mx-4">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent w-1/2 animate-[flow_1.5s_infinite_linear]"></div>
-                    </div>
-                    <!-- Mobile Arrow -->
-                    <i class="fas fa-arrow-down text-gray-600 text-2xl md:hidden"></i>
-
-                    <!-- Node 2: Logic (Make/N8N) -->
-                    <div class="node flex flex-col items-center gap-3 relative z-10 w-full md:w-auto">
-                        <div class="w-24 h-24 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(124,58,237,0.4)] border-4 border-gray-800 animate-pulse">
-                            <i class="fas fa-brain text-5xl text-white"></i>
-                        </div>
-                        <div class="bg-gray-800 px-4 py-2 rounded-lg border border-purple-500/50 text-center">
-                            <span class="text-xs text-purple-400 block">המוח (Make/N8N)</span>
-                            <span class="font-bold text-sm">עיבוד נתונים חכם</span>
-                        </div>
-                    </div>
-
-                    <!-- Connection Line 2 -->
-                    <div class="hidden md:block flex-1 h-[2px] bg-gray-600 relative overflow-hidden mx-4">
-                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent w-1/2 animate-[flow_1.5s_infinite_linear] delay-75"></div>
-                    </div>
-                    <!-- Mobile Arrow -->
-                    <i class="fas fa-arrow-down text-gray-600 text-2xl md:hidden"></i>
-
-                    <!-- Node 3: Actions (Split) -->
-                    <div class="node flex flex-col items-center gap-4 relative z-10 w-full md:w-auto">
-                        <!-- Action A -->
-                        <div class="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 w-full">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i class="fab fa-whatsapp text-green-600 text-xl"></i>
-                            </div>
-                            <span class="text-sm font-bold">הודעה ללקוח</span>
-                        </div>
-                        <!-- Action B -->
-                        <div class="flex items-center gap-3 bg-gray-800 p-3 rounded-xl border border-gray-700 w-full">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-envelope text-blue-600 text-xl"></i>
-                            </div>
-                            <span class="text-sm font-bold">חשבונית במייל</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Background glow effect -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-500/10 filter blur-[100px] rounded-full pointer-events-none"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
@@ -434,7 +475,7 @@
 
     <!-- Chat Widget Integration -->
     <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
-    <script>ktt10.setup({id:"NYJSD4N2WeSFBFnY51h",accountId:"1133996",color:"#2563eb"})</script>
+    <script>ktt10.setup({id:"NYJSD4N2WeSFBFnY51h",accountId:"1133996",color:"#006dff"})</script>
 
     <!-- מודל הנחיה במקרה שהצ'אט לא נפתח אוטומטית -->
     <div id="chatGuidanceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeChatGuidance()">
@@ -454,47 +495,190 @@
             </div>
         </div>
     </div>
+
+    <!-- הודעה צפה (Toast) למצב דמו -->
+    <div id="demo-toast">
+        <i class="fas fa-robot text-blue-400 text-lg"></i>
+        <span>מצב הדגמה פעיל (סימולציית AI)</span>
+    </div>
     
     <script>
-        // === Gemini AI Integration ===
+        // ==========================================
+        //  AI CONFIGURATION
+        // ==========================================
         
-        async function callGemini(prompt) {
-            // החלף את המרכאות הריקות במפתח ה-API שלך
-            const apiKey = "AIzaSyA5tVfMWhOBw79a5W9rymYNzNmVk34YHfk"; 
+        // 1. אם אתה מעלה לאתר חיצוני (Tiiny Host וכד'), הדבק את המפתח שלך כאן למטה:
+        // דוגמה: const apiKey = "AIzaSxxxxxxxxxxxx...";
+        const apiKey = ""; 
+
+        // 2. אם אתה משאיר את השורה למעלה ריקה, הקוד ינסה לעבוד במצב "פנימי" (שיעבוד רק כאן ב-Canvas).
+        
+        // ==========================================
+
+        // Show toast notification
+        function showDemoToast() {
+            const toast = document.getElementById("demo-toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 4000);
+        }
+
+        // Live Demo Simulation Logic
+        function selectType(btn, value) {
+            // Update buttons visual state
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active', 'bg-blue-50', 'border-blue-500', 'text-blue-600'));
+            btn.classList.add('active', 'bg-blue-50', 'border-blue-500', 'text-blue-600');
             
-            if (!apiKey) {
-                alert("נא להגדיר מפתח API בקובץ הקוד (שורה 800 בערך) כדי שהבינה המלאכותית תעבוד.");
-                return "חסר מפתח API";
+            // Update hidden input
+            document.getElementById('demoService').value = value;
+        }
+
+        function runSimulation() {
+            const name = document.getElementById('demoName').value;
+            const service = document.getElementById('demoService').value;
+            
+            if(!name) {
+                alert("אנא הכנס שם מלא");
+                return;
             }
 
-            // שיניתי למודל הציבורי הסטנדרטי שעובד עם מפתחות אישיים (Flash 1.5)
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            // Reset UI
+            document.getElementById('email-placeholder').classList.add('hidden');
+            document.getElementById('email-content').classList.add('hidden');
+            document.getElementById('email-content').classList.remove('opacity-100');
+            document.getElementById('email-content').classList.add('opacity-0');
+            
+            // Show Loader
+            document.getElementById('process-loader').classList.remove('hidden');
+            
+            // Animate Process Dots
+            const dots = ['dot-process', 'dot-end'];
+            
+            setTimeout(() => {
+                document.getElementById('dot-process').classList.add('active');
+            }, 500);
+
+            setTimeout(() => {
+                document.getElementById('dot-end').classList.add('active');
+            }, 1200);
+
+            // Show Result
+            setTimeout(() => {
+                document.getElementById('process-loader').classList.add('hidden');
+                showEmailResult(name, service);
+                
+                // Reset dots after a while
+                setTimeout(() => {
+                    document.querySelectorAll('.process-dot').forEach(d => d.classList.remove('active'));
+                }, 2000);
+            }, 1800);
+        }
+
+        function showEmailResult(name, service) {
+            let emailBody = "";
+            let subject = "";
+
+            if (service === 'ecom') {
+                subject = "אישור הזמנה #12345 📦";
+                emailBody = `היי ${name},<br><br>תודה שרכשת אצלנו! ההזמנה שלך התקבלה בהצלחה וכבר יצאה לליקוט.<br>מספר המעקב שלך הוא: IL-987654.<br><br>נשלח עדכון כשהחבילה בדרך!`;
+            } else if (service === 'consulting') {
+                subject = "תודה שפנית ל-Consult Pro 🤝";
+                emailBody = `שלום ${name},<br><br>שמחתי לקבל את פנייתך בנושא ייעוץ עסקי.<br>המערכת האוטומטית שלנו כבר פתחה עבורך תיק לקוח ב-CRM.<br><br>נציג יחזור אליך תוך 24 שעות לתיאום פגישה.`;
+            } else {
+                subject = "ברוכים הבאים לקורס! 🎓";
+                emailBody = `היי ${name}!<br><br>איזה כיף שהצטרפת. הגישה שלך לאזור האישי נפתחה בהצלחה.<br>שם המשתמש שלך: ${name.split(' ')[0]}123<br><br>בהצלחה בלימודים!`;
+            }
+
+            const emailHTML = `
+                <div class="w-full">
+                    <div class="border-b border-slate-100 pb-3 mb-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-lg">${subject}</h4>
+                                <p class="text-xs text-slate-500 mt-1">מאת: AutoMaster Bot</p>
+                            </div>
+                            <span class="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">לפני רגע</span>
+                        </div>
+                    </div>
+                    <div class="text-slate-600 text-sm leading-relaxed">
+                        ${emailBody}
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <span class="text-xs bg-green-50 text-green-600 px-2 py-1 rounded border border-green-100">נשלח אוטומטית</span>
+                    </div>
+                </div>
+            `;
+
+            const contentDiv = document.getElementById('email-content');
+            contentDiv.innerHTML = emailHTML;
+            contentDiv.classList.remove('hidden');
+            
+            // Trigger reflow
+            void contentDiv.offsetWidth;
+            
+            contentDiv.classList.remove('opacity-0');
+            contentDiv.classList.add('opacity-100');
+        }
+
+        // Main AI Function
+        async function callGemini(prompt, type = 'general') {
+            let url;
+            
+            // בדיקה: האם המשתמש הזין מפתח בקוד?
+            if (apiKey && apiKey.length > 10) {
+                // יש מפתח - משתמשים במודל הציבורי (עבור אתר חיצוני)
+                url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            } else {
+                // אין מפתח - מנסים להשתמש במודל הפנימי (עבור תצוגה כאן)
+                // הערה: זה לא יעבוד באתר חיצוני ללא מפתח!
+                url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=`;
+            }
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    referrerPolicy: 'no-referrer',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: prompt
-                            }]
-                        }]
+                        contents: [{ parts: [{ text: prompt }] }]
                     })
                 });
 
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('API Error:', errorData);
-                    throw new Error('Network response was not ok');
+                    throw new Error(`API Error: ${response.status}`);
                 }
                 const data = await response.json();
                 return data.candidates[0].content.parts[0].text;
+
             } catch (error) {
-                console.error('Error:', error);
-                return "אופס, נראה שהייתה שגיאה בתקשורת עם ה-AI. אנא וודא שהמפתח תקין.";
+                console.warn('Network/API Error, switching to Demo Mode:', error);
+                
+                // === DEMO MODE FALLBACK (גיבוי למקרה של תקלה או חסימת אינטרנט) ===
+                showDemoToast();
+                
+                if (type === 'ideas') {
+                    return `(מצב הדגמה - לא זוהה חיבור ל-AI)
+
+הנה 3 רעיונות לאוטומציה שיכולים לשדרג את העסק שלך:
+
+1. **אוטומציה לקליטת לידים:** חיבור האתר ל-CRM כך שכל ליד שנכנס מקבל אוטומטית הודעת "תודה שפנית" והמשימה נפתחת ביומן.
+2. **חשבוניות אוטומטיות:** ברגע שלקוח משלם, המערכת מפיקה חשבונית מס ושולחת לו למייל, ללא מגע יד אדם.
+3. **תזכורות בוואטסאפ:** בוט חכם ששולח תזכורת ללקוח יום לפני הפגישה ומבקש אישור הגעה.`;
+                } 
+                else if (type === 'email') {
+                    return `(מצב הדגמה - לא זוהה חיבור ל-AI)
+
+היי [שם הלקוח],
+
+תודה שפנית ל-AutoMaster! 
+קיבלנו את פנייתך ואנחנו כבר מטפלים בה.
+
+רצינו לעדכן אותך שהנושא נמצא בבדיקה, ונחזור אליך עם תשובות מסודרות בהקדם האפשרי.
+
+בברכה,
+צוות AutoMaster`;
+                }
+                
+                return "מצב הדגמה: המערכת מדמה תשובה חכמה.";
             }
         }
 
@@ -506,21 +690,22 @@
                 return;
             }
 
-            // UI Loading State
             document.getElementById('ideaSpinner').classList.remove('hidden');
             document.getElementById('ideaBtnText').textContent = 'חושב...';
             
             const prompt = `הצע 3 רעיונות פרקטיים וקצרים לאוטומציה עסקית עבור עסק מסוג: ${input}. כתוב בעברית, ברשימת תבליטים, בטון מקצועי ושיווקי.`;
             
-            const result = await callGemini(prompt);
+            // Pass 'ideas' type for fallback
+            const result = await callGemini(prompt, 'ideas');
             
-            // UI Reset State
             document.getElementById('ideaSpinner').classList.add('hidden');
             document.getElementById('ideaBtnText').textContent = 'תן לי רעיונות ✨';
             
-            const resultDiv = document.getElementById('ideaResult');
-            document.getElementById('ideaContent').textContent = result;
-            resultDiv.classList.remove('hidden');
+            if (result) {
+                const resultDiv = document.getElementById('ideaResult');
+                document.getElementById('ideaContent').textContent = result;
+                resultDiv.classList.remove('hidden');
+            }
         }
 
         // כלי 2: מחולל אימיילים
@@ -531,21 +716,21 @@
                 return;
             }
 
-            // UI Loading State
             document.getElementById('emailSpinner').classList.remove('hidden');
             document.getElementById('emailBtnText').textContent = 'מנסח...';
             
             const prompt = `כתוב נוסח קצר ומקצועי להודעת וואטסאפ או אימייל אוטומטית ללקוח בנושא: ${input}. כתוב בעברית, ללא כותרות מיותרות, רק הטקסט לשליחה.`;
             
-            const result = await callGemini(prompt);
+            const result = await callGemini(prompt, 'email');
             
-            // UI Reset State
             document.getElementById('emailSpinner').classList.add('hidden');
             document.getElementById('emailBtnText').textContent = 'נסח לי הודעה ✨';
             
-            const resultDiv = document.getElementById('emailResult');
-            document.getElementById('emailContent').textContent = result;
-            resultDiv.classList.remove('hidden');
+            if (result) {
+                const resultDiv = document.getElementById('emailResult');
+                document.getElementById('emailContent').textContent = result;
+                resultDiv.classList.remove('hidden');
+            }
         }
 
         function copyToClipboard(elementId) {
@@ -615,4 +800,3 @@
     </script>
 </body>
 </html>
-
