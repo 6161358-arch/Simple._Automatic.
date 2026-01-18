@@ -115,6 +115,21 @@
             100% { background-position: 200% 50%; }
         }
 
+        /* FAQ Accordion Styles */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
@@ -153,6 +168,7 @@
             <div class="hidden md:flex space-x-8 space-x-reverse items-center text-sm font-bold text-slate-600">
                 <a href="#features" class="hover:text-blue-600 transition hover:scale-105">פתרונות</a>
                 <a href="#simulator" class="hover:text-blue-600 transition hover:scale-105">סימולטור</a>
+                <a href="#faq" class="hover:text-blue-600 transition hover:scale-105">שאלות ותשובות</a>
                 <a href="#ai-lab" class="hover:text-blue-600 transition hover:scale-105">מעבדת AI</a>
                 <button onclick="highlightChat()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-0.5">
                     דבר איתנו
@@ -174,6 +190,7 @@
         <div class="flex flex-col gap-8 text-center text-2xl font-bold text-slate-800">
             <a href="#features" onclick="toggleMobileMenu()" class="hover:text-blue-600">פתרונות</a>
             <a href="#simulator" onclick="toggleMobileMenu()" class="hover:text-blue-600">סימולטור</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="hover:text-blue-600">שאלות ותשובות</a>
             <a href="#ai-lab" onclick="toggleMobileMenu()" class="hover:text-blue-600">מעבדת AI</a>
             <a href="javascript:void(0)" onclick="toggleMobileMenu(); highlightChat()" class="text-blue-600">צור קשר</a>
         </div>
@@ -322,23 +339,25 @@
                 <div class="w-full lg:w-5/12" data-aos="fade-left">
                     <h2 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900"><span class="text-blue-600">///</span> סימולטור חי</h2>
                     <p class="text-slate-500 mb-10 text-lg">
-                        אל תדמיין, תראה. הזן נתונים וצפה ב"מוח" של המערכת מבצע פעולות מורכבות בזמן אמת.
+                        אל תדמיין, תראה. בחר תרחיש, הזן נתונים וצפה ב"מוח" של המערכת מבצע פעולות מורכבות בזמן אמת.
                     </p>
 
                     <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-2xl shadow-slate-200/50 relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">שם הלקוח</label>
+                                <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">שם (לצורך ההדגמה)</label>
                                 <input type="text" id="sim-name" value="ישראל ישראלי" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-lg">
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">תרחיש לבדיקה</label>
                                 <div class="relative">
-                                    <select id="sim-scenario" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none transition appearance-none cursor-pointer">
+                                    <select id="sim-scenario" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none transition appearance-none cursor-pointer text-base">
                                         <option value="lead">⚡ ליד חדש (CRM + וואטסאפ)</option>
                                         <option value="sale">💰 רכישה בחנות (חשבונית + מלאי)</option>
                                         <option value="support">🚑 פניית שירות (תמיכה + שיבוץ)</option>
+                                        <option value="onboarding">💼 קליטת עובד (חוזה + הרשאות)</option>
+                                        <option value="social">📱 סושיאל (פרסום פוסט לכל הרשתות)</option>
                                     </select>
                                     <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
                                         <i class="fas fa-chevron-down"></i>
@@ -365,7 +384,6 @@
                             <div class="text-xs text-slate-400 font-mono tracking-widest">SYSTEM.LOG</div>
                         </div>
                         <div class="flex-1 p-6 overflow-y-auto text-sm relative bg-[#1e293b]" id="terminal-body">
-                            <!-- No scanline for clean look -->
                             <div class="text-slate-400 mb-2 font-mono">Initializing System v4.2...</div>
                             <div class="text-slate-400 mb-2 font-mono">Connection Established.</div>
                             <div class="text-green-400 font-mono">> Ready. Waiting for input...</div>
@@ -388,10 +406,66 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-slate-50 relative z-10 border-b border-slate-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4">שאלות נפוצות</h2>
+                <p class="text-slate-500 text-lg">כל מה שרצית לדעת על אוטומציה ולא היה לך את מי לשאול</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <details class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="0">
+                    <summary class="flex justify-between items-center p-6 font-bold text-lg text-slate-800 hover:text-blue-600 transition">
+                        <span>האם זה מתאים לעסק קטן?</span>
+                        <span class="transform transition-transform group-open:rotate-180 text-blue-500"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 leading-relaxed bg-slate-50/50">
+                        בהחלט! למעשה, עסקים קטנים הם המרוויחים העיקריים. אוטומציה חוסכת את הצורך במזכירה או עובד נוסף, ומאפשרת לעסק לתת שירות של "גדולים" בתקציב נמוך.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <summary class="flex justify-between items-center p-6 font-bold text-lg text-slate-800 hover:text-blue-600 transition">
+                        <span>האם אני צריך ידע טכני או מתכנת?</span>
+                        <span class="transform transition-transform group-open:rotate-180 text-blue-500"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 leading-relaxed bg-slate-50/50">
+                        ממש לא. אנחנו בונים עבורך את כל המערכת מא' ועד ת'. אתה מקבל מוצר מוגמר שעובד ברקע. אם תרצה לשנות משהו בעתיד, המערכות שאנחנו עובדים איתן (כמו Make) הן ידידותיות מאוד.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <summary class="flex justify-between items-center p-6 font-bold text-lg text-slate-800 hover:text-blue-600 transition">
+                        <span>האם זה עובד עם התוכנות שיש לי היום?</span>
+                        <span class="transform transition-transform group-open:rotate-180 text-blue-500"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 leading-relaxed bg-slate-50/50">
+                        ב-99% מהמקרים התשובה היא כן. אנחנו יודעים להתממשק לגוגל, אופיס, מערכות CRM, חשבוניות ירוקות, פייסבוק, וואטסאפ ועוד אלפי שירותים אחרים באמצעות API פתוח.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 -->
+                <details class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <summary class="flex justify-between items-center p-6 font-bold text-lg text-slate-800 hover:text-blue-600 transition">
+                        <span>כמה זמן לוקח להקים מערכת כזו?</span>
+                        <span class="transform transition-transform group-open:rotate-180 text-blue-500"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 leading-relaxed bg-slate-50/50">
+                        אוטומציות פשוטות יכולות להיות באוויר תוך 48 שעות. תהליכים מורכבים יותר שדורשים אפיון עמוק עשויים לקחת בין שבוע לשבועיים. אנחנו עובדים בשיטת "ספרינטים" כדי שתראו תוצאות מהר.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
     <!-- AI LAB Section -->
-    <section id="ai-lab" class="py-24 relative overflow-hidden bg-slate-50">
+    <section id="ai-lab" class="py-24 relative overflow-hidden bg-white">
         <!-- Decoration -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white rounded-full blur-[80px] -z-10 opacity-60"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-slate-50 rounded-full blur-[80px] -z-10 opacity-60"></div>
 
         <div class="max-w-4xl mx-auto px-4 relative z-10">
             <div class="text-center mb-12">
@@ -452,6 +526,7 @@
                 <ul class="space-y-3">
                     <li><a href="#features" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> פתרונות</a></li>
                     <li><a href="#simulator" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> דמו חי</a></li>
+                    <li><a href="#faq" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> שאלות ותשובות</a></li>
                     <li><a href="#ai-lab" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> AI Lab</a></li>
                 </ul>
             </div>
@@ -552,7 +627,7 @@
                     { text: `> [SYSTEM] Transaction Finalized.`, color: "text-green-400" }
                 ];
                 finalMsg = `חשבונית הופקה ל-${name}, מלאי ירד, הנה"ח עודכנה.`;
-            } else {
+            } else if (scenario === 'support') {
                 logs = [
                     { text: `> [TICKET] Incoming Stream: User="${name}"`, color: "text-blue-400" },
                     { text: `> [AI] Analyzing Sentiment...`, color: "text-purple-400" },
@@ -562,6 +637,29 @@
                     { text: `> [DB] Ticket #5541 Created [PRIORITY:HIGH]`, color: "text-slate-300" }
                 ];
                 finalMsg = `פנייה דחופה מ-${name} זוהתה ונותבה למנהל.`;
+            } else if (scenario === 'onboarding') {
+                logs = [
+                    { text: `> [HR] New Hire Trigger: "${name}"`, color: "text-blue-400" },
+                    { text: `> [DOCS] Generating Employment Contract...`, color: "text-yellow-400" },
+                    { text: `> [SIGN] Sent via DocuSign for e-signature`, color: "text-purple-400" },
+                    { text: `> [IT] Creating G-Suite Account: ${name}@company.com`, color: "text-slate-300" },
+                    { text: `> [SLACK] Sending invite to workspace`, color: "text-green-400" },
+                    { text: `> [TASK] "Prepare Laptop" -> Assigned to IT Mgr`, color: "text-slate-400" },
+                    { text: `> [SYSTEM] Onboarding Sequence Initiated.`, color: "text-green-400 font-bold" }
+                ];
+                finalMsg = `חוזה נשלח לחתימה, משתמש נוצר במערכות, משימות נפתחו.`;
+            } else if (scenario === 'social') {
+                logs = [
+                    { text: `> [CMS] New Content Approved: "Launch Day"`, color: "text-blue-400" },
+                    { text: `> [IMG] Resizing assets for Instagram/LinkedIn/FB`, color: "text-yellow-400" },
+                    { text: `> [AI] Generating Hashtags & Captions...`, color: "text-purple-400" },
+                    { text: `> [API] Posting to LinkedIn... SUCCESS`, color: "text-blue-300" },
+                    { text: `> [API] Posting to Instagram... SUCCESS`, color: "text-pink-400" },
+                    { text: `> [API] Posting to Facebook... SUCCESS`, color: "text-blue-500" },
+                    { text: `> [ANALYTICS] Tracking pixels activated.`, color: "text-slate-400" },
+                    { text: `> [SYSTEM] Multi-Channel Distribution Complete.`, color: "text-green-400 font-bold" }
+                ];
+                finalMsg = `הפוסט פורסם בהצלחה בכל הרשתות החברתיות במקביל.`;
             }
 
             // High Speed Typing Effect
