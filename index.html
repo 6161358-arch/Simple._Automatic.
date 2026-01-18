@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פשוט. אוטומט. | אוטומציה עסקית מתקדמת</title>
+    <title>פשוט. אוטומט. | Clean Future 2026</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,284 +17,268 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #0f172a;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --bg-light: #f8fafc;
         }
         
         body { 
             font-family: 'Heebo', sans-serif; 
+            background-color: var(--bg-light);
+            color: #1e293b;
             overflow-x: hidden;
         }
 
         h1, h2, h3, .brand-font {
-            font-family: 'Rubik', sans-serif;
+            font-family: 'Outfit', 'Rubik', sans-serif;
         }
         
-        /* Custom Animations */
-        .blob {
-            position: absolute;
-            filter: blur(80px);
-            z-index: 0;
-            opacity: 0.4;
-            animation: float 10s infinite ease-in-out;
-        }
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
+        /* Clean Tech Grid Background */
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
         }
 
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        /* Soft Glow Effects */
+        .soft-glow-box {
+            box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .soft-glow-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px -10px rgba(59, 130, 246, 0.25);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
+        /* Floating Nav - Light Glass */
+        .floating-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
-        .terminal-window {
-            background: #1e1e1e;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            font-family: 'Courier New', Courier, monospace;
+        /* Glass Card Light */
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
             overflow: hidden;
         }
-
-        .terminal-header {
-            background: #2d2d2d;
-            padding: 10px 15px;
-            display: flex;
-            gap: 8px;
+        
+        /* Shimmer Effect */
+        .glass-card-light::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: 0.6s;
+        }
+        
+        .glass-card-light:hover::before {
+            left: 100%;
         }
 
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        /* Terminal - Kept dark for contrast but cleaner */
+        .terminal-clean {
+            background: #1e293b; /* Slate 800 */
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+            border: 1px solid #334155;
         }
 
-        /* Typing cursor */
-        .typing::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        /* Animated Gradient Text - Aurora Style */
+        .gradient-text-anim {
+            background: linear-gradient(to right, #2563eb, #7c3aed, #2563eb);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradient 3s linear infinite;
         }
         
-        /* Network Animations */
-        @keyframes pulse-line {
-            0% { stroke-opacity: 0.1; stroke-dashoffset: 100; }
-            50% { stroke-opacity: 1; }
-            100% { stroke-opacity: 0.1; stroke-dashoffset: 0; }
-        }
-        
-        .network-line {
-            stroke-dasharray: 10;
-            animation: pulse-line 3s linear infinite;
-        }
-
-        @keyframes float-data {
-            0% { transform: translateY(0px); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-20px); opacity: 0; }
-        }
-
-        .data-particle {
-            animation: float-data 4s infinite ease-in-out;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="selection:bg-blue-100 selection:text-blue-900">
 
-    <!-- Background Blobs -->
-    <div class="blob bg-blue-400 w-96 h-96 top-0 right-0 rounded-full mix-blend-multiply"></div>
-    <div class="blob bg-purple-400 w-96 h-96 bottom-0 left-0 rounded-full mix-blend-multiply animation-delay-2000"></div>
+    <!-- Background Elements -->
+    <div class="fixed inset-0 tech-grid z-0 pointer-events-none"></div>
+    <!-- Soft Orbs (Pastel colors now) -->
+    <div class="fixed top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-200/40 rounded-full blur-[100px] pointer-events-none animate-pulse mix-blend-multiply"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-200/40 rounded-full blur-[100px] pointer-events-none animate-pulse mix-blend-multiply" style="animation-delay: 2s;"></div>
 
-    <!-- Arrow Pointer for Chat (Hidden by default) -->
+    <!-- Arrow Pointer for Chat -->
     <div id="chat-pointer" class="fixed bottom-24 right-8 z-50 hidden animate-bounce flex flex-col items-center pointer-events-none">
-        <div class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg font-bold mb-2">
-            לחץ כאן כדי להתחיל!
+        <div class="bg-white text-blue-600 px-4 py-2 rounded-lg shadow-xl font-bold mb-2 text-sm tracking-wide border border-blue-100">
+            מתחילים כאן
         </div>
-        <i class="fas fa-arrow-down text-blue-600 text-4xl drop-shadow-md"></i>
+        <i class="fas fa-arrow-down text-blue-500 text-3xl drop-shadow-md"></i>
     </div>
 
-    <!-- Navbar -->
-    <nav class="glass-nav fixed w-full z-50 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <!-- Logo -->
-                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <span class="text-2xl font-bold text-slate-800 tracking-tight brand-font">פשוט.<span class="text-blue-600">אוטומט.</span></span>
-                </a>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8 space-x-reverse items-center">
-                    <a href="#features" class="text-slate-600 hover:text-blue-600 font-medium transition">פתרונות</a>
-                    <a href="#simulator" class="text-slate-600 hover:text-blue-600 font-medium transition">סימולטור</a>
-                    <a href="#ai-lab" class="text-slate-600 hover:text-blue-600 font-medium transition">מעבדת AI</a>
-                    <button onclick="highlightChat()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full font-bold hover:bg-slate-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                        דבר איתנו
-                    </button>
+    <!-- Floating Navbar -->
+    <div class="fixed w-full z-50 top-6 px-4">
+        <nav class="max-w-6xl mx-auto floating-nav rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
+            <!-- Logo -->
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:rotate-12 transition-transform">
+                    <i class="fas fa-bolt"></i>
                 </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()" class="text-slate-600 hover:text-blue-600 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
+                <span class="text-2xl font-bold tracking-tight brand-font text-slate-800">פשוט.<span class="text-blue-600">אוטומט.</span></span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 space-x-reverse items-center text-sm font-bold text-slate-600">
+                <a href="#features" class="hover:text-blue-600 transition hover:scale-105">פתרונות</a>
+                <a href="#simulator" class="hover:text-blue-600 transition hover:scale-105">סימולטור</a>
+                <a href="#ai-lab" class="hover:text-blue-600 transition hover:scale-105">מעבדת AI</a>
+                <button onclick="highlightChat()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-0.5">
+                    דבר איתנו
+                </button>
             </div>
-        </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#features" class="block px-3 py-3 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">פתרונות</a>
-                <a href="#simulator" class="block px-3 py-3 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">סימולטור</a>
-                <a href="#ai-lab" class="block px-3 py-3 text-slate-600 font-medium hover:bg-slate-50 rounded-lg">מעבדת AI</a>
-                <a href="javascript:void(0)" onclick="highlightChat()" class="block px-3 py-3 text-blue-600 font-bold hover:bg-blue-50 rounded-lg">צור קשר</a>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-slate-800 hover:text-blue-600 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
+        </nav>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <button onclick="toggleMobileMenu()" class="absolute top-8 left-8 text-slate-800 text-3xl"><i class="fas fa-times"></i></button>
+        <div class="flex flex-col gap-8 text-center text-2xl font-bold text-slate-800">
+            <a href="#features" onclick="toggleMobileMenu()" class="hover:text-blue-600">פתרונות</a>
+            <a href="#simulator" onclick="toggleMobileMenu()" class="hover:text-blue-600">סימולטור</a>
+            <a href="#ai-lab" onclick="toggleMobileMenu()" class="hover:text-blue-600">מעבדת AI</a>
+            <a href="javascript:void(0)" onclick="toggleMobileMenu(); highlightChat()" class="text-blue-600">צור קשר</a>
         </div>
-    </nav>
+    </div>
 
     <!-- Hero Section -->
-    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    <header class="relative pt-40 pb-20 lg:pt-52 lg:pb-32 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
             <div data-aos="fade-up" data-aos-duration="1000">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-sm font-bold mb-6 border border-blue-200 shadow-sm">
-                    🚀 הטכנולוגיה החדשה כבר כאן
-                </span>
-                <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
-                    תן לעסק שלך לרוץ<br>
-                    <span class="gradient-text">על טייס אוטומטי</span>
+                <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white border border-blue-100 text-blue-600 text-sm font-bold mb-8 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span>הטכנולוגיה החדשה כבר כאן</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
+                    העסק שלך,<br>
+                    <span class="gradient-text-anim">על טייס אוטומטי</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-slate-600 mb-10 max-w-3xl mx-auto font-light">
-                    אנחנו מחברים בין המערכות שלך, חוסכים לך שעות של עבודה ידנית, 
-                    ומאפשרים לך להתמקד בצמיחה במקום בבירוקרטיה.
+                
+                <p class="text-lg md:text-2xl text-slate-500 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                    אנחנו מחברים בין המערכות שלך, חוסכים לך מאות שעות עבודה, 
+                    ומאפשרים לך להתמקד בצמיחה בזמן שהרובוטים עובדים.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#simulator" class="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-blue-500/30 shadow-lg hover:shadow-blue-500/50 hover:bg-blue-700 transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                        <i class="fas fa-play-circle"></i> נסה את הסימולטור
+                <div class="flex flex-col sm:flex-row justify-center gap-5">
+                    <a href="#simulator" class="group relative px-8 py-4 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all hover:scale-105 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/20">
+                        <span class="relative flex items-center gap-2"><i class="fas fa-play"></i> הפעל סימולטור</span>
                     </a>
-                    <a href="#ai-lab" class="bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-slate-50 transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                    
+                    <a href="#ai-lab" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold text-lg hover:bg-slate-50 hover:border-purple-300 transition hover:scale-105 flex items-center justify-center gap-2 shadow-sm">
                         <i class="fas fa-magic text-purple-500"></i> שאל את ה-AI
                     </a>
                 </div>
             </div>
 
-            <!-- New "Digital Neural Network" Visualizer -->
-            <div class="mt-16 relative mx-auto max-w-5xl" data-aos="fade-up" data-aos-delay="200">
-                <div class="bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 p-2 md:p-4">
-                    <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden relative">
+            <!-- Tech Visualizer (Clean Mode) -->
+            <div class="mt-20 relative mx-auto max-w-6xl" data-aos="fade-up" data-aos-delay="200">
+                <div class="rounded-3xl shadow-2xl shadow-blue-900/10 border border-white p-3 bg-white/50 backdrop-blur-sm relative">
+                    
+                    <div class="aspect-video bg-white rounded-2xl overflow-hidden relative border border-slate-100 shadow-inner">
+                         <!-- Grid -->
+                         <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px); background-size: 40px 40px;"></div>
                          
-                         <!-- Tech Grid Background -->
-                         <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px); background-size: 40px 40px;"></div>
-                         
-                         <!-- Floating Binary Data -->
-                         <div class="absolute inset-0 pointer-events-none opacity-20 text-xs font-mono text-blue-400 overflow-hidden">
-                             <div class="absolute top-10 left-10 data-particle" style="animation-delay: 0s;">01001</div>
-                             <div class="absolute top-40 right-20 data-particle" style="animation-delay: 1s;">11010</div>
-                             <div class="absolute bottom-20 left-1/4 data-particle" style="animation-delay: 2s;">PROCESS</div>
-                             <div class="absolute top-1/3 right-1/3 data-particle" style="animation-delay: 3s;">SYNC</div>
+                         <!-- Floating Binary -->
+                         <div class="absolute inset-0 pointer-events-none opacity-30 text-xs font-mono text-blue-600 overflow-hidden">
+                             <div class="absolute top-10 left-10 data-particle">01010110</div>
+                             <div class="absolute bottom-20 right-20 data-particle" style="animation-delay: 1s;">SYSTEM_OK</div>
+                             <div class="absolute top-1/2 left-10 data-particle" style="animation-delay: 2s;">SYNCING...</div>
                          </div>
 
-                         <!-- Network SVG Layer -->
+                         <!-- Network Lines -->
                          <svg class="absolute inset-0 w-full h-full pointer-events-none">
                             <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <linearGradient id="gradNeon" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0" />
-                                    <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:0.6" />
                                     <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0" />
                                 </linearGradient>
                             </defs>
-                            <!-- Connection Lines -->
-                            <line x1="50%" y1="50%" x2="20%" y2="30%" stroke="url(#grad1)" stroke-width="1.5" class="network-line" style="animation-duration: 3s;" />
-                            <line x1="50%" y1="50%" x2="80%" y2="30%" stroke="url(#grad1)" stroke-width="1.5" class="network-line" style="animation-duration: 4s;" />
-                            <line x1="50%" y1="50%" x2="25%" y2="70%" stroke="url(#grad1)" stroke-width="1.5" class="network-line" style="animation-duration: 2.5s;" />
-                            <line x1="50%" y1="50%" x2="75%" y2="70%" stroke="url(#grad1)" stroke-width="1.5" class="network-line" style="animation-duration: 3.5s;" />
-                            <line x1="50%" y1="50%" x2="50%" y2="20%" stroke="url(#grad1)" stroke-width="1.5" class="network-line" style="animation-duration: 5s;" />
+                            <line x1="50%" y1="50%" x2="20%" y2="30%" stroke="url(#gradNeon)" stroke-width="2" class="network-line" />
+                            <line x1="50%" y1="50%" x2="80%" y2="30%" stroke="url(#gradNeon)" stroke-width="2" class="network-line" style="animation-delay: 0.5s;" />
+                            <line x1="50%" y1="50%" x2="25%" y2="70%" stroke="url(#gradNeon)" stroke-width="2" class="network-line" style="animation-delay: 1s;" />
+                            <line x1="50%" y1="50%" x2="75%" y2="70%" stroke="url(#gradNeon)" stroke-width="2" class="network-line" style="animation-delay: 1.5s;" />
+                            <line x1="50%" y1="50%" x2="50%" y2="20%" stroke="url(#gradNeon)" stroke-width="2" class="network-line" style="animation-delay: 2s;" />
                          </svg>
 
                          <!-- Central Core -->
                          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                             <div class="relative w-24 h-24 flex items-center justify-center">
-                                 <div class="absolute inset-0 bg-blue-500/20 rounded-full animate-ping"></div>
-                                 <div class="relative w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full flex items-center justify-center shadow-lg border-2 border-blue-400 z-10">
-                                     <i class="fas fa-brain text-4xl text-white"></i>
+                             <div class="relative w-32 h-32 flex items-center justify-center">
+                                 <div class="absolute inset-0 bg-blue-100 rounded-full animate-ping opacity-50"></div>
+                                 <div class="absolute inset-0 border border-blue-200 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                                 <div class="relative w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-xl shadow-blue-500/20 border border-blue-100 z-10">
+                                     <i class="fas fa-brain text-5xl text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-600"></i>
                                  </div>
-                                 <div class="absolute -bottom-8 whitespace-nowrap text-blue-300 text-xs font-mono bg-slate-900/80 px-2 py-1 rounded border border-blue-900">CORE_SYSTEM</div>
                              </div>
                          </div>
 
                          <!-- Satellite Nodes -->
                          <!-- Node 1 -->
                          <div class="absolute top-[30%] left-[20%] -translate-x-1/2 -translate-y-1/2 z-10">
-                             <div class="w-12 h-12 bg-slate-800 rounded-xl border border-slate-600 flex items-center justify-center shadow-lg transform hover:scale-110 transition duration-300">
-                                 <i class="fab fa-whatsapp text-green-400 text-2xl"></i>
+                             <div class="w-14 h-14 bg-white/90 backdrop-blur rounded-xl border border-slate-100 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                 <i class="fab fa-whatsapp text-green-500 text-3xl"></i>
                              </div>
                          </div>
-
                          <!-- Node 2 -->
                          <div class="absolute top-[30%] left-[80%] -translate-x-1/2 -translate-y-1/2 z-10">
-                             <div class="w-12 h-12 bg-slate-800 rounded-xl border border-slate-600 flex items-center justify-center shadow-lg transform hover:scale-110 transition duration-300">
-                                 <i class="fas fa-envelope text-red-400 text-xl"></i>
+                             <div class="w-14 h-14 bg-white/90 backdrop-blur rounded-xl border border-slate-100 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                 <i class="fas fa-envelope text-red-500 text-2xl"></i>
                              </div>
                          </div>
-
                          <!-- Node 3 -->
                          <div class="absolute top-[70%] left-[25%] -translate-x-1/2 -translate-y-1/2 z-10">
-                             <div class="w-12 h-12 bg-slate-800 rounded-xl border border-slate-600 flex items-center justify-center shadow-lg transform hover:scale-110 transition duration-300">
-                                 <i class="fas fa-file-excel text-green-600 text-xl"></i>
+                             <div class="w-14 h-14 bg-white/90 backdrop-blur rounded-xl border border-slate-100 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                 <i class="fas fa-file-excel text-green-700 text-2xl"></i>
                              </div>
                          </div>
-
                          <!-- Node 4 -->
                          <div class="absolute top-[70%] left-[75%] -translate-x-1/2 -translate-y-1/2 z-10">
-                             <div class="w-12 h-12 bg-slate-800 rounded-xl border border-slate-600 flex items-center justify-center shadow-lg transform hover:scale-110 transition duration-300">
-                                 <i class="fas fa-credit-card text-yellow-400 text-xl"></i>
+                             <div class="w-14 h-14 bg-white/90 backdrop-blur rounded-xl border border-slate-100 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                 <i class="fas fa-credit-card text-yellow-500 text-2xl"></i>
                              </div>
                          </div>
-                         
                          <!-- Node 5 -->
                          <div class="absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-10">
-                             <div class="w-12 h-12 bg-slate-800 rounded-xl border border-slate-600 flex items-center justify-center shadow-lg transform hover:scale-110 transition duration-300">
-                                 <i class="fas fa-users text-blue-400 text-xl"></i>
+                             <div class="w-14 h-14 bg-white/90 backdrop-blur rounded-xl border border-slate-100 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+                                 <i class="fas fa-users text-blue-500 text-2xl"></i>
                              </div>
                          </div>
-
                     </div>
                 </div>
             </div>
@@ -302,20 +286,20 @@
     </header>
 
     <!-- Value Proposition -->
-    <section class="py-20 bg-white relative z-10" id="features">
+    <section class="py-24 relative z-10" id="features">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">למה העסק שלך חייב אוטומציה?</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">בעולם של היום, זמן הוא המשאב היקר ביותר. המערכות שלנו מחזירות לך אותו.</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">למה העסק שלך חייב אוטומציה?</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto text-lg">בעולם של היום, זמן הוא המשאב היקר ביותר. המערכות שלנו מחזירות לך אותו.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <div class="glass-card-light p-8 rounded-3xl soft-glow-box transition-all duration-300 group" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-800">חיסכון אדיר בזמן</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-800">חיסכון אדיר בזמן</h3>
                     <p class="text-slate-600 leading-relaxed">
                         במקום להקליד נתונים ידנית, המערכת מעבירה מידע בין אפליקציות בשניות. 
                         מה שלקח לך שעתיים ביום, יקרה עכשיו ב-0 שניות.
@@ -323,11 +307,11 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-purple-900/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <div class="glass-card-light p-8 rounded-3xl soft-glow-box transition-all duration-300 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-purple-50 border border-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all shadow-sm">
                         <i class="fas fa-bullseye"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-800">0% טעויות אנוש</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-800">0% טעויות אנוש</h3>
                     <p class="text-slate-600 leading-relaxed">
                         רובוטים לא מתעייפים, לא שוכחים לשלוח מייל ולא טועים בהקלדת מספרים.
                         התהליכים העסקיים שלך הופכים למדויקים ואמינים.
@@ -335,11 +319,11 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="group p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-green-900/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <div class="glass-card-light p-8 rounded-3xl soft-glow-box transition-all duration-300 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-50 border border-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:bg-green-600 group-hover:text-white transition-all shadow-sm">
                         <i class="fas fa-sack-dollar"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-slate-800">הגדלת רווחים</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-slate-800">הגדלת רווחים</h3>
                     <p class="text-slate-600 leading-relaxed">
                         כשאתה לא מתעסק באדמיניסטרציה, אתה פנוי למכור ולפתח את העסק.
                         בנוסף, מענה מהיר ללידים (אוטומטי) מעלה את אחוזי הסגירה.
@@ -349,69 +333,74 @@
         </div>
     </section>
 
-    <!-- LIVE SIMULATOR SECTION (The "Wow" Factor) -->
-    <section id="simulator" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <!-- Decoration Grid -->
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')] opacity-10"></div>
-        
-        <div class="max-w-6xl mx-auto px-4 relative z-10">
-            <div class="flex flex-col lg:flex-row gap-12 items-center">
+    <!-- LIVE SIMULATOR SECTION (Clean Tech Style) -->
+    <section id="simulator" class="py-24 bg-white relative overflow-hidden border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
                 
                 <!-- Controller -->
-                <div class="w-full lg:w-1/2" data-aos="fade-left">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4"><i class="fas fa-terminal text-green-400 ml-3"></i>סימולטור חי</h2>
-                    <p class="text-slate-300 mb-8 text-lg">
-                        ראה איך המערכת עובדת בזמן אמת. הזן נתונים וצפה ב"מוח" של המערכת מבצע את הפעולות.
+                <div class="w-full lg:w-5/12" data-aos="fade-left">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-slate-900"><span class="text-blue-600">///</span> סימולטור חי</h2>
+                    <p class="text-slate-500 mb-10 text-lg">
+                        אל תדמיין, תראה. הזן נתונים וצפה ב"מוח" של המערכת מבצע פעולות מורכבות בזמן אמת.
                     </p>
 
-                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 backdrop-blur-sm">
-                        <div class="space-y-4">
+                    <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-2xl shadow-slate-200/50 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+                        <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-slate-400 mb-1">שם הלקוח</label>
-                                <input type="text" id="sim-name" value="ישראל ישראלי" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+                                <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">שם הלקוח</label>
+                                <input type="text" id="sim-name" value="ישראל ישראלי" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-lg">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-slate-400 mb-1">תרחיש לבדיקה</label>
-                                <select id="sim-scenario" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
-                                    <option value="lead">ליד חדש מהאתר (CRM + וואטסאפ)</option>
-                                    <option value="sale">רכישה בחנות (חשבונית + מלאי)</option>
-                                    <option value="support">פניית שירות (כרטיס תמיכה + שיבוץ)</option>
-                                </select>
+                                <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">תרחיש לבדיקה</label>
+                                <div class="relative">
+                                    <select id="sim-scenario" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none transition appearance-none cursor-pointer">
+                                        <option value="lead">⚡ ליד חדש (CRM + וואטסאפ)</option>
+                                        <option value="sale">💰 רכישה בחנות (חשבונית + מלאי)</option>
+                                        <option value="support">🚑 פניית שירות (תמיכה + שיבוץ)</option>
+                                    </select>
+                                    <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <button onclick="runTerminal()" id="run-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-900/50 transition-all transform active:scale-95 flex justify-center items-center gap-2 mt-2">
-                                <span>הרץ אוטומציה</span>
+                            <button onclick="runTerminal()" id="run-btn" class="w-full bg-slate-900 text-white hover:bg-slate-800 font-bold py-4 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 flex justify-center items-center gap-3 mt-4 text-lg tracking-wide">
+                                <span>הרץ פרוטוקול</span>
                                 <i class="fas fa-play"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Terminal Display -->
-                <div class="w-full lg:w-1/2" data-aos="fade-right">
-                    <div class="terminal-window h-[400px] flex flex-col">
-                        <div class="terminal-header">
-                            <div class="terminal-dot bg-red-500"></div>
-                            <div class="terminal-dot bg-yellow-500"></div>
-                            <div class="terminal-dot bg-green-500"></div>
-                            <div class="flex-1 text-center text-xs text-gray-400 font-mono">system_process.exe</div>
+                <!-- Terminal Display (Dark for Contrast) -->
+                <div class="w-full lg:w-7/12" data-aos="fade-right">
+                    <div class="terminal-clean h-[500px] flex flex-col overflow-hidden">
+                        <div class="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="text-xs text-slate-400 font-mono tracking-widest">SYSTEM.LOG</div>
                         </div>
-                        <div class="flex-1 p-4 overflow-y-auto text-sm" id="terminal-body">
-                            <div class="text-slate-400 mb-2">> System Ready...</div>
-                            <div class="text-slate-400 mb-2">> Waiting for input...</div>
-                            <div class="text-blue-400 typing hidden" id="cursor-line">_</div>
+                        <div class="flex-1 p-6 overflow-y-auto text-sm relative bg-[#1e293b]" id="terminal-body">
+                            <!-- No scanline for clean look -->
+                            <div class="text-slate-400 mb-2 font-mono">Initializing System v4.2...</div>
+                            <div class="text-slate-400 mb-2 font-mono">Connection Established.</div>
+                            <div class="text-green-400 font-mono">> Ready. Waiting for input...</div>
+                            <div class="text-blue-400 typing hidden mt-1" id="cursor-line">_</div>
                         </div>
                     </div>
                     
-                    <!-- Result Pop-up (Hidden initially) -->
-                    <div id="result-toast" class="mt-4 bg-white text-slate-900 p-4 rounded-xl shadow-lg transform translate-y-10 opacity-0 transition-all duration-500 hidden border-r-4 border-green-500">
-                        <div class="flex items-start gap-3">
-                            <div class="bg-green-100 text-green-600 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-sm">התהליך הושלם בהצלחה!</h4>
-                                <p class="text-xs text-slate-600 mt-1" id="toast-msg">הנתונים עובדו.</p>
-                            </div>
+                    <!-- Result Pop-up -->
+                    <div id="result-toast" class="mt-6 bg-white text-slate-900 p-5 rounded-2xl shadow-xl border border-green-100 transform translate-y-10 opacity-0 transition-all duration-500 hidden flex items-center gap-4">
+                        <div class="bg-green-50 text-green-600 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 border border-green-100">
+                            <i class="fas fa-check text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-slate-800">בוצע בהצלחה</h4>
+                            <p class="text-slate-500 text-sm" id="toast-msg">הנתונים עובדו.</p>
                         </div>
                     </div>
                 </div>
@@ -420,83 +409,89 @@
     </section>
 
     <!-- AI LAB Section -->
-    <section id="ai-lab" class="py-24 bg-slate-50 relative">
-        <div class="max-w-4xl mx-auto px-4">
+    <section id="ai-lab" class="py-24 relative overflow-hidden bg-slate-50">
+        <!-- Decoration -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white rounded-full blur-[80px] -z-10 opacity-60"></div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
             <div class="text-center mb-12">
-                <span class="text-purple-600 font-bold tracking-wider text-sm uppercase">AI Powered</span>
-                <h2 class="text-4xl font-bold text-slate-900 mt-2">מעבדת הרעיונות</h2>
-                <p class="text-slate-600 mt-4">
-                    אין לך רעיון מה לאטמט? ה-AI שלנו כאן לעזור.<br>
-                    כתוב את סוג העסק שלך וקבל הצעות מותאמות אישית ברגע.
+                <span class="text-purple-600 font-bold tracking-[0.2em] text-sm uppercase bg-purple-50 px-3 py-1 rounded border border-purple-100">AI Powered</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mt-4">מעבדת הרעיונות <span class="text-purple-600">AI</span></h2>
+                <p class="text-slate-500 mt-6 text-lg">
+                    אין לך רעיון מה לאטמט? הבינה המלאכותית שלנו כאן לעזור.<br>
+                    כתוב את סוג העסק שלך וקבל תוכנית עבודה מותאמת אישית.
                 </p>
             </div>
 
-            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-1 md:p-2 border border-slate-100">
-                <div class="flex flex-col md:flex-row gap-2 p-4">
+            <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 p-2 border border-slate-100">
+                <div class="flex flex-col md:flex-row gap-2 p-2">
                     <input type="text" id="ai-input" placeholder="למשל: סוכנות ביטוח, מאלף כלבים, חנות בגדים..." 
-                           class="flex-1 bg-slate-50 border-none rounded-xl px-6 py-4 text-lg focus:ring-2 focus:ring-purple-500 transition outline-none">
-                    <button onclick="askAI()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-purple-200 transition-all transform hover:-translate-y-1 whitespace-nowrap">
-                        <i class="fas fa-sparkles ml-2"></i> תן רעיונות
+                           class="flex-1 bg-slate-50 border border-slate-200 rounded-2xl px-6 py-5 text-lg text-slate-800 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition outline-none">
+                    <button onclick="askAI()" class="bg-purple-600 hover:bg-purple-700 text-white px-10 py-5 rounded-2xl font-bold text-lg shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1 whitespace-nowrap flex items-center justify-center gap-2">
+                        <i class="fas fa-sparkles"></i> תן רעיונות
                     </button>
                 </div>
                 
                 <!-- AI Output Area -->
-                <div id="ai-output" class="hidden p-6 md:p-8 bg-gradient-to-br from-slate-50 to-white rounded-2xl border-t border-slate-100 min-h-[150px]">
-                    <div id="ai-loading" class="flex flex-col items-center justify-center py-8">
-                        <div class="w-10 h-10 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-3"></div>
-                        <p class="text-slate-500 text-sm animate-pulse">מנתח את העסק שלך...</p>
+                <div id="ai-output" class="hidden p-8 bg-slate-50 rounded-2xl border-t border-slate-100 min-h-[200px] mt-2 relative overflow-hidden">
+                    <div id="ai-loading" class="flex flex-col items-center justify-center py-10">
+                        <div class="relative w-16 h-16">
+                            <div class="absolute inset-0 border-t-4 border-purple-500 rounded-full animate-spin"></div>
+                            <div class="absolute inset-2 border-r-4 border-blue-500 rounded-full animate-spin direction-reverse"></div>
+                        </div>
+                        <p class="text-slate-500 text-sm animate-pulse mt-4 tracking-wider">מעבד נתונים...</p>
                     </div>
-                    <div id="ai-content" class="hidden text-right space-y-4">
-                        <!-- Dynamic Content will be injected here -->
+                    <div id="ai-content" class="hidden text-right space-y-4 relative z-10">
+                        <!-- Dynamic Content -->
                     </div>
                 </div>
             </div>
 
             <!-- Quick Suggestions Chips -->
             <div class="flex flex-wrap justify-center gap-3 mt-8">
-                <button onclick="fillAI('משרד עו״ד')" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 transition">משרד עו״ד</button>
-                <button onclick="fillAI('מאמן כושר')" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 transition">מאמן כושר</button>
-                <button onclick="fillAI('חנות איקומרס')" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 transition">חנות איקומרס</button>
-                <button onclick="fillAI('נדל״ן')" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 transition">נדל״ן</button>
+                <button onclick="fillAI('משרד עו״ד')" class="px-5 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer shadow-sm">משרד עו״ד</button>
+                <button onclick="fillAI('מאמן כושר')" class="px-5 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer shadow-sm">מאמן כושר</button>
+                <button onclick="fillAI('חנות איקומרס')" class="px-5 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer shadow-sm">חנות איקומרס</button>
+                <button onclick="fillAI('נדל״ן')" class="px-5 py-2 bg-white border border-slate-200 rounded-full text-slate-600 text-sm hover:border-purple-500 hover:text-purple-600 hover:bg-purple-50 transition cursor-pointer shadow-sm">נדל״ן</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer class="bg-slate-900 text-slate-400 py-16 border-t border-slate-800 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-8 relative z-10">
             <div class="col-span-1 md:col-span-2">
-                <h3 class="text-white text-2xl font-bold mb-4 brand-font">פשוט.<span class="text-blue-500">אוטומט.</span></h3>
-                <p class="max-w-xs leading-relaxed">
-                    אנחנו הופכים טכנולוגיה מורכבת לפתרונות פשוטים שעובדים בשבילך.
-                    מערכות אוטומציה שמחזירות לך את השליטה בזמן.
+                <h3 class="text-white text-3xl font-bold mb-6 brand-font tracking-tight">פשוט.<span class="text-blue-500">אוטומט.</span></h3>
+                <p class="max-w-sm leading-relaxed text-slate-500 text-lg">
+                    הופכים טכנולוגיה מורכבת לפתרונות פשוטים.
+                    מערכות אוטומציה שמחזירות לך את השליטה בזמן, בכסף ובחיים.
                 </p>
             </div>
             <div>
-                <h4 class="text-white font-bold mb-4">קישורים מהירים</h4>
-                <ul class="space-y-2">
-                    <li><a href="#features" class="hover:text-blue-400 transition">פתרונות</a></li>
-                    <li><a href="#simulator" class="hover:text-blue-400 transition">דמו</a></li>
-                    <li><a href="#ai-lab" class="hover:text-blue-400 transition">AI Lab</a></li>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">ניווט</h4>
+                <ul class="space-y-3">
+                    <li><a href="#features" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> פתרונות</a></li>
+                    <li><a href="#simulator" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> דמו חי</a></li>
+                    <li><a href="#ai-lab" class="hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-left text-xs text-slate-600"></i> AI Lab</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-bold mb-4">צור קשר</h4>
-                <ul class="space-y-2">
-                    <li><i class="fas fa-envelope ml-2 text-slate-600"></i> 6161358@gmail.com</li>
-                    <li><i class="fab fa-whatsapp ml-2 text-slate-600"></i> 053-3182643</li>
-                    <li class="pt-2">
-                        <button onclick="highlightChat()" class="text-blue-400 hover:text-blue-300 font-bold text-sm">פתח צ'אט תמיכה &rarr;</button>
+                <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">צור קשר</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center border border-slate-700"><i class="fas fa-envelope text-slate-400"></i></div> 6161358@gmail.com</li>
+                    <li class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center border border-slate-700"><i class="fab fa-whatsapp text-slate-400"></i></div> 053-3182643</li>
+                    <li class="pt-4">
+                        <button onclick="highlightChat()" class="text-blue-400 hover:text-blue-300 font-bold text-sm tracking-wide group">פתח צ'אט תמיכה <span class="group-hover:mr-2 transition-all">&rarr;</span></button>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="text-center pt-8 border-t border-slate-800 text-sm">
-            &copy; 2026 פשוט. אוטומט. נבנה באמצעות <i class="fas fa-code text-blue-500 mx-1"></i> ואוטומציה.
+        <div class="text-center pt-8 border-t border-slate-800 text-slate-600 text-sm relative z-10">
+            &copy; 2026 פשוט. אוטומט. <span class="mx-2">|</span> All rights reserved.
         </div>
     </footer>
 
-    <!-- Chat Widget Embed (Using Chatrace as requested) -->
+    <!-- Chat Widget Embed -->
     <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
     <script>ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"})</script>
 
@@ -510,30 +505,27 @@
             duration: 800,
         });
 
-        // Mobile Menu Toggle
+        // Mobile Menu
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => menu.classList.remove('opacity-0'), 10);
+            } else {
+                menu.classList.add('opacity-0');
+                setTimeout(() => menu.classList.add('hidden'), 300);
+            }
         }
 
-        // Chat Widget Helper with Highlight Animation
+        // Chat Highlight
         function highlightChat() {
-            // 1. Try to open the widget directly
-            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) {
-                ktt10.openWidget();
-            }
-            
-            // 2. Show the bouncing arrow to direct attention
+            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) ktt10.openWidget();
             const pointer = document.getElementById('chat-pointer');
             pointer.classList.remove('hidden');
-            
-            // 3. Hide it after 5 seconds
-            setTimeout(() => {
-                pointer.classList.add('hidden');
-            }, 5000);
+            setTimeout(() => pointer.classList.add('hidden'), 5000);
         }
 
-        // --- Terminal Simulator Logic ---
+        // --- Simulator Logic ---
         const terminalBody = document.getElementById('terminal-body');
         const toast = document.getElementById('result-toast');
         const toastMsg = document.getElementById('toast-msg');
@@ -548,68 +540,64 @@
             const btn = document.getElementById('run-btn');
 
             // Reset
-            terminalBody.innerHTML = '<div class="text-slate-400 mb-2">> System Ready...</div>';
+            terminalBody.innerHTML = '<div class="text-slate-400 mb-2 font-mono">Initializing protocol...</div>';
             toast.classList.add('hidden', 'translate-y-10', 'opacity-0');
             btn.classList.add('opacity-50', 'cursor-not-allowed');
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> מעבד...';
+            btn.innerHTML = '<i class="fas fa-microchip fa-spin"></i> מעבד נתונים...';
 
-            // Scenario Logs Configuration - ULTRA FAST MODE
-            // Delays cut significantly to show speed
             let logs = [];
             let finalMsg = "";
 
             if (scenario === 'lead') {
                 logs = [
-                    { text: `> New Webhook received: Source="Landing Page"`, color: "text-blue-300", delay: 200 },
-                    { text: `> Parsing data: Name="${name}"`, color: "text-slate-300", delay: 500 },
-                    { text: `> Adding to CRM (HubSpot)...`, color: "text-yellow-300", delay: 800 },
-                    { text: `> [SUCCESS] Contact ID #98221 created.`, color: "text-green-400", delay: 1100 },
-                    { text: `> Sending WhatsApp via API...`, color: "text-purple-300", delay: 1400 },
-                    { text: `> [SENT] "Hi ${name}, thanks for joining!"`, color: "text-green-400", delay: 1600 },
-                    { text: `> Creating Task for Sales Team...`, color: "text-slate-300", delay: 1900 },
-                    { text: `> Process Finished.`, color: "text-white font-bold", delay: 2100 }
+                    { text: `> [WEBHOOK] Incoming Signal: Landing_Page_v2`, color: "text-blue-400" },
+                    { text: `> [PARSER] Extracting Identity: "${name}"`, color: "text-slate-300" },
+                    { text: `> [CRM] HubSpot API Handshake... OK`, color: "text-yellow-400" },
+                    { text: `> [DB] Contact Created: ID #98221`, color: "text-green-400" },
+                    { text: `> [API] WhatsApp Gateway: Triggering Template_01`, color: "text-purple-400" },
+                    { text: `> [SENT] Message delivered to ${name}`, color: "text-green-500 font-bold" },
+                    { text: `> [TASK] Sales Agent Notified.`, color: "text-slate-400" },
+                    { text: `> [SYSTEM] Process Terminated Successfully.`, color: "text-green-400" }
                 ];
-                finalMsg = `ליד בשם ${name} נקלט ב-CRM, קיבל וואטסאפ אישי ומשימה נפתחה לאיש מכירות.`;
+                finalMsg = `הליד ${name} נקלט, קיבל הודעה, והמשימה עברה למכירות.`;
             } else if (scenario === 'sale') {
                 logs = [
-                    { text: `> Payment Gateway Trigger: Status=Approved`, color: "text-green-300", delay: 200 },
-                    { text: `> Customer: ${name}`, color: "text-slate-300", delay: 400 },
-                    { text: `> Generating Invoice PDF...`, color: "text-yellow-300", delay: 700 },
-                    { text: `> [FILE] Invoice_2024_001.pdf created`, color: "text-slate-400", delay: 1000 },
-                    { text: `> Mailing to customer...`, color: "text-blue-300", delay: 1200 },
-                    { text: `> Updating Inventory (-1 Item)...`, color: "text-red-300", delay: 1500 },
-                    { text: `> Syncing with Accounting Software...`, color: "text-purple-300", delay: 1800 },
-                    { text: `> Transaction Complete.`, color: "text-white font-bold", delay: 2000 }
+                    { text: `> [PAYMENT] Gateway Trigger: STATUS=APPROVED`, color: "text-green-400" },
+                    { text: `> [IDENT] Customer Verification: ${name}`, color: "text-slate-300" },
+                    { text: `> [GEN] Rendering Invoice PDF (v2.0)...`, color: "text-yellow-400" },
+                    { text: `> [FILE] Uploading Invoice_2024_001.pdf to Cloud`, color: "text-blue-400" },
+                    { text: `> [MAIL] SMTP Server: Dispatched to user.`, color: "text-slate-400" },
+                    { text: `> [INV] SKU-992 Update: -1 Unit`, color: "text-red-400" },
+                    { text: `> [SYNC] Accounting ERP handshake complete.`, color: "text-purple-400" },
+                    { text: `> [SYSTEM] Transaction Finalized.`, color: "text-green-400" }
                 ];
-                finalMsg = `חשבונית נשלחה ל-${name}, המלאי עודכן והנהלת חשבונות סונכרנה.`;
+                finalMsg = `חשבונית הופקה ל-${name}, מלאי ירד, הנה"ח עודכנה.`;
             } else {
                 logs = [
-                    { text: `> Incoming Ticket: User="${name}"`, color: "text-blue-300", delay: 200 },
-                    { text: `> Analyzing sentiment with AI...`, color: "text-purple-300", delay: 600 },
-                    { text: `> Sentiment: Urgent/High Priority`, color: "text-red-400", delay: 900 },
-                    { text: `> Assigning to Senior Support Agent...`, color: "text-yellow-300", delay: 1200 },
-                    { text: `> Sending SMS update to ${name}...`, color: "text-green-300", delay: 1500 },
-                    { text: `> Ticket #5541 Opened.`, color: "text-white font-bold", delay: 1800 }
+                    { text: `> [TICKET] Incoming Stream: User="${name}"`, color: "text-blue-400" },
+                    { text: `> [AI] Analyzing Sentiment...`, color: "text-purple-400" },
+                    { text: `> [AI_RESULT] Sentiment=URGENT (Confidence: 98%)`, color: "text-red-500 font-bold" },
+                    { text: `> [ROUTING] Bypassing Tier 1 -> Assigning Senior Agent`, color: "text-yellow-400" },
+                    { text: `> [SMS] Gateway: "We are on it" -> Sent to ${name}`, color: "text-green-400" },
+                    { text: `> [DB] Ticket #5541 Created [PRIORITY:HIGH]`, color: "text-slate-300" }
                 ];
-                finalMsg = `פנייה דחופה מ-${name} נותבה למנהל בכיר ונשלח עדכון ללקוח.`;
+                finalMsg = `פנייה דחופה מ-${name} זוהתה ונותבה למנהל.`;
             }
 
-            // Execute Logs
+            // High Speed Typing Effect
             for (let log of logs) {
-                await new Promise(r => setTimeout(r, log.delay - (logs[logs.indexOf(log)-1]?.delay || 0)));
+                await new Promise(r => setTimeout(r, 400));
                 const div = document.createElement('div');
-                div.className = `${log.color} font-mono mb-1`;
+                div.className = `${log.color} font-mono mb-1 text-xs md:text-sm border-l-2 border-transparent pl-2 hover:border-slate-700 hover:bg-slate-800/50`;
                 div.innerHTML = log.text;
                 terminalBody.appendChild(div);
-                terminalBody.scrollTop = terminalBody.scrollHeight; // Auto scroll
+                terminalBody.scrollTop = terminalBody.scrollHeight;
             }
 
-            // Finish
             isRunning = false;
             btn.classList.remove('opacity-50', 'cursor-not-allowed');
-            btn.innerHTML = '<span>הרץ אוטומציה</span><i class="fas fa-play"></i>';
+            btn.innerHTML = '<span>הרץ פרוטוקול</span><i class="fas fa-play"></i>';
             
-            // Show Toast
             toastMsg.innerText = finalMsg;
             toast.classList.remove('hidden');
             setTimeout(() => {
@@ -617,38 +605,36 @@
             }, 100);
         }
 
-        // --- Local AI Logic (Mock) ---
-        // This simulates AI without needing an external API key, ensuring it always works for the demo.
-        
+        // --- AI Logic ---
         function fillAI(text) {
             document.getElementById('ai-input').value = text;
         }
 
         const aiResponses = {
             'עו״ד': [
-                "1. **יצירת חוזים אוטומטית**: טופס באתר שממלא תבנית וורד ושולח ללקוח לחתימה.",
-                "2. **תזכורות לדיונים**: סנכרון יומן בית משפט עם גוגל קלנדר + SMS ללקוח יום לפני.",
-                "3. **קליטת לקוח**: צ'אטבוט באתר שאוסף פרטים ראשוניים ומסנן תיקים לא רלוונטיים."
+                "**חוזה חכם**: טופס דיגיטלי שמפיק הסכם שכר טרחה ושולח לחתימה בנייד.",
+                "**בוט תיקים**: בדיקת סטטוס תיק ב'נט המשפט' ועדכון אוטומטי ללקוח ב-SMS.",
+                "**סינון לידים**: צ'אטבוט שמברר מהות התביעה ומסנן פניות סרק."
             ],
             'כושר': [
-                "1. **חידוש מנוי**: הודעת וואטסאפ אוטומטית שבוע לפני סיום המנוי עם קישור לתשלום.",
-                "2. **מעקב התקדמות**: טופס שקילה שבועי שמעדכן אוטומטית גרף בתיק המתאמן.",
-                "3. **ביטולי אימונים**: אם מתאמן מבטל פחות מ-24 שעות, המערכת מחייבת אוטומטית ומציעה את המקום למתאמן אחר."
+                "**חידוש אוטומטי**: התראה בוואטסאפ 3 ימים לפני סוף מנוי עם לינק לתשלום.",
+                "**מעקב משקל**: טופס שקילה שבועי שיוצר גרף התקדמות ושולח למתאמן.",
+                "**מילוי מקום**: ביטול אימון מקפיץ הודעה לרשימת המתנה וממלא את החור ביומן."
             ],
             'חנות': [
-                "1. **נטישת עגלה**: סדרת מיילים חכמה שמחזירה 15% מהלקוחות שלא סיימו קנייה.",
-                "2. **אפ-סייל (Upsell)**: הצעה אוטומטית למוצר משלים במייל אישור ההזמנה.",
-                "3. **ניהול מלאי**: התראה לספק כשמוצר יורד מתחת ל-5 יחידות."
+                "**הצלת עגלות**: סדרת מסרים חכמה שמחזירה 20% מהנטישות באתר.",
+                "**ניהול ספקים**: התראה אוטומטית לספק כשהמלאי יורד מתחת לקו האדום.",
+                "**מועדון לקוחות**: הודעת יום הולדת עם קופון אישי שנשלחת לבד."
             ],
             'נדל״ן': [
-                "1. **תיאום סיורים**: לינק לקלנדלי שבו מתעניינים קובעים סיור בנכס, והמתווך מקבל עדכון ביומן.",
-                "2. **מאגר נכסים**: בוט שסורק קבוצות פייסבוק ומכניס דירות רלוונטיות לטבלת אקסל.",
-                "3. **פולו-אפ**: סדרת הודעות למתעניינים שלא ענו שבועיים ('האם עדיין מחפש?')."
+                "**תיאום ביומן**: לינק לקביעת סיור שמסתנכרן עם היומן שלך ושולח תזכורת.",
+                "**צייד הנכסים**: בוט שסורק קבוצות ולוחות ושולח לך נכסים רלוונטיים.",
+                "**חימום לידים**: סדרת ערך (מדריכים/טיפים) ללקוחות שעדיין לא בשלו לקנייה."
             ],
             'default': [
-                "1. **חשבוניות ירוקות**: הפקה ושליחה אוטומטית ברגע שהאשראי עובר.",
-                "2. **איסוף לידים**: כל פנייה מהפייסבוק/אתר נכנסת ל-CRM ושולחת התראה לנייד שלך.",
-                "3. **ניהול משימות**: כשמייל חשוב מגיע, הוא הופך אוטומטית למשימה ב-Trello/Monday."
+                "**חשבונית אוטומטית**: הפקה ושליחה במייל ברגע הסליקה.",
+                "**סדר בבלאגן**: כל ליד מכל מקור נכנס לטבלה אחת מסודרת.",
+                "**מעקב משימות**: מייל חשוב הופך למשימה ביומן או במערכת הניהול."
             ]
         };
 
@@ -658,18 +644,14 @@
             const loader = document.getElementById('ai-loading');
             const content = document.getElementById('ai-content');
 
-            if(!input) return alert("אנא כתוב תחום עיסוק כלשהו");
+            if(!input) return alert("המערכת דורשת קלט כדי להתחיל...");
 
-            // UI Changes
             outputDiv.classList.remove('hidden');
             loader.classList.remove('hidden');
             content.classList.add('hidden');
 
-            // Simulate "Thinking" time
             setTimeout(() => {
                 let foundKey = 'default';
-                
-                // Simple keyword matching logic
                 if (input.includes('עוד') || input.includes('דין') || input.includes('משפט')) foundKey = 'עו״ד';
                 else if (input.includes('כושר') || input.includes('ספורט') || input.includes('מאמן')) foundKey = 'כושר';
                 else if (input.includes('חנות') || input.includes('מכיר') || input.includes('בגד')) foundKey = 'חנות';
@@ -677,24 +659,20 @@
 
                 const ideas = aiResponses[foundKey];
 
-                // Build HTML
-                let html = `<h4 class="font-bold text-lg text-purple-700 mb-2">מצאתי עבורך 3 רעיונות ל-${input}:</h4>`;
+                let html = `<h4 class="font-bold text-xl text-purple-600 mb-4 border-b border-slate-200 pb-2">3 פתרונות זוהו עבור: <span class="text-slate-800">${input}</span></h4>`;
                 ideas.forEach(idea => {
-                    // Make bold text stand out
-                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-slate-800">$1</span>');
-                    html += `<div class="p-3 bg-white border border-slate-100 rounded-lg shadow-sm flex items-start gap-3">
-                                <i class="fas fa-lightbulb text-yellow-400 mt-1"></i>
-                                <p class="text-slate-600 text-sm">${formatted}</p>
+                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-blue-600">$1</span>');
+                    html += `<div class="p-4 bg-white border border-slate-100 rounded-xl mb-3 flex items-start gap-4 hover:border-purple-300 transition shadow-sm hover:shadow-md">
+                                <div class="mt-1 w-2 h-2 rounded-full bg-purple-500 shadow-sm"></div>
+                                <p class="text-slate-600 text-sm leading-relaxed">${formatted}</p>
                              </div>`;
                 });
 
                 content.innerHTML = html;
-                
                 loader.classList.add('hidden');
                 content.classList.remove('hidden');
-            }, 1500);
+            }, 1200);
         }
-
     </script>
 </body>
 </html>
