@@ -25,7 +25,7 @@
     <style>
         :root {
             --accent-blue: #3b82f6;
-            --accent-orange: #f97316; /* High contrast CTA color */
+            --accent-orange: #f97316;
             --bg-light: #f8fafc;
         }
         
@@ -40,86 +40,89 @@
             font-family: 'Outfit', 'Rubik', sans-serif;
         }
         
-        /* Clean Tech Grid Background */
+        /* Clean Tech Grid */
         .tech-grid {
             background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
-        /* Hero Button Pulse */
+        /* Pulse Animation for CTA */
         @keyframes pulse-orange {
-            0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); transform: scale(1); }
         }
         
-        .cta-pulse {
+        .cta-pulse-active {
             animation: pulse-orange 2s infinite;
         }
 
-        /* Glass Cards */
-        .glass-card-light {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #2563eb;
+            cursor: pointer;
+            margin-top: -8px; 
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #e2e8f0;
+            border-radius: 4px;
         }
 
-        /* Floating Badge */
-        .float-badge {
-            animation: float-badge 3s ease-in-out infinite;
-            z-index: 50; /* Ensure visibility */
+        /* Floating Nav Styling */
+        .floating-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
-        @keyframes float-badge {
-            0%, 100% { transform: translateY(0) translateX(-50%); }
-            50% { transform: translateY(-5px) translateX(-50%); }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
 <body class="selection:bg-orange-100 selection:text-orange-900">
 
-    <!-- FOMO Banner -->
-    <div class="bg-slate-900 text-white text-center py-2 text-sm font-medium tracking-wide relative z-50">
-        <span class="inline-block w-2 h-2 rounded-full bg-red-500 animate-pulse ml-2"></span>
-        נותרו 3 מקומות בלבד לאפיון מערכת לחודש פברואר. <a href="#contact-quick" class="underline hover:text-orange-400 font-bold">שריין מקום עכשיו &larr;</a>
-    </div>
-
-    <!-- Background Elements -->
+    <!-- Background Elements (Subtle) -->
     <div class="fixed inset-0 tech-grid z-0 pointer-events-none"></div>
-    <div class="fixed top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-100/60 rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
     <!-- Floating Navbar -->
-    <div class="fixed w-full z-40 top-10 px-4">
-        <nav class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md rounded-full px-6 py-3 flex justify-between items-center shadow-lg border border-white/50">
+    <div class="fixed w-full z-50 top-6 px-4">
+        <nav class="max-w-6xl mx-auto floating-nav rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 group">
-                <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-md">
+            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:rotate-12 transition-transform">
                     <i class="fas fa-bolt"></i>
                 </div>
-                <span class="text-xl font-bold tracking-tight brand-font text-slate-900">פשוט.<span class="text-blue-600">אוטומט.</span></span>
+                <span class="text-2xl font-bold tracking-tight brand-font text-slate-800">פשוט.<span class="text-blue-600">אוטומט.</span></span>
             </a>
             
             <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6 space-x-reverse items-center text-sm font-bold text-slate-600">
-                <a href="#features" class="hover:text-blue-600 transition">למה אנחנו</a>
-                <a href="#simulator" class="hover:text-blue-600 transition">איך זה עובד</a>
-                <a href="#testimonials" class="hover:text-blue-600 transition">לקוחות</a>
-                <!-- HERO CTA IN NAV -->
-                <a href="#contact-quick" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full shadow-lg shadow-orange-500/30 transition transform hover:-translate-y-0.5">
-                    תיאום הדגמה חינם
-                </a>
+            <div class="hidden md:flex space-x-8 space-x-reverse items-center text-sm font-bold text-slate-600">
+                <a href="#features" class="hover:text-blue-600 transition hover:scale-105">למה אנחנו</a>
+                <a href="#simulator" class="hover:text-blue-600 transition hover:scale-105">מחשבון חיסכון</a>
+                <a href="#testimonials" class="hover:text-blue-600 transition hover:scale-105">סיפורי הצלחה</a>
+                <a href="#ai-lab" class="hover:text-blue-600 transition hover:scale-105">מעבדת AI</a>
+                <button onclick="document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-slate-900 text-white px-6 py-2.5 rounded-full hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-0.5">
+                    דבר איתנו
+                </button>
             </div>
 
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
-                <button onclick="toggleMobileMenu()" class="text-slate-800 text-xl"><i class="fas fa-bars"></i></button>
+                <button onclick="toggleMobileMenu()" class="text-slate-800 hover:text-blue-600 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </nav>
     </div>
@@ -129,13 +132,22 @@
         <button onclick="toggleMobileMenu()" class="absolute top-8 left-8 text-3xl"><i class="fas fa-times"></i></button>
         <a href="#features" onclick="toggleMobileMenu()">למה אנחנו</a>
         <a href="#simulator" onclick="toggleMobileMenu()">סימולטור</a>
+        <a href="#testimonials" onclick="toggleMobileMenu()">לקוחות</a>
         <a href="#contact-quick" onclick="toggleMobileMenu()" class="text-orange-600">תיאום שיחה</a>
     </div>
 
-    <!-- Arrow Pointer for Chat (Updated) -->
-    <div id="chat-pointer" class="fixed bottom-24 right-8 z-50 animate-bounce flex flex-col items-center pointer-events-none">
+    <!-- Floating AI Trigger -->
+    <button onclick="toggleAIModal()" class="fixed bottom-6 left-6 z-40 bg-white border border-purple-200 text-slate-800 p-3 rounded-full shadow-2xl flex items-center gap-2 hover:scale-105 transition-transform group">
+        <div class="bg-purple-100 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center text-xl group-hover:rotate-12 transition">
+            <i class="fas fa-lightbulb"></i>
+        </div>
+        <span class="font-bold pr-2 pl-4 hidden md:inline">מחולל רעיונות</span>
+    </button>
+
+    <!-- Arrow Pointer for Chat -->
+    <div id="chat-pointer" class="fixed bottom-24 right-8 z-50 hidden animate-bounce flex flex-col items-center pointer-events-none">
         <div class="bg-blue-600 text-white px-4 py-2 rounded-xl shadow-xl shadow-blue-500/30 font-bold mb-2 text-sm tracking-wide border border-blue-400 relative">
-            רוצה לדבר איתנו?
+            דבר איתנו כאן!
             <div class="absolute -bottom-1 right-6 w-3 h-3 bg-blue-600 transform rotate-45"></div>
         </div>
         <i class="fas fa-arrow-down text-blue-600 text-4xl drop-shadow-md"></i>
@@ -145,56 +157,118 @@
     <header class="relative pt-40 pb-16 overflow-hidden z-10">
         <div class="max-w-5xl mx-auto px-4 text-center">
             
-            <!-- Social Proof Ticker (Mini) -->
-            <div class="inline-flex items-center gap-2 mb-6 bg-blue-50 border border-blue-100 text-blue-800 px-4 py-1.5 rounded-full text-sm font-semibold animate-fade-in-up">
-                <i class="fas fa-star text-yellow-400"></i>
-                <span>הצטרפו ל-150+ עסקים שכבר חוסכים זמן</span>
-            </div>
-
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 mb-6 leading-tight tracking-tight drop-shadow-sm" data-aos="fade-up">
                 העסק שלך מרוויח<br>
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">בזמן שאתה ישן.</span>
             </h1>
             
             <p class="text-xl md:text-2xl text-slate-500 mb-10 max-w-2xl mx-auto font-normal leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                שעה אחת של הקמת אוטומציה תחסוך לך מאות שעות בשנה.
-                <br class="hidden md:block">
-                אנחנו נבנה עבורך את ה"עובד הדיגיטלי" שלא מתעייף, לא שוכח ולא מבקש העלאה.
+                בנינו "עובד דיגיטלי" שלא מתעייף, לא שוכח לחזור ללידים ולא מבקש העלאה.
+                <span class="block mt-2 font-semibold text-slate-700">תנו לנו שעה, נחסוך לכם מאות שעות בשנה.</span>
             </p>
             
             <!-- THE HERO CTA -->
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-16" data-aos="zoom-in" data-aos-delay="200">
-                <a href="#contact-quick" class="cta-pulse bg-orange-600 hover:bg-orange-700 text-white text-xl md:text-2xl font-bold py-5 px-10 rounded-2xl shadow-2xl shadow-orange-500/40 transition-all transform hover:scale-105 w-full md:w-auto">
-                    אני רוצה אוטומציה לעסק! <i class="fas fa-arrow-left mr-2"></i>
+            <div class="flex flex-col items-center gap-4 mb-16" data-aos="zoom-in" data-aos-delay="200">
+                <a href="#contact-quick" id="hero-cta" class="bg-orange-600 hover:bg-orange-700 text-white text-2xl font-bold py-5 px-12 rounded-2xl shadow-2xl shadow-orange-500/40 transition-all transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-3">
+                    אני רוצה אוטומציה עכשיו <i class="fas fa-arrow-left"></i>
                 </a>
-                <p class="text-sm text-slate-400 mt-2 md:mt-0 md:absolute md:-bottom-8">
-                    * שיחת ייעוץ ראשונית ללא עלות וללא התחייבות
+                <p class="text-sm text-slate-400 font-medium">
+                    <i class="fas fa-check text-green-500 mr-1"></i> שיחת אפיון ללא עלות 
+                    <span class="mx-2">|</span> 
+                    <i class="fas fa-check text-green-500 mr-1"></i> התאמה אישית לעסק
                 </p>
             </div>
 
-            <!-- TRUST STRIP (Social Proof) -->
-            <div class="border-y border-slate-200 py-6 bg-slate-50/50 backdrop-blur-sm">
-                <p class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-4">המערכות שאנחנו מחברים עבורך</p>
-                <div class="flex justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 flex-wrap px-4">
-                    <i class="fab fa-google text-3xl md:text-4xl hover:text-blue-500"></i>
-                    <i class="fab fa-whatsapp text-3xl md:text-4xl hover:text-green-500"></i>
-                    <i class="fab fa-hubspot text-3xl md:text-4xl hover:text-orange-500"></i>
-                    <i class="fas fa-file-invoice-dollar text-3xl md:text-4xl hover:text-green-600"></i>
-                    <i class="fab fa-facebook text-3xl md:text-4xl hover:text-blue-600"></i>
-                    <i class="fab fa-slack text-3xl md:text-4xl hover:text-purple-600"></i>
+            <!-- IMMEDIATE SOCIAL PROOF -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left bg-white p-6 rounded-2xl shadow-lg border border-slate-100 max-w-5xl mx-auto transform -rotate-1 hover:rotate-0 transition-transform duration-500">
+                <div class="flex items-center gap-4 border-b md:border-b-0 md:border-l border-slate-100 pb-4 md:pb-0 pl-4">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full" alt="Client">
+                    <div>
+                        <p class="font-bold text-slate-900 text-sm">"חסכתם לי 20 שעות בשבוע!"</p>
+                        <p class="text-xs text-slate-500">דניאל, סוכן ביטוח</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 border-b md:border-b-0 md:border-l border-slate-100 pb-4 md:pb-0 pl-4">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-12 h-12 rounded-full" alt="Client">
+                    <div>
+                        <p class="font-bold text-slate-900 text-sm">"הלידים מטופלים תוך שניות"</p>
+                        <p class="text-xs text-slate-500">רועי, מנהל מכירות</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">ROI</div>
+                    <div>
+                        <p class="font-bold text-slate-900 text-sm">החזר השקעה תוך חודש</p>
+                        <p class="text-xs text-slate-500">נתון ממוצע בקרב לקוחותינו</p>
+                    </div>
                 </div>
             </div>
+
         </div>
     </header>
 
-    <!-- PROCESS VISUALIZER (Heatmap Style - Fixed Layout) -->
+    <!-- REAL TIME ROI SIMULATOR -->
+    <section id="simulator" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">אל תנחש, תחשב.</h2>
+                <p class="text-slate-500">הזיזו את המחוונים כדי לראות כמה כסף אתם מפסידים כרגע על עבודה ידנית.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-start bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm">
+                
+                <div class="w-full lg:w-1/2 space-y-8">
+                    <div>
+                        <label class="flex justify-between font-bold text-slate-700 mb-4">
+                            <span>כמה לידים/משימות ביום?</span>
+                            <span class="text-blue-600" id="leads-val">10</span>
+                        </label>
+                        <input type="range" id="leads-range" min="1" max="100" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                    </div>
+                    
+                    <div>
+                        <label class="flex justify-between font-bold text-slate-700 mb-4">
+                            <span>דקות טיפול ידני לכל משימה?</span>
+                            <span class="text-blue-600" id="time-val">15 דק'</span>
+                        </label>
+                        <input type="range" id="time-range" min="1" max="60" value="15" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                    </div>
+
+                    <div class="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800">
+                        <i class="fas fa-info-circle mr-1"></i> החישוב מבוסס על עלות שעת עבודה ממוצעת של 50 ₪ + מניעת טעויות אנוש.
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow-xl p-8 border border-slate-100 text-center transform scale-105">
+                    <h3 class="text-slate-500 font-medium mb-2 uppercase tracking-wide text-sm">פוטנציאל חיסכון שנתי</h3>
+                    <div class="text-5xl font-black text-slate-900 mb-2">
+                        ₪<span id="savings-display">15,000</span>
+                    </div>
+                    <div class="text-green-500 font-bold mb-6 text-sm bg-green-50 inline-block px-3 py-1 rounded-full">
+                        + <span id="hours-display">550</span> שעות פנויות בשנה!
+                    </div>
+                    
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                        זה הזמן והכסף שאתם שורפים על הקלדות, העתק-הדבק וטלפונים מיותרים. המערכת שלנו עושה את זה ב-0 שניות.
+                    </p>
+
+                    <a href="#contact-quick" class="block w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl transition shadow-lg">
+                        תחסכו לי את הכסף הזה &larr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS (Heatmap Style) -->
     <section class="py-24 relative z-10">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-slate-900">איך זה עובד? (וכמה זה חוסך לך)</h2>
             </div>
 
-            <!-- Added extra gap for badges -->
             <div class="relative flex flex-col md:flex-row items-center justify-center gap-16 md:gap-6">
                 
                 <!-- Step 1 -->
@@ -206,11 +280,8 @@
 
                 <!-- Connector 1 -->
                 <div class="relative flex items-center justify-center w-full md:w-24 h-12 md:h-auto">
-                    <!-- Line -->
                     <div class="hidden md:block w-full h-1 bg-slate-200"></div>
                     <div class="md:hidden h-24 w-1 bg-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    
-                    <!-- ROI Badge (Floats prominently) -->
                     <div class="absolute bg-green-50 text-green-700 text-sm font-bold px-4 py-2 rounded-full border border-green-200 shadow-lg float-badge whitespace-nowrap z-30">
                         <i class="fas fa-clock mr-1 text-green-500"></i> חסכת 15 דק' הקלדה
                     </div>
@@ -228,11 +299,8 @@
 
                 <!-- Connector 2 -->
                 <div class="relative flex items-center justify-center w-full md:w-24 h-12 md:h-auto">
-                    <!-- Line -->
                     <div class="hidden md:block w-full h-1 bg-slate-200"></div>
                     <div class="md:hidden h-24 w-1 bg-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    
-                    <!-- ROI Badge -->
                     <div class="absolute bg-green-50 text-green-700 text-sm font-bold px-4 py-2 rounded-full border border-green-200 shadow-lg float-badge whitespace-nowrap z-30" style="animation-delay: 1s;">
                         <i class="fas fa-shekel-sign mr-1 text-green-500"></i> חסכת 50 ₪ לליד
                     </div>
@@ -248,7 +316,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS (Social Proof) -->
+    <!-- TESTIMONIALS -->
     <section id="testimonials" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">אל תאמינו לנו, תאמינו למספרים שלהם</h2>
@@ -270,10 +338,10 @@
                     <div class="text-yellow-400 text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"ה-ROI (החזר השקעה) היה מיידי. תוך שבוע המערכת החזירה את העלות שלה בזכות לידים שלא הלכו לאיבוד."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center font-bold text-purple-700">ש</div>
+                        <div class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center font-bold text-purple-700">ר</div>
                         <div>
-                            <p class="font-bold text-slate-900">שרון לוי</p>
-                            <p class="text-xs text-slate-500">מנהלת איקומרס</p>
+                            <p class="font-bold text-slate-900">רועי</p>
+                            <p class="text-xs text-slate-500">מנהל מכירות</p>
                         </div>
                     </div>
                 </div>
@@ -293,98 +361,7 @@
         </div>
     </section>
 
-    <!-- LIVE SIMULATOR (Updated with Context & CTA) -->
-    <section id="simulator" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="flex flex-col lg:flex-row gap-16 items-center">
-                
-                <!-- Controller -->
-                <div class="w-full lg:w-5/12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">תראה כמה זמן זה חוסך לך</h2>
-                    <p class="text-slate-400 mb-8">
-                        בחר תרחיש וראה איך ב-3 שניות המערכת מבצעת עבודה של שעה שלמה.
-                    </p>
-
-                    <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="text-sm text-slate-400">שם הלקוח</label>
-                                <input type="text" id="sim-name" value="ישראל ישראלי" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-3 mt-1 text-white">
-                            </div>
-                            <div>
-                                <label class="text-sm text-slate-400">תרחיש</label>
-                                <select id="sim-scenario" class="w-full bg-slate-900 border border-slate-600 rounded-lg px-3 py-3 mt-1 text-white">
-                                    <option value="lead">⚡ טיפול בליד (חיסכון: 20 דקות)</option>
-                                    <option value="sale">💰 הפקת חשבונית (חיסכון: 15 דקות)</option>
-                                    <option value="onboarding">💼 קליטת עובד (חיסכון: 3 שעות)</option>
-                                </select>
-                            </div>
-                            <button onclick="runTerminal()" id="run-btn" class="w-full bg-blue-600 hover:bg-blue-500 font-bold py-3 rounded-lg shadow-lg transition-all mt-2">
-                                <i class="fas fa-play mr-2"></i> הפעל הדגמה
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Terminal & Result CTA -->
-                <div class="w-full lg:w-7/12 relative">
-                    <div class="terminal-clean h-[400px] flex flex-col overflow-hidden bg-black/80 border border-slate-700 rounded-xl shadow-2xl">
-                        <div class="bg-slate-800 px-4 py-2 border-b border-slate-700 flex gap-2">
-                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                        </div>
-                        <div class="flex-1 p-4 font-mono text-sm text-green-400 overflow-y-auto" id="terminal-body">
-                            <div class="text-slate-500">Waiting for input...</div>
-                        </div>
-                    </div>
-
-                    <!-- Result Overlay (Appears after run) -->
-                    <div id="result-cta" class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 hidden">
-                        <div class="text-5xl mb-4">🚀</div>
-                        <h3 class="text-2xl font-bold mb-2">ראית כמה זה מהיר?</h3>
-                        <p class="text-slate-300 mb-6 max-w-sm">המערכת ביצעה ב-2 שניות עבודה ידנית מעייפת. דמיין את זה קורה 100 פעמים ביום בעסק שלך.</p>
-                        <a href="#contact-quick" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
-                            אני רוצה כזה לעסק שלי!
-                        </a>
-                        <button onclick="hideResult()" class="mt-4 text-sm text-slate-500 underline">הרץ הדגמה נוספת</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MINI CTA: Quick Contact Form -->
-    <section id="contact-quick" class="py-20 bg-gradient-to-br from-blue-600 to-indigo-700 text-white text-center">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-4">רוצה לבדוק כמה כסף תחסוך?</h2>
-            <p class="text-blue-100 mb-8">השאירו פרטים לשיחת אבחון קצרה (ללא עלות) ונראה איפה הכסף שלכם נוזל.</p>
-            
-            <form id="lead-form" class="bg-white/10 p-6 rounded-3xl backdrop-blur-md shadow-2xl border border-white/20" onsubmit="event.preventDefault(); sendLead();">
-                
-                <!-- Main Fields (Required) -->
-                <div class="flex flex-col md:flex-row gap-4 mb-4">
-                    <input type="text" id="contact-name" placeholder="שם מלא *" required class="px-4 py-3 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-400 w-full placeholder-slate-500">
-                    <input type="tel" id="contact-phone" placeholder="טלפון *" required class="px-4 py-3 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-400 w-full placeholder-slate-500">
-                    <input type="email" id="contact-email" placeholder="אימייל *" required class="px-4 py-3 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-400 w-full placeholder-slate-500">
-                </div>
-
-                <!-- Optional Fields (Business Info) -->
-                <div class="flex flex-col md:flex-row gap-4 items-center">
-                    <input type="text" id="business-name" placeholder="שם העסק (אופציונלי)" class="px-4 py-2.5 rounded-xl text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 w-full md:w-1/3 bg-white/80 border border-transparent focus:bg-white placeholder-slate-500 transition">
-                    <input type="text" id="business-topic" placeholder="תחום העסק (אופציונלי)" class="px-4 py-2.5 rounded-xl text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 w-full md:w-1/3 bg-white/80 border border-transparent focus:bg-white placeholder-slate-500 transition">
-                    
-                    <button type="submit" id="submit-btn" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 px-6 rounded-xl shadow-lg transition w-full md:w-1/3 whitespace-nowrap transform hover:scale-105">
-                        דברו איתי עכשיו &larr;
-                    </button>
-                </div>
-
-            </form>
-            <p class="text-xs text-blue-200 mt-4 opacity-80"><i class="fas fa-lock ml-1"></i> הפרטים שלך בטוחים איתנו. 0% ספאם.</p>
-        </div>
-    </section>
-
-    <!-- AI LAB (Beautiful Version Restored) -->
+    <!-- AI LAB (Embedded in Page) -->
     <section id="ai-lab" class="py-24 bg-white relative overflow-hidden">
         <!-- Decoration -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-100/50 rounded-full blur-[100px] -z-10"></div>
@@ -398,19 +375,17 @@
 
             <div class="bg-gradient-to-br from-white to-purple-50 rounded-3xl shadow-2xl shadow-purple-200/50 p-2 border border-purple-100 max-w-2xl mx-auto transform transition hover:scale-[1.01]">
                 <div class="flex flex-col md:flex-row gap-2 p-2">
-                    <input type="text" id="ai-input" placeholder="לדוגמה: עורך דין, גנן, חנות בגדים..." 
+                    <input type="text" id="ai-input-page" placeholder="לדוגמה: עורך דין, גנן, חנות בגדים..." 
                            class="flex-1 bg-white border border-purple-100 rounded-2xl px-6 py-4 text-lg text-slate-800 focus:ring-4 focus:ring-purple-200 focus:border-purple-400 outline-none shadow-inner transition-all placeholder-slate-400">
-                    <button onclick="askAI()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1 whitespace-nowrap active:scale-95">
+                    <button onclick="askAIPage()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1 whitespace-nowrap active:scale-95">
                         <i class="fas fa-sparkles ml-2"></i> תן רעיונות
                     </button>
                 </div>
             </div>
 
-            <!-- AI Output Area -->
-            <div id="ai-output" class="hidden max-w-2xl mx-auto mt-8 text-right space-y-4">
-                <!-- Results go here -->
-            </div>
-            <div id="ai-cta-btn" class="hidden mt-8">
+            <!-- AI Output Area (Page) -->
+            <div id="ai-output-page" class="hidden max-w-2xl mx-auto mt-8 text-right space-y-4"></div>
+            <div id="ai-cta-btn-page" class="hidden mt-8">
                 <a href="#contact-quick" class="inline-block bg-slate-900 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-800 transition transform hover:scale-105 shadow-xl">
                     וואו, אני רוצה לבנות את זה! &larr;
                 </a>
@@ -418,81 +393,183 @@
         </div>
     </section>
 
-    <!-- FAQ Section (ROI Focused) -->
-    <section id="faq" class="py-24 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-2">שאלות נפוצות (והתשובות שמעניינות את הכיס שלך)</h2>
+    <!-- CONTACT FORM (Updated) -->
+    <section id="contact-quick" class="py-24 bg-gradient-to-br from-blue-600 to-indigo-800 text-white relative overflow-hidden">
+        <!-- Decor -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">מוכנים להפסיק לעבוד קשה?</h2>
+            <p class="text-blue-100 mb-10 max-w-xl mx-auto">מלאו פרטים ונחזור אליכם לשיחת אבחון קצרה. בלי התחייבות, בלי אותיות קטנות.</p>
+            
+            <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-3xl mx-auto">
+                <!-- ID Renamed to avoid duplication with middle form if added, though here there is only one main contact form -->
+                <form id="lead-form-main" class="space-y-4" onsubmit="event.preventDefault(); sendLead();">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="relative">
+                            <input type="text" id="contact-name-main" placeholder="שם מלא" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition">
+                        </div>
+                        <div class="relative">
+                            <input type="tel" id="contact-phone-main" placeholder="טלפון נייד" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition">
+                            <span class="text-[10px] text-slate-400 absolute right-2 -bottom-5">אנחנו לא מסמסים סתם :)</span>
+                        </div>
+                        <div class="relative">
+                            <input type="email" id="contact-email-main" placeholder="אימייל" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition">
+                            <span class="text-[10px] text-slate-400 absolute right-2 -bottom-5">בלי ספאם, מבטיחים.</span>
+                        </div>
+                        <div class="relative">
+                            <input type="text" id="business-name-main" placeholder="שם העסק (אופציונלי)" class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition">
+                        </div>
+                    </div>
+
+                    <div class="pt-8 flex flex-col md:flex-row gap-4 items-center">
+                        <!-- Send Form Button -->
+                        <button type="submit" id="submit-btn-main" class="w-full md:w-2/3 bg-orange-600 hover:bg-orange-700 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
+                            שלח פרטים
+                        </button>
+                        
+                        <!-- Chat Bot Trigger Button -->
+                        <button type="button" onclick="highlightChat()" class="w-full md:w-1/3 bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold py-4 rounded-xl shadow-sm transition border border-blue-200 flex justify-center items-center gap-2">
+                            <i class="fas fa-robot text-xl"></i> רוצה לדבר עם הבוט?
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI IDEA GENERATOR MODAL (Popup) -->
+    <div id="ai-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden relative transform scale-95 transition-transform duration-300" id="ai-modal-content">
+            <button onclick="toggleAIModal()" class="absolute top-4 left-4 text-slate-400 hover:text-slate-600 text-2xl z-10"><i class="fas fa-times"></i></button>
+            
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-8 text-white text-center relative overflow-hidden">
+                <div class="absolute top-[-50%] right-[-50%] w-full h-full bg-white/10 rounded-full blur-3xl"></div>
+                <h3 class="text-2xl font-bold mb-2">🤖 מעבדת הרעיונות</h3>
+                <p class="text-purple-100">כתוב את המקצוע שלך וקבל 3 רעיונות לאוטומציה שיחסכו לך כסף.</p>
             </div>
 
+            <div class="p-8">
+                <div class="flex gap-2 mb-6">
+                    <input type="text" id="ai-input" placeholder="לדוגמה: עורך דין, מאלף כלבים..." class="flex-1 border border-slate-300 rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-purple-500 outline-none">
+                    <button onclick="askAI()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 rounded-xl font-bold transition">
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+
+                <div id="ai-output" class="space-y-3 min-h-[100px]">
+                    <p class="text-slate-400 text-center mt-8 italic">התוצאות יופיעו כאן...</p>
+                </div>
+
+                <div id="ai-cta-btn" class="hidden mt-6 pt-6 border-t border-slate-100 text-center">
+                    <p class="text-slate-800 font-bold mb-3">אהבת את הרעיונות?</p>
+                    <button onclick="toggleAIModal(); document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-orange-700 transition w-full">
+                        כן! אני רוצה לבנות את זה &larr;
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">שאלות נפוצות</h2>
             <div class="space-y-4">
-                <details class="group bg-white rounded-2xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-lg text-slate-800 hover:text-blue-600">
+                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                    <summary class="flex justify-between items-center p-5 font-bold text-slate-800 hover:text-blue-600">
                         <span>כמה כסף זה באמת חוסך?</span>
-                        <span class="text-blue-500 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center transition-colors group-hover:bg-blue-100"><i class="fas fa-plus"></i></span>
+                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
                     </summary>
-                    <div class="px-5 pb-5 text-slate-600">
-                        החישוב פשוט: אם עובד עולה לך 50 ש"ח לשעה, והמערכת חוסכת 20 שעות בחודש (שזה נתון שמרני), <strong>חסכת 1,000 ש"ח כל חודש</strong> באופן ישיר. וזה לפני שדיברנו על לידים שלא הולכים לאיבוד ולקוחות מרוצים שחוזרים.
+                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
+                        החישוב פשוט: אם עובד עולה לך 50 ש"ח לשעה, והמערכת חוסכת 20 שעות בחודש (שזה נתון שמרני), <strong>חסכת 1,000 ש"ח כל חודש</strong> באופן ישיר.
                     </div>
                 </details>
-
-                <details class="group bg-white rounded-2xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-lg text-slate-800 hover:text-blue-600">
-                        <span>האם זה מתאים לעסק קטן של אדם אחד?</span>
-                        <span class="text-blue-500 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center transition-colors group-hover:bg-blue-100"><i class="fas fa-plus"></i></span>
+                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                    <summary class="flex justify-between items-center p-5 font-bold text-slate-800 hover:text-blue-600">
+                        <span>האם זה מתאים לעסק של אדם אחד?</span>
+                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
                     </summary>
-                    <div class="px-5 pb-5 text-slate-600">
+                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
                         בדיוק בשביל זה אנחנו כאן. אוטומציה היא הדרך היחידה של עסק של אדם אחד לתפקד כמו עסק של 5 עובדים, בלי לשלם 5 משכורות.
                     </div>
                 </details>
-
-                <details class="group bg-white rounded-2xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-lg text-slate-800 hover:text-blue-600">
-                        <span>תוך כמה זמן אראה החזר השקעה (ROI)?</span>
-                        <span class="text-blue-500 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center transition-colors group-hover:bg-blue-100"><i class="fas fa-plus"></i></span>
-                    </summary>
-                    <div class="px-5 pb-5 text-slate-600">
-                        רוב הלקוחות שלנו מדווחים על החזר השקעה מלא תוך חודש עד שלושה חודשים. המערכת עובדת מהיום הראשון.
-                    </div>
-                </details>
-            </div>
-
-            <!-- FAQ CTA -->
-            <div class="text-center mt-12">
-                <p class="text-slate-500 mb-4">עדיין מתלבט?</p>
-                <a href="#contact-quick" class="text-blue-600 font-bold border-b-2 border-blue-200 hover:border-blue-600 transition">
-                    דבר איתנו, זה לא עולה כסף לבדוק &larr;
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-right">
-                <h3 class="text-white text-2xl font-bold brand-font">פשוט.<span class="text-blue-500">אוטומט.</span></h3>
-                <p class="text-sm mt-2 text-slate-500">בונים לך זמן פנוי.</p>
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 relative">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-8 inline-block bg-slate-800 p-4 rounded-xl border border-slate-700">
+                <p class="text-xs text-slate-500 mb-2">מחשבון מהיר: כמה דקות אתה מבזבז ביום על שטויות?</p>
+                <div class="flex items-center gap-2 justify-center">
+                    <input type="number" id="wasted-min" placeholder="דקות" class="w-16 bg-slate-900 border border-slate-600 text-white text-center rounded px-2 py-1 text-sm">
+                    <span class="text-sm">=</span>
+                    <span class="text-orange-500 font-bold text-sm"><span id="wasted-result">0</span> ימי עבודה בשנה!</span>
+                </div>
             </div>
-            <div class="flex gap-6 text-sm font-medium">
-                <a href="#features" class="hover:text-white">פתרונות</a>
-                <a href="#testimonials" class="hover:text-white">לקוחות</a>
-                <a href="#contact-quick" class="hover:text-white">צור קשר</a>
-            </div>
-            <div class="text-xs text-slate-600">
-                &copy; 2026 פשוט. אוטומט. כל הזכויות שמורות.
-            </div>
+            <p class="text-sm">
+                &copy; 2026 פשוט. אוטומט. <span class="mx-2">|</span> בונים לך זמן פנוי.
+            </p>
         </div>
     </footer>
 
-    <!-- Chat Widget Embed (Still here but less aggressive) -->
+    <!-- Chat Widget Embed -->
     <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
     <script>ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"})</script>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true, offset: 50, duration: 800 });
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ once: true, offset: 50, duration: 800 });
+            }
+
+            setTimeout(() => {
+                const cta = document.getElementById('hero-cta');
+                if(cta) cta.classList.add('cta-pulse-active');
+            }, 3000);
+
+            // --- Simulator Logic ---
+            const leadsSlider = document.getElementById('leads-range');
+            const timeSlider = document.getElementById('time-range');
+            const leadsDisplay = document.getElementById('leads-val');
+            const timeDisplay = document.getElementById('time-val');
+            const savingsDisplay = document.getElementById('savings-display');
+            const hoursDisplay = document.getElementById('hours-display');
+
+            function updateSimulator() {
+                if(!leadsSlider || !timeSlider) return;
+                const leads = parseInt(leadsSlider.value);
+                const time = parseInt(timeSlider.value);
+                
+                if(leadsDisplay) leadsDisplay.innerText = leads;
+                if(timeDisplay) timeDisplay.innerText = time + " דק'";
+
+                const annualHours = Math.round((leads * time * 22 * 12) / 60);
+                const annualSavings = (annualHours * 50).toLocaleString();
+
+                if(hoursDisplay) hoursDisplay.innerText = annualHours;
+                if(savingsDisplay) savingsDisplay.innerText = annualSavings;
+            }
+
+            if(leadsSlider) leadsSlider.addEventListener('input', updateSimulator);
+            if(timeSlider) timeSlider.addEventListener('input', updateSimulator);
+            updateSimulator(); 
+
+            // --- Easter Egg Calc ---
+            const wastedInput = document.getElementById('wasted-min');
+            const wastedResult = document.getElementById('wasted-result');
+            if(wastedInput && wastedResult) {
+                wastedInput.addEventListener('input', (e) => {
+                    const mins = parseInt(e.target.value) || 0;
+                    const days = ((mins * 250) / 60 / 8).toFixed(1);
+                    wastedResult.innerText = days;
+                });
+            }
+        });
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -500,113 +577,98 @@
             menu.classList.toggle('flex');
         }
 
-        // Highlight Chat logic (kept but minimal)
+        function toggleAIModal() {
+            const modal = document.getElementById('ai-modal');
+            const content = document.getElementById('ai-modal-content');
+            
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 10);
+            } else {
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        // Highlight Chat logic (Shows arrow for 5 seconds)
         function highlightChat() {
-            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) ktt10.openWidget();
-        }
-
-        // --- Simulator Logic ---
-        const terminalBody = document.getElementById('terminal-body');
-        const resultCta = document.getElementById('result-cta');
-        let isRunning = false;
-
-        async function runTerminal() {
-            if(isRunning) return;
-            isRunning = true;
-            resultCta.classList.add('hidden'); // Reset
+            const pointer = document.getElementById('chat-pointer');
+            pointer.classList.remove('hidden');
             
-            const name = document.getElementById('sim-name').value;
-            const scenario = document.getElementById('sim-scenario').value;
-            const btn = document.getElementById('run-btn');
-
-            terminalBody.innerHTML = '<div class="text-slate-400 mb-2 font-mono">Initializing...</div>';
-            btn.classList.add('opacity-50', 'cursor-not-allowed');
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> מעבד...';
-
-            let logs = [];
-            // Simple logic for demo
-            if (scenario === 'lead') {
-                logs = [
-                    { text: `> New Lead: "${name}"`, color: "text-white" },
-                    { text: `> CRM Updated.`, color: "text-blue-400" },
-                    { text: `> WhatsApp Sent to client.`, color: "text-green-400" },
-                    { text: `> Task created for Sales.`, color: "text-yellow-400" },
-                    { text: `> DONE. Time saved: 20 mins.`, color: "text-green-500 font-bold" }
-                ];
-            } else if (scenario === 'sale') {
-                logs = [
-                    { text: `> [PAYMENT] Gateway Trigger: STATUS=APPROVED`, color: "text-green-400" },
-                    { text: `> [IDENT] Customer Verification: ${name}`, color: "text-slate-300" },
-                    { text: `> [GEN] Rendering Invoice PDF (v2.0)...`, color: "text-yellow-400" },
-                    { text: `> [FILE] Uploading Invoice_2024_001.pdf to Cloud`, color: "text-blue-400" },
-                    { text: `> [MAIL] SMTP Server: Dispatched to user.`, color: "text-slate-400" },
-                    { text: `> [INV] SKU-992 Update: -1 Unit`, color: "text-red-400" },
-                    { text: `> [SYNC] Accounting ERP handshake complete.`, color: "text-purple-400" },
-                    { text: `> [SYSTEM] Transaction Finalized.`, color: "text-green-400" }
-                ];
-            } else if (scenario === 'support') {
-                logs = [
-                    { text: `> [TICKET] Incoming Stream: User="${name}"`, color: "text-blue-400" },
-                    { text: `> [AI] Analyzing Sentiment...`, color: "text-purple-400" },
-                    { text: `> [AI_RESULT] Sentiment=URGENT (Confidence: 98%)`, color: "text-red-500 font-bold" },
-                    { text: `> [ROUTING] Bypassing Tier 1 -> Assigning Senior Agent`, color: "text-yellow-400" },
-                    { text: `> [SMS] Gateway: "We are on it" -> Sent to ${name}`, color: "text-green-400" },
-                    { text: `> [DB] Ticket #5541 Created [PRIORITY:HIGH]`, color: "text-slate-300" }
-                ];
-            } else if (scenario === 'onboarding') {
-                logs = [
-                    { text: `> [HR] New Hire Trigger: "${name}"`, color: "text-blue-400" },
-                    { text: `> [DOCS] Generating Employment Contract...`, color: "text-yellow-400" },
-                    { text: `> [SIGN] Sent via DocuSign for e-signature`, color: "text-purple-400" },
-                    { text: `> [IT] Creating G-Suite Account: ${name}@company.com`, color: "text-slate-300" },
-                    { text: `> [SLACK] Sending invite to workspace`, color: "text-green-400" },
-                    { text: `> [TASK] "Prepare Laptop" -> Assigned to IT Mgr`, color: "text-slate-400" },
-                    { text: `> [SYSTEM] Onboarding Sequence Initiated.`, color: "text-green-400 font-bold" }
-                ];
-            } else if (scenario === 'social') {
-                logs = [
-                    { text: `> [CMS] New Content Approved: "Launch Day"`, color: "text-blue-400" },
-                    { text: `> [IMG] Resizing assets for Instagram/LinkedIn/FB`, color: "text-yellow-400" },
-                    { text: `> [AI] Generating Hashtags & Captions...`, color: "text-purple-400" },
-                    { text: `> [API] Posting to LinkedIn... SUCCESS`, color: "text-blue-300" },
-                    { text: `> [API] Posting to Instagram... SUCCESS`, color: "text-pink-400" },
-                    { text: `> [API] Posting to Facebook... SUCCESS`, color: "text-blue-500" },
-                    { text: `> [ANALYTICS] Tracking pixels activated.`, color: "text-slate-400" },
-                    { text: `> [SYSTEM] Multi-Channel Distribution Complete.`, color: "text-green-400 font-bold" }
-                ];
+            // Try to open widget
+            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) {
+                ktt10.openWidget();
             }
 
-            for (let log of logs) {
-                await new Promise(r => setTimeout(r, 400));
-                const div = document.createElement('div');
-                div.className = `${log.color} font-mono mb-1 text-sm`;
-                div.innerHTML = log.text;
-                terminalBody.appendChild(div);
-                terminalBody.scrollTop = terminalBody.scrollHeight;
-            }
-
-            isRunning = false;
-            btn.classList.remove('opacity-50', 'cursor-not-allowed');
-            btn.innerHTML = '<i class="fas fa-play mr-2"></i> הפעל הדגמה';
-            
-            // Show the "Sales Pitch" overlay
+            // Hide after 5 seconds
             setTimeout(() => {
-                resultCta.classList.remove('hidden');
-            }, 500);
+                pointer.classList.add('hidden');
+            }, 5000);
         }
 
-        function hideResult() {
-            resultCta.classList.add('hidden');
-            terminalBody.innerHTML = '<div class="text-slate-500">Waiting for input...</div>';
-        }
-
-        // --- AI Logic (Linked to CTA) ---
-        function fillAI(text) { document.getElementById('ai-input').value = text; }
-
+        // --- AI Logic (Unified) ---
         const aiResponses = {
-            'עו״ד': [ "בוט שבודק סטטוס תיקים לבד", "הפקת הסכמי שכר טרחה אוטומטית", "תזכורות SMS לדיונים ללקוחות" ],
-            'default': [ "חשבונית אוטומטית בסליקה", "מעקב אחרי הצעות מחיר פתוחות", "ניהול משימות אוטומטי מהמייל" ]
+            'עו״ד': [
+                "**חוזה חכם**: טופס דיגיטלי שמפיק הסכם שכר טרחה ושולח לחתימה בנייד.",
+                "**בוט תיקים**: בדיקת סטטוס תיק ב'נט המשפט' ועדכון אוטומטי ללקוח ב-SMS.",
+                "**סינון לידים**: צ'אטבוט שמברר מהות התביעה ומסנן פניות סרק."
+            ],
+            'כושר': [
+                "**חידוש אוטומטי**: התראה בוואטסאפ 3 ימים לפני סוף מנוי עם לינק לתשלום.",
+                "**מעקב משקל**: טופס שקילה שבועי שיוצר גרף התקדמות ושולח למתאמן.",
+                "**מילוי מקום**: ביטול אימון מקפיץ הודעה לרשימת המתנה וממלא את החור ביומן."
+            ],
+            'חנות': [
+                "**הצלת עגלות**: סדרת מסרים חכמה שמחזירה 20% מהנטישות באתר.",
+                "**ניהול ספקים**: התראה אוטומטית לספק כשהמלאי יורד מתחת לקו האדום.",
+                "**מועדון לקוחות**: הודעת יום הולדת עם קופון אישי שנשלחת לבד."
+            ],
+            'נדל״ן': [
+                "**תיאום ביומן**: לינק לקביעת סיור שמסתנכרן עם היומן שלך ושולח תזכורת.",
+                "**צייד הנכסים**: בוט שסורק קבוצות ולוחות ושולח לך נכסים רלוונטיים.",
+                "**חימום לידים**: סדרת ערך (מדריכים/טיפים) ללקוחות שעדיין לא בשלו לקנייה."
+            ],
+            'ביטוח': [
+                "**חידוש פוליסות**: סדרת הודעות חודש לפני תום הביטוח עם הצעה מעודכנת.",
+                "**סטטוס תביעה**: עדכון אוטומטי ללקוח בכל שינוי סטטוס בחברת הביטוח.",
+                "**קליטת מבוטח**: טופס דיגיטלי שקולט את כל המסמכים ושומר בתיק הלקוח."
+            ],
+            'שיווק': [
+                "**דוחות אוטומטיים**: שליחת דוח ביצועים שבועי ללקוח בלי לגעת באקסל.",
+                "**ליד מיידי**: כל ליד מקבל SMS תוך שניה והתראה קופצת בצוות המכירות.",
+                "**העלאת תכנים**: יצירת פוסט ב-AI והפצה לכל הרשתות החברתיות בלחיצה."
+            ],
+            'פיננסים': [
+                "**איסוף חשבוניות**: בוט שאוסף חשבוניות מהמייל ומתייק בתיקיית הלקוח.",
+                "**התראת חריגה**: התראה למנהל כשסעיף הוצאות חורג מהתקציב.",
+                "**גבייה**: תזכורת עדינה אך עקבית ללקוחות שלא שילמו בזמן."
+            ],
+            'default': [
+                "**חשבונית אוטומטית**: הפקה ושליחה במייל ברגע הסליקה.",
+                "**סדר בבלאגן**: כל ליד מכל מקור נכנס לטבלה אחת מסודרת.",
+                "**מעקב משימות**: מייל חשוב הופך למשימה ביומן או במערכת הניהול."
+            ]
         };
+
+        function getIdeasByInput(input) {
+            let foundKey = 'default';
+            // Logic to find the best match
+            if (input.includes('עוד') || input.includes('דין') || input.includes('משפט')) foundKey = 'עו״ד';
+            else if (input.includes('כושר') || input.includes('ספורט') || input.includes('מאמן') || input.includes('סטודיו')) foundKey = 'כושר';
+            else if (input.includes('חנות') || input.includes('מכיר') || input.includes('בגד') || input.includes('מסחר')) foundKey = 'חנות';
+            else if (input.includes('נדל') || input.includes('דיר') || input.includes('תיווך') || input.includes('מתווך')) foundKey = 'נדל״ן';
+            else if (input.includes('ביטוח') || input.includes('סוכן')) foundKey = 'ביטוח';
+            else if (input.includes('שיווק') || input.includes('פרסום') || input.includes('דיגיטל') || input.includes('סושיאל')) foundKey = 'שיווק';
+            else if (input.includes('חשבון') || input.includes('כספ') || input.includes('רואה') || input.includes('יועץ')) foundKey = 'פיננסים';
+            
+            return aiResponses[foundKey];
+        }
 
         function askAI() {
             const input = document.getElementById('ai-input').value.toLowerCase();
@@ -615,86 +677,94 @@
 
             if(!input) return alert("נא להזין מקצוע");
 
-            outputDiv.innerHTML = '<div class="text-center"><i class="fas fa-circle-notch fa-spin text-purple-600 text-2xl"></i></div>';
+            outputDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-circle-notch fa-spin text-purple-600 text-3xl"></i></div>';
+            ctaBtn.classList.add('hidden');
+
+            setTimeout(() => {
+                const ideas = getIdeasByInput(input);
+
+                let html = '';
+                ideas.forEach(idea => {
+                    // Highlight bold text
+                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-purple-700">$1</span>');
+                    html += `<div class="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-3 text-right">
+                                <i class="fas fa-check-circle text-green-500 text-xl mt-1 shrink-0"></i>
+                                <span class="text-slate-700 font-medium text-sm leading-relaxed">${formatted}</span>
+                             </div>`;
+                });
+                outputDiv.innerHTML = html;
+                ctaBtn.classList.remove('hidden');
+            }, 1000);
+        }
+
+        // --- AI Logic (On Page - using same logic) ---
+        function askAIPage() {
+            const input = document.getElementById('ai-input-page').value.toLowerCase();
+            const outputDiv = document.getElementById('ai-output-page');
+            const ctaBtn = document.getElementById('ai-cta-btn-page');
+
+            if(!input) return alert("נא להזין מקצוע");
+
+            outputDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-circle-notch fa-spin text-purple-600 text-3xl"></i></div>';
             outputDiv.classList.remove('hidden');
             ctaBtn.classList.add('hidden');
 
             setTimeout(() => {
-                let ideas = aiResponses['default'];
-                if (input.includes('עוד')) ideas = aiResponses['עו״ד'];
-                // Add more mappings as needed...
+                const ideas = getIdeasByInput(input);
 
                 let html = '';
                 ideas.forEach(idea => {
-                    html += `<div class="p-4 bg-white border-l-4 border-purple-500 shadow-sm rounded-r-lg"><i class="fas fa-check text-green-500 ml-2"></i> ${idea}</div>`;
+                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-purple-700">$1</span>');
+                    html += `<div class="p-4 bg-white border border-purple-100 shadow-sm rounded-xl flex items-start gap-3 text-right">
+                                <div class="bg-purple-100 text-purple-600 w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1"><i class="fas fa-lightbulb"></i></div>
+                                <span class="text-slate-700 text-base leading-relaxed">${formatted}</span>
+                             </div>`;
                 });
                 outputDiv.innerHTML = html;
-                ctaBtn.classList.remove('hidden'); // Show the "Build This" button
+                ctaBtn.classList.remove('hidden');
             }, 1000);
         }
 
         // --- Webhook Lead Sender ---
         async function sendLead() {
-            const nameInput = document.getElementById('contact-name');
-            const phoneInput = document.getElementById('contact-phone');
-            const emailInput = document.getElementById('contact-email');
-            const businessNameInput = document.getElementById('business-name');
-            const businessTopicInput = document.getElementById('business-topic');
-            const btn = document.getElementById('submit-btn');
-            
-            const name = nameInput.value;
-            const phone = phoneInput.value;
-            const email = emailInput.value;
-            const businessName = businessNameInput.value;
-            const businessTopic = businessTopicInput.value;
+            const btn = document.getElementById('submit-btn-main');
+            const name = document.getElementById('contact-name-main').value;
+            const phone = document.getElementById('contact-phone-main').value;
+            const email = document.getElementById('contact-email-main').value;
+            const bName = document.getElementById('business-name-main').value;
 
             if(!name || !phone || !email) return;
 
-            // Visual feedback - Loading
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> שולח...';
             btn.disabled = true;
             btn.classList.add('opacity-75');
 
             try {
-                // Send data to Make.com Webhook
                 await fetch('https://hook.eu2.make.com/1e4gbxmyojvx9x5u3eapxs8wwgq3rx3p', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                        name: name, 
-                        phone: phone,
-                        email: email,
-                        business_name: businessName,
-                        business_topic: businessTopic,
-                        source: 'Landing Page Main Form',
-                        date: new Date().toISOString()
+                        name: name, phone: phone, email: email, business_name: bName,
+                        source: 'Landing Page Optimized', date: new Date().toISOString()
                     })
                 });
 
-                // Success State
                 btn.innerHTML = '<i class="fas fa-check"></i> נשלח בהצלחה!';
-                btn.classList.remove('bg-orange-500', 'hover:bg-orange-600');
-                btn.classList.add('bg-green-500', 'hover:bg-green-600');
+                btn.classList.replace('bg-orange-600', 'bg-green-600');
                 
-                // Clear inputs
-                nameInput.value = '';
-                phoneInput.value = '';
-                emailInput.value = '';
-                businessNameInput.value = '';
-                businessTopicInput.value = '';
+                document.getElementById('lead-form-main').reset();
 
-                // Reset button after 3 seconds
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.disabled = false;
-                    btn.classList.remove('opacity-75', 'bg-green-500', 'hover:bg-green-600');
-                    btn.classList.add('bg-orange-500', 'hover:bg-orange-600');
+                    btn.classList.replace('bg-green-600', 'bg-orange-600');
+                    btn.classList.remove('opacity-75');
                 }, 3000);
 
             } catch (error) {
-                console.error('Error sending lead:', error);
-                alert('הייתה שגיאה בשליחת הפרטים. אנא נסה שוב או פנה אלינו בוואטסאפ.');
+                console.error('Error', error);
+                alert('שגיאה בשליחה. נסה שוב.');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 btn.classList.remove('opacity-75');
