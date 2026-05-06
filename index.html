@@ -738,12 +738,33 @@
             btn.classList.add('opacity-75');
 
             try {
-                // הדמיית שליחה
-                setTimeout(() => {
+                const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/Simple_automatic_website', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        businessName: bName,
+                        source: 'Website Contact Form'
+                    })
+                });
+
+                if (response.ok) {
                     btn.innerHTML = '<i class="fas fa-check"></i> נשלח בהצלחה!';
-                }, 1000);
+                    // Optional: Reset form fields after successful submission
+                    // document.getElementById('lead-form-main').reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
             } catch (err) {
+                console.error('Error sending lead:', err);
                 alert('שגיאה בשליחה. נסה שוב.');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
             }
         }
     </script>
