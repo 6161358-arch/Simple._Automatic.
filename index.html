@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>פשוט. אוטומט. | מכונת הזמן של העסק שלך</title>
     
+    <!-- Favicon: הברק בצבעי המותג -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23009E8E'/%3E%3Cstop offset='100%25' stop-color='%230F2B46'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23grad)'/%3E%3Cpath d='M19 6 L11 17 L16 17 L14 26 L23 13 L18 13 Z' fill='white'/%3E%3C/svg%3E">
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
+    <!-- Animate On Scroll Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Brand Colors based on the Logo */
             --brand-teal: #009E8E;
             --brand-navy: #0F2B46;
             --bg-light: #f8fafc;
@@ -36,7 +40,6 @@
             font-family: 'Outfit', 'Rubik', sans-serif;
         }
         
-        /* Clean Tech Grid with brand teal */
         .tech-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(0, 158, 142, 0.04) 1px, transparent 1px),
@@ -44,7 +47,6 @@
             mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
-        /* Pulse Animation for CTA using brand teal */
         @keyframes pulse-brand {
             0% { box-shadow: 0 0 0 0 rgba(0, 158, 142, 0.6); transform: scale(1); }
             70% { box-shadow: 0 0 0 15px rgba(0, 158, 142, 0); transform: scale(1.02); }
@@ -55,40 +57,25 @@
             animation: pulse-brand 2.5s infinite;
         }
 
-        /* Range Slider Styling */
-        input[type=range] {
-            -webkit-appearance: none; 
-            background: transparent; 
-        }
+        input[type=range] { -webkit-appearance: none; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: var(--brand-teal);
-            cursor: pointer;
-            margin-top: -8px; 
+            -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%;
+            background: var(--brand-teal); cursor: pointer; margin-top: -8px; 
             box-shadow: 0 0 10px rgba(0, 158, 142, 0.5);
         }
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 8px;
-            cursor: pointer;
-            background: #e2e8f0;
-            border-radius: 4px;
+            width: 100%; height: 8px; cursor: pointer; background: #e2e8f0; border-radius: 4px;
         }
 
-        /* Floating Nav Styling */
         .floating-nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 158, 142, 0.1);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 158, 142, 0.1);
         }
     </style>
 </head>
 <body class="selection:bg-[#009E8E]/20 selection:text-[#0F2B46]">
 
+    <!-- Top Announcement Bar (מייל פון) -->
     <div class="absolute top-0 w-full z-[60] bg-[#009E8E] text-white py-2 px-4 text-center text-sm md:text-base font-medium flex justify-center items-center gap-3">
         <span>🚀 חדש מבית פשוט אוטומט: <strong>מייל פון</strong> - המייל שלך בקול שלך</span>
         <button onclick="document.getElementById('mail-phone-section').scrollIntoView({behavior: 'smooth'})" class="bg-black hover:bg-gray-800 text-white px-4 py-1 rounded-full text-xs font-bold hover:scale-105 transition-transform shadow-sm">
@@ -96,9 +83,10 @@
         </button>
     </div>
 
+    <!-- Background Elements -->
     <div class="fixed inset-0 tech-grid z-0 pointer-events-none"></div>
 
-    <!-- החזרתי את התפריט ל-top-12 כמו שהיה -->
+    <!-- Floating Navbar -->
     <div id="navbar-container" class="fixed w-full z-50 top-12 px-4 transition-all duration-300">
         <nav class="max-w-6xl mx-auto floating-nav rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
             <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
@@ -123,6 +111,7 @@
         </nav>
     </div>
 
+    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-50 bg-white hidden flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-[#0F2B46] transition-opacity">
         <button onclick="toggleMobileMenu()" class="absolute top-8 left-8 text-3xl"><i class="fas fa-times"></i></button>
         <a href="#features" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">למה אנחנו</a>
@@ -131,6 +120,7 @@
         <a href="#contact-quick" onclick="toggleMobileMenu()" class="text-[#009E8E]">תיאום שיחה</a>
     </div>
 
+    <!-- Floating AI Trigger -->
     <button onclick="toggleAIModal()" class="fixed bottom-6 left-6 z-40 bg-white border border-[#009E8E]/20 text-[#0F2B46] p-3 rounded-full shadow-2xl flex items-center gap-2 hover:scale-105 transition-transform group">
         <div class="bg-[#009E8E]/10 text-[#009E8E] w-10 h-10 rounded-full flex items-center justify-center text-xl group-hover:rotate-12 transition">
             <i class="fas fa-lightbulb"></i>
@@ -138,6 +128,7 @@
         <span class="font-bold pr-2 pl-4 hidden md:inline">מחולל רעיונות</span>
     </button>
 
+    <!-- Arrow Pointer for Chat -->
     <div id="chat-pointer" class="fixed bottom-24 right-8 z-50 hidden animate-bounce flex flex-col items-center pointer-events-none">
         <div class="bg-[#009E8E] text-white px-4 py-2 rounded-xl shadow-xl shadow-[#009E8E]/30 font-bold mb-2 text-sm tracking-wide border border-[#009E8E] relative">
             דבר איתנו כאן!
@@ -146,6 +137,7 @@
         <i class="fas fa-arrow-down text-[#009E8E] text-4xl drop-shadow-md"></i>
     </div>
 
+    <!-- HERO SECTION -->
     <header class="relative pt-48 pb-16 overflow-hidden z-10">
         <div class="max-w-5xl mx-auto px-4 text-center">
             
@@ -159,6 +151,7 @@
                 <span class="block mt-2 font-semibold text-[#0F2B46]">תנו לנו שעה, נחסוך לכם מאות שעות בשנה.</span>
             </p>
             
+            <!-- THE HERO CTA -->
             <div class="flex flex-col items-center gap-4 mb-16" data-aos="zoom-in" data-aos-delay="200">
                 <a href="#contact-quick" id="hero-cta" class="bg-[#009E8E] hover:bg-[#008A7B] text-white text-2xl font-bold py-5 px-12 rounded-2xl shadow-2xl shadow-[#009E8E]/40 transition-all transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-3">
                     אני רוצה אוטומציה עכשיו <i class="fas fa-arrow-left"></i>
@@ -170,6 +163,7 @@
                 </p>
             </div>
 
+            <!-- IMMEDIATE SOCIAL PROOF -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left bg-white p-6 rounded-2xl shadow-lg border border-slate-100 max-w-5xl mx-auto transform -rotate-1 hover:rotate-0 transition-transform duration-500">
                 <div class="flex items-center gap-4 border-b md:border-b-0 md:border-l border-slate-100 pb-4 md:pb-0 pl-4">
                     <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full" alt="Client">
@@ -199,6 +193,7 @@
         </div>
     </header>
 
+    <!-- REAL TIME ROI SIMULATOR -->
     <section id="simulator" class="py-20 bg-white">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-12">
@@ -251,6 +246,7 @@
         </div>
     </section>
 
+    <!-- PROCESS (Heatmap Style) -->
     <section id="features" class="py-24 relative z-10">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -258,13 +254,14 @@
             </div>
 
             <div class="relative flex flex-col md:flex-row items-center justify-center gap-16 md:gap-6">
-                
+                <!-- Step 1 -->
                 <div class="w-full md:w-1/3 bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center relative z-10">
                     <div class="w-16 h-16 bg-slate-100 text-[#0F2B46] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
                     <h3 class="font-bold text-xl mb-2 text-[#0F2B46]">ליד נכנס</h3>
                     <p class="text-slate-500 text-sm">פייסבוק / אתר / טלפון</p>
                 </div>
 
+                <!-- Connector 1 -->
                 <div class="relative flex items-center justify-center w-full md:w-24 h-12 md:h-auto">
                     <div class="hidden md:block w-full h-1 bg-slate-200"></div>
                     <div class="md:hidden h-24 w-1 bg-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
@@ -273,6 +270,7 @@
                     </div>
                 </div>
 
+                <!-- Step 2 -->
                 <div class="w-full md:w-1/3 bg-gradient-to-br from-[#0F2B46] to-[#009E8E] text-white p-8 rounded-3xl shadow-2xl shadow-[#009E8E]/30 text-center relative z-20 md:scale-110 border-4 border-white">
                     <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#009E8E] text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm tracking-wide">המוח האוטומטי</div>
                     <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4 text-3xl animate-[spin_10s_linear_infinite]">
@@ -282,6 +280,7 @@
                     <p class="text-teal-100 text-sm">המערכת בודקת, מסננת ומעדכנת CRM</p>
                 </div>
 
+                <!-- Connector 2 -->
                 <div class="relative flex items-center justify-center w-full md:w-24 h-12 md:h-auto">
                     <div class="hidden md:block w-full h-1 bg-slate-200"></div>
                     <div class="md:hidden h-24 w-1 bg-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
@@ -290,6 +289,7 @@
                     </div>
                 </div>
 
+                <!-- Step 3 -->
                 <div class="w-full md:w-1/3 bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center relative z-10">
                     <div class="w-16 h-16 bg-[#009E8E]/10 text-[#009E8E] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl"><i class="fas fa-check"></i></div>
                     <h3 class="font-bold text-xl mb-2 text-[#0F2B46]">ביצוע מושלם</h3>
@@ -299,10 +299,12 @@
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
     <section id="testimonials" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#0F2B46]">אל תאמינו לנו, תאמינו למספרים שלהם</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 relative">
                     <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"חסכו לי משכורת של מזכירה במשרה מלאה. המערכת עושה את כל התיאומים והגבייה לבד. פשוט קסם."</p>
@@ -314,6 +316,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Testimonial 2 -->
                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 relative shadow-md">
                     <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"ה-ROI (החזר השקעה) היה מיידי. תוך שבוע המערכת החזירה את העלות שלה בזכות לידים שלא הלכו לאיבוד."</p>
@@ -325,6 +328,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Testimonial 3 -->
                 <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 relative">
                     <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"הפסקתי לרדוף אחרי לקוחות לתשלום. המערכת שולחת תזכורות לבד. השקט הנפשי שווה הכל."</p>
@@ -340,7 +344,9 @@
         </div>
     </section>
 
+    <!-- AI LAB -->
     <section id="ai-lab" class="py-24 bg-white relative overflow-hidden">
+        <!-- Decoration -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#009E8E]/5 rounded-full blur-[100px] -z-10"></div>
 
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -360,6 +366,7 @@
                 </div>
             </div>
 
+            <!-- AI Output Area (Page) -->
             <div id="ai-output-page" class="hidden max-w-2xl mx-auto mt-8 text-right space-y-4"></div>
             <div id="ai-cta-btn-page" class="hidden mt-8">
                 <a href="#contact-quick" class="inline-block bg-[#0F2B46] text-white font-bold py-3 px-8 rounded-full hover:bg-[#009E8E] transition transform hover:scale-105 shadow-xl">
@@ -369,6 +376,7 @@
         </div>
     </section>
 
+    <!-- CONTACT FORM -->
     <section id="contact-quick" class="py-24 bg-gradient-to-br from-[#0F2B46] to-[#081828] text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
 
@@ -409,6 +417,7 @@
         </div>
     </section>
 
+    <!-- AI IDEA GENERATOR MODAL (Popup) -->
     <div id="ai-modal" class="fixed inset-0 z-50 bg-[#0F2B46]/80 backdrop-blur-sm hidden flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden relative transform scale-95 transition-transform duration-300" id="ai-modal-content">
             <button onclick="toggleAIModal()" class="absolute top-4 left-4 text-white/70 hover:text-white text-2xl z-10"><i class="fas fa-times"></i></button>
@@ -441,6 +450,7 @@
         </div>
     </div>
 
+    <!-- FAQ Section -->
     <section class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#0F2B46]">שאלות נפוצות</h2>
@@ -467,6 +477,7 @@
         </div>
     </section>
 
+    <!-- MAIL PHONE BANNER -->
     <section id="mail-phone-section" class="py-16 bg-gradient-to-r from-[#0b1d3a] to-[#1a5ebd] text-white border-y border-[#00b4d8]/30 relative overflow-hidden">
         <div class="absolute top-1/2 left-0 w-96 h-96 bg-[#00b4d8]/20 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2"></div>
         <div class="max-w-5xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -485,6 +496,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="bg-[#0F2B46] text-slate-400 py-12 border-t border-[#0F2B46] relative">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <div class="mb-8 inline-block bg-slate-800/50 p-4 rounded-xl border border-slate-700">
@@ -501,9 +513,46 @@
         </div>
     </footer>
 
+    <!-- EXIT INTENT POPUP -->
+    <div id="exit-popup" class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[#0F2B46]/80 backdrop-blur-sm" onclick="closeExitPopup()"></div>
+        <div class="bg-white rounded-3xl shadow-2xl z-10 w-full max-w-lg mx-4 overflow-hidden transform scale-95 transition-transform duration-300 relative" id="exit-popup-content">
+            <button onclick="closeExitPopup()" class="absolute top-4 left-4 text-white/80 hover:text-white text-2xl z-20 transition"><i class="fas fa-times"></i></button>
+            <div class="bg-gradient-to-r from-[#0F2B46] to-[#009E8E] p-8 text-white text-center relative overflow-hidden">
+                <div class="absolute top-[-50%] right-[-50%] w-full h-full bg-white/10 rounded-full blur-3xl"></div>
+                <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm text-3xl">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3 class="text-3xl font-black mb-1">רגע לפני שעוזבים...</h3>
+            </div>
+            <div class="p-8 text-center">
+                <p class="text-xl text-[#0F2B46] font-bold mb-3">הולכים לשרוף עוד שעה על אקסל?</p>
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    קבלו ישירות למייל מדריך חינמי מקיף:<br>
+                    <span class="font-bold text-[#009E8E] text-lg">5 אוטומציות שכל עסק חייב</span><br>
+                    <span class="text-sm">(כדי להפסיק לעבוד קשה ולחסוך המון זמן וכסף)</span>
+                </p>
+                <form id="exit-form" onsubmit="event.preventDefault(); submitExitForm();">
+                    <div class="relative mb-4">
+                        <input type="email" id="exit-email" placeholder="הכנס כתובת אימייל לקבלת המדריך" required class="w-full px-4 py-4 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-center" dir="ltr">
+                    </div>
+                    <button type="submit" id="exit-btn" class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-xl transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
+                        שלח לי את המדריך בחינם <i class="fas fa-download"></i>
+                    </button>
+                </form>
+                <div id="exit-msg" class="hidden mt-4 text-center font-bold text-[#009E8E] bg-[#009E8E]/10 py-3 rounded-xl border border-[#009E8E]/20"></div>
+                <button onclick="closeExitPopup()" class="mt-4 text-slate-400 text-sm hover:text-slate-600 underline">
+                    לא תודה, אני מעדיף להמשיך לעבוד קשה
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget Embed -->
     <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
     <script>ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"})</script>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -515,7 +564,6 @@
             window.addEventListener('scroll', () => {
                 const navContainer = document.getElementById('navbar-container');
                 if(navContainer) {
-                    // החזרת הלוגיקה ל-top-12
                     if (window.scrollY > 20) {
                         navContainer.classList.replace('top-12', 'top-4');
                     } else {
@@ -593,17 +641,15 @@
             }
         }
 
-        // Highlight Chat logic (Shows arrow for 5 seconds)
+        // Highlight Chat logic
         function highlightChat() {
             const pointer = document.getElementById('chat-pointer');
             pointer.classList.remove('hidden');
             
-            // Try to open widget
             if (typeof ktt10 !== 'undefined' && ktt10.openWidget) {
                 ktt10.openWidget();
             }
 
-            // Hide after 5 seconds
             setTimeout(() => {
                 pointer.classList.add('hidden');
             }, 5000);
@@ -655,7 +701,6 @@
 
         function getIdeasByInput(input) {
             let foundKey = 'default';
-            // Logic to find the best match
             if (input.includes('עוד') || input.includes('דין') || input.includes('משפט')) foundKey = 'עו״ד';
             else if (input.includes('כושר') || input.includes('ספורט') || input.includes('מאמן') || input.includes('סטודיו')) foundKey = 'כושר';
             else if (input.includes('חנות') || input.includes('מכיר') || input.includes('בגד') || input.includes('מסחר')) foundKey = 'חנות';
@@ -663,7 +708,6 @@
             else if (input.includes('ביטוח') || input.includes('סוכן')) foundKey = 'ביטוח';
             else if (input.includes('שיווק') || input.includes('פרסום') || input.includes('דיגיטל') || input.includes('סושיאל')) foundKey = 'שיווק';
             else if (input.includes('חשבון') || input.includes('כספ') || input.includes('רואה') || input.includes('יועץ')) foundKey = 'פיננסים';
-            
             return aiResponses[foundKey];
         }
 
@@ -679,10 +723,8 @@
 
             setTimeout(() => {
                 const ideas = getIdeasByInput(input);
-
                 let html = '';
                 ideas.forEach(idea => {
-                    // Highlight bold text
                     const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#0F2B46]">$1</span>');
                     html += `<div class="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-3 text-right">
                                 <i class="fas fa-check-circle text-[#009E8E] text-xl mt-1 shrink-0"></i>
@@ -694,7 +736,6 @@
             }, 1000);
         }
 
-        // --- AI Logic (On Page - using same logic) ---
         function askAIPage() {
             const input = document.getElementById('ai-input-page').value.toLowerCase();
             const outputDiv = document.getElementById('ai-output-page');
@@ -708,7 +749,6 @@
 
             setTimeout(() => {
                 const ideas = getIdeasByInput(input);
-
                 let html = '';
                 ideas.forEach(idea => {
                     const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#0F2B46]">$1</span>');
@@ -740,9 +780,7 @@
             try {
                 const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/Simple_automatic_website', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         name: name,
                         phone: phone,
@@ -758,11 +796,81 @@
                     throw new Error('Network response was not ok');
                 }
             } catch (err) {
-                console.error('Error sending lead:', err);
                 alert('שגיאה בשליחה. נסה שוב.');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 btn.classList.remove('opacity-75');
+            }
+        }
+
+        // --- Exit Intent Popup Logic ---
+        let exitPopupShown = false;
+
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY <= 0 && !exitPopupShown) {
+                exitPopupShown = true;
+                openExitPopup();
+            }
+        });
+
+        function openExitPopup() {
+            const popup = document.getElementById('exit-popup');
+            const content = document.getElementById('exit-popup-content');
+            popup.classList.remove('hidden');
+            popup.classList.add('flex');
+            setTimeout(() => {
+                popup.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeExitPopup() {
+            const popup = document.getElementById('exit-popup');
+            const content = document.getElementById('exit-popup-content');
+            popup.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                popup.classList.add('hidden');
+                popup.classList.remove('flex');
+            }, 300);
+        }
+
+        async function submitExitForm() {
+            const email = document.getElementById('exit-email').value;
+            const btn = document.getElementById('exit-btn');
+            const msg = document.getElementById('exit-msg');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> מעבד...';
+
+            try {
+                await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/Simple_automatic_website', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: 'ליד מדריך חינמי (Exit Intent)',
+                        phone: 'לא הוזן',
+                        email: email,
+                        businessName: 'לא הוזן',
+                        source: 'Exit Intent Popup - Free Guide'
+                    })
+                });
+
+                btn.classList.add('hidden');
+                document.getElementById('exit-email').classList.add('hidden');
+                
+                msg.innerHTML = '<i class="fas fa-check-circle text-xl mb-1 block"></i> מעולה! המדריך בדרך למייל שלך.';
+                msg.classList.remove('hidden');
+
+                setTimeout(() => {
+                    closeExitPopup();
+                }, 3000);
+
+            } catch (err) {
+                btn.disabled = false;
+                btn.innerHTML = 'שגיאה בשליחה. נסה שוב <i class="fas fa-redo"></i>';
             }
         }
     </script>
