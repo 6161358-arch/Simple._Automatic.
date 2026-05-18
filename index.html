@@ -403,7 +403,15 @@
                         </div>
                     </div>
 
-                    <div class="pt-8 flex flex-col md:flex-row gap-4 items-center">
+                    <!-- צ'קבוקס אישור דיוור (אופציונלי) -->
+                    <div class="pt-2 flex items-start justify-start gap-2 text-right dir-rtl">
+                        <input type="checkbox" id="contact-consent-main" class="mt-1 w-4 h-4 cursor-pointer accent-[#009E8E]">
+                        <label for="contact-consent-main" class="text-sm text-slate-500 cursor-pointer">
+                            אני מסכים/ה לקבל עדכונים, טיפים והצעות שיווקיות למייל ולוואטסאפ.
+                        </label>
+                    </div>
+
+                    <div class="pt-4 flex flex-col md:flex-row gap-4 items-center">
                         <button type="submit" id="submit-btn-main" class="w-full md:w-2/3 bg-[#009E8E] hover:bg-[#008A7B] text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
                             שלח פרטים
                         </button>
@@ -781,6 +789,7 @@
             const phone = document.getElementById('contact-phone-main').value;
             const email = document.getElementById('contact-email-main').value;
             const bName = document.getElementById('business-name-main').value;
+            const consent = document.getElementById('contact-consent-main').checked;
 
             if(!name || !phone || !email) return;
 
@@ -798,7 +807,8 @@
                         phone: phone,
                         email: email,
                         businessName: bName,
-                        source: 'Website Contact Form'
+                        source: 'Website Contact Form',
+                        marketingConsent: consent
                     })
                 });
 
