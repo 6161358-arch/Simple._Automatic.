@@ -7,7 +7,7 @@
     
     <!-- Favicon: הברק בצבעי המותג -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23009E8E'/%3E%3Cstop offset='100%25' stop-color='%230F2B46'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23grad)'/%3E%3Cpath d='M19 6 L11 17 L16 17 L14 26 L23 13 L18 13 Z' fill='white'/%3E%3C/svg%3E">
-
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -29,8 +29,8 @@
             --bg-light: #f8fafc;
         }
         
-        body { 
-            font-family: 'Heebo', sans-serif; 
+        body {
+            font-family: 'Heebo', sans-serif;
             background-color: var(--bg-light);
             color: #1e293b;
             overflow-x: hidden;
@@ -60,7 +60,7 @@
         input[type=range] { -webkit-appearance: none; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%;
-            background: var(--brand-teal); cursor: pointer; margin-top: -8px; 
+            background: var(--brand-teal); cursor: pointer; margin-top: -8px;
             box-shadow: 0 0 10px rgba(0, 158, 142, 0.5);
         }
         input[type=range]::-webkit-slider-runnable-track {
@@ -90,7 +90,8 @@
     <div id="navbar-container" class="fixed w-full z-50 top-12 px-4 transition-all duration-300">
         <nav class="max-w-6xl mx-auto floating-nav rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
             <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
-                <img src="./logo.png" alt="לוגו פשוט אוטומט" border="0" class="h-20 md:h-28 -my-2 md:-my-4 w-auto object-contain transition-transform duration-300 transform group-hover:scale-105">
+                <!-- Using the local logo file as requested -->
+                <img src="logo.png" alt="לוגו פשוט אוטומט" border="0" class="h-10 md:h-12 w-auto object-contain transition-transform duration-300 transform group-hover:scale-105 rounded">
             </a>
             
             <div class="hidden md:flex space-x-8 space-x-reverse items-center text-sm font-bold text-slate-600">
@@ -121,11 +122,11 @@
     </div>
 
     <!-- Floating AI Trigger -->
-    <button onclick="toggleAIModal()" class="fixed bottom-6 left-6 z-40 bg-white border border-[#009E8E]/20 text-[#0F2B46] p-3 rounded-full shadow-2xl flex items-center gap-2 hover:scale-105 transition-transform group">
-        <div class="bg-[#009E8E]/10 text-[#009E8E] w-10 h-10 rounded-full flex items-center justify-center text-xl group-hover:rotate-12 transition">
+    <button onclick="toggleAIModal()" class="fixed bottom-6 left-6 z-40 bg-white border border-purple-200 text-[#0F2B46] p-3 rounded-full shadow-[0_4px_20px_rgba(139,92,246,0.2)] flex items-center gap-2 hover:scale-105 transition-all duration-300 group hover:shadow-[0_4px_25px_rgba(139,92,246,0.4)]">
+        <div class="bg-purple-100 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center text-xl group-hover:rotate-12 transition">
             <i class="fas fa-lightbulb"></i>
         </div>
-        <span class="font-bold pr-2 pl-4 hidden md:inline">מחולל רעיונות</span>
+        <span class="font-bold pr-2 pl-4 hidden md:inline text-purple-900">מחולל רעיונות</span>
     </button>
 
     <!-- Arrow Pointer for Chat -->
@@ -189,7 +190,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </header>
 
@@ -347,30 +347,34 @@
     <!-- AI LAB -->
     <section id="ai-lab" class="py-24 bg-white relative overflow-hidden">
         <!-- Decoration -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#009E8E]/5 rounded-full blur-[100px] -z-10"></div>
-
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/5 rounded-full blur-[100px] -z-10"></div>
+        
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
             <div class="mb-12">
-                <span class="bg-[#009E8E]/10 text-[#009E8E] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block shadow-sm">AI Powered Generator</span>
-                <h2 class="text-4xl font-bold text-[#0F2B46] mb-4">אין לך רעיון? תן לרובוט להציע</h2>
-                <p class="text-slate-500 mb-8">כתוב את תחום העיסוק שלך וקבל 3 רעיונות לאוטומציה ששווים כסף.</p>
+                <span class="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-flex items-center gap-2 shadow-sm border border-purple-200">
+                    <i class="fas fa-robot text-purple-500"></i> AI Powered Generator
+                </span>
+                <h2 class="text-4xl font-bold text-[#0F2B46] mb-4">אין לך רעיון? <span class="text-transparent bg-clip-text bg-gradient-to-l from-purple-600 to-indigo-500">תן לרובוט להציע</span></h2>
+                <p class="text-slate-500 mb-8 text-lg">כתוב את תחום העיסוק שלך וקבל 3 רעיונות לאוטומציה ששווים כסף.</p>
             </div>
 
-            <div class="bg-white rounded-3xl shadow-2xl shadow-[#009E8E]/10 p-2 border border-[#009E8E]/10 max-w-2xl mx-auto transform transition hover:scale-[1.01]">
+            <div class="bg-white rounded-3xl shadow-[0_10px_40px_rgba(139,92,246,0.15)] p-2 border border-purple-100 max-w-2xl mx-auto transform transition hover:scale-[1.02] duration-300 relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl blur opacity-10 group-hover:opacity-20 transition duration-500 -z-10"></div>
                 <div class="flex flex-col md:flex-row gap-2 p-2">
-                    <input type="text" id="ai-input-page" placeholder="לדוגמה: עורך דין, גנן, חנות בגדים..." 
-                           class="flex-1 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-lg text-slate-800 focus:ring-4 focus:ring-[#009E8E]/20 focus:border-[#009E8E] outline-none shadow-inner transition-all placeholder-slate-400">
-                    <button onclick="askAIPage()" class="bg-gradient-to-r from-[#0F2B46] to-[#009E8E] text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-[#009E8E]/20 transition-all transform hover:-translate-y-1 whitespace-nowrap active:scale-95">
-                        <i class="fas fa-sparkles ml-2"></i> תן רעיונות
+                    <input type="text" id="ai-input-page" placeholder="לדוגמה: עורך דין, גנן, חנות בגדים..."
+                            class="flex-1 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-lg text-slate-800 focus:ring-4 focus:ring-purple-600/20 focus:border-purple-500 outline-none shadow-inner transition-all placeholder-slate-400">
+                    <button onclick="askAIPage()" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1 whitespace-nowrap active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fas fa-sparkles text-purple-200"></i> תן רעיונות
                     </button>
                 </div>
             </div>
 
             <!-- AI Output Area (Page) -->
-            <div id="ai-output-page" class="hidden max-w-2xl mx-auto mt-8 text-right space-y-4"></div>
-            <div id="ai-cta-btn-page" class="hidden mt-8">
-                <a href="#contact-quick" class="inline-block bg-[#0F2B46] text-white font-bold py-3 px-8 rounded-full hover:bg-[#009E8E] transition transform hover:scale-105 shadow-xl">
-                    וואו, אני רוצה לבנות את זה! &larr;
+            <div id="ai-output-page" class="hidden max-w-2xl mx-auto mt-10 text-right space-y-4"></div>
+            
+            <div id="ai-cta-btn-page" class="hidden mt-10">
+                <a href="#contact-quick" class="inline-flex items-center gap-2 bg-[#0F2B46] text-white font-bold py-3.5 px-8 rounded-full hover:bg-purple-600 transition transform hover:scale-105 shadow-xl">
+                    וואו, אני רוצה לבנות את זה! <i class="fas fa-arrow-left"></i>
                 </a>
             </div>
         </div>
@@ -379,7 +383,7 @@
     <!-- CONTACT FORM -->
     <section id="contact-quick" class="py-24 bg-gradient-to-br from-[#0F2B46] to-[#081828] text-white relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-
+        
         <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">מוכנים להפסיק לעבוד קשה?</h2>
             <p class="text-slate-300 mb-10 max-w-xl mx-auto">מלאו פרטים ונחזור אליכם לשיחת אבחון קצרה. בלי התחייבות, בלי אותיות קטנות.</p>
@@ -411,13 +415,31 @@
                         </label>
                     </div>
 
-                    <div class="pt-4 flex flex-col md:flex-row gap-4 items-center">
-                        <button type="submit" id="submit-btn-main" class="w-full md:w-2/3 bg-[#009E8E] hover:bg-[#008A7B] text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
-                            שלח פרטים
-                        </button>
+                    <div class="pt-4 flex flex-col gap-4">
+                        <!-- שורת כפתורים עליונה -->
+                        <div class="flex flex-col md:flex-row gap-4 w-full">
+                            <!-- כפתור שליחה ראשי -->
+                            <button type="submit" id="submit-btn-main" class="w-full md:w-2/3 bg-[#009E8E] hover:bg-[#008A7B] text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
+                                שלח פרטים ונדבר <i class="fas fa-paper-plane mr-1 text-sm"></i>
+                            </button>
+                            
+                            <!-- כפתור בוט -->
+                            <button type="button" onclick="highlightChat()" class="w-full md:w-1/3 bg-slate-50 hover:bg-slate-100 text-[#0F2B46] font-bold py-4 rounded-xl shadow-sm transition border border-slate-200 flex justify-center items-center gap-2">
+                                <i class="fas fa-robot text-xl text-[#009E8E]"></i> רוצה לדבר עם הבוט?
+                            </button>
+                        </div>
                         
-                        <button type="button" onclick="highlightChat()" class="w-full md:w-1/3 bg-slate-100 hover:bg-slate-200 text-[#0F2B46] font-bold py-4 rounded-xl shadow-sm transition border border-slate-200 flex justify-center items-center gap-2">
-                            <i class="fas fa-robot text-xl text-[#009E8E]"></i> רוצה לדבר עם הבוט?
+                        <!-- כפתור טופס Fillout Popup -->
+                        <button type="button" data-fillout-id="xhAPHNLpn5us" data-fillout-embed-type="popup" class="w-full bg-white text-[#0F2B46] border-2 border-[#009E8E] hover:bg-[#009E8E] hover:text-white py-3.5 rounded-xl shadow-[0_0_15px_rgba(0,158,142,0.3)] hover:shadow-[0_0_20px_rgba(0,158,142,0.5)] transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-center items-center gap-0.5 relative group mt-2">
+                            <span class="absolute -top-2 -right-2 flex h-4 w-4">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-4 w-4 bg-[#009E8E] border-2 border-white"></span>
+                            </span>
+                            <div class="flex items-center gap-2 font-bold text-base md:text-lg">
+                                <i class="fas fa-magic text-xl text-[#009E8E] group-hover:text-white transition-colors duration-300"></i>
+                                לקבלת אפיון אוטומטי מותאם אישית למייל הקש כאן
+                            </div>
+                            <span class="text-sm font-normal opacity-90 group-hover:text-teal-100">בהזנת פרטי עסק בקצרה</span>
                         </button>
                     </div>
                 </form>
@@ -428,29 +450,34 @@
     <!-- AI IDEA GENERATOR MODAL (Popup) -->
     <div id="ai-modal" class="fixed inset-0 z-50 bg-[#0F2B46]/80 backdrop-blur-sm hidden flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden relative transform scale-95 transition-transform duration-300" id="ai-modal-content">
-            <button onclick="toggleAIModal()" class="absolute top-4 left-4 text-white/70 hover:text-white text-2xl z-10"><i class="fas fa-times"></i></button>
+            <button onclick="toggleAIModal()" class="absolute top-4 left-4 text-white/70 hover:text-white text-2xl z-10 transition"><i class="fas fa-times"></i></button>
             
-            <div class="bg-gradient-to-r from-[#0F2B46] to-[#009E8E] p-8 text-white text-center relative overflow-hidden">
+            <div class="bg-gradient-to-r from-purple-700 to-indigo-600 p-8 text-white text-center relative overflow-hidden">
                 <div class="absolute top-[-50%] right-[-50%] w-full h-full bg-white/10 rounded-full blur-3xl"></div>
-                <h3 class="text-2xl font-bold mb-2">🤖 מעבדת הרעיונות</h3>
-                <p class="text-teal-100">כתוב את המקצוע שלך וקבל 3 רעיונות לאוטומציה שיחסכו לך כסף.</p>
+                <h3 class="text-2xl font-bold mb-2 flex justify-center items-center gap-2">
+                    <i class="fas fa-robot text-purple-200"></i> מעבדת הרעיונות
+                </h3>
+                <p class="text-purple-100">כתוב את המקצוע שלך וקבל 3 רעיונות לאוטומציה שיחסכו לך כסף.</p>
             </div>
 
             <div class="p-8">
-                <div class="flex gap-2 mb-6">
-                    <input type="text" id="ai-input" placeholder="לדוגמה: עורך דין, מאלף כלבים..." class="flex-1 border border-slate-300 rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-[#009E8E] outline-none">
-                    <button onclick="askAI()" class="bg-[#009E8E] hover:bg-[#008A7B] text-white px-6 rounded-xl font-bold transition">
-                        <i class="fas fa-magic"></i>
+                <div class="flex flex-col md:flex-row gap-3 mb-6">
+                    <input type="text" id="ai-input" placeholder="לדוגמה: עורך דין, מאלף כלבים..." class="flex-1 border border-slate-200 bg-slate-50 rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition">
+                    <button onclick="askAI()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-bold transition shadow-lg shadow-purple-500/30 flex items-center justify-center gap-2">
+                        <i class="fas fa-magic"></i> שגר
                     </button>
                 </div>
 
-                <div id="ai-output" class="space-y-3 min-h-[100px]">
-                    <p class="text-slate-400 text-center mt-8 italic">התוצאות יופיעו כאן...</p>
+                <div id="ai-output" class="space-y-3 min-h-[100px] bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-slate-400 text-center mt-6 italic flex flex-col items-center gap-2">
+                        <i class="fas fa-sparkles text-slate-300 text-2xl"></i>
+                        התוצאות יופיעו כאן...
+                    </p>
                 </div>
 
-                <div id="ai-cta-btn" class="hidden mt-6 pt-6 border-t border-slate-100 text-center">
+                <div id="ai-cta-btn" class="hidden mt-6 pt-6 border-t border-slate-200 text-center">
                     <p class="text-[#0F2B46] font-bold mb-3">אהבת את הרעיונות?</p>
-                    <button onclick="toggleAIModal(); document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-[#009E8E] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#008A7B] transition w-full">
+                    <button onclick="toggleAIModal(); document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-gradient-to-r from-[#0F2B46] to-[#009E8E] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition transform w-full md:w-auto">
                         כן! אני רוצה לבנות את זה &larr;
                     </button>
                 </div>
@@ -481,6 +508,33 @@
                         בדיוק בשביל זה אנחנו כאן. אוטומציה היא הדרך היחידה של עסק של אדם אחד לתפקד כמו עסק של 5 עובדים, בלי לשלם 5 משכורות.
                     </div>
                 </details>
+                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
+                        <span>האם המידע שלי ושל הלקוחות שלי מאובטח?</span>
+                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
+                        לחלוטין. אנחנו עובדים עם תשתיות אוטומציה מתקדמות (מבוססות N8N על שרתים ייעודיים ועצמאיים), כך שהמידע לא מטייל בשרתים ציבוריים עמוסים. המערכת משמשת כ"צינור חכם" שמעביר את הנתונים ישירות ובהצפנה למערכות שלך (CRM, דרייב, יומן) בבטחה מלאה וביציבות מקסימלית.
+                    </div>
+                </details>
+                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
+                        <span>אני קצת טכנופוב, צריך ידע טכני כדי לתפעל את זה?</span>
+                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
+                        בכלל לא! זה בדיוק היתרון שלנו. אנחנו מקימים עבורך את כל התהליך "מאחורי הקלעים". מבחינתך, אתה ממשיך לעבוד כרגיל – רק שפתאום לידים קופצים לך מסודרים למייל, הודעות נשלחות לבד, וחשבוניות מופקות באורח פלא. הכל עובד לבד בלי שתצטרך ללמוד שורת קוד אחת.
+                    </div>
+                </details>
+                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
+                        <span>מה קורה כשהעסק שלי יגדל והתהליכים ישתנו?</span>
+                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
+                    </summary>
+                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
+                        המערכות שלנו נבנות בצורה מודולרית וגמישה. שינית מערכת ניהול? הוספת שירות חדש? יש לך עובדים חדשים שצריכים לקבל התראות? אין שום בעיה. תמיד נוכל לשדרג, להוסיף ולדייק את האוטומציות כדי שיתאימו למידות החדשות של העסק שלך.
+                    </div>
+                </details>
             </div>
         </div>
     </section>
@@ -505,19 +559,36 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#0F2B46] text-slate-400 py-12 border-t border-[#0F2B46] relative">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <div class="mb-8 inline-block bg-slate-800/50 p-4 rounded-xl border border-slate-700">
-                <p class="text-xs text-slate-300 mb-2">מחשבון מהיר: כמה דקות אתה מבזבז ביום על שטויות?</p>
-                <div class="flex items-center gap-2 justify-center">
-                    <input type="number" id="wasted-min" placeholder="דקות" class="w-16 bg-slate-900 border border-slate-600 text-white text-center rounded px-2 py-1 text-sm">
-                    <span class="text-sm">=</span>
-                    <span class="text-[#009E8E] font-bold text-sm"><span id="wasted-result">0</span> ימי עבודה בשנה!</span>
+    <footer class="bg-white text-slate-600 py-16 border-t border-slate-200 relative overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#009E8E] to-purple-600"></div>
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-10">
+            
+            <!-- Logo & Info -->
+            <div class="text-center md:text-right flex flex-col items-center md:items-start gap-4">
+                <img src="./logo.png" alt="לוגו פשוט אוטומט" class="h-16 w-auto object-contain">
+                <p class="text-sm font-medium text-slate-500 bg-slate-50 px-4 py-2 rounded-lg border border-slate-100">
+                    &copy; 2026 פשוט. אוטומט. <span class="mx-2 text-slate-300">|</span> בונים לך זמן פנוי.
+                </p>
+            </div>
+
+            <!-- Modern Mini Calculator -->
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm w-full md:w-auto transform transition hover:shadow-md">
+                <h4 class="font-bold text-[#0F2B46] mb-2 flex items-center justify-center md:justify-start gap-2">
+                    <i class="fas fa-stopwatch text-[#009E8E] text-lg"></i> מחשבון זמן מבוזבז
+                </h4>
+                <p class="text-xs text-slate-500 mb-4">כמה דקות ביום הולכות לך על הקלדות ושטויות?</p>
+                <div class="flex items-center gap-3 justify-center md:justify-start bg-white p-2 rounded-xl border border-slate-100 shadow-inner">
+                    <div class="relative">
+                        <input type="number" id="wasted-min" placeholder="לדוג': 30" class="w-24 bg-transparent border-none text-[#0F2B46] font-bold px-2 py-1 text-center focus:ring-0 outline-none" min="0">
+                    </div>
+                    <span class="text-slate-300 font-light">|</span>
+                    <div class="text-[#009E8E] font-bold flex items-center gap-1.5 px-2">
+                        <span id="wasted-result" class="text-xl">0</span> 
+                        <span class="text-xs leading-tight">ימי עבודה<br>בשנה!</span>
+                    </div>
                 </div>
             </div>
-            <p class="text-sm">
-                &copy; 2026 פשוט. אוטומט. <span class="mx-2">|</span> בונים לך זמן פנוי.
-            </p>
+            
         </div>
     </footer>
 
@@ -571,6 +642,9 @@
     <!-- Chat Widget Embed -->
     <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
     <script>ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"})</script>
+
+    <!-- Fillout Popup Embed Script -->
+    <script src="https://server.fillout.com/embed/v1/"></script>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -732,38 +806,56 @@
         }
 
         function askAI() {
-            const input = document.getElementById('ai-input').value.toLowerCase();
+            const inputEl = document.getElementById('ai-input');
+            const input = inputEl.value.toLowerCase();
             const outputDiv = document.getElementById('ai-output');
             const ctaBtn = document.getElementById('ai-cta-btn');
 
-            if(!input) return alert("נא להזין מקצוע");
+            if(!input) {
+                inputEl.placeholder = "נא להזין מקצוע!";
+                inputEl.classList.add('border-red-500', 'ring-red-500', 'bg-red-50');
+                setTimeout(() => {
+                    inputEl.placeholder = "לדוגמה: עורך דין, מאלף כלבים...";
+                    inputEl.classList.remove('border-red-500', 'ring-red-500', 'bg-red-50');
+                }, 2000);
+                return;
+            }
 
-            outputDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-circle-notch fa-spin text-[#009E8E] text-3xl"></i></div>';
+            outputDiv.innerHTML = '<div class="text-center py-8"><i class="fas fa-circle-notch fa-spin text-purple-600 text-4xl"></i><p class="text-purple-400 text-sm mt-3 animate-pulse">ה-AI חושב על רעיונות...</p></div>';
             ctaBtn.classList.add('hidden');
 
             setTimeout(() => {
                 const ideas = getIdeasByInput(input);
                 let html = '';
                 ideas.forEach(idea => {
-                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#0F2B46]">$1</span>');
-                    html += `<div class="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-start gap-3 text-right">
-                                <i class="fas fa-check-circle text-[#009E8E] text-xl mt-1 shrink-0"></i>
+                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-purple-900">$1</span>');
+                    html += `<div class="p-3 bg-white border border-purple-100 rounded-lg flex items-start gap-3 text-right shadow-sm transition hover:shadow-md">
+                                <i class="fas fa-magic text-purple-500 text-lg mt-1.5 shrink-0"></i>
                                 <span class="text-slate-700 font-medium text-sm leading-relaxed">${formatted}</span>
                              </div>`;
                 });
                 outputDiv.innerHTML = html;
                 ctaBtn.classList.remove('hidden');
-            }, 1000);
+            }, 1200);
         }
 
         function askAIPage() {
-            const input = document.getElementById('ai-input-page').value.toLowerCase();
+            const inputEl = document.getElementById('ai-input-page');
+            const input = inputEl.value.toLowerCase();
             const outputDiv = document.getElementById('ai-output-page');
             const ctaBtn = document.getElementById('ai-cta-btn-page');
 
-            if(!input) return alert("נא להזין מקצוע");
+            if(!input) {
+                inputEl.placeholder = "נא להזין מקצוע!";
+                inputEl.classList.add('border-red-500', 'ring-red-500', 'bg-red-50');
+                setTimeout(() => {
+                    inputEl.placeholder = "לדוגמה: עורך דין, גנן, חנות בגדים...";
+                    inputEl.classList.remove('border-red-500', 'ring-red-500', 'bg-red-50');
+                }, 2000);
+                return;
+            }
 
-            outputDiv.innerHTML = '<div class="text-center py-4"><i class="fas fa-circle-notch fa-spin text-[#009E8E] text-3xl"></i></div>';
+            outputDiv.innerHTML = '<div class="text-center py-8 bg-white rounded-2xl shadow-sm border border-slate-100"><i class="fas fa-cog fa-spin text-purple-500 text-4xl mb-3"></i><p class="text-slate-500 text-sm animate-pulse">מייצר עבורך אוטומציות מותאמות אישית...</p></div>';
             outputDiv.classList.remove('hidden');
             ctaBtn.classList.add('hidden');
 
@@ -772,14 +864,14 @@
                 let html = '';
                 ideas.forEach(idea => {
                     const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#0F2B46]">$1</span>');
-                    html += `<div class="p-4 bg-white border border-[#009E8E]/10 shadow-sm rounded-xl flex items-start gap-3 text-right">
-                                <div class="bg-[#009E8E]/10 text-[#009E8E] w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1"><i class="fas fa-lightbulb"></i></div>
-                                <span class="text-slate-700 text-base leading-relaxed">${formatted}</span>
+                    html += `<div class="p-5 bg-white border border-purple-100 shadow-sm hover:shadow-md transition-shadow rounded-2xl flex items-start gap-4 text-right group">
+                                <div class="bg-purple-50 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300"><i class="fas fa-lightbulb"></i></div>
+                                <span class="text-slate-700 text-base leading-relaxed pt-1">${formatted}</span>
                              </div>`;
                 });
                 outputDiv.innerHTML = html;
                 ctaBtn.classList.remove('hidden');
-            }, 1000);
+            }, 1500);
         }
 
         // --- Webhook Lead Sender ---
@@ -814,14 +906,23 @@
 
                 if (response.ok) {
                     btn.innerHTML = '<i class="fas fa-check"></i> נשלח בהצלחה!';
+                    btn.classList.remove('bg-[#009E8E]', 'hover:bg-[#008A7B]');
+                    btn.classList.add('bg-green-600', 'hover:bg-green-700');
                 } else {
                     throw new Error('Network response was not ok');
                 }
             } catch (err) {
-                alert('שגיאה בשליחה. נסה שוב.');
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                btn.classList.remove('opacity-75');
+                // הוחלף alert להודעה על הכפתור עצמו
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> שגיאה בשליחה. נסה שוב.';
+                btn.classList.remove('bg-[#009E8E]', 'hover:bg-[#008A7B]');
+                btn.classList.add('bg-red-500', 'hover:bg-red-600');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-75', 'bg-red-500', 'hover:bg-red-600');
+                    btn.classList.add('bg-[#009E8E]', 'hover:bg-[#008A7B]');
+                }, 3500);
             }
         }
 
