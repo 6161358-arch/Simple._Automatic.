@@ -527,15 +527,27 @@
             </div>
             <div class="p-8 text-center">
                 <p class="text-xl text-[#0F2B46] font-bold mb-3">הולכים לשרוף עוד שעה על אקסל?</p>
-                <p class="text-slate-600 mb-6 leading-relaxed">
+                <p class="text-slate-600 mb-5 leading-relaxed">
                     קבלו ישירות למייל מדריך חינמי מקיף:<br>
                     <span class="font-bold text-[#009E8E] text-lg">5 אוטומציות שכל עסק חייב</span><br>
-                    <span class="text-sm">(כדי להפסיק לעבוד קשה ולחסוך המון זמן וכסף)</span>
+                    <span class="text-sm font-bold text-[#0F2B46] bg-[#009E8E]/10 px-2 py-1 rounded inline-block mt-2">(אוטומציות פרקטיות שאפשר לעשות לבד כבר עכשיו!)</span>
                 </p>
                 <form id="exit-form" onsubmit="event.preventDefault(); submitExitForm();">
-                    <div class="relative mb-4">
-                        <input type="email" id="exit-email" placeholder="הכנס כתובת אימייל לקבלת המדריך" required class="w-full px-4 py-4 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-center" dir="ltr">
+                    <div class="relative mb-3">
+                        <input type="text" id="exit-name" placeholder="שם מלא" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-center" dir="rtl">
                     </div>
+                    <div class="relative mb-4">
+                        <input type="email" id="exit-email" placeholder="אימייל לקבלת המדריך" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-center" dir="ltr">
+                    </div>
+                    
+                    <!-- צ'קבוקס אישור דיוור -->
+                    <div class="mb-4 flex items-start justify-center gap-2 text-right dir-rtl">
+                        <input type="checkbox" id="exit-consent" required class="mt-1 w-4 h-4 cursor-pointer accent-[#009E8E]">
+                        <label for="exit-consent" class="text-xs text-slate-500 cursor-pointer">
+                            אני מאשר/ת קבלת דיוור, טיפים והצעות שיווקיות (ניתן להסרה בכל עת).
+                        </label>
+                    </div>
+
                     <button type="submit" id="exit-btn" class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-xl transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
                         שלח לי את המדריך בחינם <i class="fas fa-download"></i>
                     </button>
@@ -838,7 +850,9 @@
         }
 
         async function submitExitForm() {
+            const name = document.getElementById('exit-name').value;
             const email = document.getElementById('exit-email').value;
+            const consent = document.getElementById('exit-consent').checked;
             const btn = document.getElementById('exit-btn');
             const msg = document.getElementById('exit-msg');
 
@@ -850,16 +864,19 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        name: 'ליד מדריך חינמי (Exit Intent)',
+                        name: name,
                         phone: 'לא הוזן',
                         email: email,
                         businessName: 'לא הוזן',
-                        source: 'Exit Intent Popup - Free Guide'
+                        source: 'Exit Intent Popup - Free Guide',
+                        marketingConsent: consent
                     })
                 });
 
                 btn.classList.add('hidden');
+                document.getElementById('exit-name').classList.add('hidden');
                 document.getElementById('exit-email').classList.add('hidden');
+                document.getElementById('exit-consent').parentElement.classList.add('hidden');
                 
                 msg.innerHTML = '<i class="fas fa-check-circle text-xl mb-1 block"></i> מעולה! המדריך בדרך למייל שלך.';
                 msg.classList.remove('hidden');
