@@ -94,15 +94,15 @@
     <div id="navbar-container" class="fixed w-full z-50 top-12 px-4 transition-all duration-300">
         <nav class="max-w-6xl mx-auto floating-nav rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
             
-            <!-- חזרנו להגדרות הלוגו הישנות והטובות - יושב מדויק, גודל הגיוני, גולש בעדינות -->
             <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
                 <img src="./logo.png" alt="לוגו פשוט אוטומט" border="0" class="h-20 md:h-28 -my-2 md:-my-4 w-auto object-contain transition-transform duration-300 transform group-hover:scale-105">
             </a>
             
             <div class="hidden md:flex space-x-8 space-x-reverse items-center text-sm font-bold text-slate-600">
-                <a href="#features" class="hover:text-[#009E8E] transition hover:scale-105">למה אנחנו</a>
+                <a href="#what-is-automation" class="hover:text-[#009E8E] transition hover:scale-105">מה זה בכלל?</a>
+                <a href="#features" class="hover:text-[#009E8E] transition hover:scale-105">איך זה עובד</a>
                 <a href="#simulator" class="hover:text-[#009E8E] transition hover:scale-105">מחשבון חיסכון</a>
-                <a href="#testimonials" class="hover:text-[#009E8E] transition hover:scale-105">סיפורי הצלחה</a>
+                <a href="#testimonials" class="hover:text-[#009E8E] transition hover:scale-105">לקוחות מספרים</a>
                 <a href="#ai-lab" class="hover:text-[#8b5cf6] transition hover:scale-105">מעבדת AI</a>
                 <button onclick="document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-[#0F2B46] text-white px-6 py-2.5 rounded-full hover:bg-[#009E8E] hover:shadow-lg hover:shadow-[#009E8E]/30 transition transform hover:-translate-y-0.5">
                     דבר איתנו
@@ -120,7 +120,8 @@
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-50 bg-white hidden flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-[#0F2B46] transition-opacity">
         <button onclick="toggleMobileMenu()" class="absolute top-8 left-8 text-3xl"><i class="fas fa-times"></i></button>
-        <a href="#features" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">למה אנחנו</a>
+        <a href="#what-is-automation" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">מה זה בכלל?</a>
+        <a href="#features" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">איך זה עובד</a>
         <a href="#simulator" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">סימולטור</a>
         <a href="#testimonials" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">לקוחות</a>
         <a href="#contact-quick" onclick="toggleMobileMenu()" class="text-[#009E8E]">תיאום שיחה</a>
@@ -166,6 +167,15 @@
                     <span class="mx-2">|</span> 
                     <i class="fas fa-check text-[#009E8E] mr-1"></i> התאמה אישית לעסק
                 </p>
+                
+                <!-- NEW LINK HERE (UPGRADED) -->
+                <a href="#what-is-automation" class="mt-4 group inline-flex items-center gap-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#009E8E]/40 px-6 py-3 rounded-full text-[#0F2B46] transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-[#009E8E]/10 transform hover:-translate-y-0.5">
+                    <span class="w-8 h-8 rounded-full bg-[#009E8E]/10 flex items-center justify-center text-[#009E8E] group-hover:rotate-12 transition-transform">
+                        <i class="fas fa-question text-sm"></i>
+                    </span>
+                    <span class="font-bold text-sm md:text-base">שומעים "אוטומציה" ושואלים מההה? בואו נסביר</span>
+                    <i class="fas fa-arrow-down text-slate-300 group-hover:text-[#009E8E] group-hover:translate-y-1 transition-all"></i>
+                </a>
             </div>
 
             <!-- IMMEDIATE SOCIAL PROOF -->
@@ -242,15 +252,90 @@
         </div>
     </section>
 
+    <!-- WHAT IS AUTOMATION (NEW SECTION) -->
+    <section id="what-is-automation" class="py-24 bg-[#0F2B46] text-white relative overflow-hidden z-10">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#009E8E]/20 rounded-full blur-[100px] pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#8b5cf6]/20 rounded-full blur-[100px] pointer-events-none transform -translate-x-1/2 translate-y-1/2"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-block bg-white/10 text-[#009E8E] px-5 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/30 backdrop-blur-sm">במילים פשוטות</div>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">שומעים "אוטומציה" ושואלים מהההה? 🤔</h2>
+                <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    אוטומציה היא <strong>"העובד השקוף"</strong> שלכם. היא פועלת 24/7 ברקע ומבצעת את כל ה"עבודה השחורה", כדי שתוכלו להתעסק במה שבאמת מביא כסף.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- Example 1 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-[#009E8E] rounded-xl flex items-center justify-center text-white text-2xl mb-5 shadow-lg">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">חיסול ההקלדות</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        לקוח השאיר פרטים באתר? המערכת מיד פותחת לו כרטיס ב-CRM ושולחת וואטסאפ אישי: "קיבלנו, מיד חוזרים!". אפס מאמץ.
+                    </p>
+                </div>
+
+                <!-- Example 2 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-[#009E8E] rounded-xl flex items-center justify-center text-white text-2xl mb-5 shadow-lg">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">גבייה על אוטומט</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        מערכת שמזהה מי טרם שילם, שולחת תזכורת אוטומטית למייל או לנייד, ומפיקה חשבונית ברגע שהתשלום עובר בהצלחה.
+                    </p>
+                </div>
+
+                <!-- Example 3 -->
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-[#009E8E] rounded-xl flex items-center justify-center text-white text-2xl mb-5 shadow-lg">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">סוף לפינג-פונג</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        הלקוח קובע פגישה לבד בקישור חכם, המערכת מסנכרנת יומנים ושולחת תזכורות אוטומטיות. בלי "מתי נוח לך?".
+                    </p>
+                </div>
+            </div>
+
+            <!-- The "We connect to everything" banner -->
+            <div class="bg-gradient-to-r from-[#009E8E]/10 to-[#8b5cf6]/10 border border-white/10 rounded-3xl p-8 md:p-10 text-center relative overflow-hidden" data-aos="zoom-in" data-aos-delay="400">
+                <div class="absolute inset-0 tech-grid opacity-30"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center gap-4 mb-4 text-2xl md:text-3xl text-white/50">
+                        <i class="fab fa-wordpress hover:text-[#21759b] transition-colors"></i>
+                        <i class="fab fa-shopify hover:text-[#95bf47] transition-colors"></i>
+                        <i class="fas fa-shopping-cart hover:text-[#009E8E] transition-colors"></i>
+                        <i class="fas fa-plug hover:text-[#8b5cf6] transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">וזה רק הקצה. אנחנו מחברים הכל להכל.</h3>
+                    <p class="text-slate-300 text-lg max-w-3xl mx-auto mb-6">
+                        אוטומציה היא לא רק הודעות וואטסאפ. אנחנו בונים גשרים שקופים בין <strong>כל פלטפורמה קיימת</strong>: אתרי תדמית, חנויות איקומרס, מערכות סליקה, קופות רושמות או כל תוכנה אחרת שיש לכם בעסק - הכל מדבר עם הכל בסינכרון מושלם.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="500">
+                <a href="#simulator" class="inline-flex items-center gap-2 text-[#009E8E] font-bold text-xl hover:text-white transition-colors duration-300 border-b-2 border-transparent hover:border-[#009E8E] pb-1">
+                    נשמע טוב? בואו נבדוק כמה כסף זה חוסך לכם בפועל <i class="fas fa-arrow-down animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- REAL TIME ROI SIMULATOR -->
-    <section id="simulator" class="py-20 bg-white">
+    <section id="simulator" class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-[#0F2B46] mb-4">אל תנחש, תחשב.</h2>
                 <p class="text-slate-500">הזיזו את המחוונים כדי לראות כמה כסף אתם מפסידים כרגע על עבודה ידנית.</p>
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-12 items-start bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-sm">
+            <div class="flex flex-col lg:flex-row gap-12 items-start bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
                 
                 <div class="w-full lg:w-1/2 space-y-8">
                     <div>
@@ -296,15 +381,15 @@
     </section>
 
     <!-- PROCESS -->
-    <section id="features" class="py-24 relative z-10">
+    <section id="features" class="py-24 relative z-10 bg-white">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-[#0F2B46]">איך זה עובד? (וכמה זה חוסך לך)</h2>
             </div>
 
             <div class="relative flex flex-col md:flex-row items-center justify-center gap-16 md:gap-6">
-                <div class="w-full md:w-1/3 bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center relative z-10">
-                    <div class="w-16 h-16 bg-slate-100 text-[#0F2B46] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+                <div class="w-full md:w-1/3 bg-slate-50 p-8 rounded-3xl shadow-md border border-slate-100 text-center relative z-10 hover:-translate-y-1 transition">
+                    <div class="w-16 h-16 bg-white text-[#0F2B46] shadow-sm rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
                     <h3 class="font-bold text-xl mb-2 text-[#0F2B46]">ליד נכנס</h3>
                     <p class="text-slate-500 text-sm">פייסבוק / אתר / טלפון</p>
                 </div>
@@ -334,7 +419,7 @@
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/3 bg-white p-8 rounded-3xl shadow-lg border border-slate-100 text-center relative z-10">
+                <div class="w-full md:w-1/3 bg-slate-50 p-8 rounded-3xl shadow-md border border-slate-100 text-center relative z-10 hover:-translate-y-1 transition">
                     <div class="w-16 h-16 bg-[#009E8E]/10 text-[#009E8E] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl"><i class="fas fa-check"></i></div>
                     <h3 class="font-bold text-xl mb-2 text-[#0F2B46]">ביצוע מושלם</h3>
                     <p class="text-slate-500 text-sm">הודעה נשלחה, חשבונית יצאה</p>
@@ -344,11 +429,11 @@
     </section>
 
     <!-- TESTIMONIALS -->
-    <section id="testimonials" class="py-20 bg-white">
+    <section id="testimonials" class="py-20 bg-slate-50 border-t border-slate-200">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#0F2B46]">אל תאמינו לנו, תאמינו למספרים שלהם</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 relative">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative hover:shadow-lg transition">
                     <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"חסכו לי משכורת של מזכירה במשרה מלאה. המערכת עושה את כל התיאומים והגבייה לבד. פשוט קסם."</p>
                     <div class="flex items-center gap-3">
@@ -359,7 +444,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 relative shadow-md">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
                     <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"ה-ROI (החזר השקעה) היה מיידי. תוך שבוע המערכת החזירה את העלות שלה בזכות לידים שלא הלכו לאיבוד."</p>
                     <div class="flex items-center gap-3">
@@ -370,7 +455,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 relative">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative hover:shadow-lg transition">
                     <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-slate-700 mb-6 italic">"הפסקתי לרדוף אחרי לקוחות לתשלום. המערכת שולחת תזכורות לבד. השקט הנפשי שווה הכל."</p>
                     <div class="flex items-center gap-3">
@@ -486,11 +571,11 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-20 bg-slate-50 border-t border-slate-200">
+    <section class="py-20 bg-white border-t border-slate-200">
         <div class="max-w-3xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#0F2B46]">שאלות נפוצות</h2>
             <div class="space-y-4">
-                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
                     <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
                         <span>כמה כסף זה באמת חוסך?</span>
                         <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
@@ -500,7 +585,7 @@
                     </div>
                 </details>
                 
-                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
                     <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
                         <span>האם צריך ידע טכני כדי לתפעל את זה?</span>
                         <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
@@ -510,7 +595,7 @@
                     </div>
                 </details>
 
-                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
                     <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
                         <span>עד כמה המידע שלי מאובטח?</span>
                         <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
@@ -520,7 +605,7 @@
                     </div>
                 </details>
 
-                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
                     <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
                         <span>האם זה מתאים לעסק של אדם אחד?</span>
                         <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
@@ -530,7 +615,7 @@
                     </div>
                 </details>
                 
-                <details class="group bg-white rounded-xl border border-slate-200 cursor-pointer shadow-sm">
+                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
                     <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
                         <span>ומה קורה כשהעסק שלי גדל?</span>
                         <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
@@ -562,7 +647,7 @@
         </div>
     </section>
 
-    <!-- REDESIGNED FOOTER (White) - אבל עם ההגדרות והמידות המקוריות (py-12) -->
+    <!-- REDESIGNED FOOTER (White) -->
     <footer class="bg-white py-12 border-t border-slate-200 relative overflow-hidden">
         <div class="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-slate-50 to-white -z-10 pointer-events-none"></div>
         <div class="max-w-6xl mx-auto px-4">
