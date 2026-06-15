@@ -102,8 +102,20 @@
                 <a href="#what-is-automation" class="hover:text-[#009E8E] transition hover:scale-105">מה זה בכלל?</a>
                 <a href="#features" class="hover:text-[#009E8E] transition hover:scale-105">איך זה עובד</a>
                 <a href="#simulator" class="hover:text-[#009E8E] transition hover:scale-105">מחשבון חיסכון</a>
-                <a href="#testimonials" class="hover:text-[#009E8E] transition hover:scale-105">לקוחות מספרים</a>
+                <a href="#testimonials" class="hover:text-[#009E8E] transition hover:scale-105">לקוחות</a>
                 <a href="#ai-lab" class="hover:text-[#8b5cf6] transition hover:scale-105">מעבדת AI</a>
+                
+                <!-- קישור עוגן לאזור הממיר החדש -->
+                <a href="#pdf-converter-tool" onclick="document.getElementById('pdf-converter-tool').scrollIntoView({behavior: 'smooth'}); return false;" class="flex items-center gap-1.5 text-[#0F2B46] hover:text-[#009E8E] transition-all hover:scale-105 bg-slate-100 hover:bg-[#009E8E]/10 px-4 py-2 rounded-full border border-slate-200 hover:border-[#009E8E]/30 relative overflow-hidden group">
+                    <i class="fas fa-file-pdf text-[#009E8E]"></i>
+                    ממיר ל-PDF
+                    <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <span class="text-[10px] bg-red-500 text-white px-1.5 rounded uppercase ml-1 mr-1 shadow-sm font-black">חינם!</span>
+                </a>
+
                 <button onclick="document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-[#0F2B46] text-white px-6 py-2.5 rounded-full hover:bg-[#009E8E] hover:shadow-lg hover:shadow-[#009E8E]/30 transition transform hover:-translate-y-0.5">
                     דבר איתנו
                 </button>
@@ -123,7 +135,7 @@
         <a href="#what-is-automation" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">מה זה בכלל?</a>
         <a href="#features" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">איך זה עובד</a>
         <a href="#simulator" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">סימולטור</a>
-        <a href="#testimonials" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">לקוחות</a>
+        <a href="#pdf-converter-tool" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">ממיר PDF חינם</a>
         <a href="#contact-quick" onclick="toggleMobileMenu()" class="text-[#009E8E]">תיאום שיחה</a>
     </div>
 
@@ -168,7 +180,6 @@
                     <i class="fas fa-check text-[#009E8E] mr-1"></i> התאמה אישית לעסק
                 </p>
                 
-                <!-- NEW LINK HERE (UPGRADED) -->
                 <a href="#what-is-automation" class="mt-4 group inline-flex items-center gap-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#009E8E]/40 px-6 py-3 rounded-full text-[#0F2B46] transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-[#009E8E]/10 transform hover:-translate-y-0.5">
                     <span class="w-8 h-8 rounded-full bg-[#009E8E]/10 flex items-center justify-center text-[#009E8E] group-hover:rotate-12 transition-transform">
                         <i class="fas fa-question text-sm"></i>
@@ -252,7 +263,7 @@
         </div>
     </section>
 
-    <!-- WHAT IS AUTOMATION (NEW SECTION) -->
+    <!-- WHAT IS AUTOMATION -->
     <section id="what-is-automation" class="py-24 bg-[#0F2B46] text-white relative overflow-hidden z-10">
         <!-- Decorative background elements -->
         <div class="absolute top-0 right-0 w-96 h-96 bg-[#009E8E]/20 rounded-full blur-[100px] pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
@@ -628,42 +639,70 @@
         </div>
     </section>
 
-    <!-- HTML TO PDF CONVERTER BANNER -->
-    <section class="py-12 bg-white relative overflow-hidden">
-        <div class="max-w-5xl mx-auto px-4 relative z-10">
-            <div class="bg-gradient-to-br from-slate-50 to-white border-2 border-[#009E8E]/20 rounded-[2rem] p-8 md:p-12 shadow-[0_15px_40px_-10px_rgba(0,158,142,0.15)] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group hover:border-[#009E8E]/40 transition-colors duration-500">
-                
-                <!-- Decorative background elements -->
-                <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#009E8E]/20 transition-colors duration-500"></div>
-                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-[#0F2B46]/5 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- EMBEDDED HTML TO PDF TOOL -->
+    <section id="pdf-converter-tool" class="py-24 bg-white relative overflow-hidden scroll-mt-20 border-t border-slate-200">
+        <!-- Decorative elements -->
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-[#0F2B46]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-                <!-- Text Content -->
-                <div class="text-center md:text-right flex-1 z-10">
-                    <div class="inline-flex items-center gap-2 bg-[#009E8E]/10 text-[#009E8E] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/20">
-                        <span class="relative flex h-2 w-2">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#009E8E]"></span>
-                        </span>
-                        כלי עזר חינמי למפתחים ומנהלים
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <!-- Text Header -->
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center gap-2 bg-[#009E8E]/10 text-[#009E8E] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/20">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#009E8E]"></span>
+                    </span>
+                    כלי עזר חינמי לקהילה
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black mb-4 text-[#0F2B46]">ממיר קוד HTML ל־<span class="text-[#009E8E]">PDF</span></h2>
+                <p class="text-slate-500 text-lg max-w-xl mx-auto">בלי לשלם דמי מנוי למערכות המרה יקרות. הדביקו את הקוד שלכם, הזינו מייל, וקבלו מסמך PDF מעוצב להורדה ברגע.</p>
+            </div>
+
+            <!-- Form Container -->
+            <div class="bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(0,158,142,0.15)] border-2 border-[#009E8E]/20 max-w-3xl mx-auto relative z-20 group hover:border-[#009E8E]/40 transition-colors duration-500">
+                <form id="convertFormEmbedded" class="space-y-6">
+                    <div>
+                        <label for="htmlTextEmbedded" class="block text-[15px] font-bold text-[#0F2B46] mb-2">1. קוד ה-HTML שלכם:</label>
+                        <div class="relative">
+                            <textarea id="htmlTextEmbedded" rows="6" placeholder="<!-- הדביקו כאן את קוד ה-HTML... -->" required
+                                class="w-full bg-white border border-slate-200 rounded-xl p-5 text-[#334155] font-mono text-sm focus:outline-none focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 transition-all resize-y shadow-inner" dir="ltr"></textarea>
+                            <div class="absolute top-4 right-4 flex items-center justify-center w-7 h-7 bg-slate-50 rounded-md text-slate-400 text-xs border border-slate-200 pointer-events-none shadow-sm">
+                                &lt;/&gt;
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-black text-[#0F2B46] mb-3 leading-tight">ממיר <span class="text-[#009E8E]">HTML ל-PDF</span> בקליק אחד</h2>
-                    <p class="text-slate-600 text-lg max-w-xl leading-relaxed">
-                        בלי לשלם דמי מנוי למערכות המרה יקרות. פיתחנו כלי פנימי מהיר ומאובטח - פשוט מדביקים את קוד ה-HTML, ומקבלים קובץ PDF מוכן ומעוצב ישירות למייל. <strong>השירות פתוח לכולם בחינם!</strong>
-                    </p>
-                </div>
 
-                <!-- CTA Button -->
-                <div class="flex-shrink-0 z-10 mt-4 md:mt-0">
-                    <a href="https://6161358-arch.github.io/HTML-PDF/" target="_blank" class="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-2xl text-white bg-[#0F2B46] hover:bg-[#009E8E] transition-colors duration-300 shadow-xl hover:shadow-[#009E8E]/30 transform hover:-translate-y-1 overflow-hidden">
-                        <span class="relative z-10 flex items-center gap-3">
-                            נסו את הממיר עכשיו <i class="fas fa-file-pdf text-xl"></i>
-                        </span>
-                    </a>
-                </div>
-                
+                    <div>
+                        <label for="emailEmbedded" class="block text-[15px] font-bold text-[#0F2B46] mb-2">2. לאן לשלוח את המסמך?</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-[#009E8E]">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <input type="email" id="emailEmbedded" required placeholder="name@example.com" 
+                                class="w-full px-4 py-3 pr-11 bg-white rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-left" dir="ltr">
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <input id="newsletterEmbedded" type="checkbox" required class="mt-1 w-5 h-5 cursor-pointer accent-[#009E8E] rounded border-slate-300">
+                        <div class="text-sm">
+                            <label for="newsletterEmbedded" class="font-bold text-[#0F2B46] cursor-pointer text-[14px]">
+                                אני מאשר/ת הצטרפות לרשימת התפוצה <span class="text-red-500">*</span>
+                            </label>
+                            <p class="text-slate-500 font-medium mt-1 leading-relaxed">קבלת עדכונים וטיפים מקצועיים למייל. ההסרה אפשרית בכל עת.</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtnEmbedded" class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2 mt-4">
+                        המרת מסמך ל-PDF <i class="fas fa-file-pdf"></i>
+                    </button>
+                    <div id="convertMsgEmbedded" class="hidden mt-4 text-center font-bold py-3 rounded-xl border"></div>
+                </form>
             </div>
         </div>
     </section>
+
     <!-- MAIL PHONE BANNER -->
     <section id="mail-phone-section" class="py-16 bg-gradient-to-r from-[#0b1d3a] to-[#1a5ebd] text-white border-y border-[#00b4d8]/30 relative overflow-hidden">
         <div class="absolute top-1/2 left-0 w-96 h-96 bg-[#00b4d8]/20 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2"></div>
@@ -867,6 +906,81 @@
                     wastedResult.innerText = days;
                 });
             }
+
+            // --- Embedded HTML to PDF Logic ---
+            const convertFormEmbedded = document.getElementById('convertFormEmbedded');
+            if(convertFormEmbedded) {
+                convertFormEmbedded.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const htmlText = document.getElementById('htmlTextEmbedded').value;
+                    const emailInput = document.getElementById('emailEmbedded').value;
+                    const newsletterCheck = document.getElementById('newsletterEmbedded').checked;
+                    const btn = document.getElementById('submitBtnEmbedded');
+                    const msg = document.getElementById('convertMsgEmbedded');
+
+                    if (!htmlText.trim()) return;
+
+                    const originalBtnHtml = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> מעבד ומייצר קובץ...';
+                    btn.disabled = true;
+                    msg.classList.add('hidden');
+
+                    const payload = {
+                        htmlContent: htmlText,
+                        email: emailInput,
+                        newsletterOptIn: newsletterCheck,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    try {
+                        // The webhook from the converter page
+                        const webhookUrl = "https://n8n.srv1256019.hstgr.cloud/webhook/1825250f-5408-44da-a6b3-7f248c0920d6";
+                        
+                        const response = await fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload) 
+                        });
+
+                        if (response.ok) {
+                            const contentType = response.headers.get('content-type');
+                            
+                            if (contentType && contentType.includes('application/pdf')) {
+                                const blob = await response.blob();
+                                const downloadUrl = window.URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.style.display = 'none';
+                                a.href = downloadUrl;
+                                a.download = `Document_${new Date().getTime()}.pdf`; 
+                                document.body.appendChild(a);
+                                a.click();
+                                window.URL.revokeObjectURL(downloadUrl);
+                                document.body.removeChild(a);
+
+                                msg.innerHTML = '<i class="fas fa-check-circle text-lg ml-1"></i> המסמך הומר וירד למחשב!';
+                                msg.className = 'mt-4 text-center font-bold py-3 rounded-xl border bg-green-50 text-green-600 border-green-200 block';
+                            } else {
+                                msg.innerHTML = '<i class="fas fa-check-circle text-lg ml-1"></i> הבקשה התקבלה! המסמך ישלח למייל.';
+                                msg.className = 'mt-4 text-center font-bold py-3 rounded-xl border bg-green-50 text-green-600 border-green-200 block';
+                            }
+                            convertFormEmbedded.reset();
+                        } else {
+                            throw new Error('Server error');
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        if (error.message.includes("Failed to fetch")) {
+                            msg.innerHTML = 'שגיאת רשת. אנא בדוק שהשרת מוגדר כראוי.';
+                        } else {
+                            msg.innerHTML = 'שגיאה ביצירת המסמך. אנא נסה שוב.';
+                        }
+                        msg.className = 'mt-4 text-center font-bold py-3 rounded-xl border bg-red-50 text-red-500 border-red-200 block';
+                    } finally {
+                        btn.innerHTML = originalBtnHtml;
+                        btn.disabled = false;
+                    }
+                });
+            }
         });
 
         function toggleMobileMenu() {
@@ -933,35 +1047,31 @@
             ctaBtn.classList.add('hidden');
 
             try {
-                // שליחת הבקשה ל-n8n (כתובת נקייה)
                 const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/f8267e4c-8f18-42ef-a2b3-abd4ae9b9de6', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ profession: input })
                 });
                 
-                // התיקון לאתר: קורא את התשובה בצורה חכמה שמונעת התרסקויות
                 const rawText = await response.text();
                 let ideas = [];
                 
                 try {
                     const data = JSON.parse(rawText);
                     if (Array.isArray(data)) {
-                        ideas = data; // מזהה אם n8n שלח ישירות את המערך
+                        ideas = data;
                     } else if (data.ideas && Array.isArray(data.ideas)) {
-                        ideas = data.ideas; // מזהה את ה-Code Node המסודר מ-n8n
+                        ideas = data.ideas;
                     } else {
                         const textData = data.output || data.text || "";
                         ideas = textData.split('\n').filter(line => line.trim().length > 0);
                     }
                 } catch (e) {
-                    // אם n8n שלח טקסט רגיל ולא JSON
                     ideas = rawText.split('\n').filter(line => line.trim().length > 0);
                 }
 
                 let html = '';
                 ideas.forEach(idea => {
-                    // המרה של הכוכביות לעיצוב המודגש הסגול
                     const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#6d28d9]">$1</span>');
                     html += `<div class="p-4 bg-purple-50/50 hover:bg-purple-50 border border-purple-100 rounded-xl flex items-start gap-3 text-right transition">
                                 <i class="fas fa-bolt text-[#8b5cf6] text-xl mt-1 shrink-0"></i>
@@ -998,29 +1108,26 @@
             ctaBtn.classList.add('hidden');
 
             try {
-                // שליחת הבקשה ל-n8n (כתובת נקייה)
                 const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/f8267e4c-8f18-42ef-a2b3-abd4ae9b9de6', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ profession: input })
                 });
                 
-                // התיקון לאתר: קורא את התשובה בצורה חכמה שמונעת התרסקויות
                 const rawText = await response.text();
                 let ideas = [];
                 
                 try {
                     const data = JSON.parse(rawText);
                     if (Array.isArray(data)) {
-                        ideas = data; // מזהה אם n8n שלח ישירות את המערך
+                        ideas = data;
                     } else if (data.ideas && Array.isArray(data.ideas)) {
-                        ideas = data.ideas; // מזהה את ה-Code Node המסודר מ-n8n
+                        ideas = data.ideas;
                     } else {
                         const textData = data.output || data.text || "";
                         ideas = textData.split('\n').filter(line => line.trim().length > 0);
                     }
                 } catch (e) {
-                    // אם n8n שלח טקסט רגיל ולא JSON
                     ideas = rawText.split('\n').filter(line => line.trim().length > 0);
                 }
 
@@ -1174,3 +1281,4 @@
     </script>
 </body>
 </html>
+<!-- Injection By NetFree --><script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script><script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
