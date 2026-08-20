@@ -714,18 +714,18 @@
                     </div>
                     <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">ממיר HTML ל-PDF</h3>
                     <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
-                        מדביקים קוד HTML, מזינים מייל — ומקבלים מסמך PDF מעוצב, בלי דמי מנוי למערכות המרה יקרות. הכלי ממש כאן באתר.
+                        מדביקים קוד HTML, מזינים מייל — ומקבלים מסמך PDF מעוצב, בלי דמי מנוי למערכות המרה יקרות.
                     </p>
                     <ul class="space-y-2 text-sm text-slate-600 mb-8">
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> תוצאה תוך שניות</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> ללא התקנה וללא רישום</li>
                         <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
                     </ul>
-                    <a href="#pdf-converter-tool" onclick="document.getElementById('pdf-converter-tool').scrollIntoView({behavior: 'smooth'}); return false;"
-                        class="w-full bg-white border-2 border-[#0F2B46] text-[#0F2B46] hover:bg-[#009E8E] hover:border-[#009E8E] hover:text-white font-bold py-4 rounded-xl shadow-sm transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                        לממיר המסמכים <i class="fas fa-arrow-down"></i>
+                    <a href="https://6161358-arch.github.io/HTML-PDF/" target="_blank" rel="noopener"
+                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                        לממיר המסמכים <i class="fas fa-file-pdf"></i>
                     </a>
-                    <span class="text-center text-xs text-slate-400 mt-3">הכלי נמצא ממש כאן למטה</span>
+                    <span class="text-center text-xs text-slate-400 mt-3">נפתח בלשונית חדשה</span>
                 </div>
 
                 <!-- Card 4: YouTube Audio Downloader -->
@@ -733,7 +733,7 @@
                     <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
                         <i class="fas fa-music"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">הורדת קבצי אודיו/וידאו מיוטיוב להאזנה</h3>
+                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">שמע מיוטיוב</h3>
                     <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
                         מדביקים קישור לסרטון או לפלייליסט, ומקבלים קובץ שמע נקי בלבד — בלי וידאו, בלי פרסומות ובלי אתרים מפוקפקים. לשימוש אישי.
                     </p>
@@ -762,70 +762,6 @@
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <!-- EMBEDDED HTML TO PDF TOOL -->
-    <section id="pdf-converter-tool" class="py-24 bg-white relative overflow-hidden scroll-mt-20 border-t border-slate-200">
-        <!-- Decorative elements -->
-        <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-[#0F2B46]/5 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <!-- Text Header -->
-            <div class="text-center mb-10">
-                <div class="inline-flex items-center gap-2 bg-[#009E8E]/10 text-[#009E8E] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/20">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#009E8E]"></span>
-                    </span>
-                    כלי עזר חינמי לקהילה
-                </div>
-                <h2 class="text-3xl md:text-4xl font-black mb-4 text-[#0F2B46]">ממיר קוד HTML ל־<span class="text-[#009E8E]">PDF</span></h2>
-                <p class="text-slate-500 text-lg max-w-xl mx-auto">בלי לשלם דמי מנוי למערכות המרה יקרות. הדביקו את הקוד שלכם, הזינו מייל, וקבלו מסמך PDF מעוצב להורדה ברגע.</p>
-            </div>
-
-            <!-- Form Container -->
-            <div class="bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(0,158,142,0.15)] border-2 border-[#009E8E]/20 max-w-3xl mx-auto relative z-20 group hover:border-[#009E8E]/40 transition-colors duration-500">
-                <form id="convertFormEmbedded" class="space-y-6">
-                    <div>
-                        <label for="htmlTextEmbedded" class="block text-[15px] font-bold text-[#0F2B46] mb-2">1. קוד ה-HTML שלכם:</label>
-                        <div class="relative">
-                            <textarea id="htmlTextEmbedded" rows="6" placeholder="<!-- הדביקו כאן את קוד ה-HTML... -->" required
-                                class="w-full bg-white border border-slate-200 rounded-xl p-5 text-[#334155] font-mono text-sm focus:outline-none focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 transition-all resize-y shadow-inner" dir="ltr"></textarea>
-                            <div class="absolute top-4 right-4 flex items-center justify-center w-7 h-7 bg-slate-50 rounded-md text-slate-400 text-xs border border-slate-200 pointer-events-none shadow-sm">
-                                &lt;/&gt;
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="emailEmbedded" class="block text-[15px] font-bold text-[#0F2B46] mb-2">2. לאן לשלוח את המסמך?</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-[#009E8E]">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <input type="email" id="emailEmbedded" required placeholder="name@example.com" 
-                                class="w-full px-4 py-3 pr-11 bg-white rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-left" dir="ltr">
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-3 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <input id="newsletterEmbedded" type="checkbox" required class="mt-1 w-5 h-5 cursor-pointer accent-[#009E8E] rounded border-slate-300">
-                        <div class="text-sm">
-                            <label for="newsletterEmbedded" class="font-bold text-[#0F2B46] cursor-pointer text-[14px]">
-                                אני מאשר/ת הצטרפות לרשימת התפוצה <span class="text-red-500">*</span>
-                            </label>
-                            <p class="text-slate-500 font-medium mt-1 leading-relaxed">קבלת עדכונים וטיפים מקצועיים למייל. ההסרה אפשרית בכל עת.</p>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="submitBtnEmbedded" class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2 mt-4">
-                        המרת מסמך ל-PDF <i class="fas fa-file-pdf"></i>
-                    </button>
-                    <div id="convertMsgEmbedded" class="hidden mt-4 text-center font-bold py-3 rounded-xl border"></div>
-                </form>
-            </div>
         </div>
     </section>
 
@@ -1030,81 +966,6 @@
                     const mins = parseInt(e.target.value) || 0;
                     const days = ((mins * 250) / 60 / 8).toFixed(1);
                     wastedResult.innerText = days;
-                });
-            }
-
-            // --- Embedded HTML to PDF Logic ---
-            const convertFormEmbedded = document.getElementById('convertFormEmbedded');
-            if(convertFormEmbedded) {
-                convertFormEmbedded.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    const htmlText = document.getElementById('htmlTextEmbedded').value;
-                    const emailInput = document.getElementById('emailEmbedded').value;
-                    const newsletterCheck = document.getElementById('newsletterEmbedded').checked;
-                    const btn = document.getElementById('submitBtnEmbedded');
-                    const msg = document.getElementById('convertMsgEmbedded');
-
-                    if (!htmlText.trim()) return;
-
-                    const originalBtnHtml = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> מעבד ומייצר קובץ...';
-                    btn.disabled = true;
-                    msg.classList.add('hidden');
-
-                    const payload = {
-                        htmlContent: htmlText,
-                        email: emailInput,
-                        newsletterOptIn: newsletterCheck,
-                        timestamp: new Date().toISOString()
-                    };
-
-                    try {
-                        // The webhook from the converter page
-                        const webhookUrl = "https://n8n.srv1256019.hstgr.cloud/webhook/1825250f-5408-44da-a6b3-7f248c0920d6";
-                        
-                        const response = await fetch(webhookUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload) 
-                        });
-
-                        if (response.ok) {
-                            const contentType = response.headers.get('content-type');
-                            
-                            if (contentType && contentType.includes('application/pdf')) {
-                                const blob = await response.blob();
-                                const downloadUrl = window.URL.createObjectURL(blob);
-                                const a = document.createElement('a');
-                                a.style.display = 'none';
-                                a.href = downloadUrl;
-                                a.download = `Document_${new Date().getTime()}.pdf`; 
-                                document.body.appendChild(a);
-                                a.click();
-                                window.URL.revokeObjectURL(downloadUrl);
-                                document.body.removeChild(a);
-
-                                msg.innerHTML = '<i class="fas fa-check-circle text-lg ml-1"></i> המסמך הומר וירד למחשב!';
-                                msg.className = 'mt-4 text-center font-bold py-3 rounded-xl border bg-green-50 text-green-600 border-green-200 block';
-                            } else {
-                                msg.innerHTML = '<i class="fas fa-check-circle text-lg ml-1"></i> הבקשה התקבלה! המסמך ישלח למייל.';
-                                msg.className = 'mt-4 text-center font-bold py-3 rounded-xl border bg-green-50 text-green-600 border-green-200 block';
-                            }
-                            convertFormEmbedded.reset();
-                        } else {
-                            throw new Error('Server error');
-                        }
-                    } catch (error) {
-                        console.error(error);
-                        if (error.message.includes("Failed to fetch")) {
-                            msg.innerHTML = 'שגיאת רשת. אנא בדוק שהשרת מוגדר כראוי.';
-                        } else {
-                            msg.innerHTML = 'שגיאה ביצירת המסמך. אנא נסה שוב.';
-                        }
-                        msg.className = 'mt-4 text-center font-bold py-3 rounded-xl border bg-red-50 text-red-500 border-red-200 block';
-                    } finally {
-                        btn.innerHTML = originalBtnHtml;
-                        btn.disabled = false;
-                    }
                 });
             }
         });
