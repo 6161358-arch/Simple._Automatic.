@@ -106,9 +106,9 @@
                 <a href="#ai-lab" class="hover:text-[#8b5cf6] transition hover:scale-105">מעבדת AI</a>
                 
                 <!-- קישור עוגן לאזור הממיר החדש -->
-                <a href="#pdf-converter-tool" onclick="document.getElementById('pdf-converter-tool').scrollIntoView({behavior: 'smooth'}); return false;" class="flex items-center gap-1.5 text-[#0F2B46] hover:text-[#009E8E] transition-all hover:scale-105 bg-slate-100 hover:bg-[#009E8E]/10 px-4 py-2 rounded-full border border-slate-200 hover:border-[#009E8E]/30 relative overflow-hidden group">
-                    <i class="fas fa-file-pdf text-[#009E8E]"></i>
-                    ממיר ל-PDF
+                <a href="#free-tools" onclick="document.getElementById('free-tools').scrollIntoView({behavior: 'smooth'}); return false;" class="flex items-center gap-1.5 text-[#0F2B46] hover:text-[#009E8E] transition-all hover:scale-105 bg-slate-100 hover:bg-[#009E8E]/10 px-4 py-2 rounded-full border border-slate-200 hover:border-[#009E8E]/30 relative overflow-hidden group">
+                    <i class="fas fa-gift text-[#009E8E]"></i>
+                    כלים חינמיים
                     <span class="absolute -top-1 -right-1 flex h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
@@ -135,7 +135,7 @@
         <a href="#what-is-automation" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">מה זה בכלל?</a>
         <a href="#features" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">איך זה עובד</a>
         <a href="#simulator" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">סימולטור</a>
-        <a href="#pdf-converter-tool" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">ממיר PDF חינם</a>
+        <a href="#free-tools" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">כלים חינמיים</a>
         <a href="#contact-quick" onclick="toggleMobileMenu()" class="text-[#009E8E]">תיאום שיחה</a>
     </div>
 
@@ -636,6 +636,132 @@
                     </div>
                 </details>
             </div>
+        </div>
+    </section>
+
+    <!-- FREE TOOLS FOR THE COMMUNITY -->
+    <section id="free-tools" class="py-24 bg-slate-50 relative overflow-hidden scroll-mt-24 border-t border-slate-200">
+        <!-- Decorative elements -->
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-[#0F2B46]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+
+            <!-- Header -->
+            <div class="text-center mb-14" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 bg-[#009E8E]/10 text-[#009E8E] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/20">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#009E8E]"></span>
+                    </span>
+                    שירותים חינמיים לתועלת הציבור
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black mb-4 text-[#0F2B46]">רוצים לראות אוטומציה <span class="text-[#009E8E]">בפעולה</span>?</h2>
+                <p class="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                    במקום להסביר מה זו אוטומציה — תנסו אותה. ממלאים בקשה קצרה, והמערכת מפיקה ושולחת לכם את התוצאה למייל תוך רגע. בלי תשלום, בלי התחייבות, בלי מנוי.
+                </p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+
+                <!-- Card 1: News -->
+                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">מהדורת חדשות למייל</h3>
+                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
+                        מבקשים — ומקבלים למייל מהדורת חדשות מסוכמת ומעודכנת. בלי לפתוח אתרים ובלי להתפזר בין עשרות כתבות. המערכת אוספת, מסכמת ושולחת. אתם רק קוראים.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> מופק ונשלח אוטומטית לפי בקשה</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> בקשה של 30 שניות — לא רשימת תפוצה</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                    </ul>
+                    <button type="button" data-fillout-id="55mo8PJiZNus" data-fillout-embed-type="popup"
+                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                        בקשת מהדורת חדשות <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <a href="https://automatic.fillout.com/t/55mo8PJiZNus" target="_blank" rel="noopener" class="text-center text-xs text-slate-400 hover:text-[#009E8E] mt-3 transition">או פתחו את הטופס בחלון נפרד</a>
+                </div>
+
+                <!-- Card 2: Shabbat Times -->
+                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-star-of-david"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">זמני כניסת שבת למייל</h3>
+                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
+                        זמני הדלקת נרות וצאת השבת הקרובה, מחושבים לפי המיקום המדויק שלכם — בכל מקום בעולם. מבקשים פעם אחת, והזמנים נשלחים אליכם למייל מיד.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> מותאם לכל עיר בעולם</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> מגיע למייל תוך רגע מהבקשה</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                    </ul>
+                    <button type="button" data-fillout-id="aqSvUsYgZvus" data-fillout-embed-type="popup"
+                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                        בקשת זמני שבת <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <a href="https://automatic.fillout.com/t/aqSvUsYgZvus" target="_blank" rel="noopener" class="text-center text-xs text-slate-400 hover:text-[#009E8E] mt-3 transition">או פתחו את הטופס בחלון נפרד</a>
+                </div>
+
+                <!-- Card 3: PDF Converter (anchor to existing tool) -->
+                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">ממיר HTML ל-PDF</h3>
+                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
+                        מדביקים קוד HTML, מזינים מייל — ומקבלים מסמך PDF מעוצב, בלי דמי מנוי למערכות המרה יקרות. הכלי ממש כאן באתר.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> תוצאה תוך שניות</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> ללא התקנה וללא רישום</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                    </ul>
+                    <a href="#pdf-converter-tool" onclick="document.getElementById('pdf-converter-tool').scrollIntoView({behavior: 'smooth'}); return false;"
+                        class="w-full bg-white border-2 border-[#0F2B46] text-[#0F2B46] hover:bg-[#009E8E] hover:border-[#009E8E] hover:text-white font-bold py-4 rounded-xl shadow-sm transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                        לממיר המסמכים <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <span class="text-center text-xs text-slate-400 mt-3">הכלי נמצא ממש כאן למטה</span>
+                </div>
+
+                <!-- Card 4: YouTube Audio Downloader -->
+                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">הורדת קבצי אודיו/וידאו מיוטיוב להאזנה</h3>
+                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
+                        מדביקים קישור לסרטון או לפלייליסט, ומקבלים קובץ שמע נקי בלבד — בלי וידאו, בלי פרסומות ובלי אתרים מפוקפקים. לשימוש אישי.
+                    </p>
+                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> קובץ שמע בלבד</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> תומך גם בפלייליסטים</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                    </ul>
+                    <a href="https://6161358-arch.github.io/Downloading-audio-from-YouTube/" target="_blank" rel="noopener"
+                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                        להורדת שמע <i class="fas fa-headphones"></i>
+                    </a>
+                    <span class="text-center text-xs text-slate-400 mt-3">נפתח בלשונית חדשה</span>
+                </div>
+
+            </div>
+
+            <!-- Bottom note -->
+            <div class="mt-14 text-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="inline-block bg-white border-2 border-[#009E8E]/20 rounded-2xl px-8 py-6 shadow-sm max-w-3xl">
+                    <p class="text-[#0F2B46] font-bold text-lg mb-1">מאחורי כל אחד מהשירותים האלה עומדת אוטומציה שמקבלת בקשה ומטפלת בה לבד, 24/7.</p>
+                    <p class="text-slate-500">בדיוק ככה אפשר לבנות גם לעסק שלכם — מענה ללידים, שליחת הצעות מחיר, תזכורות לגבייה ועוד.</p>
+                    <button onclick="document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="mt-4 bg-[#009E8E] hover:bg-[#008A7B] text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-[#009E8E]/30 transition transform hover:-translate-y-0.5">
+                        מה אפשר לבנות לי? <i class="fas fa-comments mr-1"></i>
+                    </button>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1282,3 +1408,7 @@
 </body>
 </html>
 <!-- Injection By NetFree --><script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script><script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
+
+<!-- Injection By NetFree -->
+<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
+<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
