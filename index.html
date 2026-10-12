@@ -1,1098 +1,1134 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="scroll-smooth">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>פשוט. אוטומט. | מכונת הזמן של העסק שלך</title>
-    
-    <!-- Favicon: הברק בצבעי המותג -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23009E8E'/%3E%3Cstop offset='100%25' stop-color='%230F2B46'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23grad)'/%3E%3Cpath d='M19 6 L11 17 L16 17 L14 26 L23 13 L18 13 Z' fill='white'/%3E%3C/svg%3E">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Animate On Scroll Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>פשוט. אוטומט. - אוטומציה לעסקים | יוסף דייטש</title>
+    <meta name="description" content="עובד דיגיטלי שלא מתעייף, לא שוכח לחזור ללידים ולא מבקש העלאה. אוטומציות לעסקים: לידים, גבייה, פגישות ועוד.">
+    <meta property="og:title" content="פשוט. אוטומט. - אוטומציה לעסקים">
+    <meta property="og:description" content="עובד דיגיטלי שלא מתעייף, לא שוכח לחזור ללידים ולא מבקש העלאה.">
+    <meta property="og:image" content="https://6161358-arch.github.io/Simple._Automatic./logo.png">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="./logo.png">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Outfit:wght@300;400;600;800&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- אייקונים (למערכות שמתחברים אליהן ולכלים החינמיים) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* ---------- צבעים (לפי הלוגו: כחול כהה וטורקיז) וגופן אחד לכל העמוד ---------- */
         :root {
-            --brand-teal: #009E8E;
-            --brand-navy: #0F2B46;
-            --bg-light: #f8fafc;
-        }
-        
-        body { 
-            font-family: 'Heebo', sans-serif; 
-            background-color: var(--bg-light);
-            color: #1e293b;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, .brand-font { font-family: 'Outfit', 'Rubik', sans-serif; }
-        
-        .tech-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(0, 158, 142, 0.04) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0, 158, 142, 0.04) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            --bg: #0a2238;         /* הכחול הכהה של גלגל השיניים */
+            --fg: #edf6f4;         /* טקסט על רקע כהה */
+            --accent: #1cc7b2;     /* הטורקיז של הלוגו, מואר */
+            --teal: #008f80;       /* הטורקיז של הלוגו - על רקע בהיר */
+            --pale: #d6eeea;       /* מנטה בהיר */
+            --paper: #f2f8f7;      /* רקע בהיר שני */
+            --ink: #0f2b46;        /* טקסט על רקע בהיר */
+            --muted: #a5bccb;      /* טקסט משני על כהה */
+            --muted-ink: #4a6072;  /* טקסט משני על בהיר */
+            --line: #ffffff2e;
+            --line-ink: #0f2b4630;
+            --lilac: #b9a3ff;       /* סגלגל - הצבע של מחולל הרעיונות (AI) */
+            --amber: #ffb000;      /* הצבע החם היחיד: הרגע שבו משהו קורה לבד */
         }
 
-        @keyframes pulse-brand {
-            0% { box-shadow: 0 0 0 0 rgba(0, 158, 142, 0.6); transform: scale(1); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 158, 142, 0); transform: scale(1.02); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 158, 142, 0); transform: scale(1); }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 400 18px/1.5 'Heebo', 'Arial Hebrew', Arial, sans-serif;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
         }
-        
-        .cta-pulse-active { animation: pulse-brand 2.5s infinite; }
+        h1, h2, h3, p { margin: 0; }
+        h1, h2 { font-weight: 900; letter-spacing: -0.03em; line-height: 1.02; }
+        a, button, input { color: inherit; font: inherit; }
+        a { text-decoration: none; }
+        button { background: none; border: 0; cursor: pointer; }
+        :focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+        [hidden] { display: none !important; }
+        .teal { color: var(--accent); }
+        section[id] { scroll-margin-top: 0; }
 
-        input[type=range] { -webkit-appearance: none; background: transparent; }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%;
-            background: var(--brand-teal); cursor: pointer; margin-top: -8px; 
-            box-shadow: 0 0 10px rgba(0, 158, 142, 0.5);
+        /* גרעיניות עדינה, קו התקדמות בצד, וסמן עגול */
+        .grain {
+            position: fixed; inset: 0; pointer-events: none; z-index: 40; opacity: .05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
         }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 8px; cursor: pointer; background: #e2e8f0; border-radius: 4px;
+        .progress { position: fixed; right: 0; top: 0; height: 100vh; width: 3px; background: var(--accent); transform-origin: top; transform: scaleY(0); z-index: 45; }
+        #cursor {
+            position: fixed; left: 0; top: 0; width: 32px; height: 32px;
+            border: 1.5px solid var(--cursor-ink, #8fe6da); border-radius: 50%;
+            z-index: 200; pointer-events: none; opacity: 0;
+            display: grid; place-items: center;
+            color: var(--cursor-inverse, #0a2238);
+            transition: width .2s, height .2s, background .2s, border-color .12s;
+        }
+        #cursor::after { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--cursor-ink, #8fe6da); }
+        #cursor span { font-size: 13px; font-weight: 700; }
+        #cursor.active { width: 68px; height: 68px; background: var(--cursor-ink, #8fe6da); }
+        #cursor.active::after { display: none; }
+        @media (pointer: fine) { .has-cursor, .has-cursor a, .has-cursor button, .has-cursor label, .has-cursor summary { cursor: none; } }
+
+        /* פס עליון של כל חלק: שם החלק מימין, משפט קצר משמאל */
+        .section-top {
+            display: flex; justify-content: space-between; gap: 20px;
+            border-top: 1px solid currentColor; padding-top: 16px;
+            font-size: 14px; font-weight: 500;
+        }
+        .eyebrow { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+        .on-light .eyebrow { color: var(--teal); }
+        .description { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.42; color: var(--muted); }
+        .on-light .description { color: var(--muted-ink); }
+        .round-link { display: inline-flex; align-items: center; gap: 16px; font-size: 17px; font-weight: 700; }
+        .round-link b {
+            font: 400 24px Arial; width: 44px; height: 44px;
+            border: 1px solid var(--line); border-radius: 50%;
+            display: grid; place-items: center; transition: .3s;
+        }
+        .on-light .round-link b { border-color: var(--line-ink); }
+        .round-link:hover b { background: var(--accent); color: var(--bg); transform: rotate(-35deg); }
+        .text-button { display: inline-block; padding: 12px 0 8px; border-bottom: 1px solid currentColor; font-size: 17px; font-weight: 700; }
+        .text-button:hover { color: var(--accent); }
+        .on-light .text-button:hover { color: var(--teal); }
+        .solid {
+            display: inline-block; padding: 15px 30px; border-radius: 14px;
+            background: var(--accent); color: var(--bg);
+            font-size: 19px; font-weight: 900; transition: background .2s, transform .2s;
+        }
+        .solid:hover { background: #5fe0cf; transform: translateY(-2px); }
+        .solid[disabled] { opacity: .65; transform: none; }
+
+        /* ---------- כותרת עליונה ותפריט ---------- */
+        .header {
+            position: absolute; top: 0; right: 0; left: 0; z-index: 50;
+            padding: 22px 6% 0;
+            display: flex; justify-content: space-between; align-items: flex-start;
+        }
+        /* הלוגו הרשמי על תווית לבנה שיורדת מראש העמוד */
+        .logo-tag {
+            display: block; background: #fff; margin-top: -22px;
+            padding: 16px 26px 14px; border-radius: 0 0 24px 24px;
+            box-shadow: 0 18px 34px -20px rgba(0, 0, 0, .7);
+            transition: padding .3s;
+        }
+        .logo-tag:hover { padding-top: 24px; }
+        .logo-tag img { display: block; height: 96px; width: auto; }
+        .header-actions { display: flex; align-items: center; gap: 30px; font-size: 16px; font-weight: 700; padding-top: 14px; }
+        /* קישורים שקטים בראש העמוד (במחשב). במסך קטן - כפתור תפריט במקומם */
+        .quiet-nav { display: flex; gap: 26px; font-size: 15px; font-weight: 500; color: var(--muted); }
+        .quiet-nav a { padding: 4px 0; background: linear-gradient(currentColor, currentColor) right bottom / 0 1px no-repeat; transition: color .2s, background-size .3s; }
+        .quiet-nav a:hover { color: var(--fg); background-size: 100% 1px; }
+        .menu-toggle { display: none; }
+        /* פס דק שמופיע רק כשגוללים חזרה למעלה, ונעלם כשממשיכים לקרוא */
+        .bar {
+            position: fixed; top: 0; right: 0; left: 0; z-index: 50; height: 54px; padding: 0 6%;
+            display: flex; align-items: center; justify-content: space-between; gap: 24px;
+            background: #0a2238e0; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+            transform: translateY(-100%); transition: transform .35s ease;
+        }
+        .bar.show { transform: none; }
+        .bar-logo { background: #fff; border-radius: 10px; padding: 3px 10px; }
+        .bar-logo img { display: block; height: 38px; width: auto; }
+        .bar .quiet-nav { color: #cfe2e6; }
+        @media (max-width: 860px) { .bar-cta { display: none; } }
+        .bar-cta { font-size: 15px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+        .bar .menu-toggle { font-size: 15px; font-weight: 700; }
+        #menu { position: fixed; inset: 0; z-index: 48; background: var(--bg); padding: 130px 14% 60px; overflow: auto; }
+        #menu a { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding: 6px 0; font-size: clamp(34px, 5.4vw, 70px); font-weight: 900; letter-spacing: -0.025em; }
+        #menu a small { font-size: 14px; font-weight: 500; color: var(--accent); letter-spacing: 0; }
+        #menu a:hover { color: var(--accent); }
+
+        /* ---------- פתיחה: כותרת ענקית, והלוגו בנוי מנקודות ---------- */
+        .hero {
+            min-height: 690px; height: 100svh; max-height: 1050px;
+            position: relative; isolation: isolate; overflow: hidden;
+            padding: 110px 6% 70px;
+            display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+        }
+        .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .hero-copy { position: relative; z-index: 2; max-width: 660px; pointer-events: none; }
+        .hero-copy a { pointer-events: auto; }
+        .hero h1 { font-size: clamp(60px, 7vw, 112px); line-height: .94; }
+        .hero h1 span { display: block; white-space: nowrap; }
+        .intro { font-size: clamp(20px, 1.8vw, 27px); font-weight: 500; line-height: 1.34; margin-top: 28px; color: #cfe2e6; max-width: 22em; }
+        .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 30px; margin-top: 30px; }
+        /* מחולל הרעיונות, כבר במסך הראשון: כותבים מקצוע וקופצים ישר לתוצאות */
+        .hero-ask { pointer-events: auto; margin-top: 30px; max-width: 520px; }
+        .hero-ask label { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 700; color: var(--lilac); margin-bottom: 6px; }
+        .hero-ask label i { animation: twinkle 2.4s ease-in-out infinite; }
+        @keyframes twinkle { 50% { transform: scale(1.25) rotate(12deg); opacity: .7; } }
+        .hero-ask div { display: flex; gap: 12px; align-items: center; border-bottom: 1.5px solid var(--line); padding-bottom: 8px; transition: border-color .2s; }
+        .hero-ask div:focus-within { border-color: var(--lilac); }
+        .hero-ask.bad div { border-color: #ff7a6b; }
+        .hero-ask input { flex: 1; min-width: 0; background: none; border: 0; outline: none; font-size: 20px; font-weight: 500; padding: 4px 0; }
+        .hero-ask input::placeholder { color: #7f98a9; }
+        .hero-ask button { font-size: 16px; font-weight: 900; color: var(--lilac); white-space: nowrap; }
+        .scatter-target { position: absolute; left: 5%; top: 19%; width: 43%; height: 65%; z-index: 3; border-radius: 40%; touch-action: pan-y; }
+        .particle-hint { position: absolute; left: 9%; bottom: 85px; font-size: 14px; font-weight: 500; color: var(--muted); z-index: 4; pointer-events: none; }
+        .hero-foot {
+            position: absolute; right: 6%; left: 6%; bottom: 22px; z-index: 4;
+            display: flex; justify-content: space-between; align-items: center; gap: 22px;
+            border-top: 1px solid var(--line); padding-top: 15px;
+            color: var(--muted); font-size: 13px; font-weight: 500;
+        }
+        .hero-foot a { color: var(--fg); }
+        .hero-foot a b { color: var(--amber); font-weight: 700; }
+
+        /* ---------- הרעיון: משפט גדול שנדלק מילה אחרי מילה בגלילה ---------- */
+        .story { background: var(--pale); color: var(--ink); padding: 56px 7% 72px; }
+        .story-grid { display: grid; grid-template-columns: 23% 1fr; gap: 4%; align-items: start; padding: 76px 0 55px; }
+        .side-note { font-size: 20px; font-weight: 500; line-height: 1.4; padding-top: 7px; }
+        .reading { font-size: clamp(38px, 4.6vw, 71px); line-height: 1.1; }
+        .reading em { font-style: normal; color: var(--teal); }
+        .word { opacity: .2; transition: opacity .3s; }
+        .word.lit { opacity: 1; }
+        .story-bottom { display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: 20px; font-weight: 500; line-height: 1.35; }
+        .gear { font: 82px/1 Arial, sans-serif; color: var(--teal); display: inline-block; }
+
+        /* ---------- איך זה עובד: התרשים נשאר במקום, והגלילה מחליפה תרחיש ---------- */
+        .flow { height: 320vh; background: var(--paper); color: var(--ink); }
+        .sticky {
+            position: sticky; top: 0; height: 100svh; min-height: 660px; overflow: hidden;
+            padding: 30px 7% 26px;
+            display: grid; grid-template-columns: 1fr 400px; grid-template-rows: auto 1fr auto; gap: 0 7%;
+            background: radial-gradient(ellipse 46% 60% at 22% 52%, #ffffff 0%, var(--paper) 70%);
+        }
+        .sticky .section-top { grid-column: 1 / -1; }
+        .flow-copy { align-self: center; max-width: 580px; }
+        .flow h2 { font-size: clamp(44px, 4.9vw, 78px); line-height: 1.04; }
+        .flow-copy > p:last-child { font-size: 21px; font-weight: 500; line-height: 1.42; margin-top: 22px; color: var(--muted-ink); max-width: 26em; }
+        .flow-copy.swap > * { animation: swap .45s ease-out both; }
+        .flow-copy.swap > *:nth-child(2) { animation-delay: .06s; }
+        .flow-copy.swap > *:nth-child(3) { animation-delay: .12s; }
+        @keyframes swap { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+        /* התרשים: שלוש תחנות שנדלקות אחת אחרי השנייה, בלי שאף אחד נוגע */
+        .diagram { align-self: center; }
+        .node {
+            position: relative; background: #fff; border: 1.5px solid var(--line-ink); border-radius: 20px;
+            padding: 18px 22px 20px; opacity: .5;
+            transition: opacity .4s, border-color .4s, box-shadow .4s, transform .4s;
+        }
+        .node small { display: block; font-size: 13px; font-weight: 700; color: var(--teal); margin-bottom: 4px; }
+        .node strong { display: block; font-size: 21px; font-weight: 700; line-height: 1.25; }
+        .node::before {
+            content: ''; position: absolute; top: 20px; left: 20px; width: 12px; height: 12px; border-radius: 50%;
+            background: var(--line-ink); transition: background .3s, box-shadow .3s;
+        }
+        .node.on { opacity: 1; border-color: var(--ink); box-shadow: 0 20px 34px -22px rgba(15, 43, 70, .55); transform: translateX(-6px); }
+        .node.on::before { background: var(--amber); box-shadow: 0 0 0 6px rgba(255, 176, 0, .22); }
+        .wire { width: 2px; height: 34px; margin: 0 44px 0 0; background: var(--line-ink); position: relative; overflow: hidden; }
+        .wire::after { content: ''; position: absolute; inset: 0; background: var(--ink); transform: scaleY(0); transform-origin: top; transition: transform .5s ease-in; }
+        .wire.on::after { transform: scaleY(1); }
+        .diagram-note { font-size: 13px; color: var(--muted-ink); margin-top: 14px; text-align: center; }
+        .track { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; }
+        .track button { padding: 7px 16px; border: 1px solid transparent; border-radius: 50px; font-size: 17px; font-weight: 700; }
+        .track button:hover, .track button[aria-pressed=true] { border-color: #0f2b4655; background: #fff; }
+        .track i { flex: 1; height: 1px; background: var(--line-ink); direction: ltr; }
+        .track i b { display: block; height: 100%; width: 0; background: var(--ink); }
+
+        /* ---------- מתחברים לכל מערכת: תגיות עם אייקונים, בשורה שזזה ---------- */
+        .connect { background: #fff; color: var(--ink); padding: 34px 0 40px; overflow: hidden; border-top: 1px solid var(--line-ink); direction: ltr; }
+        .connect > p { direction: rtl; text-align: center; font-size: 14px; font-weight: 700; letter-spacing: .14em; color: var(--muted-ink); margin-bottom: 22px; padding: 0 7%; }
+        .marquee { display: flex; width: max-content; direction: ltr; animation: marquee 34s linear infinite; }
+        .marquee:hover { animation-play-state: paused; }
+        .chip {
+            display: flex; align-items: center; gap: 12px; direction: rtl;
+            margin: 0 11px; padding: 13px 26px; white-space: nowrap;
+            background: var(--paper); border: 1px solid #dbe6e8; border-radius: 18px;
+            box-shadow: 0 6px 14px -10px rgba(15, 43, 70, .45);
+            font-size: 18px; font-weight: 700;
+            transition: transform .2s, box-shadow .2s, border-color .2s;
+        }
+        .chip:hover { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 14px 22px -12px rgba(15, 43, 70, .5); }
+        .chip i { font-size: 25px; }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        /* ---------- מחשבון החיסכון: המספר הוא הכותרת ---------- */
+        .calc { padding: 56px 7% 84px; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: center; padding-top: 60px; }
+        .calc h2 { font-size: clamp(50px, 5.4vw, 84px); }
+        .calc .description { margin: 24px 0 34px; max-width: 24em; }
+        .slider { margin-bottom: 26px; max-width: 460px; }
+        .slider label { display: flex; justify-content: space-between; align-items: baseline; font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+        .slider label span { font-size: 26px; font-weight: 900; color: var(--accent); }
+        input[type=range] { width: 100%; height: 6px; appearance: none; -webkit-appearance: none; background: var(--line); border-radius: 6px; direction: ltr; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); border: 4px solid var(--bg); box-shadow: 0 0 0 1.5px var(--accent); }
+        input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); border: 4px solid var(--bg); }
+        .calc-note { font-size: 14px; color: var(--muted); max-width: 32em; }
+        .result { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0 34px; }
+        .result small { font-size: 16px; font-weight: 700; color: var(--accent); }
+        .result .sum { font-size: clamp(74px, 10.5vw, 170px); font-weight: 900; letter-spacing: -0.05em; line-height: .95; direction: ltr; text-align: right; margin-top: 8px; }
+        .result .sum i { font-style: normal; font-size: .45em; color: var(--accent); margin-right: .12em; }
+        .result .hours { font-size: clamp(21px, 2vw, 28px); font-weight: 700; margin-top: 10px; }
+        .result .hours b { color: var(--amber); font-weight: 900; }
+        .calc .result + p { margin: 22px 0 26px; color: var(--muted); max-width: 30em; }
+
+        /* ---------- לקוחות ---------- */
+        .voices { background: var(--pale); color: var(--ink); padding: 56px 7% 84px; }
+        .voices h2 { font-size: clamp(44px, 4.8vw, 74px); padding: 60px 0 40px; max-width: 12em; }
+        .voices-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 5%; }
+        .voice { border-top: 1px solid var(--line-ink); padding: 26px 0 0; }
+        .voice blockquote { margin: 0; font-size: clamp(20px, 1.7vw, 24px); font-weight: 500; line-height: 1.38; }
+        .voice p { margin-top: 20px; font-size: 16px; font-weight: 700; }
+        .voice p span { font-weight: 400; color: var(--muted-ink); }
+
+        /* ---------- מחולל הרעיונות ---------- */
+        .lab { padding: 56px 7% 84px; }
+        .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: start; padding-top: 60px; }
+        .lab h2 { font-size: clamp(40px, 4.2vw, 64px); }
+        .lab .description { margin-top: 18px; max-width: 24em; font-size: clamp(18px, 1.4vw, 21px); }
+        .ask { display: flex; gap: 12px; border-bottom: 2px solid var(--fg); padding-bottom: 10px; transition: border-color .2s; }
+        .ask:focus-within { border-color: var(--lilac); }
+        .ask input { flex: 1; min-width: 0; background: none; border: 0; outline: none; font-size: clamp(22px, 2.2vw, 30px); font-weight: 700; padding: 6px 0; }
+        .ask input::placeholder { color: #6f8a9c; font-weight: 500; }
+        .ask.bad { border-color: #ff7a6b; }
+        .ask button { font-size: 18px; font-weight: 900; color: var(--lilac); white-space: nowrap; }
+        .ideas { margin-top: 26px; display: grid; gap: 14px; }
+        .idea { border: 1px solid var(--line); border-radius: 18px; padding: 16px 20px; font-size: 18px; line-height: 1.5; background: #ffffff0a; animation: swap .45s ease-out both; }
+        .idea b { color: var(--lilac); }
+        .ideas .wait { color: var(--muted); font-weight: 500; }
+        .ideas .fail { color: #ffb4aa; font-weight: 700; }
+        #ai-cta-btn-page { margin-top: 24px; }
+
+        /* ---------- אפיון אוטומטי למייל: פס בטורקיז של הלוגו ---------- */
+        .spec { background: var(--accent); color: var(--ink); padding: 56px 7% 76px; position: relative; overflow: hidden; }
+        .spec::before {
+            content: ''; position: absolute; left: -110px; bottom: -200px; width: 420px; height: 420px; border-radius: 50%;
+            border: 56px solid #ffffff38; pointer-events: none;
+        }
+        .spec-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 7%; align-items: end; padding-top: 56px; position: relative; }
+        .spec h2 { font-size: clamp(40px, 4.2vw, 64px); }
+        .spec h2 span { color: #fff; }
+        .spec .steps { list-style: none; margin: 0 0 22px; padding: 0; font-size: clamp(17px, 1.35vw, 20px); font-weight: 500; line-height: 1.4; }
+        .spec .steps li { display: flex; gap: 14px; align-items: baseline; padding: 8px 0; border-top: 1px solid #0f2b4640; }
+        .spec .steps li:last-child { border-bottom: 1px solid #0f2b4640; }
+        .spec .steps b { font-weight: 900; min-width: 1.2em; }
+        .spec-button {
+            display: inline-flex; align-items: center; gap: 14px;
+            background: var(--ink); color: #fff; border-radius: 14px; padding: 14px 26px;
+            font-size: clamp(18px, 1.45vw, 21px); font-weight: 900;
+            box-shadow: 0 20px 30px -18px rgba(15, 43, 70, .9);
+            transition: transform .2s, background .2s;
+            animation: nudge 2.6s ease-in-out infinite;
+        }
+        .spec-button:hover { background: #fff; color: var(--ink); transform: translateY(-3px); animation-play-state: paused; }
+        .spec-button i { font-size: 1.1em; }
+        @keyframes nudge { 0%, 78%, 100% { transform: none; } 84% { transform: translateY(-6px); } 90% { transform: none; } 95% { transform: translateY(-3px); } }
+        .spec small { display: block; margin-top: 14px; font-size: 15px; font-weight: 500; }
+        /* אותה הצעה, בקטן, ליד טופס יצירת הקשר */
+        .spec-mini {
+            display: flex; align-items: center; gap: 16px; text-align: right;
+            margin-top: 30px; padding: 18px 22px; max-width: 30em;
+            border: 1.5px solid var(--accent); border-radius: 20px; background: #1cc7b214;
+            transition: background .2s, transform .2s;
+        }
+        .spec-mini:hover { background: #1cc7b22e; transform: translateY(-2px); }
+        .spec-mini i { font-size: 30px; color: var(--accent); }
+        .spec-mini strong { display: block; font-size: 20px; font-weight: 900; }
+        .spec-mini span span { display: block; font-size: 15px; color: var(--muted); }
+
+        /* ---------- כלים חינמיים: ארבעה טורים עם קווים דקים, בלי כרטיסים ---------- */
+        .tools { padding: 44px 7% 50px; }
+        .tools-head { display: grid; grid-template-columns: auto 1fr; gap: 7%; align-items: end; padding: 26px 0 28px; }
+        .tools h2 { font-size: clamp(44px, 4.9vw, 78px); }
+        .tools-head .description { max-width: 30em; font-size: clamp(17px, 1.4vw, 21px); }
+        .tools-list { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .tool {
+            position: relative; display: flex; flex-direction: column;
+            padding: 26px 24px 28px; border-inline-start: 1px solid var(--line);
+            transition: background .3s;
+        }
+        .tool:first-child { border-inline-start: 0; padding-inline-start: 0; }
+        /* קו טורקיז שנמתח מעל הטור כשעומדים עליו */
+        .tool::after { content: ''; position: absolute; top: -1px; right: 0; left: 0; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform .45s; }
+        .tool:hover::after { transform: scaleX(1); }
+        .tool:hover { background: #ffffff0a; }
+        .tool:first-child:hover { background: none; }
+        .tool-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+        .tool-icon { font-size: 30px; color: var(--accent); transition: transform .3s; }
+        .tool:hover .tool-icon { transform: translateY(-4px) rotate(-8deg); }
+        .tool-free { font-size: 13px; font-weight: 700; color: var(--amber); letter-spacing: .06em; }
+        .tool h3 { font-size: clamp(25px, 2.3vw, 36px); font-weight: 900; letter-spacing: -0.025em; line-height: 1.06; margin-bottom: 12px; transition: color .3s; }
+        .tool:hover h3 { color: var(--accent); }
+        .tool > p { color: var(--muted); font-size: 17px; line-height: 1.45; flex: 1; }
+        .tool ul { list-style: none; margin: 12px 0 0; padding: 0; font-size: 15px; font-weight: 500; color: var(--muted); }
+        .tool li { display: flex; gap: 9px; align-items: baseline; padding: 3px 0; }
+        .tool li i { color: var(--accent); font-size: 13px; }
+        .tool .go { display: flex; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; margin-top: 24px; }
+        .tool .go a.alt { font-size: 13px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+        .pill { display: inline-flex; align-items: center; gap: 9px; padding: 6px 0 7px; border-bottom: 1.5px solid currentColor; font-size: 17px; font-weight: 700; transition: color .2s, gap .2s; }
+        .pill:hover { color: var(--accent); gap: 14px; }
+        .pill i { font-size: .8em; }
+        .tools-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; margin-top: 22px; font-size: 18px; font-weight: 500; line-height: 1.4; color: var(--muted); }
+        .tools-foot .text-button { color: var(--fg); }
+
+        /* ---------- מייל פון ---------- */
+        .mailphone { background: var(--pale); color: var(--ink); padding: 56px 7% 76px; }
+        .mailphone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: end; padding-top: 60px; }
+        .mailphone h2 { font-size: clamp(52px, 6.4vw, 100px); line-height: .95; white-space: nowrap; }
+        .mailphone h2 span { color: #1667d9; }
+        /* כתום כהה יותר מהכתום הרגיל, כדי שייקרא טוב על הרקע הבהיר */
+        .mailphone .new { color: #d26a00; font-weight: 900; }
+        .mailphone .description { margin-bottom: 20px; }
+
+        /* ---------- שאלות נפוצות ---------- */
+        .faq { padding: 56px 7% 84px; }
+        .faq-grid { display: grid; grid-template-columns: 34% 1fr; gap: 7%; padding-top: 60px; }
+        .faq h2 { font-size: clamp(50px, 5.4vw, 84px); }
+        .faq details { border-top: 1px solid var(--line); }
+        .faq details:last-child { border-bottom: 1px solid var(--line); }
+        .faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-size: clamp(20px, 1.9vw, 26px); font-weight: 700; cursor: pointer; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: '+'; font: 400 30px/1 Arial; color: var(--accent); transition: transform .3s; }
+        .faq details[open] summary::after { transform: rotate(45deg); }
+        .faq details p { color: var(--muted); padding: 0 0 24px; max-width: 40em; }
+        .faq details p b { color: var(--fg); }
+
+        /* ---------- סיום: השארת פרטים ---------- */
+        .finish { background: var(--bg); padding: 76px 7% 0; border-top: 1px solid var(--line); }
+        .finish-grid { display: grid; grid-template-columns: 1fr 460px; gap: 7%; align-items: start; }
+        .finish h2 { font-size: clamp(56px, 6.4vw, 100px); line-height: .98; }
+        .finish .description { margin-top: 26px; max-width: 24em; }
+        .finish-links { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 28px; }
+        .form-card { border: 1px solid var(--line); border-radius: 24px; padding: 28px; background: #ffffff0a; }
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+        .field label span { font-weight: 400; color: var(--muted); }
+        .field input {
+            width: 100%; font-size: 17px; color: var(--fg);
+            background: #ffffff12; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+        }
+        .field input:focus { outline: none; border-color: var(--accent); background: #ffffff1c; }
+        .field input[dir="ltr"] { text-align: right; }
+        .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--muted); margin: 6px 0 20px; }
+        .consent input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--accent); flex: none; }
+        .form-card .solid { width: 100%; }
+        .form-msg { margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
+        .form-msg.ok { background: #156a55; color: #e6fff8; }
+        .form-msg.err { background: #8f2a22; color: #fff0ee; }
+        .finish footer {
+            margin-top: 80px; border-top: 1px solid var(--line); padding: 22px 0 26px;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; flex-wrap: wrap;
+            color: var(--muted); font-size: 14px;
+        }
+        .foot-logo { display: block; background: #fff; border-radius: 18px; padding: 10px 18px; }
+        .foot-logo img { display: block; height: 78px; width: auto; }
+        .wasted { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .wasted input { width: 74px; background: #ffffff12; border: 1px solid var(--line); border-radius: 10px; padding: 6px 8px; text-align: center; font-weight: 700; color: var(--fg); }
+        .wasted b { color: var(--accent); font-size: 20px; font-weight: 900; }
+
+        /* מצביע לצ'אט וחלון יציאה */
+        #chat-pointer {
+            position: fixed; bottom: 96px; right: 26px; z-index: 90; pointer-events: none;
+            background: var(--amber); color: var(--ink); font-weight: 900; font-size: 15px;
+            padding: 8px 14px; border-radius: 12px 12px 2px 12px; animation: bob 1s ease-in-out infinite;
+        }
+        @keyframes bob { 50% { transform: translateY(-8px); } }
+        #exit-popup { position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 16px; background: #061523cc; opacity: 0; transition: opacity .3s; }
+        #exit-popup.show { opacity: 1; }
+        #exit-popup-content {
+            position: relative; width: min(560px, 100%); background: var(--pale); color: var(--ink);
+            border-radius: 26px; padding: 40px 34px 30px; transform: scale(.95); transition: transform .3s;
+        }
+        #exit-popup.show #exit-popup-content { transform: none; }
+        #exit-popup-content h2 { font-size: clamp(34px, 5vw, 50px); margin: 6px 0 14px; }
+        #exit-popup-content .eyebrow { color: var(--teal); margin: 0; }
+        #exit-popup-content > p { color: var(--muted-ink); margin-bottom: 20px; }
+        #exit-popup-content > p b { color: var(--ink); }
+        #exit-form input[type=text], #exit-form input[type=email] { width: 100%; background: #fff; border: 1px solid var(--line-ink); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 17px; }
+        #exit-form .consent { color: var(--muted-ink); margin-bottom: 16px; }
+        #exit-form .consent input { accent-color: var(--teal); }
+        #exit-btn { width: 100%; background: var(--ink); color: #fff; }
+        #exit-btn:hover { background: var(--teal); }
+        #exit-msg { margin-top: 14px; font-weight: 700; color: var(--teal); text-align: center; }
+        .exit-x { position: absolute; top: 14px; left: 18px; font: 400 30px/1 Arial; }
+        .exit-no { display: block; margin: 16px auto 0; font-size: 14px; color: var(--muted-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* במחשב: כל חלק תופס בדיוק גובה מסך אחד, והתוכן שלו ממורכז */
+        @media (min-width: 1100px) {
+            .calc, .voices, .tools, .faq { min-height: 100svh; display: flex; flex-direction: column; }
+            .calc-grid, .faq-grid { flex: 1; align-content: center; padding-top: 30px; }
+            /* שלושת אלה נשארים רצועות נמוכות, כדי לא להתחרות בחלקים הראשיים */
+            .lab, .spec, .mailphone { padding-top: 44px; padding-bottom: 60px; }
+            .lab-grid, .spec-grid, .mailphone-grid { padding-top: 40px; }
+            .voices h2 { margin-top: auto; padding-top: 30px; }
+            .voices-list { margin-bottom: auto; }
+            .tools-head { margin-top: auto; }
+            .tools-foot { margin-bottom: auto; }
+            /* ארבעת הכלים בשורה אחת, בלי רשימת הפירוט */
+            .tools-list { grid-template-columns: repeat(4, 1fr); }
+            .tool { padding-top: 28px; padding-bottom: 30px; }
+            .tool ul { display: none; }
+            .calc, .voices, .faq { padding-bottom: 56px; }
         }
 
-        .floating-nav {
-            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); border: 1px solid rgba(0, 158, 142, 0.1);
+        /* כניסה בגלילה */
+        .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s, transform .8s; transition-delay: var(--d, 0s); }
+        .js .reveal.visible { opacity: 1; transform: none; }
+
+        /* ---------- מסכים קטנים ---------- */
+        @media (max-width: 860px) {
+            .header { padding-top: 16px; }
+            .logo-tag { margin-top: -16px; padding: 12px 16px 10px; border-radius: 0 0 18px 18px; }
+            .logo-tag img { height: 64px; }
+            .header-actions { gap: 16px; font-size: 14px; }
+            .quiet-nav { display: none; }
+            .menu-toggle { display: inline-block; }
+            .bar { height: 50px; padding: 0 5%; }
+            .bar-logo img { height: 34px; }
+            #menu { padding: 110px 8% 50px; }
+            .hero { height: auto; min-height: 930px; max-height: none; display: block; padding: 136px 7% 65px; }
+            .hero-ask { margin-top: 24px; }
+            .hero-ask input { font-size: 18px; }
+            .hero h1 { font-size: clamp(46px, 12vw, 76px); }
+            .intro { font-size: clamp(19px, 5.2vw, 24px); margin-top: 18px; }
+            .hero-actions { margin-top: 22px; gap: 14px 22px; }
+            .scatter-target { left: 5%; top: 62%; width: 90%; height: 28%; }
+            .particle-hint { left: 7%; bottom: 66px; font-size: 13px; }
+            .hero-foot { font-size: 12px; bottom: 14px; }
+            .hero-foot span { display: none; }
+            .section-top { font-size: 13px; }
+            .story { padding: 38px 7% 55px; }
+            .story-grid { display: block; padding: 36px 0 32px; }
+            .side-note { font-size: 17px; margin-bottom: 24px; }
+            .reading { font-size: clamp(31px, 8.2vw, 48px); }
+            .story-bottom { font-size: 16px; }
+            .gear { font-size: 60px; }
+            /* בטלפון אין "נעיצה": התרחישים מתחלפים לבד, ואפשר לבחור בכפתורים */
+            .flow { height: auto; }
+            .sticky { position: static; height: auto; min-height: 0; display: block; padding: 38px 7% 50px; background: var(--paper); }
+            .flow-copy { padding-top: 34px; min-height: 330px; }
+            .flow h2 { font-size: clamp(40px, 10.5vw, 60px); }
+            .flow-copy > p:last-child { font-size: 18px; margin-top: 14px; }
+            .track { gap: 6px; margin: 24px 0 0; }
+            .track button { font-size: 15px; padding: 7px 12px; }
+            .calc, .voices, .lab, .tools, .faq { padding: 38px 7% 60px; }
+            .mailphone { padding: 38px 7% 56px; }
+            .calc-grid, .lab-grid, .spec-grid, .mailphone-grid, .faq-grid, .finish-grid { grid-template-columns: 1fr; gap: 30px; padding-top: 36px; }
+            .tools-head { display: block; padding: 36px 0 24px; }
+            .tools-head .description { margin-top: 14px; }
+            .tools-list { grid-template-columns: 1fr; }
+            .tool { padding: 24px 0 26px; border-inline-start: 0; border-top: 1px solid var(--line); }
+            .tool:first-child { border-top: 0; }
+            .tool:hover { background: none; }
+            .tool-top { margin-bottom: 16px; }
+            .spec { padding: 38px 7% 56px; }
+            .spec-button { width: 100%; justify-content: center; padding: 18px 16px; }
+            .chip { font-size: 16px; padding: 11px 20px; margin: 0 8px; }
+            .finish-grid { padding-top: 0; }
+            .calc h2, .faq h2 { font-size: clamp(42px, 10.8vw, 64px); }
+            .tools h2 { font-size: clamp(42px, 10.8vw, 64px); }
+            .lab h2, .spec h2 { font-size: clamp(38px, 9.6vw, 56px); }
+            .voices h2 { font-size: clamp(38px, 9.6vw, 56px); padding: 36px 0 26px; }
+            .voices-list { grid-template-columns: 1fr; }
+            .voice { padding: 22px 0 26px; }
+            .mailphone h2 { font-size: clamp(50px, 13vw, 76px); }
+            .finish { padding: 56px 7% 0; }
+            .finish h2 { font-size: clamp(44px, 10.5vw, 67px); }
+            .form-card { padding: 22px 18px; }
+            .finish footer { margin-top: 56px; font-size: 13px; }
+            #cursor { display: none; }
         }
-        
-        /* Ticker Animation for Integrations */
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-ticker {
-            animation: ticker 35s linear infinite;
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .js .reveal { opacity: 1; transform: none; }
         }
     </style>
 </head>
-<body class="selection:bg-[#009E8E]/20 selection:text-[#0F2B46]">
+<body>
+    <div id="cursor" aria-hidden="true"><span></span></div>
+    <div class="grain"></div>
+    <div class="progress"></div>
 
-    <!-- Top Announcement Bar -->
-    <div class="absolute top-0 w-full z-[60] bg-[#009E8E] text-white py-2 px-4 text-center text-sm md:text-base font-medium flex justify-center items-center gap-3">
-        <span>🚀 חדש מבית פשוט אוטומט: <strong>מייל פון</strong> - המייל שלך בקול שלך</span>
-        <button onclick="document.getElementById('mail-phone-section').scrollIntoView({behavior: 'smooth'})" class="bg-black hover:bg-gray-800 text-white px-4 py-1 rounded-full text-xs font-bold hover:scale-105 transition-transform shadow-sm">
-            לפרטים
-        </button>
-    </div>
-
-    <div class="fixed inset-0 tech-grid z-0 pointer-events-none"></div>
-
-    <!-- Floating Navbar -->
-    <div id="navbar-container" class="fixed w-full z-50 top-12 px-4 transition-all duration-300">
-        <nav class="max-w-6xl mx-auto floating-nav rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
-            
-            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group">
-                <img src="./logo.png" alt="לוגו פשוט אוטומט" border="0" class="h-20 md:h-28 -my-2 md:-my-4 w-auto object-contain transition-transform duration-300 transform group-hover:scale-105">
-            </a>
-            
-            <div class="hidden md:flex space-x-8 space-x-reverse items-center text-sm font-bold text-slate-600">
-                <a href="#what-is-automation" class="hover:text-[#009E8E] transition hover:scale-105">מה זה בכלל?</a>
-                <a href="#features" class="hover:text-[#009E8E] transition hover:scale-105">איך זה עובד</a>
-                <a href="#simulator" class="hover:text-[#009E8E] transition hover:scale-105">מחשבון חיסכון</a>
-                <a href="#testimonials" class="hover:text-[#009E8E] transition hover:scale-105">לקוחות</a>
-                <a href="#ai-lab" class="hover:text-[#8b5cf6] transition hover:scale-105">מעבדת AI</a>
-                
-                <!-- קישור עוגן לאזור הממיר החדש -->
-                <a href="#free-tools" onclick="document.getElementById('free-tools').scrollIntoView({behavior: 'smooth'}); return false;" class="flex items-center gap-1.5 text-[#0F2B46] hover:text-[#009E8E] transition-all hover:scale-105 bg-slate-100 hover:bg-[#009E8E]/10 px-4 py-2 rounded-full border border-slate-200 hover:border-[#009E8E]/30 relative overflow-hidden group">
-                    <i class="fas fa-gift text-[#009E8E]"></i>
-                    כלים חינמיים
-                    <span class="absolute -top-1 -right-1 flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                    <span class="text-[10px] bg-red-500 text-white px-1.5 rounded uppercase ml-1 mr-1 shadow-sm font-black">חינם!</span>
-                </a>
-
-                <button onclick="document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-[#0F2B46] text-white px-6 py-2.5 rounded-full hover:bg-[#009E8E] hover:shadow-lg hover:shadow-[#009E8E]/30 transition transform hover:-translate-y-0.5">
-                    דבר איתנו
-                </button>
-            </div>
-
-            <div class="md:hidden">
-                <button onclick="toggleMobileMenu()" class="text-[#0F2B46] hover:text-[#009E8E] focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </nav>
-    </div>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-white hidden flex flex-col items-center justify-center space-y-8 text-2xl font-bold text-[#0F2B46] transition-opacity">
-        <button onclick="toggleMobileMenu()" class="absolute top-8 left-8 text-3xl"><i class="fas fa-times"></i></button>
-        <a href="#what-is-automation" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">מה זה בכלל?</a>
-        <a href="#features" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">איך זה עובד</a>
-        <a href="#simulator" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">סימולטור</a>
-        <a href="#free-tools" class="hover:text-[#009E8E]" onclick="toggleMobileMenu()">כלים חינמיים</a>
-        <a href="#contact-quick" onclick="toggleMobileMenu()" class="text-[#009E8E]">תיאום שיחה</a>
-    </div>
-
-    <!-- Floating AI Trigger -->
-    <button onclick="toggleAIModal()" class="fixed bottom-6 left-6 z-40 bg-white border border-[#8b5cf6]/20 text-[#0F2B46] p-3 rounded-full shadow-2xl flex items-center gap-2 hover:scale-105 transition-transform group">
-        <div class="bg-gradient-to-r from-[#8b5cf6] to-[#a855f7] text-white w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-md group-hover:rotate-12 transition">
-            <i class="fas fa-robot"></i>
-        </div>
-        <span class="font-bold pr-2 pl-4 hidden md:inline text-transparent bg-clip-text bg-gradient-to-r from-[#8b5cf6] to-[#6d28d9]">מחולל רעיונות</span>
-    </button>
-
-    <!-- Arrow Pointer for Chat -->
-    <div id="chat-pointer" class="fixed bottom-24 right-8 z-50 hidden animate-bounce flex flex-col items-center pointer-events-none">
-        <div class="bg-[#009E8E] text-white px-4 py-2 rounded-xl shadow-xl shadow-[#009E8E]/30 font-bold mb-2 text-sm tracking-wide border border-[#009E8E] relative">
-            דבר איתנו כאן!
-            <div class="absolute -bottom-1 right-6 w-3 h-3 bg-[#009E8E] transform rotate-45"></div>
-        </div>
-        <i class="fas fa-arrow-down text-[#009E8E] text-4xl drop-shadow-md"></i>
-    </div>
-
-    <!-- HERO SECTION -->
-    <header class="relative pt-48 pb-16 overflow-hidden z-10">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-[#0F2B46] mb-6 leading-tight tracking-tight drop-shadow-sm" data-aos="fade-up">
-                העסק שלך מרוויח<br>
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#0F2B46] to-[#009E8E]">בזמן שאתה ישן.</span>
-            </h1>
-            
-            <p class="text-xl md:text-2xl text-slate-500 mb-10 max-w-2xl mx-auto font-normal leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                בנינו "עובד דיגיטלי" שלא מתעייף, לא שוכח לחזור ללידים ולא מבקש העלאה.
-                <span class="block mt-2 font-semibold text-[#0F2B46]">תנו לנו שעה, נחסוך לכם מאות שעות בשנה.</span>
-            </p>
-            
-            <div class="flex flex-col items-center gap-4 mb-16" data-aos="zoom-in" data-aos-delay="200">
-                <a href="#contact-quick" id="hero-cta" class="bg-[#009E8E] hover:bg-[#008A7B] text-white text-2xl font-bold py-5 px-12 rounded-2xl shadow-2xl shadow-[#009E8E]/40 transition-all transform hover:scale-105 w-full md:w-auto flex items-center justify-center gap-3">
-                    אני רוצה אוטומציה עכשיו <i class="fas fa-arrow-left"></i>
-                </a>
-                <p class="text-sm text-slate-400 font-medium">
-                    <i class="fas fa-check text-[#009E8E] mr-1"></i> שיחת אפיון ללא עלות 
-                    <span class="mx-2">|</span> 
-                    <i class="fas fa-check text-[#009E8E] mr-1"></i> התאמה אישית לעסק
-                </p>
-                
-                <a href="#what-is-automation" class="mt-4 group inline-flex items-center gap-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#009E8E]/40 px-6 py-3 rounded-full text-[#0F2B46] transition-all duration-300 shadow-sm hover:shadow-lg hover:shadow-[#009E8E]/10 transform hover:-translate-y-0.5">
-                    <span class="w-8 h-8 rounded-full bg-[#009E8E]/10 flex items-center justify-center text-[#009E8E] group-hover:rotate-12 transition-transform">
-                        <i class="fas fa-question text-sm"></i>
-                    </span>
-                    <span class="font-bold text-sm md:text-base">שומעים "אוטומציה" ושואלים מההה? בואו נסביר</span>
-                    <i class="fas fa-arrow-down text-slate-300 group-hover:text-[#009E8E] group-hover:translate-y-1 transition-all"></i>
-                </a>
-            </div>
-
-            <!-- IMMEDIATE SOCIAL PROOF -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left bg-white p-6 rounded-2xl shadow-lg border border-slate-100 max-w-5xl mx-auto transform -rotate-1 hover:rotate-0 transition-transform duration-500">
-                <div class="flex items-center gap-4 border-b md:border-b-0 md:border-l border-slate-100 pb-4 md:pb-0 pl-4">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-12 h-12 rounded-full" alt="Client">
-                    <div>
-                        <p class="font-bold text-[#0F2B46] text-sm">"חסכתם לי 20 שעות בשבוע!"</p>
-                        <p class="text-xs text-slate-500">דניאל, סוכן ביטוח</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-4 border-b md:border-b-0 md:border-l border-slate-100 pb-4 md:pb-0 pl-4">
-                    <img src="https://randomuser.me/api/portraits/men/45.jpg" class="w-12 h-12 rounded-full" alt="Client">
-                    <div>
-                        <p class="font-bold text-[#0F2B46] text-sm">"הלידים מטופלים תוך שניות"</p>
-                        <p class="text-xs text-slate-500">רועי, מנהל מכירות</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-[#009E8E]/10 flex items-center justify-center text-[#009E8E] font-bold text-xl">ROI</div>
-                    <div>
-                        <p class="font-bold text-[#0F2B46] text-sm">החזר השקעה תוך חודש</p>
-                        <p class="text-xs text-slate-500">נתון ממוצע בקרב לקוחותינו</p>
-                    </div>
-                </div>
-            </div>
+    <header class="header">
+        <a href="#home" class="logo-tag" data-cursor="למעלה"><img src="./logo-full.png" alt="פשוט. אוטומט. - יוסף דייטש" width="409" height="298"></a>
+        <div class="header-actions">
+            <nav class="quiet-nav" aria-label="ניווט ראשי">
+                <a href="#features" data-cursor="↓">איך זה עובד</a>
+                <a href="#simulator" data-cursor="↓">מחשבון</a>
+                <a href="#ai-lab" data-cursor="↓">מחולל רעיונות</a>
+                <a href="#free-tools" data-cursor="↓">כלים חינמיים</a>
+                <a href="#spec" data-cursor="↓">אפיון למייל</a>
+            </nav>
+            <button onclick="highlightChat()" data-cursor="צ'אט">דבר איתנו</button>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="menu" data-cursor="תפריט">תפריט ☰</button>
         </div>
     </header>
+    <div class="bar" id="bar" inert>
+        <a class="bar-logo" href="#home" data-cursor="למעלה"><img src="./logo-full.png" alt="פשוט. אוטומט." width="409" height="298"></a>
+        <nav class="quiet-nav" aria-label="ניווט">
+                <a href="#features" data-cursor="↓">איך זה עובד</a>
+                <a href="#simulator" data-cursor="↓">מחשבון</a>
+                <a href="#ai-lab" data-cursor="↓">מחולל רעיונות</a>
+                <a href="#free-tools" data-cursor="↓">כלים חינמיים</a>
+                <a href="#spec" data-cursor="↓">אפיון למייל</a>
+        </nav>
+        <a class="bar-cta" href="#contact-quick" data-cursor="קדימה">תיאום שיחה ↙</a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="menu">תפריט ☰</button>
+    </div>
+    <nav id="menu" hidden>
+        <a href="#story">מה זה בכלל <small>הרעיון</small></a>
+        <a href="#features">איך זה עובד <small>שלושה תרחישים</small></a>
+        <a href="#simulator">מחשבון חיסכון <small>כמה זה שווה</small></a>
+        <a href="#ai-lab">מחולל רעיונות <small>AI</small></a>
+        <a href="#spec">אפיון למייל <small>אוטומטי</small></a>
+        <a href="#free-tools">כלים חינמיים <small>חינם</small></a>
+        <a href="#contact-quick">תיאום שיחה <small>בלי התחייבות</small></a>
+    </nav>
 
-    <!-- INTEGRATIONS TICKER -->
-    <section class="py-10 bg-white border-y border-slate-100 overflow-hidden relative z-10">
-        <div class="max-w-6xl mx-auto px-4 mb-6 text-center">
-            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">מתחברים לכל המערכות שאתם כבר מכירים</p>
-        </div>
-        
-        <!-- Ticker Container -->
-        <div class="relative w-full overflow-hidden flex" dir="ltr"> <!-- dir=ltr is crucial for seamless left scroll animation -->
-            <div class="flex w-max animate-ticker hover:[animation-play-state:paused] cursor-default">
-                
-                <!-- Set 1 -->
-                <div class="flex gap-6 px-3 items-center">
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-[#8b5cf6]"><path d="M12 2.25c.5 5.5 4.25 9.25 9.75 9.75-5.5.5-9.25 4.25-9.75 9.75-.5-5.5-4.25-9.25-9.75-9.75 5.5-.5 9.25-4.25 9.75-9.75z" /></svg> <span class="font-bold text-[#0F2B46]">כלי AI</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fab fa-whatsapp text-green-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">WhatsApp</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fab fa-google text-[#4285F4] text-2xl"></i> <span class="font-bold text-[#0F2B46]">כלי Google</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-phone-volume text-[#009E8E] text-2xl"></i> <span class="font-bold text-[#0F2B46]">ימות המשיח</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-code-branch text-slate-700 text-2xl"></i> <span class="font-bold text-[#0F2B46]">מערכות בהתאמה אישית</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-envelope text-red-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Gmail</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fab fa-telegram text-blue-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Telegram</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-users-cog text-orange-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">מערכות CRM</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-database text-blue-400 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Airtable</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-wpforms text-purple-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Fillout</span></div>
+    <div id="chat-pointer" hidden>דבר איתנו כאן ↓</div>
+
+    <main>
+        <!-- פתיחה: הלוגו בנוי מנקודות. נוגעים בו - והן מתפזרות וחוזרות -->
+        <section class="hero" id="home" data-tone="dark">
+            <canvas id="logo" role="img" aria-label="הלוגו של פשוט. אוטומט.: גלגל שיניים ומעגל חשמלי, בנויים מנקודות"></canvas>
+            <div class="hero-copy">
+                <h1><span>העסק מרוויח.</span><span class="teal">גם כשאתם ישנים.</span></h1>
+                <p class="intro">עובד דיגיטלי שלא מתעייף, לא שוכח לחזור ללידים ולא מבקש העלאה.</p>
+                <div class="hero-actions">
+                    <a class="solid" id="hero-cta" href="#contact-quick" data-cursor="קדימה">אני רוצה אוטומציה</a>
                 </div>
-
-                <!-- Set 2 (Exact Duplicate for infinite loop) -->
-                <div class="flex gap-6 px-3 items-center">
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 text-[#8b5cf6]"><path d="M12 2.25c.5 5.5 4.25 9.25 9.75 9.75-5.5.5-9.25 4.25-9.75 9.75-.5-5.5-4.25-9.25-9.75-9.75 5.5-.5 9.25-4.25 9.75-9.75z" /></svg> <span class="font-bold text-[#0F2B46]">כלי AI</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fab fa-whatsapp text-green-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">WhatsApp</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fab fa-google text-[#4285F4] text-2xl"></i> <span class="font-bold text-[#0F2B46]">כלי Google</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-phone-volume text-[#009E8E] text-2xl"></i> <span class="font-bold text-[#0F2B46]">ימות המשיח</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-code-branch text-slate-700 text-2xl"></i> <span class="font-bold text-[#0F2B46]">מערכות בהתאמה אישית</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-envelope text-red-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Gmail</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fab fa-telegram text-blue-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Telegram</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-users-cog text-orange-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">מערכות CRM</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-database text-blue-400 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Airtable</span></div>
-                    <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl shadow-sm whitespace-nowrap"><i class="fas fa-wpforms text-purple-500 text-2xl"></i> <span class="font-bold text-[#0F2B46]">Fillout</span></div>
-                </div>
-            </div>
-            
-            <!-- Fade edges -->
-            <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-            <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-        </div>
-    </section>
-
-    <!-- WHAT IS AUTOMATION -->
-    <section id="what-is-automation" class="py-24 bg-[#0F2B46] text-white relative overflow-hidden z-10">
-        <!-- Decorative background elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-[#009E8E]/20 rounded-full blur-[100px] pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#8b5cf6]/20 rounded-full blur-[100px] pointer-events-none transform -translate-x-1/2 translate-y-1/2"></div>
-        
-        <div class="max-w-6xl mx-auto px-4 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <div class="inline-block bg-white/10 text-[#009E8E] px-5 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/30 backdrop-blur-sm">במילים פשוטות</div>
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">שומעים "אוטומציה" ושואלים מהההה? 🤔</h2>
-                <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                    אוטומציה היא <strong>"העובד השקוף"</strong> שלכם. היא פועלת 24/7 ברקע ומבצעת את כל ה"עבודה השחורה", כדי שתוכלו להתעסק במה שבאמת מביא כסף.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <!-- Example 1 -->
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 bg-[#009E8E] rounded-xl flex items-center justify-center text-white text-2xl mb-5 shadow-lg">
-                        <i class="fas fa-keyboard"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">חיסול ההקלדות</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        לקוח השאיר פרטים באתר? המערכת מיד פותחת לו כרטיס ב-CRM ושולחת וואטסאפ אישי: "קיבלנו, מיד חוזרים!". אפס מאמץ.
-                    </p>
-                </div>
-
-                <!-- Example 2 -->
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 bg-[#009E8E] rounded-xl flex items-center justify-center text-white text-2xl mb-5 shadow-lg">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">גבייה על אוטומט</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        מערכת שמזהה מי טרם שילם, שולחת תזכורת אוטומטית למייל או לנייד, ומפיקה חשבונית ברגע שהתשלום עובר בהצלחה.
-                    </p>
-                </div>
-
-                <!-- Example 3 -->
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-14 h-14 bg-[#009E8E] rounded-xl flex items-center justify-center text-white text-2xl mb-5 shadow-lg">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">סוף לפינג-פונג</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        הלקוח קובע פגישה לבד בקישור חכם, המערכת מסנכרנת יומנים ושולחת תזכורות אוטומטיות. בלי "מתי נוח לך?".
-                    </p>
-                </div>
-            </div>
-
-            <!-- The "We connect to everything" banner -->
-            <div class="bg-gradient-to-r from-[#009E8E]/10 to-[#8b5cf6]/10 border border-white/10 rounded-3xl p-8 md:p-10 text-center relative overflow-hidden" data-aos="zoom-in" data-aos-delay="400">
-                <div class="absolute inset-0 tech-grid opacity-30"></div>
-                <div class="relative z-10">
-                    <div class="flex justify-center gap-4 mb-4 text-2xl md:text-3xl text-white/50">
-                        <i class="fab fa-wordpress hover:text-[#21759b] transition-colors"></i>
-                        <i class="fab fa-shopify hover:text-[#95bf47] transition-colors"></i>
-                        <i class="fas fa-shopping-cart hover:text-[#009E8E] transition-colors"></i>
-                        <i class="fas fa-plug hover:text-[#8b5cf6] transition-colors"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">וזה רק הקצה. אנחנו מחברים הכל להכל.</h3>
-                    <p class="text-slate-300 text-lg max-w-3xl mx-auto mb-6">
-                        אוטומציה היא לא רק הודעות וואטסאפ. אנחנו בונים גשרים שקופים בין <strong>כל פלטפורמה קיימת</strong>: אתרי תדמית, חנויות איקומרס, מערכות סליקה, קופות רושמות או כל תוכנה אחרת שיש לכם בעסק - הכל מדבר עם הכל בסינכרון מושלם.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="500">
-                <a href="#simulator" class="inline-flex items-center gap-2 text-[#009E8E] font-bold text-xl hover:text-white transition-colors duration-300 border-b-2 border-transparent hover:border-[#009E8E] pb-1">
-                    נשמע טוב? בואו נבדוק כמה כסף זה חוסך לכם בפועל <i class="fas fa-arrow-down animate-bounce"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- REAL TIME ROI SIMULATOR -->
-    <section id="simulator" class="py-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#0F2B46] mb-4">אל תנחש, תחשב.</h2>
-                <p class="text-slate-500">הזיזו את המחוונים כדי לראות כמה כסף אתם מפסידים כרגע על עבודה ידנית.</p>
-            </div>
-
-            <div class="flex flex-col lg:flex-row gap-12 items-start bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
-                
-                <div class="w-full lg:w-1/2 space-y-8">
+                <form class="hero-ask" id="hero-ask" onsubmit="event.preventDefault(); heroAsk();">
+                    <label for="hero-ai-input"><i class="fas fa-wand-magic-sparkles"></i>אין לכם רעיון? ה-AI יציע 3 אוטומציות לעסק שלכם</label>
                     <div>
-                        <label class="flex justify-between font-bold text-[#0F2B46] mb-4">
-                            <span>כמה לידים/משימות ביום?</span>
-                            <span class="text-[#009E8E]" id="leads-val">10</span>
-                        </label>
-                        <input type="range" id="leads-range" min="1" max="100" value="10" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                    </div>
-                    
-                    <div>
-                        <label class="flex justify-between font-bold text-[#0F2B46] mb-4">
-                            <span>דקות טיפול ידני לכל משימה?</span>
-                            <span class="text-[#009E8E]" id="time-val">15 דק'</span>
-                        </label>
-                        <input type="range" id="time-range" min="1" max="60" value="15" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-                    </div>
-
-                    <div class="p-4 bg-[#009E8E]/10 rounded-xl border border-[#009E8E]/20 text-sm text-[#0F2B46]">
-                        <i class="fas fa-info-circle mr-1 text-[#009E8E]"></i> החישוב מבוסס על עלות שעת עבודה ממוצעת של 50 ₪ + מניעת טעויות אנוש.
-                    </div>
-                </div>
-
-                <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow-xl p-8 border border-slate-100 text-center transform scale-105">
-                    <h3 class="text-slate-500 font-medium mb-2 uppercase tracking-wide text-sm">פוטנציאל חיסכון שנתי</h3>
-                    <div class="text-5xl font-black text-[#0F2B46] mb-2">
-                        ₪<span id="savings-display">15,000</span>
-                    </div>
-                    <div class="text-[#009E8E] font-bold mb-6 text-sm bg-[#009E8E]/10 inline-block px-3 py-1 rounded-full">
-                        + <span id="hours-display">550</span> שעות פנויות בשנה!
-                    </div>
-                    
-                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                        זה הזמן והכסף שאתם שורפים על הקלדות, העתק-הדבק וטלפונים מיותרים. המערכת שלנו עושה את זה ב-0 שניות.
-                    </p>
-
-                    <a href="#contact-quick" class="block w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-3 rounded-xl transition shadow-lg">
-                        תחסכו לי את הכסף הזה &larr;
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section id="features" class="py-24 relative z-10 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-[#0F2B46]">איך זה עובד? (וכמה זה חוסך לך)</h2>
-            </div>
-
-            <div class="relative flex flex-col md:flex-row items-center justify-center gap-16 md:gap-6">
-                <div class="w-full md:w-1/3 bg-slate-50 p-8 rounded-3xl shadow-md border border-slate-100 text-center relative z-10 hover:-translate-y-1 transition">
-                    <div class="w-16 h-16 bg-white text-[#0F2B46] shadow-sm rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
-                    <h3 class="font-bold text-xl mb-2 text-[#0F2B46]">ליד נכנס</h3>
-                    <p class="text-slate-500 text-sm">פייסבוק / אתר / טלפון</p>
-                </div>
-
-                <div class="relative flex items-center justify-center w-full md:w-24 h-12 md:h-auto">
-                    <div class="hidden md:block w-full h-1 bg-slate-200"></div>
-                    <div class="md:hidden h-24 w-1 bg-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    <div class="absolute bg-[#009E8E]/10 text-[#009E8E] text-sm font-bold px-4 py-2 rounded-full border border-[#009E8E]/20 shadow-lg whitespace-nowrap z-30">
-                        <i class="fas fa-clock mr-1"></i> חסכת 15 דק' הקלדה
-                    </div>
-                </div>
-
-                <div class="w-full md:w-1/3 bg-gradient-to-br from-[#0F2B46] to-[#009E8E] text-white p-8 rounded-3xl shadow-2xl shadow-[#009E8E]/30 text-center relative z-20 md:scale-110 border-4 border-white">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#009E8E] text-white text-xs font-bold px-3 py-1 rounded-full uppercase shadow-sm tracking-wide">המוח האוטומטי</div>
-                    <div class="w-16 h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4 text-3xl animate-[spin_10s_linear_infinite]">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-2">עיבוד וסינון</h3>
-                    <p class="text-teal-100 text-sm">המערכת בודקת, מסננת ומעדכנת CRM</p>
-                </div>
-
-                <div class="relative flex items-center justify-center w-full md:w-24 h-12 md:h-auto">
-                    <div class="hidden md:block w-full h-1 bg-slate-200"></div>
-                    <div class="md:hidden h-24 w-1 bg-slate-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    <div class="absolute bg-[#009E8E]/10 text-[#009E8E] text-sm font-bold px-4 py-2 rounded-full border border-[#009E8E]/20 shadow-lg whitespace-nowrap z-30" style="animation-delay: 1s;">
-                        <i class="fas fa-shekel-sign mr-1"></i> חסכת 50 ₪ לליד
-                    </div>
-                </div>
-
-                <div class="w-full md:w-1/3 bg-slate-50 p-8 rounded-3xl shadow-md border border-slate-100 text-center relative z-10 hover:-translate-y-1 transition">
-                    <div class="w-16 h-16 bg-[#009E8E]/10 text-[#009E8E] rounded-full flex items-center justify-center mx-auto mb-4 text-2xl"><i class="fas fa-check"></i></div>
-                    <h3 class="font-bold text-xl mb-2 text-[#0F2B46]">ביצוע מושלם</h3>
-                    <p class="text-slate-500 text-sm">הודעה נשלחה, חשבונית יצאה</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="py-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-[#0F2B46]">אל תאמינו לנו, תאמינו למספרים שלהם</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative hover:shadow-lg transition">
-                    <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-slate-700 mb-6 italic">"חסכו לי משכורת של מזכירה במשרה מלאה. המערכת עושה את כל התיאומים והגבייה לבד. פשוט קסם."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-[#0F2B46]/10 rounded-full flex items-center justify-center font-bold text-[#0F2B46]">ד</div>
-                        <div>
-                            <p class="font-bold text-[#0F2B46]">דניאל כהן</p>
-                            <p class="text-xs text-slate-500">סוכן ביטוח</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
-                    <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-slate-700 mb-6 italic">"ה-ROI (החזר השקעה) היה מיידי. תוך שבוע המערכת החזירה את העלות שלה בזכות לידים שלא הלכו לאיבוד."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-[#009E8E]/10 rounded-full flex items-center justify-center font-bold text-[#009E8E]">ר</div>
-                        <div>
-                            <p class="font-bold text-[#0F2B46]">רועי</p>
-                            <p class="text-xs text-slate-500">מנהל מכירות</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative hover:shadow-lg transition">
-                    <div class="text-[#009E8E] text-xl mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-slate-700 mb-6 italic">"הפסקתי לרדוף אחרי לקוחות לתשלום. המערכת שולחת תזכורות לבד. השקט הנפשי שווה הכל."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-[#0F2B46]/10 rounded-full flex items-center justify-center font-bold text-[#0F2B46]">י</div>
-                        <div>
-                            <p class="font-bold text-[#0F2B46]">יגאל א.</p>
-                            <p class="text-xs text-slate-500">יועץ עסקי</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI LAB -->
-    <section id="ai-lab" class="py-24 bg-white relative overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#8b5cf6]/5 rounded-full blur-[100px] -z-10"></div>
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <div class="mb-12">
-                <span class="bg-[#8b5cf6]/10 text-[#8b5cf6] px-4 py-1.5 rounded-full text-sm font-bold tracking-wider mb-4 inline-flex items-center gap-2 shadow-sm border border-[#8b5cf6]/20"><i class="fas fa-microchip"></i> AI Powered</span>
-                <h2 class="text-4xl font-bold text-[#0F2B46] mb-4">אין לך רעיון? תן לרובוט להציע</h2>
-                <p class="text-slate-500 mb-8">כתוב את תחום העיסוק שלך וקבל 3 רעיונות לאוטומציה ששווים כסף.</p>
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-2xl shadow-[#8b5cf6]/10 p-2 border border-[#8b5cf6]/10 max-w-2xl mx-auto transform transition hover:scale-[1.01]">
-                <div class="flex flex-col md:flex-row gap-2 p-2">
-                    <input type="text" id="ai-input-page" placeholder="לדוגמה: עורך דין, גנן, חנות בגדים..."
-                            class="flex-1 bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-lg text-slate-800 focus:ring-4 focus:ring-[#8b5cf6]/20 focus:border-[#8b5cf6] outline-none shadow-inner transition-all placeholder-slate-400">
-                    <button onclick="askAIPage()" class="bg-gradient-to-r from-[#6d28d9] to-[#8b5cf6] text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-[#8b5cf6]/30 transition-all transform hover:-translate-y-1 hover:shadow-xl hover:shadow-[#8b5cf6]/40 whitespace-nowrap active:scale-95">
-                        <i class="fas fa-sparkles ml-2"></i> תן רעיונות
-                    </button>
-                </div>
-            </div>
-
-            <!-- AI Output Area -->
-            <div id="ai-output-page" class="hidden max-w-2xl mx-auto mt-8 text-right space-y-4"></div>
-            
-            <div id="ai-cta-btn-page" class="hidden mt-8">
-                <a href="#contact-quick" class="inline-block bg-[#0F2B46] text-white font-bold py-3 px-8 rounded-full hover:bg-[#009E8E] transition transform hover:scale-105 shadow-xl">
-                    וואו, אני רוצה לבנות את זה! &larr;
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT FORM -->
-    <section id="contact-quick" class="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200 z-10">
-        <!-- Automation style background (dots & grid) -->
-        <div class="absolute inset-0 z-0 opacity-[0.06]" style="background-image: radial-gradient(#009E8E 2px, transparent 2px); background-size: 30px 30px;"></div>
-        <div class="absolute inset-0 z-0 opacity-[0.04]" style="background-image: linear-gradient(to right, #0F2B46 1px, transparent 1px), linear-gradient(to bottom, #0F2B46 1px, transparent 1px); background-size: 90px 90px;"></div>
-        
-        <!-- Decorative glowing blobs -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#009E8E]/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 z-0 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#0F2B46]/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 z-0 pointer-events-none"></div>
-
-        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#0F2B46]">מוכנים להפסיק לעבוד קשה?</h2>
-            <p class="text-slate-500 mb-10 max-w-xl mx-auto">מלאו פרטים ונחזור אליכם לשיחת אבחון קצרה. בלי התחייבות, בלי אותיות קטנות.</p>
-            
-            <div class="bg-white p-8 rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,158,142,0.15)] border border-slate-100 max-w-3xl mx-auto relative z-20">
-                <form id="lead-form-main" class="space-y-4" onsubmit="event.preventDefault(); sendLead();">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="relative">
-                            <input type="text" id="contact-name-main" placeholder="שם מלא" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition">
-                        </div>
-                        <div class="relative">
-                            <input type="tel" id="contact-phone-main" placeholder="טלפון נייד" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition">
-                        </div>
-                        <div class="relative">
-                            <input type="email" id="contact-email-main" placeholder="אימייל" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition">
-                        </div>
-                        <div class="relative">
-                            <input type="text" id="business-name-main" placeholder="שם העסק (אופציונלי)" class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition">
-                        </div>
-                    </div>
-
-                    <div class="pt-2 flex items-start justify-start gap-2 text-right dir-rtl">
-                        <input type="checkbox" id="contact-consent-main" class="mt-1 w-4 h-4 cursor-pointer accent-[#009E8E]">
-                        <label for="contact-consent-main" class="text-sm text-slate-500 cursor-pointer">
-                            אני מסכים/ה לקבל עדכונים, טיפים והצעות שיווקיות למייל ולוואטסאפ.
-                        </label>
-                    </div>
-
-                    <div id="form-message" class="hidden text-center font-bold p-3 rounded-xl"></div>
-
-                    <!-- Row 1: Submit Details & Chat -->
-                    <div class="pt-4 flex flex-col md:flex-row gap-4 items-center w-full">
-                        <button type="submit" id="submit-btn-main" class="w-full md:w-2/3 bg-[#009E8E] hover:bg-[#008A7B] text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
-                            שלח פרטים <i class="fas fa-paper-plane"></i>
-                        </button>
-                        
-                        <button type="button" onclick="highlightChat()" class="w-full md:w-1/3 bg-slate-100 hover:bg-slate-200 text-[#0F2B46] font-bold py-4 rounded-xl shadow-sm transition border border-slate-200 flex justify-center items-center gap-2 group">
-                            <i class="fas fa-robot text-xl text-[#009E8E] group-hover:scale-110 transition"></i> רוצה לדבר עם הבוט?
-                        </button>
-                    </div>
-                    
-                    <!-- Row 2: Full Width Fillout Button -->
-                    <div class="pt-2 w-full">
-                        <button type="button" data-fillout-id="xhAPHNLpn5us" data-fillout-embed-type="popup" class="w-full bg-white border-2 border-[#009E8E] text-[#009E8E] hover:bg-[#009E8E] hover:text-white font-bold py-4 rounded-xl shadow-sm transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-center items-center gap-1 relative overflow-hidden group">
-                            <span class="absolute top-2 left-2 flex h-3 w-3">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75 group-hover:bg-white"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-[#009E8E] group-hover:bg-white"></span>
-                            </span>
-                            <div class="flex items-center gap-2 text-lg">
-                                לקבלת אפיון אוטומטי מותאם אישית למייל הקש כאן <i class="fas fa-bolt group-hover:animate-pulse"></i>
-                            </div>
-                            <span class="text-xs opacity-80 font-normal">בהזנת פרטי עסק בקצרה</span>
-                        </button>
+                        <input type="text" id="hero-ai-input" placeholder="מה העסק שלכם? למשל: גנן, עורך דין..." autocomplete="off">
+                        <button type="submit" data-cursor="רעיונות">תן רעיונות ←</button>
                     </div>
                 </form>
             </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-20 bg-white border-t border-slate-200">
-        <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-[#0F2B46]">שאלות נפוצות</h2>
-            <div class="space-y-4">
-                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
-                        <span>כמה כסף זה באמת חוסך?</span>
-                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
-                    </summary>
-                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
-                        החישוב פשוט: אם עובד עולה לך 50 ש"ח לשעה, והמערכת חוסכת 20 שעות בחודש (שזה נתון שמרני), <strong>חסכת 1,000 ש"ח כל חודש</strong> באופן ישיר.
-                    </div>
-                </details>
-                
-                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
-                        <span>האם צריך ידע טכני כדי לתפעל את זה?</span>
-                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
-                    </summary>
-                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
-                        ממש לא! אנחנו בונים עבורך את המערכת מאחורי הקלעים. מבחינתך, אתה ממשיך לעבוד כרגיל (למשל לעדכן שורה באקסל או לגרור ליד ב-CRM), והאוטומציה עושה את שאר הקסם לבד.
-                    </div>
-                </details>
-
-                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
-                        <span>עד כמה המידע שלי מאובטח?</span>
-                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
-                    </summary>
-                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
-                        אנחנו עובדים עם מערכת <strong>n8n מבוססת שרת פרטי וסגור</strong>. המשמעות היא שהמידע של העסק שלך לא עובר דרך שרתים ציבוריים פרוצים (כמו בחלק מהמערכות החינמיות), אלא מנוהל בסביבה מאובטחת, פרטית ויציבה במיוחד שמבטיחה שהדאטה שלך נשאר רק שלך.
-                    </div>
-                </details>
-
-                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
-                        <span>האם זה מתאים לעסק של אדם אחד?</span>
-                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
-                    </summary>
-                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
-                        בדיוק בשביל זה אנחנו כאן. אוטומציה היא הדרך היחידה של עסק של אדם אחד (One Man Show) לתפקד כמו עסק של 5 עובדים, בלי לשלם 5 משכורות ובלי לקרוס מעומס.
-                    </div>
-                </details>
-                
-                <details class="group bg-slate-50 rounded-xl border border-slate-200 cursor-pointer shadow-sm">
-                    <summary class="flex justify-between items-center p-5 font-bold text-[#0F2B46] hover:text-[#009E8E]">
-                        <span>ומה קורה כשהעסק שלי גדל?</span>
-                        <i class="fas fa-plus text-slate-400 group-open:rotate-45 transition-transform"></i>
-                    </summary>
-                    <div class="px-5 pb-5 text-slate-600 leading-relaxed">
-                        המערכות שלנו גדלות איתך. בניגוד לעובד שזקוק לחפיפה וזמן הסתגלות, המערכת שלנו יכולה לטפל ב-10 לידים ביום בדיוק באותה יעילות שהיא תטפל ב-1,000 לידים ביום, ללא שום עלייה בזמן או בתקורה.
-                    </div>
-                </details>
+            <button id="scatter-logo" class="scatter-target" aria-label="פיזור הנקודות של הלוגו" data-cursor="פזרו"></button>
+            <p class="particle-hint">געו בנקודות</p>
+            <div class="hero-foot">
+                <span>שיחת אפיון ללא עלות · התאמה אישית לעסק</span>
+                <a href="#mail-phone-section"><b>חדש</b> · מייל פון: המייל שלך, בקול שלך ↓</a>
+                <span>פשוט. אוטומט. © 2026</span>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- FREE TOOLS FOR THE COMMUNITY -->
-    <section id="free-tools" class="py-24 bg-slate-50 relative overflow-hidden scroll-mt-24 border-t border-slate-200">
-        <!-- Decorative elements -->
-        <div class="absolute -top-24 -left-24 w-64 h-64 bg-[#009E8E]/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-[#0F2B46]/5 rounded-full blur-3xl pointer-events-none"></div>
+        <section class="story on-light" id="story" data-tone="light">
+            <div class="section-top"><span>הרעיון</span><span>במילים פשוטות</span></div>
+            <div class="story-grid">
+                <p class="side-note">שומעים "אוטומציה"<br>ושואלים מה זה?<br>ככה זה נראה.</p>
+                <h2 class="reading">לקוח משאיר פרטים.<br>הוא נרשם לבד.<br>ההודעה יוצאת לבד.<br><em>ואתם רק מגלים<br>שזה כבר קרה.</em></h2>
+            </div>
+            <div class="story-bottom">
+                <span class="gear" aria-hidden="true">✳</span>
+                <p>אוטומציה היא העובד השקוף שלכם.<br>עובדת ברקע, 24/7, על כל העבודה השחורה.</p>
+            </div>
+        </section>
+        <span id="what-is-automation"></span>
 
-        <div class="max-w-6xl mx-auto px-4 relative z-10">
-
-            <!-- Header -->
-            <div class="text-center mb-14" data-aos="fade-up">
-                <div class="inline-flex items-center gap-2 bg-[#009E8E]/10 text-[#009E8E] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#009E8E]/20">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009E8E] opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#009E8E]"></span>
-                    </span>
-                    שירותים חינמיים לתועלת הציבור
+        <!-- איך זה עובד: גוללים, והתרשים מדגים תרחיש אחרי תרחיש -->
+        <section class="flow on-light" id="features" data-tone="light">
+            <div class="sticky">
+                <div class="section-top"><span>איך זה עובד</span><span>שלושה דברים שקורים בלי שנגעתם</span></div>
+                <div class="flow-copy" id="flow-copy">
+                    <p class="eyebrow" id="phase-number"></p>
+                    <h2 id="phase-title"></h2>
+                    <p id="phase-copy"></p>
                 </div>
-                <h2 class="text-3xl md:text-5xl font-black mb-4 text-[#0F2B46]">רוצים לראות אוטומציה <span class="text-[#009E8E]">בפעולה</span>?</h2>
-                <p class="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
-                    במקום להסביר מה זו אוטומציה — תנסו אותה. ממלאים בקשה קצרה, והמערכת מפיקה ושולחת לכם את התוצאה למייל תוך רגע. בלי תשלום, בלי התחייבות, בלי מנוי.
-                </p>
+                <div class="diagram" aria-live="polite">
+                    <div class="node" data-node="0"><small></small><strong></strong></div>
+                    <div class="wire" data-wire="0"></div>
+                    <div class="node" data-node="1"><small></small><strong></strong></div>
+                    <div class="wire" data-wire="1"></div>
+                    <div class="node" data-node="2"><small></small><strong></strong></div>
+                    <p class="diagram-note">אף אחד לא לחץ על כלום.</p>
+                </div>
+                <div class="track">
+                    <button data-phase="0" aria-pressed="true" data-cursor="בחרו">לידים</button>
+                    <i><b></b></i>
+                    <button data-phase="1" aria-pressed="false" data-cursor="בחרו">גבייה</button>
+                    <i><b></b></i>
+                    <button data-phase="2" aria-pressed="false" data-cursor="בחרו">פגישות</button>
+                </div>
             </div>
+        </section>
 
-            <!-- Cards Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <section class="connect on-light" data-tone="light" aria-label="מתחברים לכל המערכות שאתם כבר מכירים">
+            <p>מתחברים לכל המערכות שאתם כבר מכירים</p>
+            <!-- אותה רשימה פעמיים, כדי שהתנועה תהיה רצופה -->
+            <div class="marquee" aria-hidden="true">
+                <div class="chip"><i class="fas fa-wand-magic-sparkles" style="color:#8b5cf6"></i>כלי AI</div><div class="chip"><i class="fab fa-whatsapp" style="color:#22c55e"></i>WhatsApp</div><div class="chip"><i class="fab fa-google" style="color:#4285F4"></i>כלי Google</div><div class="chip"><i class="fas fa-phone-volume" style="color:#009E8E"></i>ימות המשיח</div><div class="chip"><i class="fas fa-code-branch" style="color:#334155"></i>מערכות בהתאמה אישית</div><div class="chip"><i class="fas fa-envelope" style="color:#ef4444"></i>Gmail</div><div class="chip"><i class="fab fa-telegram" style="color:#3b82f6"></i>Telegram</div><div class="chip"><i class="fas fa-users-cog" style="color:#f97316"></i>מערכות CRM</div><div class="chip"><i class="fas fa-database" style="color:#60a5fa"></i>Airtable</div><div class="chip"><i class="fab fa-wpforms" style="color:#a855f7"></i>Fillout</div>
+                <div class="chip"><i class="fas fa-wand-magic-sparkles" style="color:#8b5cf6"></i>כלי AI</div><div class="chip"><i class="fab fa-whatsapp" style="color:#22c55e"></i>WhatsApp</div><div class="chip"><i class="fab fa-google" style="color:#4285F4"></i>כלי Google</div><div class="chip"><i class="fas fa-phone-volume" style="color:#009E8E"></i>ימות המשיח</div><div class="chip"><i class="fas fa-code-branch" style="color:#334155"></i>מערכות בהתאמה אישית</div><div class="chip"><i class="fas fa-envelope" style="color:#ef4444"></i>Gmail</div><div class="chip"><i class="fab fa-telegram" style="color:#3b82f6"></i>Telegram</div><div class="chip"><i class="fas fa-users-cog" style="color:#f97316"></i>מערכות CRM</div><div class="chip"><i class="fas fa-database" style="color:#60a5fa"></i>Airtable</div><div class="chip"><i class="fab fa-wpforms" style="color:#a855f7"></i>Fillout</div>
+            </div>
+        </section>
 
-                <!-- Card 1: News -->
-                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
-                        <i class="fas fa-newspaper"></i>
+        <!-- מחשבון החיסכון -->
+        <section class="calc" id="simulator" data-tone="dark">
+            <div class="section-top"><span>מחשבון חיסכון</span><span>הזיזו את המחוונים</span></div>
+            <div class="calc-grid">
+                <div>
+                    <h2 class="reveal">אל תנחשו.<br><span class="teal">תחשבו.</span></h2>
+                    <p class="description reveal">כמה כסף הולך היום על עבודה ידנית: הקלדות, העתק-הדבק וטלפונים מיותרים.</p>
+                    <div class="slider">
+                        <label for="leads-range">כמה לידים או משימות ביום? <span id="leads-val">10</span></label>
+                        <input type="range" id="leads-range" min="1" max="100" value="10">
                     </div>
-                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">מהדורת חדשות למייל</h3>
-                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
-                        מבקשים — ומקבלים למייל מהדורת חדשות מסוכמת ומעודכנת. בלי לפתוח אתרים ובלי להתפזר בין עשרות כתבות. המערכת אוספת, מסכמת ושולחת. אתם רק קוראים.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> מופק ונשלח אוטומטית לפי בקשה</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> בקשה של 30 שניות — לא רשימת תפוצה</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                    <div class="slider">
+                        <label for="time-range">דקות טיפול ידני לכל משימה? <span id="time-val">15 דק'</span></label>
+                        <input type="range" id="time-range" min="1" max="60" value="15">
+                    </div>
+                    <p class="calc-note">החישוב לפי עלות שעת עבודה ממוצעת של 50 ₪, 22 ימי עבודה בחודש.</p>
+                </div>
+                <div>
+                    <div class="result">
+                        <small>פוטנציאל חיסכון שנתי</small>
+                        <div class="sum"><i>₪</i><span id="savings-display">15,000</span></div>
+                        <p class="hours">ועוד <b><span id="hours-display">550</span> שעות</b> פנויות בשנה.</p>
+                    </div>
+                    <p>זה הזמן והכסף שהולכים היום על עבודה שמערכת עושה באפס שניות.</p>
+                    <a class="solid" href="#contact-quick" data-cursor="קדימה">תחסכו לי את הכסף הזה</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="voices on-light" id="testimonials" data-tone="light">
+            <div class="section-top"><span>לקוחות</span><span>במילים שלהם</span></div>
+            <h2 class="reveal">אל תאמינו לנו. תאמינו למספרים שלהם.</h2>
+            <div class="voices-list">
+                <div class="voice reveal"><blockquote>"חסכו לי משכורת של מזכירה במשרה מלאה. המערכת עושה את כל התיאומים והגבייה לבד."</blockquote><p>דניאל כהן <span>· סוכן ביטוח</span></p></div>
+                <div class="voice reveal"><blockquote>"ההחזר על ההשקעה היה מיידי. תוך שבוע המערכת החזירה את העלות שלה, בזכות לידים שלא הלכו לאיבוד."</blockquote><p>רועי <span>· מנהל מכירות</span></p></div>
+                <div class="voice reveal"><blockquote>"הפסקתי לרדוף אחרי לקוחות לתשלום. המערכת שולחת תזכורות לבד. השקט הנפשי שווה הכול."</blockquote><p>יגאל א. <span>· יועץ עסקי</span></p></div>
+            </div>
+        </section>
+
+        <!-- מחולל הרעיונות (AI) -->
+        <section class="lab" id="ai-lab" data-tone="dark">
+            <div class="section-top"><span>מחולל רעיונות</span><span>AI</span></div>
+            <div class="lab-grid">
+                <div>
+                    <h2 class="reveal">אין לכם רעיון?<br><span style="color: var(--lilac)">תנו לרובוט להציע.</span></h2>
+                    <p class="description reveal">כותבים את תחום העיסוק, ומקבלים 3 רעיונות לאוטומציה ששווים כסף.</p>
+                </div>
+                <div>
+                    <div class="ask" id="ai-ask">
+                        <input type="text" id="ai-input-page" placeholder="לדוגמה: עורך דין, גנן, חנות בגדים..." aria-label="תחום העיסוק שלכם" onkeydown="if(event.key==='Enter')askAIPage()">
+                        <button onclick="askAIPage()" data-cursor="שלחו">תן רעיונות ←</button>
+                    </div>
+                    <div id="ai-output-page" class="ideas" hidden></div>
+                    <div id="ai-cta-btn-page" hidden>
+                        <a class="solid" href="#contact-quick" data-cursor="קדימה">אני רוצה לבנות את זה</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- אפיון אוטומטי למייל -->
+        <section class="spec on-light" id="spec" data-tone="light">
+            <div class="section-top"><span>אפיון אוטומטי</span><span>חינם · בלי שיחה · תוך דקות</span></div>
+            <div class="spec-grid">
+                <h2 class="reveal">אפיון לעסק שלכם.<br><span>ישר למייל.</span></h2>
+                <div class="reveal">
+                    <ol class="steps">
+                        <li><b>1</b>כותבים בקצרה על העסק.</li>
+                        <li><b>2</b>המערכת בונה אפיון אוטומציה מותאם אישית.</li>
+                        <li><b>3</b>הוא מגיע אליכם למייל.</li>
+                    </ol>
+                    <button type="button" class="spec-button" data-fillout-id="xhAPHNLpn5us" data-fillout-embed-type="popup" data-cursor="אפיון"><i class="fas fa-envelope-open-text"></i>קבלו אפיון מותאם אישית</button>
+                    <small>זו בעצמה אוטומציה: אף אחד לא יושב וכותב את זה.</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- כלים חינמיים -->
+        <section class="tools" id="free-tools" data-tone="dark">
+            <div class="section-top"><span>כלים חינמיים</span><span>שירותים לתועלת הציבור</span></div>
+            <div class="tools-head">
+                <h2 class="reveal">אוטומציה. <span class="teal">בפעולה.</span></h2>
+                <p class="description reveal">במקום להסביר, תנסו. ממלאים בקשה קצרה, והתוצאה מגיעה למייל תוך רגע. בלי תשלום, בלי התחייבות, בלי מנוי.</p>
+            </div>
+            <div class="tools-list">
+                <div class="tool reveal">
+                    <div class="tool-top"><span class="tool-icon"><i class="fas fa-newspaper"></i></span><span class="tool-free">חינם</span></div>
+                    <h3>מהדורת חדשות</h3>
+                    <p>חדשות מסוכמות ומעודכנות, ישר למייל שלכם.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>מופק ונשלח אוטומטית לפי בקשה</li>
+                        <li><i class="fas fa-check"></i>בקשה של 30 שניות, לא רשימת תפוצה</li>
                     </ul>
-                    <button type="button" data-fillout-id="55mo8PJiZNus" data-fillout-embed-type="popup"
-                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                        בקשת מהדורת חדשות <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <a href="https://automatic.fillout.com/t/55mo8PJiZNus" target="_blank" rel="noopener" class="text-center text-xs text-slate-400 hover:text-[#009E8E] mt-3 transition">או פתחו את הטופס בחלון נפרד</a>
-                </div>
-
-                <!-- Card 2: Shabbat Times -->
-                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
-                        <i class="fas fa-star-of-david"></i>
+                    <div class="go">
+                        <button type="button" class="pill" data-fillout-id="55mo8PJiZNus" data-fillout-embed-type="popup" data-cursor="בקשה">בקשת מהדורת חדשות ←</button>
+                        <a class="alt" href="https://automatic.fillout.com/t/55mo8PJiZNus" target="_blank" rel="noopener">או בחלון נפרד</a>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">זמני כניסת שבת למייל</h3>
-                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
-                        זמני הדלקת נרות וצאת השבת הקרובה, מחושבים לפי המיקום המדויק שלכם — בכל מקום בעולם. מבקשים פעם אחת, והזמנים נשלחים אליכם למייל מיד.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> מותאם לכל עיר בעולם</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> מגיע למייל תוך רגע מהבקשה</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                </div>
+                <div class="tool reveal">
+                    <div class="tool-top"><span class="tool-icon"><i class="fas fa-star-of-david"></i></span><span class="tool-free">חינם</span></div>
+                    <h3>זמני שבת</h3>
+                    <p>הדלקת נרות וצאת השבת, למייל, לפי המיקום המדויק שלכם.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>מותאם לכל עיר בעולם</li>
+                        <li><i class="fas fa-check"></i>מגיע למייל תוך רגע מהבקשה</li>
                     </ul>
-                    <button type="button" data-fillout-id="aqSvUsYgZvus" data-fillout-embed-type="popup"
-                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                        בקשת זמני שבת <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <a href="https://automatic.fillout.com/t/aqSvUsYgZvus" target="_blank" rel="noopener" class="text-center text-xs text-slate-400 hover:text-[#009E8E] mt-3 transition">או פתחו את הטופס בחלון נפרד</a>
-                </div>
-
-                <!-- Card 3: PDF Converter (anchor to existing tool) -->
-                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
-                        <i class="fas fa-file-pdf"></i>
+                    <div class="go">
+                        <button type="button" class="pill" data-fillout-id="aqSvUsYgZvus" data-fillout-embed-type="popup" data-cursor="בקשה">בקשת זמני שבת ←</button>
+                        <a class="alt" href="https://automatic.fillout.com/t/aqSvUsYgZvus" target="_blank" rel="noopener">או בחלון נפרד</a>
                     </div>
-                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">ממיר HTML ל-PDF</h3>
-                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
-                        מדביקים קוד HTML, מזינים מייל — ומקבלים מסמך PDF מעוצב, בלי דמי מנוי למערכות המרה יקרות.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> תוצאה תוך שניות</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> ללא התקנה וללא רישום</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                </div>
+                <div class="tool reveal">
+                    <div class="tool-top"><span class="tool-icon"><i class="fas fa-file-pdf"></i></span><span class="tool-free">חינם</span></div>
+                    <h3>HTML ל-PDF</h3>
+                    <p>מדביקים קוד HTML, מזינים מייל, ומקבלים מסמך PDF מעוצב.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>תוצאה תוך שניות</li>
+                        <li><i class="fas fa-check"></i>ללא התקנה וללא רישום</li>
                     </ul>
-                    <a href="https://6161358-arch.github.io/HTML-PDF/" target="_blank" rel="noopener"
-                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                        לממיר המסמכים <i class="fas fa-file-pdf"></i>
-                    </a>
-                    <span class="text-center text-xs text-slate-400 mt-3">נפתח בלשונית חדשה</span>
+                    <div class="go"><a class="pill" href="https://6161358-arch.github.io/HTML-PDF/" target="_blank" rel="noopener" data-cursor="↗">לממיר המסמכים <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                 </div>
-
-                <!-- Card 4: YouTube Audio Downloader -->
-                <div class="bg-white p-7 rounded-[2rem] shadow-[0_15px_40px_-10px_rgba(15,43,70,0.10)] border-2 border-slate-100 hover:border-[#009E8E]/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-16 h-16 rounded-2xl bg-[#009E8E]/10 text-[#009E8E] flex items-center justify-center text-2xl mb-6 shadow-inner">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-[#0F2B46] mb-3">שמע מיוטיוב</h3>
-                    <p class="text-slate-500 leading-relaxed mb-6 flex-grow">
-                        מדביקים קישור לסרטון או לפלייליסט, ומקבלים קובץ שמע נקי בלבד — בלי וידאו, בלי פרסומות ובלי אתרים מפוקפקים. לשימוש אישי.
-                    </p>
-                    <ul class="space-y-2 text-sm text-slate-600 mb-8">
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> קובץ שמע בלבד</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> תומך גם בפלייליסטים</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check-circle text-[#009E8E]"></i> חינם לחלוטין</li>
+                <div class="tool reveal">
+                    <div class="tool-top"><span class="tool-icon"><i class="fas fa-headphones"></i></span><span class="tool-free">חינם</span></div>
+                    <h3>שמע מיוטיוב</h3>
+                    <p>מקישור לסרטון או לפלייליסט, קובץ שמע בלבד. לשימוש אישי.</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i>קובץ שמע בלבד</li>
+                        <li><i class="fas fa-check"></i>תומך גם בפלייליסטים</li>
                     </ul>
-                    <a href="https://6161358-arch.github.io/Downloading-audio-from-YouTube/" target="_blank" rel="noopener"
-                        class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-[#009E8E]/30 transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                        להורדת שמע <i class="fas fa-headphones"></i>
-                    </a>
-                    <span class="text-center text-xs text-slate-400 mt-3">נפתח בלשונית חדשה</span>
-                </div>
-
-            </div>
-
-            <!-- Bottom note -->
-            <div class="mt-14 text-center" data-aos="fade-up" data-aos-delay="400">
-                <div class="inline-block bg-white border-2 border-[#009E8E]/20 rounded-2xl px-8 py-6 shadow-sm max-w-3xl">
-                    <p class="text-[#0F2B46] font-bold text-lg mb-1">מאחורי כל אחד מהשירותים האלה עומדת אוטומציה שמקבלת בקשה ומטפלת בה לבד, 24/7.</p>
-                    <p class="text-slate-500">בדיוק ככה אפשר לבנות גם לעסק שלכם — מענה ללידים, שליחת הצעות מחיר, תזכורות לגבייה ועוד.</p>
-                    <button onclick="document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="mt-4 bg-[#009E8E] hover:bg-[#008A7B] text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-[#009E8E]/30 transition transform hover:-translate-y-0.5">
-                        מה אפשר לבנות לי? <i class="fas fa-comments mr-1"></i>
-                    </button>
+                    <div class="go"><a class="pill" href="https://6161358-arch.github.io/Downloading-audio-from-YouTube/" target="_blank" rel="noopener" data-cursor="↗">להורדת שמע <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                 </div>
             </div>
-
-        </div>
-    </section>
-
-    <!-- MAIL PHONE BANNER -->
-    <section id="mail-phone-section" class="py-16 bg-gradient-to-r from-[#0b1d3a] to-[#1a5ebd] text-white border-y border-[#00b4d8]/30 relative overflow-hidden">
-        <div class="absolute top-1/2 left-0 w-96 h-96 bg-[#00b4d8]/20 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2"></div>
-        <div class="max-w-5xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="text-center md:text-right">
-                <div class="inline-block bg-[#00b4d8]/20 text-[#00b4d8] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-[#00b4d8]/30">חדש! מבית פשוט אוטומט</div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">הכירו את <span class="text-[#00b4d8]">מייל פון</span> <i class="fas fa-phone-alt mr-2"></i></h2>
-                <p class="text-blue-100 text-lg max-w-xl">
-                    הגישה החכמה למייל שלכם דרך שיחת טלפון רגילה. בלי אפליקציות, בלי מסכים – פשוט מדברים והמערכת מבצעת. מותאם במיוחד לטלפונים כשרים!
-                </p>
+            <div class="tools-foot">
+                <p>מאחורי כל כלי כאן עומדת אוטומציה שעובדת לבד. ככה אפשר לבנות גם לעסק שלכם.</p>
+                <a class="text-button" href="#contact-quick" data-cursor="קדימה">מה אפשר לבנות לי? ↙</a>
             </div>
-            <div class="flex-shrink-0">
-                <a href="https://6161358-arch.github.io/Mail_Phone/" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-full text-white bg-[#00b4d8] hover:bg-cyan-500 transition duration-300 shadow-[0_0_20px_rgba(0,180,216,0.4)] hover:scale-105">
-                    למעבר לאתר מייל פון <i class="fas fa-external-link-alt mr-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- REDESIGNED FOOTER (White) -->
-    <footer class="bg-white py-12 border-t border-slate-200 relative overflow-hidden">
-        <div class="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-slate-50 to-white -z-10 pointer-events-none"></div>
-        <div class="max-w-6xl mx-auto px-4">
-            
-            <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-8">
-                
-                <div class="w-full md:w-1/2 flex justify-center md:justify-start">
-                    <img src="./logo.png" alt="לוגו פשוט אוטומט" class="h-20 md:h-28 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-500">
+        <section class="mailphone on-light" id="mail-phone-section" data-tone="light">
+            <div class="section-top"><span class="new">חדש מבית פשוט. אוטומט.</span><span>לבעלי טלפון כשר</span></div>
+            <div class="mailphone-grid">
+                <h2 class="reveal">מייל <span>פון.</span></h2>
+                <div class="reveal">
+                    <p class="description">המייל שלכם, בשיחת טלפון רגילה. מתקשרים, שומעים את המיילים, עונים בקול. בלי אפליקציות ובלי מסכים.</p>
+                    <a class="round-link" href="https://6161358-arch.github.io/Mail_Phone/" target="_blank" rel="noopener" data-cursor="↗">לאתר מייל פון <b>↖</b></a>
                 </div>
+            </div>
+        </section>
 
-                <!-- Footer Interactive Widget -->
-                <div class="w-full md:w-1/2">
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-2 h-full bg-[#009E8E]"></div>
-                        <h4 class="text-[#0F2B46] font-bold text-lg mb-4 flex items-center gap-2">
-                            <i class="fas fa-calculator text-[#009E8E]"></i> מחשבון "זמן פח"
-                        </h4>
-                        <p class="text-sm text-slate-500 mb-4">כמה דקות ביום אתם מבזבזים על משימות מונוטוניות, הקלדות והעתק-הדבק?</p>
-                        
-                        <div class="flex items-center gap-4 bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                            <input type="number" id="wasted-min" placeholder="הזן דקות" class="w-24 bg-white border border-slate-200 text-[#0F2B46] font-bold text-center rounded-xl px-2 py-2 outline-none focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 transition">
-                            <span class="text-slate-400 font-medium">ביום, שווים ל-</span>
-                            <div class="flex-1 text-left">
-                                <span class="text-2xl font-black text-[#009E8E]" id="wasted-result">0</span>
-                                <span class="text-xs font-bold text-[#0F2B46] bg-[#009E8E]/10 px-2 py-1 rounded">ימי עבודה בשנה!</span>
-                            </div>
-                        </div>
+        <section class="faq" id="faq" data-tone="dark">
+            <div class="section-top"><span>שאלות נפוצות</span><span>לפני שמתחילים</span></div>
+            <div class="faq-grid">
+                <h2 class="reveal">שואלים.<br><span class="teal">עונים.</span></h2>
+                <div>
+                    <details><summary>כמה כסף זה באמת חוסך?</summary><p>החישוב פשוט: אם עובד עולה לך 50 ש"ח לשעה, והמערכת חוסכת 20 שעות בחודש (נתון שמרני), חסכת 1,000 ש"ח כל חודש באופן ישיר.</p></details>
+                    <details><summary>צריך ידע טכני כדי לתפעל את זה?</summary><p>ממש לא. אנחנו בונים עבורך את המערכת מאחורי הקלעים. מבחינתך אתה ממשיך לעבוד כרגיל (למשל לעדכן שורה באקסל או לגרור ליד ב-CRM), והאוטומציה עושה את השאר לבד.</p></details>
+                    <details><summary>עד כמה המידע שלי מאובטח?</summary><p>אנחנו עובדים עם מערכת n8n על <b>שרת פרטי וסגור</b>. המידע של העסק שלך לא עובר דרך שרתים ציבוריים, אלא מנוהל בסביבה פרטית ויציבה, והדאטה שלך נשאר רק שלך.</p></details>
+                    <details><summary>זה מתאים לעסק של אדם אחד?</summary><p>בדיוק בשביל זה אנחנו כאן. אוטומציה היא הדרך של עסק של אדם אחד לתפקד כמו עסק של 5 עובדים, בלי לשלם 5 משכורות ובלי לקרוס מעומס.</p></details>
+                    <details><summary>ומה קורה כשהעסק שלי גדל?</summary><p>המערכות גדלות איתך. בניגוד לעובד שצריך חפיפה וזמן הסתגלות, המערכת מטפלת ב-10 לידים ביום באותה יעילות שבה תטפל ב-1,000, בלי עלייה בזמן או בתקורה.</p></details>
+                </div>
+            </div>
+        </section>
+
+        <section class="finish" id="contact-quick" data-tone="dark">
+            <div class="finish-grid">
+                <div>
+                    <p class="eyebrow reveal">הצעד הבא</p>
+                    <h2 class="reveal">מוכנים להפסיק<br><span class="teal">לעבוד קשה?</span></h2>
+                    <p class="description reveal">מלאו פרטים ונחזור אליכם לשיחת אבחון קצרה. בלי התחייבות, בלי אותיות קטנות.</p>
+                    <div class="finish-links reveal">
+                        <button class="text-button" onclick="highlightChat()" data-cursor="צ'אט">רוצה לדבר עם הבוט? ↙</button>
                     </div>
-                </div>
-            </div>
-
-            <div class="text-center pt-8 border-t border-slate-100">
-                <p class="text-slate-500 font-medium text-sm">
-                    &copy; 2026 פשוט. אוטומט. <span class="mx-2 text-slate-300">|</span> בונים לך זמן פנוי.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- AI IDEA GENERATOR MODAL -->
-    <div id="ai-modal" class="fixed inset-0 z-50 bg-[#0F2B46]/80 backdrop-blur-sm hidden flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden relative transform scale-95 transition-transform duration-300" id="ai-modal-content">
-            <button onclick="toggleAIModal()" class="absolute top-4 left-4 text-white/70 hover:text-white text-2xl z-10"><i class="fas fa-times"></i></button>
-            
-            <div class="bg-gradient-to-r from-[#6d28d9] to-[#8b5cf6] p-8 text-white text-center relative overflow-hidden">
-                <div class="absolute top-[-50%] right-[-50%] w-full h-full bg-white/10 rounded-full blur-3xl"></div>
-                <h3 class="text-2xl font-bold mb-2">🤖 מעבדת הרעיונות</h3>
-                <p class="text-purple-100">כתוב את המקצוע שלך וקבל 3 רעיונות לאוטומציה שיחסכו לך כסף.</p>
-            </div>
-
-            <div class="p-8">
-                <div class="flex gap-2 mb-6">
-                    <input type="text" id="ai-input" placeholder="לדוגמה: עורך דין, מאלף כלבים..." class="flex-1 border border-slate-300 rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-[#8b5cf6] outline-none">
-                    <button onclick="askAI()" class="bg-[#8b5cf6] hover:bg-[#7c3aed] text-white px-6 rounded-xl font-bold transition">
-                        <i class="fas fa-magic"></i>
+                    <button type="button" class="spec-mini reveal" data-fillout-id="xhAPHNLpn5us" data-fillout-embed-type="popup" data-cursor="אפיון">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <span><strong>לא רוצים לחכות לשיחה?</strong><span>קבלו אפיון אוטומטי מותאם אישית למייל, בהזנת פרטי העסק בקצרה.</span></span>
                     </button>
                 </div>
 
-                <div id="ai-output" class="space-y-3 min-h-[100px]">
-                    <p class="text-slate-400 text-center mt-8 italic">התוצאות יופיעו כאן...</p>
-                </div>
-
-                <div id="ai-cta-btn" class="hidden mt-6 pt-6 border-t border-slate-100 text-center">
-                    <p class="text-[#0F2B46] font-bold mb-3">אהבת את הרעיונות?</p>
-                    <button onclick="toggleAIModal(); document.getElementById('contact-quick').scrollIntoView({behavior: 'smooth'})" class="bg-[#009E8E] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#008A7B] transition w-full">
-                        כן! אני רוצה לבנות את זה &larr;
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- EXIT INTENT POPUP -->
-    <div id="exit-popup" class="fixed inset-0 z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300">
-        <div class="absolute inset-0 bg-[#0F2B46]/80 backdrop-blur-sm" onclick="closeExitPopup()"></div>
-        <div class="bg-white rounded-3xl shadow-2xl z-10 w-full max-w-lg mx-4 overflow-hidden transform scale-95 transition-transform duration-300 relative" id="exit-popup-content">
-            <button onclick="closeExitPopup()" class="absolute top-4 left-4 text-white/80 hover:text-white text-2xl z-20 transition"><i class="fas fa-times"></i></button>
-            <div class="bg-gradient-to-r from-[#0F2B46] to-[#009E8E] p-8 text-white text-center relative overflow-hidden">
-                <div class="absolute top-[-50%] right-[-50%] w-full h-full bg-white/10 rounded-full blur-3xl"></div>
-                <div class="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm text-3xl">
-                    <i class="fas fa-file-pdf"></i>
-                </div>
-                <h3 class="text-3xl font-black mb-1">רגע לפני שעוזבים...</h3>
-            </div>
-            <div class="p-8 text-center">
-                <p class="text-xl text-[#0F2B46] font-bold mb-3">הולכים לשרוף עוד שעה על אקסל?</p>
-                <p class="text-slate-600 mb-5 leading-relaxed">
-                    קבלו ישירות למייל מדריך חינמי מקיף:<br>
-                    <span class="font-bold text-[#009E8E] text-lg">5 אוטומציות שכל עסק חייב</span><br>
-                    <span class="text-sm font-bold text-[#0F2B46] bg-[#009E8E]/10 px-2 py-1 rounded inline-block mt-2">(אוטומציות פרקטיות שאפשר לעשות לבד כבר עכשיו!)</span>
-                </p>
-                <form id="exit-form" onsubmit="event.preventDefault(); submitExitForm();">
-                    <div class="relative mb-3">
-                        <input type="text" id="exit-name" placeholder="שם מלא" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-center" dir="rtl">
-                    </div>
-                    <div class="relative mb-4">
-                        <input type="email" id="exit-email" placeholder="אימייל לקבלת המדריך" required class="w-full px-4 py-3 bg-slate-50 rounded-xl text-slate-900 border border-slate-200 focus:border-[#009E8E] focus:ring-2 focus:ring-[#009E8E]/20 outline-none transition text-center" dir="ltr">
-                    </div>
-                    
-                    <div class="mb-4 flex items-start justify-center gap-2 text-right dir-rtl">
-                        <input type="checkbox" id="exit-consent" required class="mt-1 w-4 h-4 cursor-pointer accent-[#009E8E]">
-                        <label for="exit-consent" class="text-xs text-slate-500 cursor-pointer">
-                            אני מאשר/ת קבלת דיוור, טיפים והצעות שיווקיות (ניתן להסרה בכל עת).
-                        </label>
-                    </div>
-
-                    <button type="submit" id="exit-btn" class="w-full bg-[#0F2B46] hover:bg-[#009E8E] text-white font-bold py-4 rounded-xl shadow-xl transition transform hover:-translate-y-1 text-lg flex justify-center items-center gap-2">
-                        שלח לי את המדריך בחינם <i class="fas fa-download"></i>
-                    </button>
+                <form class="form-card reveal" id="lead-form-main" onsubmit="event.preventDefault(); sendLead();">
+                    <div class="field"><label for="contact-name-main">שם מלא</label><input type="text" id="contact-name-main" autocomplete="name" required></div>
+                    <div class="field"><label for="contact-phone-main">טלפון נייד</label><input type="tel" id="contact-phone-main" autocomplete="tel" dir="ltr" required></div>
+                    <div class="field"><label for="contact-email-main">אימייל</label><input type="email" id="contact-email-main" autocomplete="email" dir="ltr" required></div>
+                    <div class="field"><label for="business-name-main">שם העסק <span>(לא חובה)</span></label><input type="text" id="business-name-main" autocomplete="organization"></div>
+                    <label class="consent">
+                        <input type="checkbox" id="contact-consent-main">
+                        <span>אני מסכים/ה לקבל עדכונים, טיפים והצעות שיווקיות למייל ולוואטסאפ.</span>
+                    </label>
+                    <button type="submit" class="solid" id="submit-btn-main" data-cursor="שלחו">שלחו פרטים</button>
+                    <div id="form-message" class="form-msg" hidden></div>
                 </form>
-                <div id="exit-msg" class="hidden mt-4 text-center font-bold text-[#009E8E] bg-[#009E8E]/10 py-3 rounded-xl border border-[#009E8E]/20"></div>
-                <button onclick="closeExitPopup()" class="mt-4 text-slate-400 text-sm hover:text-slate-600 underline">
-                    לא תודה, אני מעדיף להמשיך לעבוד קשה
-                </button>
             </div>
+
+            <footer>
+                <a href="#home" class="foot-logo"><img src="./logo-full.png" alt="פשוט. אוטומט. - יוסף דייטש" width="409" height="298" loading="lazy"></a>
+                <label class="wasted">מחשבון "זמן פח":
+                    <input type="number" id="wasted-min" min="0" placeholder="דקות" aria-label="דקות ביום על משימות מונוטוניות">
+                    דקות ביום הן <b id="wasted-result">0</b> ימי עבודה בשנה.
+                </label>
+                <span>&copy; 2026 פשוט. אוטומט. | בונים לך זמן פנוי.</span>
+            </footer>
+        </section>
+    </main>
+
+    <!-- חלון יציאה: מדריך חינמי -->
+    <div id="exit-popup" hidden>
+        <div id="exit-popup-content" role="dialog" aria-modal="true" aria-labelledby="exit-title">
+            <button class="exit-x" onclick="closeExitPopup()" aria-label="סגירה">×</button>
+            <p class="eyebrow">רגע לפני שעוזבים</p>
+            <h2 id="exit-title">עוד שעה על אקסל?</h2>
+            <p>קבלו ישירות למייל מדריך חינמי: <b>5 אוטומציות שכל עסק חייב</b>. דברים פרקטיים שאפשר לעשות לבד, כבר עכשיו.</p>
+            <form id="exit-form" onsubmit="event.preventDefault(); submitExitForm();">
+                <input type="text" id="exit-name" placeholder="שם מלא" aria-label="שם מלא" required>
+                <input type="email" id="exit-email" placeholder="אימייל לקבלת המדריך" aria-label="אימייל" dir="ltr" style="text-align:right" required>
+                <label class="consent">
+                    <input type="checkbox" id="exit-consent" required>
+                    <span>אני מאשר/ת קבלת דיוור, טיפים והצעות שיווקיות (ניתן להסרה בכל עת).</span>
+                </label>
+                <button type="submit" class="solid" id="exit-btn">שלחו לי את המדריך</button>
+            </form>
+            <div id="exit-msg" hidden></div>
+            <button class="exit-no" onclick="closeExitPopup()">לא תודה, אני מעדיף להמשיך לעבוד קשה</button>
         </div>
     </div>
 
-    <!-- Chat Widget Embed -->
+    <!-- צ'אט וטפסים קופצים -->
     <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
-    <script>ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"})</script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://server.fillout.com/embed/v1/"></script> <!-- Fillout Script -->
-    
+    <script>try { ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"}); } catch (e) {}</script>
+    <script src="https://server.fillout.com/embed/v1/"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof AOS !== 'undefined') {
-                AOS.init({ once: true, offset: 50, duration: 800 });
-            }
+        document.documentElement.classList.add('js');
+        const $ = (s) => document.querySelector(s);
+        const $$ = (s) => [...document.querySelectorAll(s)];
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const smallScreen = matchMedia('(max-width: 860px)');
 
-            window.addEventListener('scroll', () => {
-                const navContainer = document.getElementById('navbar-container');
-                if(navContainer) {
-                    if (window.scrollY > 20) {
-                        navContainer.classList.replace('top-12', 'top-4');
-                    } else {
-                        navContainer.classList.replace('top-4', 'top-12');
-                    }
-                }
-            });
+        // ---------- תפריט ----------
+        function setMenu(open) {
+            $('#menu').hidden = !open;
+            $$('.menu-toggle').forEach((el) => { el.setAttribute('aria-expanded', open); el.textContent = open ? 'סגירה ×' : 'תפריט ☰'; });
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+        $$('.menu-toggle').forEach((el) => el.onclick = () => setMenu($('#menu').hidden));
 
-            setTimeout(() => {
-                const cta = document.getElementById('hero-cta');
-                if(cta) cta.classList.add('cta-pulse-active');
-            }, 3000);
+        // הפס הדק: מופיע כשגוללים למעלה (אחרי הפתיחה), ונעלם כשגוללים למטה
+        const bar = $('#bar');
+        let lastY = scrollY;
+        function updateBar() {
+            const y = scrollY;
+            const show = y > innerHeight * 0.7 && (y < lastY - 4 || (bar.classList.contains('show') && y <= lastY + 4));
+            bar.classList.toggle('show', show);
+            bar.inert = !show;
+            lastY = y;
+        }
+        addEventListener('scroll', updateBar, { passive: true });
+        $$('#menu a').forEach((el) => el.onclick = () => setMenu(false));
+        addEventListener('keydown', (e) => { if (e.key === 'Escape') { setMenu(false); closeExitPopup(); } });
 
-            // --- Simulator Logic ---
-            const leadsSlider = document.getElementById('leads-range');
-            const timeSlider = document.getElementById('time-range');
-            const leadsDisplay = document.getElementById('leads-val');
-            const timeDisplay = document.getElementById('time-val');
-            const savingsDisplay = document.getElementById('savings-display');
-            const hoursDisplay = document.getElementById('hours-display');
-
-            function updateSimulator() {
-                if(!leadsSlider || !timeSlider) return;
-                const leads = parseInt(leadsSlider.value);
-                const time = parseInt(timeSlider.value);
-                
-                if(leadsDisplay) leadsDisplay.innerText = leads;
-                if(timeDisplay) timeDisplay.innerText = time + " דק'";
-
-                const annualHours = Math.round((leads * time * 22 * 12) / 60);
-                const annualSavings = (annualHours * 50).toLocaleString();
-
-                if(hoursDisplay) hoursDisplay.innerText = annualHours;
-                if(savingsDisplay) savingsDisplay.innerText = annualSavings;
-            }
-
-            if(leadsSlider) leadsSlider.addEventListener('input', updateSimulator);
-            if(timeSlider) timeSlider.addEventListener('input', updateSimulator);
-            updateSimulator(); 
-
-            // --- Easter Egg Calc (Footer) ---
-            const wastedInput = document.getElementById('wasted-min');
-            const wastedResult = document.getElementById('wasted-result');
-            if(wastedInput && wastedResult) {
-                wastedInput.addEventListener('input', (e) => {
-                    const mins = parseInt(e.target.value) || 0;
-                    const days = ((mins * 250) / 60 / 8).toFixed(1);
-                    wastedResult.innerText = days;
-                });
-            }
+        // ---------- סמן עגול (רק עם עכבר) ----------
+        const cursor = $('#cursor');
+        const pointer = { x: -1000, y: -1000 };
+        let cx = -1000, cy = -1000;
+        function updateCursorTone() {
+            if (pointer.x < 0) return;
+            const under = document.elementFromPoint(pointer.x, pointer.y);
+            const light = !!(under && under.closest('[data-tone="light"], #exit-popup-content')) && $('#menu').hidden;
+            cursor.style.setProperty('--cursor-ink', light ? '#0f2b46' : '#8fe6da');
+            cursor.style.setProperty('--cursor-inverse', light ? '#f2f8f7' : '#0a2238');
+        }
+        addEventListener('pointermove', (e) => {
+            pointer.x = e.clientX; pointer.y = e.clientY;
+            if (e.pointerType === 'mouse') { cursor.style.opacity = 1; document.body.classList.add('has-cursor'); }
+            updateCursorTone();
+        });
+        // מעל הצ'אט והטפסים הקופצים (חלונות חיצוניים) הסמן העגול נעלם
+        document.addEventListener('pointerover', (e) => { if (e.target.tagName === 'IFRAME') cursor.style.opacity = 0; });
+        document.documentElement.addEventListener('pointerleave', () => { cursor.style.opacity = 0; pointer.x = -1000; });
+        $$('a, button, summary, [data-cursor]').forEach((el) => {
+            el.addEventListener('pointerenter', () => { cursor.classList.add('active'); cursor.querySelector('span').textContent = el.dataset.cursor || (el.tagName === 'SUMMARY' ? '+' : '↗'); });
+            el.addEventListener('pointerleave', () => { cursor.classList.remove('active'); cursor.querySelector('span').textContent = ''; });
         });
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
+        // ---------- "הרעיון": פירוק המשפט למילים שנדלקות בגלילה ----------
+        const reading = $('.reading');
+        const walker = document.createTreeWalker(reading, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        for (const node of textNodes) {
+            const fragment = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach((part) => {
+                if (!part.trim()) { fragment.append(document.createTextNode(part)); return; }
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = part;
+                fragment.append(span);
+            });
+            node.replaceWith(fragment);
         }
+        const words = $$('.reading .word');
 
-        function toggleAIModal() {
-            const modal = document.getElementById('ai-modal');
-            const content = document.getElementById('ai-modal-content');
-            
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modal.classList.remove('opacity-0');
-                    content.classList.remove('scale-95');
-                    content.classList.add('scale-100');
-                }, 10);
+        // ---------- כניסה של חלקי העמוד בגלילה ----------
+        const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }), { threshold: 0.12 });
+        $$('.reveal').forEach((el) => {
+            const i = Array.prototype.indexOf.call(el.parentNode.children, el);
+            el.style.setProperty('--d', (i % 3) * 0.1 + 's');
+            revealObserver.observe(el);
+        });
+
+        // ---------- "איך זה עובד": שלושה תרחישים ----------
+        // ✏️ כאן משנים את הכותרות והטקסטים של כל תרחיש, ואת שלוש התחנות שבתרשים.
+        const FLOWS = [
+            {
+                number: '01 — לידים',
+                title: 'ליד נכנס.<br>מטופל לבד.',
+                copy: 'לקוח השאיר פרטים באתר? המערכת פותחת לו כרטיס ב-CRM ושולחת וואטסאפ אישי: "קיבלנו, מיד חוזרים!". אפס הקלדות.',
+                nodes: [['כשזה קורה', 'לקוח השאיר פרטים באתר'], ['המערכת', 'פותחת לו כרטיס ב-CRM'], ['והלקוח מקבל', 'וואטסאפ אישי, תוך שניות']]
+            },
+            {
+                number: '02 — גבייה',
+                title: 'מי לא שילם?<br>המערכת זוכרת.',
+                copy: 'מערכת שמזהה מי טרם שילם, שולחת תזכורת למייל או לנייד, ומפיקה חשבונית ברגע שהתשלום עובר.',
+                nodes: [['כשזה קורה', 'תשלום לא הגיע בזמן'], ['המערכת', 'שולחת תזכורת למייל ולנייד'], ['וכשהתשלום עובר', 'החשבונית יוצאת לבד']]
+            },
+            {
+                number: '03 — פגישות',
+                title: 'סוף ל"מתי<br>נוח לך?"',
+                copy: 'הלקוח קובע פגישה לבד בקישור חכם. המערכת מסנכרנת יומנים ושולחת תזכורות. בלי פינג-פונג.',
+                nodes: [['כשזה קורה', 'לקוח בוחר שעה בקישור'], ['המערכת', 'מסנכרנת את היומנים'], ['ולפני הפגישה', 'תזכורת יוצאת לשני הצדדים']]
+            }
+        ];
+        const flowSection = $('#features'), flowCopy = $('#flow-copy');
+        const nodeEls = $$('.node'), wireEls = $$('.wire');
+        let phase = -1, beat = 0, beatTimer = null, flowInView = false;
+
+        // התרשים "רץ": תחנה נדלקת, הקו מתמלא, התחנה הבאה נדלקת. בסוף - מתחיל שוב
+        // (במסך קטן עובר לתרחיש הבא).
+        function lightUp(n) {
+            nodeEls.forEach((el, i) => el.classList.toggle('on', i <= n));
+            wireEls.forEach((el, i) => el.classList.toggle('on', i < n));
+        }
+        function tick() {
+            clearTimeout(beatTimer);
+            if (!flowInView || document.hidden) { beatTimer = setTimeout(tick, 800); return; }
+            if (beat > 2) {
+                if (smallScreen.matches) { startPhase((phase + 1) % FLOWS.length); return; }
+                beat = 0; lightUp(-1);
+                beatTimer = setTimeout(tick, 700);
+                return;
+            }
+            lightUp(beat);
+            beat++;
+            beatTimer = setTimeout(tick, beat > 2 ? 2600 : 1300);
+        }
+        function startPhase(n) {
+            const changed = n !== phase;
+            phase = n; beat = 0;
+            const f = FLOWS[n];
+            if (changed) {
+                $('#phase-number').textContent = f.number;
+                $('#phase-title').innerHTML = f.title;
+                $('#phase-copy').textContent = f.copy;
+                flowCopy.classList.remove('swap'); void flowCopy.offsetWidth; flowCopy.classList.add('swap');
+                $$('[data-phase]').forEach((el) => el.setAttribute('aria-pressed', +el.dataset.phase === n));
+                nodeEls.forEach((el, i) => { el.querySelector('small').textContent = f.nodes[i][0]; el.querySelector('strong').textContent = f.nodes[i][1]; });
+            }
+            if (reducedMotion) { lightUp(2); return; }
+            lightUp(-1);
+            clearTimeout(beatTimer);
+            beatTimer = setTimeout(tick, 500);
+        }
+        new IntersectionObserver((entries) => {
+            const now = entries[0].isIntersecting;
+            if (now && !flowInView && phase >= 0) startPhase(phase);
+            flowInView = now;
+        }, { threshold: 0.05 }).observe(flowSection);
+
+        $$('[data-phase]').forEach((el) => el.onclick = () => {
+            const n = +el.dataset.phase;
+            if (smallScreen.matches) { startPhase(n); return; }
+            const top = scrollY + flowSection.getBoundingClientRect().top + (flowSection.offsetHeight - innerHeight) * [0.05, 0.5, 0.94][n];
+            scrollTo({ top, behavior: reducedMotion ? 'instant' : 'smooth' });
+        });
+
+        // ---------- כל מה שתלוי בגלילה ----------
+        function scrollUpdate() {
+            const y = scrollY, v = innerHeight;
+            $('.progress').style.transform = 'scaleY(' + y / Math.max(1, document.documentElement.scrollHeight - v) + ')';
+
+            const r = reading.getBoundingClientRect();
+            const readProgress = Math.max(0, Math.min(1, (v * 0.84 - r.top) / (r.height + v * 0.18)));
+            words.forEach((el, i) => el.classList.toggle('lit', reducedMotion || i / words.length < readProgress));
+            $('.gear').style.transform = 'rotate(' + (reducedMotion ? 0 : y * 0.09) + 'deg)';
+
+            if (!smallScreen.matches) {
+                const box = flowSection.getBoundingClientRect();
+                const progress = Math.max(0, Math.min(1, -box.top / Math.max(1, box.height - v)));
+                const current = Math.min(2, Math.floor(progress * 3));
+                if (current !== phase) startPhase(current);
+                $$('.track b').forEach((el, i) => el.style.width = Math.max(0, Math.min(1, progress * 2 - i)) * 100 + '%');
             } else {
-                modal.classList.add('opacity-0');
-                content.classList.remove('scale-100');
-                content.classList.add('scale-95');
-                setTimeout(() => modal.classList.add('hidden'), 300);
+                $$('.track b').forEach((el, i) => el.style.width = (phase > i ? 100 : 0) + '%');
             }
+            updateCursorTone();
         }
+        addEventListener('scroll', scrollUpdate, { passive: true });
+        if (phase < 0) startPhase(0);
+        scrollUpdate();
 
+        // ---------- מחשבון החיסכון ----------
+        const leadsSlider = $('#leads-range'), timeSlider = $('#time-range');
+        function updateSimulator() {
+            const leads = parseInt(leadsSlider.value), time = parseInt(timeSlider.value);
+            $('#leads-val').innerText = leads;
+            $('#time-val').innerText = time + " דק'";
+            const annualHours = Math.round((leads * time * 22 * 12) / 60);
+            $('#hours-display').innerText = annualHours.toLocaleString();
+            $('#savings-display').innerText = (annualHours * 50).toLocaleString();
+        }
+        leadsSlider.addEventListener('input', updateSimulator);
+        timeSlider.addEventListener('input', updateSimulator);
+        updateSimulator();
+
+        // מחשבון "זמן פח" שבתחתית
+        $('#wasted-min').addEventListener('input', (e) => {
+            const mins = parseInt(e.target.value) || 0;
+            $('#wasted-result').innerText = ((mins * 250) / 60 / 8).toFixed(1);
+        });
+
+        // ---------- צ'אט ----------
         function highlightChat() {
-            const pointer = document.getElementById('chat-pointer');
-            pointer.classList.remove('hidden');
-            
-            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) {
-                ktt10.openWidget();
-            }
-
-            setTimeout(() => {
-                pointer.classList.add('hidden');
-            }, 5000);
+            const chatPointer = $('#chat-pointer');
+            chatPointer.hidden = false;
+            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) ktt10.openWidget();
+            setTimeout(() => { chatPointer.hidden = true; }, 5000);
         }
 
-        // Display nice loading animation before ideas
-        const renderLoading = () => `<div class="text-center py-6 flex flex-col items-center justify-center gap-3">
-                                        <i class="fas fa-circle-notch fa-spin text-[#8b5cf6] text-4xl"></i>
-                                        <span class="text-slate-500 font-medium">ה-AI חושב על רעיונות...</span>
-                                     </div>`;
-
-        async function askAI() {
-            const inputEl = document.getElementById('ai-input');
-            const input = inputEl.value;
-            const outputDiv = document.getElementById('ai-output');
-            const ctaBtn = document.getElementById('ai-cta-btn');
-
-            if(!input) {
-                inputEl.placeholder = "נא להזין מקצוע!";
-                inputEl.classList.add('border-red-500', 'ring-red-500');
-                setTimeout(() => {
-                    inputEl.placeholder = "לדוגמה: עורך דין, מאלף כלבים...";
-                    inputEl.classList.remove('border-red-500', 'ring-red-500');
-                }, 2000);
+        // ---------- מחולל הרעיונות ----------
+        // השדה שבמסך הראשון: מעביר את מה שנכתב לחלק של המחולל, גולל אליו ומפעיל אותו
+        function heroAsk() {
+            const field = $('#hero-ai-input'), value = field.value.trim();
+            if (!value) {
+                $('#hero-ask').classList.add('bad');
+                field.focus();
+                setTimeout(() => $('#hero-ask').classList.remove('bad'), 1500);
                 return;
             }
-
-            outputDiv.innerHTML = renderLoading();
-            ctaBtn.classList.add('hidden');
-
-            try {
-                const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/f8267e4c-8f18-42ef-a2b3-abd4ae9b9de6', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ profession: input })
-                });
-                
-                const rawText = await response.text();
-                let ideas = [];
-                
-                try {
-                    const data = JSON.parse(rawText);
-                    if (Array.isArray(data)) {
-                        ideas = data;
-                    } else if (data.ideas && Array.isArray(data.ideas)) {
-                        ideas = data.ideas;
-                    } else {
-                        const textData = data.output || data.text || "";
-                        ideas = textData.split('\n').filter(line => line.trim().length > 0);
-                    }
-                } catch (e) {
-                    ideas = rawText.split('\n').filter(line => line.trim().length > 0);
-                }
-
-                let html = '';
-                ideas.forEach(idea => {
-                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#6d28d9]">$1</span>');
-                    html += `<div class="p-4 bg-purple-50/50 hover:bg-purple-50 border border-purple-100 rounded-xl flex items-start gap-3 text-right transition">
-                                <i class="fas fa-bolt text-[#8b5cf6] text-xl mt-1 shrink-0"></i>
-                                <span class="text-slate-700 font-medium text-sm leading-relaxed">${formatted}</span>
-                             </div>`;
-                });
-                outputDiv.innerHTML = html;
-                ctaBtn.classList.remove('hidden');
-
-            } catch (err) {
-                console.error(err);
-                outputDiv.innerHTML = `<div class="text-red-500 text-center font-bold p-4 bg-red-50 rounded-xl border border-red-100">אופס... הייתה שגיאה בחיבור למעבדה. נסה שוב.</div>`;
-            }
+            $('#ai-input-page').value = value;
+            $('#ai-lab').scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth' });
+            askAIPage();
         }
-
+        const escapeHtml = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         async function askAIPage() {
-            const inputEl = document.getElementById('ai-input-page');
-            const input = inputEl.value;
-            const outputDiv = document.getElementById('ai-output-page');
-            const ctaBtn = document.getElementById('ai-cta-btn-page');
-
-            if(!input) {
-                inputEl.placeholder = "שכחת לכתוב מקצוע ;)";
-                inputEl.classList.add('ring-4', 'ring-red-400/20', 'border-red-400');
-                setTimeout(() => {
-                    inputEl.placeholder = "לדוגמה: עורך דין, גנן, חנות בגדים...";
-                    inputEl.classList.remove('ring-4', 'ring-red-400/20', 'border-red-400');
-                }, 2000);
+            const inputEl = $('#ai-input-page'), outputDiv = $('#ai-output-page'), ctaBtn = $('#ai-cta-btn-page');
+            const input = inputEl.value.trim();
+            if (!input) {
+                inputEl.placeholder = 'שכחת לכתוב מקצוע ;)';
+                $('#ai-ask').classList.add('bad');
+                setTimeout(() => { inputEl.placeholder = 'לדוגמה: עורך דין, גנן, חנות בגדים...'; $('#ai-ask').classList.remove('bad'); }, 2000);
                 return;
             }
-
-            outputDiv.innerHTML = renderLoading();
-            outputDiv.classList.remove('hidden');
-            ctaBtn.classList.add('hidden');
+            outputDiv.innerHTML = '<p class="wait">ה-AI חושב על רעיונות...</p>';
+            outputDiv.hidden = false;
+            ctaBtn.hidden = true;
 
             try {
                 const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/f8267e4c-8f18-42ef-a2b3-abd4ae9b9de6', {
@@ -1100,59 +1136,39 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ profession: input })
                 });
-                
                 const rawText = await response.text();
                 let ideas = [];
-                
                 try {
                     const data = JSON.parse(rawText);
-                    if (Array.isArray(data)) {
-                        ideas = data;
-                    } else if (data.ideas && Array.isArray(data.ideas)) {
-                        ideas = data.ideas;
-                    } else {
-                        const textData = data.output || data.text || "";
-                        ideas = textData.split('\n').filter(line => line.trim().length > 0);
-                    }
+                    if (Array.isArray(data)) ideas = data;
+                    else if (data.ideas && Array.isArray(data.ideas)) ideas = data.ideas;
+                    else ideas = (data.output || data.text || '').split('\n').filter((line) => line.trim().length > 0);
                 } catch (e) {
-                    ideas = rawText.split('\n').filter(line => line.trim().length > 0);
+                    ideas = rawText.split('\n').filter((line) => line.trim().length > 0);
                 }
-
-                let html = '';
-                ideas.forEach(idea => {
-                    const formatted = idea.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold text-[#6d28d9]">$1</span>');
-                    html += `<div class="p-5 bg-white border border-[#8b5cf6]/20 shadow-sm hover:shadow-md rounded-2xl flex items-start gap-4 text-right transition transform hover:-translate-y-1">
-                                <div class="bg-gradient-to-br from-[#8b5cf6]/20 to-[#6d28d9]/10 text-[#6d28d9] w-10 h-10 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-lightbulb"></i></div>
-                                <span class="text-slate-700 text-base leading-relaxed mt-1">${formatted}</span>
-                             </div>`;
-                });
-                outputDiv.innerHTML = html;
-                ctaBtn.classList.remove('hidden');
-
+                outputDiv.innerHTML = ideas.map((idea, i) =>
+                    '<div class="idea" style="animation-delay:' + i * 0.12 + 's">' + escapeHtml(idea).replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') + '</div>').join('');
+                ctaBtn.hidden = false;
             } catch (err) {
                 console.error(err);
-                outputDiv.innerHTML = `<div class="text-red-500 text-center font-bold p-4 bg-red-50 rounded-xl border border-red-100">אופס... הייתה שגיאה בחיבור למעבדה. נסה שוב.</div>`;
+                outputDiv.innerHTML = '<p class="fail">החיבור למחולל נכשל. נסו שוב בעוד רגע.</p>';
             }
         }
 
-        // --- Webhook Lead Sender ---
+        // ---------- טופס השארת פרטים ----------
         async function sendLead() {
-            const btn = document.getElementById('submit-btn-main');
-            const msg = document.getElementById('form-message');
-            
-            const name = document.getElementById('contact-name-main').value;
-            const phone = document.getElementById('contact-phone-main').value;
-            const email = document.getElementById('contact-email-main').value;
-            const bName = document.getElementById('business-name-main').value;
-            const consent = document.getElementById('contact-consent-main').checked;
+            const btn = $('#submit-btn-main'), msg = $('#form-message');
+            const name = $('#contact-name-main').value;
+            const phone = $('#contact-phone-main').value;
+            const email = $('#contact-email-main').value;
+            const bName = $('#business-name-main').value;
+            const consent = $('#contact-consent-main').checked;
+            if (!name || !phone || !email) return;
 
-            if(!name || !phone || !email) return;
-
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> שולח...';
+            const originalText = btn.textContent;
+            btn.textContent = 'שולח...';
             btn.disabled = true;
-            btn.classList.add('opacity-75');
-            msg.classList.add('hidden');
+            msg.hidden = true;
 
             try {
                 const response = await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/Simple_automatic_website', {
@@ -1167,73 +1183,44 @@
                         marketingConsent: consent
                     })
                 });
-
-                if (response.ok) {
-                    btn.innerHTML = '<i class="fas fa-check"></i> נשלח בהצלחה!';
-                    btn.classList.replace('bg-[#009E8E]', 'bg-green-500');
-                    btn.classList.replace('hover:bg-[#008A7B]', 'hover:bg-green-600');
-                    
-                    msg.innerHTML = 'הפרטים התקבלו! נחזור אליך בהקדם.';
-                    msg.className = 'text-center font-bold p-3 rounded-xl bg-green-50 text-green-600 border border-green-200 block';
-                    
-                    document.getElementById('lead-form-main').reset();
-                } else {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
+                btn.textContent = 'הפרטים נשלחו';
+                msg.textContent = 'הפרטים התקבלו! נחזור אליך בהקדם.';
+                msg.className = 'form-msg ok';
+                msg.hidden = false;
+                $('#lead-form-main').reset();
             } catch (err) {
-                btn.innerHTML = originalText;
+                btn.textContent = originalText;
                 btn.disabled = false;
-                btn.classList.remove('opacity-75');
-                
-                msg.innerHTML = 'שגיאה בשליחת הנתונים. אנא נסו שוב או פנו דרך הבוט.';
-                msg.className = 'text-center font-bold p-3 rounded-xl bg-red-50 text-red-500 border border-red-200 block';
+                msg.textContent = 'הפרטים לא נשלחו. נסו שוב, או פנו דרך הבוט.';
+                msg.className = 'form-msg err';
+                msg.hidden = false;
             }
         }
 
-        // --- Exit Intent Popup Logic ---
+        // ---------- חלון יציאה (כשהעכבר עוזב את העמוד כלפי מעלה) ----------
         let exitPopupShown = false;
-
         document.addEventListener('mouseleave', (e) => {
-            if (e.clientY <= 0 && !exitPopupShown) {
-                exitPopupShown = true;
-                openExitPopup();
-            }
+            if (e.clientY <= 0 && !exitPopupShown) { exitPopupShown = true; openExitPopup(); }
         });
-
         function openExitPopup() {
-            const popup = document.getElementById('exit-popup');
-            const content = document.getElementById('exit-popup-content');
-            popup.classList.remove('hidden');
-            popup.classList.add('flex');
-            setTimeout(() => {
-                popup.classList.remove('opacity-0');
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            }, 10);
+            const popup = $('#exit-popup');
+            popup.hidden = false;
+            setTimeout(() => popup.classList.add('show'), 10);
         }
-
         function closeExitPopup() {
-            const popup = document.getElementById('exit-popup');
-            const content = document.getElementById('exit-popup-content');
-            popup.classList.add('opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-            setTimeout(() => {
-                popup.classList.add('hidden');
-                popup.classList.remove('flex');
-            }, 300);
+            const popup = $('#exit-popup');
+            if (popup.hidden) return;
+            popup.classList.remove('show');
+            setTimeout(() => { popup.hidden = true; }, 300);
         }
+        $('#exit-popup').addEventListener('click', (e) => { if (e.target.id === 'exit-popup') closeExitPopup(); });
 
         async function submitExitForm() {
-            const name = document.getElementById('exit-name').value;
-            const email = document.getElementById('exit-email').value;
-            const consent = document.getElementById('exit-consent').checked;
-            const btn = document.getElementById('exit-btn');
-            const msg = document.getElementById('exit-msg');
-
+            const name = $('#exit-name').value, email = $('#exit-email').value, consent = $('#exit-consent').checked;
+            const btn = $('#exit-btn'), msg = $('#exit-msg');
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> מעבד...';
-
+            btn.textContent = 'שולח...';
             try {
                 await fetch('https://n8n.srv1256019.hstgr.cloud/webhook/Simple_automatic_website', {
                     method: 'POST',
@@ -1247,29 +1234,93 @@
                         marketingConsent: consent
                     })
                 });
-
-                btn.classList.add('hidden');
-                document.getElementById('exit-name').classList.add('hidden');
-                document.getElementById('exit-email').classList.add('hidden');
-                document.getElementById('exit-consent').parentElement.classList.add('hidden');
-                
-                msg.innerHTML = '<i class="fas fa-check-circle text-xl mb-1 block"></i> מעולה! המדריך בדרך למייל שלך.';
-                msg.classList.remove('hidden');
-
-                setTimeout(() => {
-                    closeExitPopup();
-                }, 3000);
-
+                $('#exit-form').hidden = true;
+                msg.textContent = 'מעולה! המדריך בדרך למייל שלך.';
+                msg.hidden = false;
+                setTimeout(closeExitPopup, 3000);
             } catch (err) {
                 btn.disabled = false;
-                btn.innerHTML = 'שגיאה בשליחה. נסה שוב <i class="fas fa-redo"></i>';
+                btn.textContent = 'השליחה נכשלה. נסו שוב';
             }
         }
+
+        // ---------- הלוגו מנקודות ----------
+        // מיקומי הנקודות חושבו מראש מתמונת הלוגו ושמורים כאן כרשימת מספרים (לא כתמונה, כדי שסינון תמונות לא ישבש אותם).
+        const hero = $('.hero'), canvas = $('#logo'), ctx = canvas.getContext('2d');
+        let particles = [], width = 0, height = 0, started = performance.now(), burstAt = -10000, ready = false;
+        const LOGO_W = 190, LOGO_H = 112, LOGO_ASPECT = 0.5895;
+        const LOGO_POINTS = [7081,14280,12029,21506,30651,6711,38329,11723,13975,7497,20843,32539,28544,17829,33357,31097,35625,33896,5925,35245,11335,9399,37513,17841,27590,22365,5567,31312,20509,35579,19242,23000,17085,32237,33707,37187,29217,16673,28928,28427,38633,18943,7571,9777,21388,19343,22534,24196,22276,24404,34105,12867,21182,38995,13864,21792,21452,22552,29199,36379,15927,28548,9735,32862,9819,32161,37189,22070,33019,30996,21530,37402,13207,23008,31111,9282,20428,20230,15129,8979,21456,32132,32537,25415,35619,36029,22528,18615,22648,6799,36757,19317,33781,18613,20507,12829,13641,27742,37463,33588,25393,23056,7109,19074,21774,6305,32440,21645,25431,10889,24962,23816,24645,4803,24218,36777,19844,23163,33741,37163,21251,7829,12419,11984,36747,8609,38327,1399,23430,33319,20867,21619,22409,21615,13623,36415,11218,30576,34690,8977,31487,20236,24307,6375,23149,25156,32583,31338,10195,37167,31320,33001,21520,37489,15360,33264,33154,33178,2123,10553,23915,40909,31077,30622,37939,20085,17029,27693,25730,37143,2539,22588,2133,20107,26539,9357,22536,24693,19458,8540,11303,10143,40523,18217,25077,29418,6035,10925,36043,33679,32939,34519,10203,22001,18973,22381,24972,2509,34248,21822,13070,33202,28522,6787,10903,14373,7772,32221,17716,13518,37525,23462,257,10175,28162,25728,36721,8291,8534,8530,29589,39455,19701,22858,25336,5179,7893,37010,34254,36007,6405,18314,29856,36272,35241,12724,33890,31463,28146,7519,36335,34298,8301,22142,4897,36441,11717,5647,8267,35898,7883,35649,20863,9049,14616,14610,4493,21655,7901,33938,23818,20208,20584,32587,31314,32625,30950,25718,35569,4427,38635,30180,24028,34300,7855,35955,14779,30333,27780,18870,15517,21235,32886,33904,18565,6007,14021,17459,22594,21862,31869,22749,21876,33343,19351,34809,25350,36423,9415,34847,31031,36065,36343,35571,6383,30731,22904,9745,12692,26460,8311,38235,20485,36339,25041,12382,33168,33725,33906,10219,11729,21999,22972,6791,5635,32494,26179,29868,23883,31322,36717,34099,10495,12857,18876,22962,26945,38625,19262,12716,24291,5987,22017,7077,33206,12754,34232,19739,13991,28437,37400,8661,13985,33305,33013,38227,21898,6717,32822,33132,33530,27788,11329,34169,33470,40509,30234,9457,33729,12061,36644,33765,39459,4131,40911,17793,9367,25542,14286,28130,31845,34821,31795,20228,28898,33313,22960,21844,18949,30568,38601,1777,18890,34242,32508,34252,23501,23624,36268,28843,28811,7187,10826,8293,34815,18219,25795,28055,11966,28938,14023,28047,7129,14783,18935,21989,34831,11226,8213,32828,34475,26551,25013,12489,29804,2141,13601,6745,22604,18498,5977,5167,23539,37191,31415,9763,40149,31037,22706,21180,28443,33136,28354,21884,33888,22638,37147,4881,35969,24956,22238,6725,23169,29933,8281,5263,19088,23810,20042,3663,18977,6701,9429,33994,9029,22922,19260,35880,33335,11661,24273,8233,38269,17035,12843,25435,28081,4867,31871,34437,30345,34384,33317,37465,34730,12407,5253,7891,15515,19656,28136,21834,7487,34897,34000,38637,13219,18175,32929,23145,37475,22614,6015,36809,7491,35106,27685,36401,15812,31861,31419,33926,33395,34113,8520,41295,22902,5185,6009,12827,32136,22264,33160,38993,22322,33522,3659,24685,33118,32171,4789,33878,14401,21627,6695,34929,37873,22986,6755,36341,15541,21808,33685,20416,10201,24683,20481,37119,21340,14399,35900,8649,29963,18209,15436,16271,35633,34517,35211,30168,36751,4831,4061,7549,28156,32096,7770,3283,38691,24414,27768,7925,34726,12051,33351,8920,21828,1765,1787,24600,6779,17467,4437,34626,9363,32235,10565,28839,9063,33709,18593,30737,37515,31686,28918,32933,7837,35663,10139,21649,30614,35508,1007,10064,22202,33403,32575,24651,35108,22856,21430,8639,24398,22920,22840,22702,17425,38241,6411,12041,41665,35253,26171,11206,20424,34441,31407,29577,22379,4811,20463,3685,7489,11930,36755,11317,4793,33701,18195,23537,25439,10509,39771,7541,38323,27784,39833,21273,7175,11713,25354,7863,13836,39013,30351,15434,30612,35675,17334,17833,33858,29555,22530,32251,16283,22759,26191,8239,41303,21609,7941,32179,29219,12431,23434,15042,8991,28524,34143,27677,40133,39749,6013,31453,19664,21756,31471,22188,13142,10794,18203,26921,24665,19832,7825,7535,12308,8285,20990,23012,9073,33200,7139,29183,20865,35637,19828,7758,10846,13136,32945,32098,31859,7833,39757,21382,32547,28932,26925,20234,28083,10973,2889,31431,17855,21782,33775,8681,23899,22626,6401,33166,32549,31079,17714,14282,9427,18902,21772,2537,17037,23426,2519,11204,33508,40513,35671,17053,21856,37517,34049,10412,17722,39781,20206,39007,5661,32860,34503,8607,21496,31748,29973,33880,28455,12370,5649,13104,31841,13520,22950,4431,34865,30335,18989,9463,12310,33526,21314,14976,18975,34728,9839,18702,20875,22568,9829,32961,34167,35987,7191,35138,5193,31427,14777,31324,20097,32884,18124,17031,35136,32557,13474,33719,20582,8595,7095,8518,21400,19357,26919,29213,25433,16956,11689,4069,13995,10848,639,8912,35299,10963,29108,2127,38267,30719,40153,39003,34525,18882,40537,10141,13261,24604,18520,22222,2159,12445,14666,13593,19321,22954,11612,20034,8241,18480,5273,25417,31805,32878,28882,32165,18134,32941,35645,9353,22476,7183,6337,22294,20117,33644,21486,19323,21271,35482,24596,32571,23078,6371,13227,7159,9425,28516,31787,35989,4423,18971,6033,7513,27222,28924,8637,27978,22700,20899,26559,22178,4879,13522,25328,39367,22021,28936,21726,11297,11172,14397,21502,17077,30733,32643,36248,14670,18223,22391,3359,23123,22078,1773,6391,31873,34509,21896,28142,24224,34811,11693,21418,38321,17342,28431,37885,24641,2139,26545,10505,10197,4117,6021,24661,19090,4441,2131,20202,24653,14606,26106,34234,18945,26840,26181,10193,36361,28829,5625,22795,15141,7529,15891,22988,27592,19626,35961,5951,8693,8900,4507,33864,33580,31829,5555,22864,21241,31437,23875,8313,34638,33751,40535,7135,34073,14238,9005,14600,21848,14604,9652,13830,10032,25021,37555,40129,34340,9053,22644,4515,34851,35565,10587,23248,34630,19660,21866,24257,23521,30315,22260,33648,32193,39393,5277,35995,34678,33023,35621,23925,33854,18607,17089,2917,22522,16954,41671,35132,27786,15511,34837,37145,14602,6737,23016,12481,6357,35615,22763,34059,37193,23658,29181,21940,25356,18557,36351,21406,25807,30705,20103,37571,12865,28726,9813,32217,22377,27972,31033,34149,20505,24695,22668,36765,30190,10971,12479,13243,13629,22328,3731,5249,8599,10955,35677,22976,4055,4513,22458,34445,3269,33681,11307,2911,36779,35613,31372,33540,2979,10185,34473,40165,3657,10790,36753,35623,34696,12718,6735,5171,23036,13591,10183,33100,31863,24390,11325,12033,5923,17047,20238,22642,14232,14240,36250,5663,22982,22228,23513,12043,21816,32921,37471,31815,23466,15885,4021,33753,29585,19092,27681,19082,18126,24663,18120,13480,6005,35868,24032,15503,40919,33150,6339,24410,7157,25395,13526,25027,21858,21438,7871,33962,37392,7499,31855,6351,24259,22914,16655,25724,15147,35235,26565,12469,12085,37183,22094,36761,14672,12103,8623,20891,9292,21448,32175,24952,37404,14385,30721,5569,32541,9003,40135,36419,40139,18692,18488,7762,35193,21874,28942,25732,19244,30697,38253,34843,23086,20497,16198,34274,4129,13840,15159,34085,15509,1757,33902,17095,17431,18605,32259,27772,9437,2547,15901,18706,21322,22007,23270,9660,26909,34636,261,22084,36735,14753,18698,12839,29595,27673,11606,34065,29104,34549,22212,19707,24394,14620,31803,27695,11598,11546,11168,36264,39375,29858,33771,2523,8667,15915,34644,10217,33339,28906,2149,11208,38615,19319,15143,15903,28128,34258,21826,22216,9019,4113,4511,23131,33783,20499,40889,10947,38607,21706,20079,36331,15364,37495,24408,22019,32971,23137,5601,23153,24958,21617,35297,36652,22262,28530,22866,27325,34507,25031,38991,23836,40517,31085,31835,31857,18874,9783,13235,2501,8655,18888,12875,41275,13229,11349,30956,24576,14290,17463,25546,4445,10535,4887,7879,20204,9286,21217,29191,33301,12378,19741,5653,33138,31411,22787,20618,38249,11994,18559,29935,29426,21631,34881,23040,8687,38311,21566,17445,7477,30327,10905,1779,28077,10818,28896,37097,4023,35303,19632,7115,23026,23848,14990,32979,31875,9678,28940,12439,32478,12312,1021,8243,33325,11691,25920,37396,32167,1751,6783,9731,15529,34314,5587,12023,8329,13134,9276,11727,32585,33164,32870,13977,19846,21532,10199,24002,35255,33003,35605,33998,17441,22832,35999,8894,34887,30926,6347,31000,30313,13524,21983,24602,10877,33134,33329,10030,34531,30337,37523,34022,32997,3649,11351,31799,19731,40123,14612,6413,9047,16661,35189,19252,18896,25334,27598,34515,5651,21981,22704,22582,26116,32189,7177,37034,37481,6775,27705,19379,24216,8671,37551,30942,12869,14393,29593,10036,23117,22622,23503,11311,8587,22470,28835,13454,629,24772,7153,4127,33025,30998,11216,21392,12306,38627,34089,12485,11687,36813,12027,36797,15539,31447,39787,21330,13096,34652,30948,11608,11725,10187,7881,24386,22592,31107,33928,20857,7867,12101,2129,36437,32128,21253,23893,22980,22936,12821,28063,10929,23175,9785,5931,17718,24960,30242,39753,20877,9787,627,39075,14230,8225,2921,10939,33548,23458,32482,33920,24004,17801,33238,21985,20808,4781,11287,25023,35894,7451,40131,12340,7945,23907,11653,12762,17065,4111,10981,30683,10519,19719,17443,40525,5169,19747,28144,21346,22160,31746,20467,37026,37099,22946,14395,33176,28180,10145,32514,21722,34931,31340,23515,14367,18516,8597,13635,35643,38319,37093,9371,7927,36375,33932,13249,40125,3281,11679,14751,10893,24580,12441,8683,31497,31483,30244,25815,2505,30570,18878,22454,24275,28526,34246,27760,34521,4053,18504,40215,22664,7131,19826,30618,35203,18199,22369,16307,22574,7137,22192,33779,8701,7089,6685,12859,13631,36359,11988,17821,22930,31853,18969,37569,32064,42059,37845,21894,25401,37559,41289,31101,25407,4503,7495,35689,39373,9011,38263,4891,19630,6707,10975,16663,11277,32555,17413,40927,23812,14284,31413,22558,36787,33922,32476,9431,19703,21462,28140,21762,12837,6721,25771,16653,11657,32183,7913,2515,37577,24212,34501,34308,24038,12825,32969,29581,8914,32991,36355,28884,37179,23052,35257,23432,9079,33773,28045,35279,7851,25166,22270,33876,36274,21786,14359,19642,9001,9021,21342,30701,10917,40913,21601,25706,25330,10511,30940,21428,35195,35687,32892,22224,8532,13997,26537,17069,18997,31057,17427,33640,33323,13637,22708,35277,25352,33850,20503,27305,22013,10915,17726,34443,28722,10796,32947,19737,34853,19733,25799,34133,253,1005,9361,21760,13838,15161,5557,10163,36025,14982,24285,9027,23939,22480,36057,28447,39071,28926,21758,7557,37927,7185,12861,40907,28558,23620,30311,35575,10446,34318,5941,37083,6307,28546,9407,10832,8156,8524,35991,31091,36027,24598,26541,6767,14222,10215,36435,30930,7919,7521,26838,33401,20855,36638,25722,8629,23648,38231,26941,23509,18179,33341,33874,39361,31469,22672,21269,39027,25158,32953,22630,13217,19256,24578,20847,34541,12475,39761,10595,33552,14664,30689,7859,37557,33546,11974,20608,19848,12075,7923,14389,21657,7911,35577,34378,36634,10953,25360,40533,13167,41669,25797,8631,9843,36731,14771,20968,12726,32981,11671,22650,22546,22407,37491,20804,34927,10513,29100,40143,36636,24226,31694,38243,35520,33381,33964,22608,7887,33482,5165,17837,40163,24006,12053,12459,8665,36019,19456,29189,7063,11170,25071,31334,39405,15048,11649,34127,10901,26187,20580,37947,26531,7503,11309,24970,34463,8217,14226,7569,21868,35667,10438,32072,33556,2907,27754,42441,20802,2977,13613,7173,28916,9355,40161,2147,29569,24281,14745,33616,2923,36729,7179,32257,15432,22009,33960,28356,4505,33353,18324,37129,4813,35864,20044,25777,22130,33767,26569,32609,32959,2125,31716,34527,35217,16572,14216,34260,30924,34075,35259,10060,16194,17805,20046,35207,7473,22526,33544,31831,10979,30994,37567,5935,22514,30560,21950,33626,33554,33355,12415,29422,24012,11281,24263,22082,19727,35130,25403,6019,22072,32255,29102,3355,20515,14759,31833,24402,18951,28504,10416,20125,36009,25912,22628,25817,4823,5191,32066,37945,32931,35263,19280,32581,9773,31439,20461,23135,8981,31801,14228,4025,39377,24265,22134,6041,9035,32888,24384,11347,6043,17439,20849,27289,9658,30739,6731,5591,33122,33250,6365,33472,2165,9395,9765,5161,22512,30566,24980,4109,36711,33293,6423,28073,37875,34469,40897,27319,4029,3667,34061,21225,7065,29583,24978,35301,40895,21794,18961,29480,37149,37877,40527,7165,34304,31310,22894,12453,42063,28510,5579,3293,2927,3263,13860,39409,22634,31055,32951,13621,4499,10121,5953,20418,19274,17813,34155,37497,13484,11220,28168,41685,21694,15533,7069,7899,39765,263,33745,2915,21422,21597,9423,28158,19842,22793,19325,10159,9729,31368,16693,29864,36011,36771,33502,30735,22996,4791,19830,34087,11234,3285,22172,22769,10875,12845,35647,35635,22405,22556,5549,23155,9821,22934,40147,10788,21714,34135,8647,23274,34055,33884,31495,10213,34012,10533,8663,25164,41663,33208,17839,36409,20121,22184,39465,17845,9272,26547,37784,31813,21768,30186,20800,28562,5623,15913,8227,20861,7125,8261,28441,36021,15133,7167,1775,42057,15125,23133,22252,3683,38999,19361,7547,18122,34487,29482,38309,21255,13619,8247,7949,9825,19264,8512,9443,2983,21752,37891,36763,16962,32213,33009,17081,13633,29209,10945,18328,21704,37871,24192,11659,17057,8231,32446,6395,28132,10177,9087,33321,11711,34137,37121,23553,3741,31087,15543,12059,35945,9069,11926,34483,5199,24297,33723,9453,17075,7831,18189,16188,34835,20517,33391,6763,3733,33671,24689,24586,4041,22916,21700,32191,32925,25073,8299,37018,33399,5629,23032,4825,22401,29953,22198,35870,11980,25773,28827,36719,26084,31376,20457,8659,20018,39467,6425,24968,33248,22146,4429,7515,37173,34151,33373,34453,26931,19454,24267,36017,12447,33128,12045,31791,21261,20422,4509,10824,19353,4415,21436,21458,33785,18688,18581,24691,9083,12855,33697,10038,32173,21522,33675,24582,23129,27321,38697,32496,34622,8140,5247,14986,33514,22777,13140,34020,19359,21390,10577,36823,34083,10189,7533,21888,36276,23535,25803,33333,26189,22256,18312,40539,22280,36061,29565,32504,24673,25053,6385,21466,6797,24214,29860,35597,13482,5969,38251,9815,33478,9455,37101,29943,32641,27748,23428,11291,11359,26169,11669,21524,7083,18686,31065,12831,19759,38997,22029,31316,7527,13852,7071,31817,24976,33377,35979,35659,41301,26844,33112,33098,22662,29810,21562,18197,14369,16287,29798,14242,19363,9373,8585,22031,23913,10561,35651,16649,37141,4421,11279,33007,22562,11709,25144,22468,27766,33297,14278,22486,18326,23054,10507,21344,22389,34899,17825,20519,3687,36646,5201,42055,7931,32442,34539,31421,15157,8896,32935,6741,21643,11962,11976,6809,11733,12483,40121,35251,37509,12095,33739,12411,10834,31071,9747,28914,25451,36397,24277,27327,19333,22846,17809,30321,3675,22371,22924,3363,32199,9405,28730,24283,32597,26155,4787,34256,8295,34819,28152,15052,20889,21611,5975,15153,17429,6781,34722,37185,26159,35197,12835,28344,6683,14749,23020,5957,40923,10515,3677,2155,5655,32472,32195,22737,18864,34157,37085,3279,34147,42439,8677,18571,25710,34760,25916,38983,28532,5259,25457,33146,20475,5581,11232,31308,30188,34010,22214,26911,7067,31115,2525,10115,41679,13072,21324,36819,38335,33620,37133,3749,36337,37887,24034,28122,19080,10541,34161,25775,39773,25443,34885,26549,21698,10137,20105,9391,27679,19838,18187,8307,35112,10123,30554,37503,10593,31475,39839,36371,32490,25397,9351,21312,34686,36381,32203,11673,32448,11677,19850,24766,33705,22200,23929,22974,23533,5937,2541,27707,8269,39395,11992,19755,32247,15139,13225,24643,26167,33311,40219,22560,7525,35289,11550,18983,36733,22586,36783,8211,20131,29969,23808,6317,33260,20966,21641,19824,25791,8625,27313,6803,11339,21348,21184,36707,1391,9051,32215,26929,33918,28449,33558,9672,22292,33385,17461,23024,22411,14377,29215,21446,33096,10836,18233,23497,35617,28837,21500,17073,10965,12722,11333,33634,23268,33005,37467,32563,22550,28732,33996,7105,30703,19258,12451,37507,10444,18100,10517,2535,25399,13908,33258,38255,18886,21870,34855,19248,20212,34077,22096,12443,39391,37853,10913,19076,12352,14739,35221,2545,21914,40915,28514,2597,32062,19735,22751,19757,24311,9419,23814,1009,34859,10941,18237,34688,36739,3681,18941,6373,4057,34268,23527,31851,20012,34310,9751,25811,7947,13462,31117,3673,21824,33500,37563,9397,19450,7171,30699,22286,9270,9461,23525,10537,23018,30240,28352,21378,14011,21878,18500,10171,36709,23030,4883,18555,35977,33116,10935,20137,17477,24984,29812,10205,10147,23177,4439,18583,7455,37573,18181,40545,13257,12348,13607,37111,37521,31825,34921,32595,8679,8975,11586,37505,14598,10569,20501,10909,22450,10885,12356,21482,11222,8989,19697,34129,23905,21396,24309,28051,6727,23173,9743,35295,24014,19666,18205,25449,40145,7939,5563,17843,28148,6709,18563,37020,18221,18183,11293,37485,30691,4417,25421,24396,9435,23505,32553,6765,23846,27291];
+        function resizeLogo() {
+            const rect = hero.getBoundingClientRect(), d = Math.min(devicePixelRatio, 2);
+            width = rect.width; height = rect.height;
+            canvas.width = width * d; canvas.height = height * d;
+            ctx.setTransform(d, 0, 0, d, 0, 0);
+        }
+        function seeded(n) { const x = Math.sin(n * 78.233 + 17.17) * 43758.5453; return x - Math.floor(x); }
+        function sampleLogo() {
+            const count = Math.min(innerWidth < 860 ? 1700 : LOGO_POINTS.length, LOGO_POINTS.length);
+            particles = LOGO_POINTS.slice(0, count).map((code, i) => {
+                // כל מספר ברשימה = מיקום של נקודה אחת בסמל, והספרה האחרונה אומרת אם היא מהחלק הכהה של הלוגו
+                const navy = code % 2 === 1, pos = (code - (navy ? 1 : 0)) / 2;
+                const x = pos % LOGO_W + seeded(i + 100), y = Math.floor(pos / LOGO_W) + seeded(i + 200);
+                return {
+                    u: x / LOGO_W - 0.5, v: (y / LOGO_H - 0.5) * LOGO_ASPECT, navy,
+                    scatterX: 0, scatterY: 0,
+                    seed: seeded(i + 7000) * 6.28,
+                    size: 0.75 + Math.pow(seeded(i + 9000), 2) * 2.1
+                };
+            });
+            started = performance.now();
+            ready = true;
+        }
+        function scatter() {
+            burstAt = performance.now();
+            particles.forEach((p, i) => {
+                p.scatterX = width * (0.025 + 0.95 * seeded(i + 12000 + burstAt));
+                p.scatterY = height * (0.04 + 0.90 * seeded(i + 16000 + burstAt));
+            });
+        }
+        $('#scatter-logo').onclick = scatter;
+        resizeLogo();
+        sampleLogo();
+        addEventListener('resize', () => { resizeLogo(); scrollUpdate(); });
+
+        function frame(t) {
+            requestAnimationFrame(frame);
+            cx += (pointer.x - cx) * 0.24; cy += (pointer.y - cy) * 0.24;
+            cursor.style.transform = 'translate(' + (cx - cursor.offsetWidth / 2) + 'px,' + (cy - cursor.offsetHeight / 2) + 'px)';
+            if (!ready || document.hidden) return;
+            const r = hero.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > innerHeight) return;
+            ctx.clearRect(0, 0, width, height);
+            const mobile = width < 860;
+            const scale = mobile ? width * 0.72 : Math.min(width * 0.3, height * 0.62);
+            const centerX = mobile ? width * 0.5 : width * 0.21;
+            const centerY = mobile ? height * 0.78 : height * 0.5;
+            const intro = reducedMotion ? 1 : 1 - Math.pow(1 - Math.min(1, (t - started) / 2000), 3);
+            const elapsed = (t - burstAt) / 1000;
+            const burst = reducedMotion ? 0 : elapsed < 0 ? 0 : elapsed < 0.16 ? elapsed / 0.16 : Math.pow(Math.max(0, 1 - (elapsed - 0.16) / 2.35), 1.6);
+            const mx = pointer.x - r.left, my = pointer.y - r.top;
+            for (const p of particles) {
+                let x = centerX + p.u * scale, y = centerY + p.v * scale;
+                x += (1 - intro) * Math.sin(p.seed * 13) * width * 0.55;
+                y += (1 - intro) * Math.cos(p.seed * 11) * height * 0.55;
+                if (!reducedMotion) {
+                    x += Math.sin(t * 0.001 + p.seed * 7) * 1.3;
+                    y += Math.cos(t * 0.0012 + p.seed * 7) * 1.5;
+                    const dx = x - mx, dy = y - my, d = Math.hypot(dx, dy);
+                    if (d < 90) { x += dx / (d || 1) * (1 - d / 90) * 20; y += dy / (d || 1) * (1 - d / 90) * 20; }
+                }
+                x = x * (1 - burst) + p.scatterX * burst;
+                y = y * (1 - burst) + p.scatterY * burst;
+                const glow = 0.7 + 0.3 * Math.sin(p.seed * 4 + t * 0.001);
+                ctx.fillStyle = p.navy ? 'rgba(224,238,240,' + (0.55 + 0.35 * intro) + ')' : 'rgba(28,199,178,' + (0.65 + 0.3 * intro) + ')';
+                ctx.beginPath();
+                ctx.arc(x, y, p.size * glow * (mobile ? 0.9 : 1.1), 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        requestAnimationFrame(frame);
     </script>
 </body>
 </html>
-<!-- Injection By NetFree --><script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script><script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
-
-<!-- Injection By NetFree -->
-<script src="//netfree.link/injection-script/go-payment.js" type="text/javascript" async ></script>
-<script src="//netfree.link/injection-script/popup-card-init.js" type="text/javascript" async ></script>
