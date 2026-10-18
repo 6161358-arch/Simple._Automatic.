@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצהרת נגישות | פשוט. אוטומט.</title>
+    <meta name="description" content="הצהרת הנגישות של פשוט. אוטומט. ומייל פון: מה עשינו, מה עוד לא מושלם, ואיך פונים אלינו.">
+    <link rel="icon" href="./logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- אותם צבעים וגופן כמו בעמוד הראשי ---------- */
+        :root {
+            --bg: #0a2238;
+            --fg: #edf6f4;
+            --accent: #1cc7b2;
+            --teal: #008f80;
+            --paper: #f2f8f7;
+            --ink: #0f2b46;
+            --muted: #a5bccb;
+            --muted-ink: #4a6072;
+            --line: #ffffff2e;
+            --line-ink: #0f2b4630;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font: 400 18px/1.65 'Heebo', 'Arial Hebrew', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+        a { color: var(--teal); text-underline-offset: 3px; }
+        :focus-visible { outline: 2px solid #ffb000; outline-offset: 4px; }
+
+        /* ראש העמוד: הלוגו על הרקע הכהה, בלי קופסה */
+        .top { background: var(--bg); color: var(--fg); padding: 28px 7% 70px; }
+        .top-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .top-bar a { color: var(--fg); font-weight: 700; font-size: 16px; text-decoration: none; border-bottom: 1px solid var(--line); }
+        .logo-crop { display: block; position: relative; overflow: hidden; aspect-ratio: 409 / 298; height: 96px; }
+        .logo-crop img { position: absolute; top: -15.44%; left: -24.94%; width: 149.63%; height: auto; max-width: none; filter: url(#logo-light); }
+        .top h1 { margin: 60px 0 0; font-size: clamp(44px, 6vw, 88px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.02; }
+        .top p { margin: 18px 0 0; color: var(--muted); max-width: 34em; }
+
+        /* התוכן: חלקים עם קו דק מעליהם */
+        main { padding: 20px 7% 80px; max-width: 980px; }
+        section { border-top: 1px solid var(--line-ink); padding: 34px 0 6px; }
+        h2 { margin: 0 0 12px; font-size: clamp(24px, 2.4vw, 32px); font-weight: 900; letter-spacing: -0.02em; }
+        p, ul { margin: 0 0 14px; }
+        ul { padding-right: 22px; }
+        li { margin-bottom: 6px; }
+        .date { color: var(--muted-ink); font-size: 15px; }
+        footer { border-top: 1px solid var(--line-ink); padding: 22px 7% 30px; font-size: 14px; color: var(--muted-ink); display: flex; gap: 18px; flex-wrap: wrap; }
+        @media (max-width: 600px) {
+            body { font-size: 17px; }
+            .logo-crop { height: 70px; }
+            .top h1 { margin-top: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="logo-light" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 -1.7273 0 0 1.1800  0 -0.3884 0 0 1.0211  0 -0.5455 0 0 1.0360  0 0 0 1 0"/></filter></svg>
+
+    <header class="top">
+        <div class="top-bar">
+            <a href="./" aria-label="חזרה לעמוד הראשי" style="border:0"><span class="logo-crop"><img src="./logo.png" alt="פשוט. אוטומט. - יוסף דייטש"></span></a>
+            <a href="./">לעמוד הראשי ←</a>
+        </div>
+        <h1>הצהרת נגישות.</h1>
+        <p>אנחנו רוצים שכל אחד יוכל להשתמש באתר. כאן כתוב מה עשינו, מה עוד לא מושלם, ולמי פונים.</p>
+    </header>
+
+    <main>
+        <section>
+            <p class="date">עודכן לאחרונה: 18.10.2026</p>
+            <p>ההצהרה הזו חלה על האתר <b>פשוט. אוטומט.</b> ועל האתר <b>מייל פון</b>. אנחנו פועלים להתאים אותם לתקן הישראלי 5568 (שמבוסס על הנחיות WCAG 2.0 ברמה AA) ולתקנות שוויון זכויות לאנשים עם מוגבלות.</p>
+        </section>
+
+        <section>
+            <h2>מה עשינו באתר</h2>
+            <ul>
+                <li>האתר כתוב בעברית מימין לשמאל, עם כותרות מסודרות לפי היררכיה.</li>
+                <li>לכל שדה בטופס יש תווית ברורה, ושדות חובה מסומנים.</li>
+                <li>אפשר לעבור בין הקישורים, הכפתורים והשדות במקלדת (Tab), והאלמנט הנבחר מסומן במסגרת בולטת.</li>
+                <li>מי שהגדיר במכשיר "הפחתת תנועה" יקבל אתר בלי האנימציות.</li>
+                <li>לתמונות ולכפתורים עם אייקון בלבד יש תיאור טקסט לקוראי מסך.</li>
+                <li>האתר מתאים את עצמו לטלפון, לטאבלט ולמחשב, ואפשר להגדיל את הטקסט בדפדפן (Ctrl ו-+).</li>
+                <li>ניגודיות גבוהה בין הטקסט לרקע.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>מה עוד לא מושלם</h2>
+            <ul>
+                <li>טופס האפיון, הכלים החינמיים והצ'אט מופעלים בשירותים חיצוניים (Fillout, Chatrace), והנגישות שלהם תלויה בהם.</li>
+                <li>בחלקים עם תנועה בזמן הגלילה (כמו התרשים או הטלפון בהדגמה) חלק מהמידע מוצג בהדרגה.</li>
+                <li>האתר עדיין לא עבר בדיקה של מורשה נגישות.</li>
+            </ul>
+            <p>נתקלתם בבעיה? נשמח לשמוע ולתקן.</p>
+        </section>
+
+        <section>
+            <h2>רכז הנגישות</h2>
+            <p>יוסף דייטש<br>
+            טלפון: <a href="tel:0533182643" dir="ltr">053-3182643</a><br>
+            מייל: <a href="mailto:6161358@gmail.com" dir="ltr">6161358@gmail.com</a></p>
+            <p>כשאתם פונים, ספרו לנו באיזה עמוד הייתה הבעיה ומה ניסיתם לעשות. נחזור אליכם בהקדם.</p>
+        </section>
+    </main>
+
+    <footer>
+        <span>&copy; 2026 פשוט. אוטומט.</span>
+        <a href="./privacy.html">מדיניות פרטיות</a>
+        <a href="./">לעמוד הראשי</a>
+    </footer>
+</body>
+</html>

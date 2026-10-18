@@ -268,15 +268,6 @@
         .result .hours b { color: var(--amber); font-weight: 900; }
         .calc .result + p { margin: 22px 0 26px; color: var(--muted); max-width: 30em; }
 
-        /* ---------- לקוחות ---------- */
-        .voices { background: var(--pale); color: var(--ink); padding: 56px 7% 84px; }
-        .voices h2 { font-size: clamp(44px, 4.8vw, 74px); padding: 60px 0 40px; max-width: 12em; }
-        .voices-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 5%; }
-        .voice { border-top: 1px solid var(--line-ink); padding: 26px 0 0; }
-        .voice blockquote { margin: 0; font-size: clamp(20px, 1.7vw, 24px); font-weight: 500; line-height: 1.38; }
-        .voice p { margin-top: 20px; font-size: 16px; font-weight: 700; }
-        .voice p span { font-weight: 400; color: var(--muted-ink); }
-
         /* ---------- מחולל הרעיונות ---------- */
         .lab { padding: 56px 7% 84px; }
         .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: start; padding-top: 60px; }
@@ -408,6 +399,10 @@
         .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--muted); margin: 6px 0 20px; }
         .consent input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--accent); flex: none; }
         .form-card .solid { width: 100%; }
+        /* הודעת פרטיות קטנה מתחת לטפסים (חובה לפי חוק הגנת הפרטיות) */
+        .form-note { margin-top: 14px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+        .form-note a, .legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+        .legal { display: flex; gap: 18px; flex-wrap: wrap; }
         .form-msg { margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 16px; }
         .form-msg.ok { background: #156a55; color: #e6fff8; }
         .form-msg.err { background: #8f2a22; color: #fff0ee; }
@@ -443,6 +438,8 @@
         #exit-form input[type=text], #exit-form input[type=email] { width: 100%; background: #fff; border: 1px solid var(--line-ink); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 17px; }
         #exit-form .consent { color: var(--muted-ink); margin-bottom: 16px; }
         #exit-form .consent input { accent-color: var(--teal); }
+        .gift-terms { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--teal); }
+        #exit-form .form-note { color: var(--muted-ink); margin: 12px 0 0; }
         #exit-btn { width: 100%; background: var(--ink); color: #fff; }
         #exit-btn:hover { background: var(--teal); }
         #exit-msg { margin-top: 14px; font-weight: 700; color: var(--teal); text-align: center; }
@@ -451,20 +448,18 @@
 
         /* במחשב: כל חלק תופס בדיוק גובה מסך אחד, והתוכן שלו ממורכז */
         @media (min-width: 1100px) {
-            .calc, .voices, .tools, .faq { min-height: 100svh; display: flex; flex-direction: column; }
+            .calc, .tools, .faq { min-height: 100svh; display: flex; flex-direction: column; }
             .calc-grid, .faq-grid { flex: 1; align-content: center; padding-top: 30px; }
             /* שלושת אלה נשארים רצועות נמוכות, כדי לא להתחרות בחלקים הראשיים */
             .lab, .spec, .mailphone { padding-top: 44px; padding-bottom: 60px; }
             .lab-grid, .spec-grid, .mailphone-grid { padding-top: 40px; }
-            .voices h2 { margin-top: auto; padding-top: 30px; }
-            .voices-list { margin-bottom: auto; }
             .tools-head { margin-top: auto; }
             .tools-foot { margin-bottom: auto; }
             /* ארבעת הכלים בשורה אחת, בלי רשימת הפירוט */
             .tools-list { grid-template-columns: repeat(4, 1fr); }
             .tool { padding-top: 28px; padding-bottom: 30px; }
             .tool ul { display: none; }
-            .calc, .voices, .faq { padding-bottom: 56px; }
+            .calc, .faq { padding-bottom: 56px; }
         }
 
         /* כניסה בגלילה */
@@ -507,7 +502,7 @@
             .flow-copy > p:last-child { font-size: 18px; margin-top: 14px; }
             .track { gap: 6px; margin: 24px 0 0; }
             .track button { font-size: 15px; padding: 7px 12px; }
-            .calc, .voices, .lab, .tools, .faq { padding: 38px 7% 60px; }
+            .calc, .lab, .tools, .faq { padding: 38px 7% 60px; }
             .mailphone { padding: 38px 7% 56px; }
             .calc-grid, .lab-grid, .spec-grid, .mailphone-grid, .faq-grid, .finish-grid { grid-template-columns: 1fr; gap: 30px; padding-top: 36px; }
             .tools-head { display: block; padding: 36px 0 24px; }
@@ -524,9 +519,6 @@
             .calc h2, .faq h2 { font-size: clamp(42px, 10.8vw, 64px); }
             .tools h2 { font-size: clamp(42px, 10.8vw, 64px); }
             .lab h2, .spec h2 { font-size: clamp(38px, 9.6vw, 56px); }
-            .voices h2 { font-size: clamp(38px, 9.6vw, 56px); padding: 36px 0 26px; }
-            .voices-list { grid-template-columns: 1fr; }
-            .voice { padding: 22px 0 26px; }
             .mailphone h2 { font-size: clamp(50px, 13vw, 76px); }
             .finish { padding: 56px 7% 0; }
             .finish h2 { font-size: clamp(44px, 10.5vw, 67px); }
@@ -691,15 +683,6 @@
             </div>
         </section>
 
-        <section class="voices on-light" id="testimonials" data-tone="light">
-            <div class="section-top"><span>לקוחות</span><span>במילים שלהם</span></div>
-            <h2 class="reveal">אל תאמינו לנו. תאמינו למספרים שלהם.</h2>
-            <div class="voices-list">
-                <div class="voice reveal"><blockquote>"חסכו לי משכורת של מזכירה במשרה מלאה. המערכת עושה את כל התיאומים והגבייה לבד."</blockquote><p>דניאל כהן <span>· סוכן ביטוח</span></p></div>
-                <div class="voice reveal"><blockquote>"ההחזר על ההשקעה היה מיידי. תוך שבוע המערכת החזירה את העלות שלה, בזכות לידים שלא הלכו לאיבוד."</blockquote><p>רועי <span>· מנהל מכירות</span></p></div>
-                <div class="voice reveal"><blockquote>"הפסקתי לרדוף אחרי לקוחות לתשלום. המערכת שולחת תזכורות לבד. השקט הנפשי שווה הכול."</blockquote><p>יגאל א. <span>· יועץ עסקי</span></p></div>
-            </div>
-        </section>
 
         <!-- מחולל הרעיונות (AI) -->
         <section class="lab" id="ai-lab" data-tone="dark">
@@ -850,6 +833,7 @@
                         <span>אני מסכים/ה לקבל עדכונים, טיפים והצעות שיווקיות למייל ולוואטסאפ.</span>
                     </label>
                     <button type="submit" class="solid" id="submit-btn-main" data-cursor="שלחו">שלחו פרטים</button>
+                    <p class="form-note">הפרטים נשמרים אצל פשוט. אוטומט. רק כדי לחזור אליכם. מסירתם אינה חובה, אבל בלעדיהם לא נוכל לחזור אליכם. <a href="./privacy.html">מדיניות פרטיות</a></p>
                     <div id="form-message" class="form-msg" hidden></div>
                 </form>
             </div>
@@ -860,6 +844,7 @@
                     <input type="number" id="wasted-min" min="0" placeholder="דקות" aria-label="דקות ביום על משימות מונוטוניות">
                     דקות ביום הן <b id="wasted-result">0</b> ימי עבודה בשנה.
                 </label>
+                <span class="legal"><a href="./privacy.html">מדיניות פרטיות</a><a href="./accessibility.html">הצהרת נגישות</a></span>
                 <span>&copy; 2026 פשוט. אוטומט. | בונים לך זמן פנוי.</span>
             </footer>
         </section>
@@ -872,14 +857,16 @@
             <p class="eyebrow">רגע לפני שעוזבים</p>
             <h2 id="exit-title">עוד שעה על אקסל?</h2>
             <p>קבלו ישירות למייל מדריך חינמי: <b>5 אוטומציות שכל עסק חייב</b>. דברים פרקטיים שאפשר לעשות לבד, כבר עכשיו.</p>
+            <p class="gift-terms">המדריך ניתן בחינם למצטרפים לרשימת התפוצה של פשוט. אוטומט.</p>
             <form id="exit-form" onsubmit="event.preventDefault(); submitExitForm();">
                 <input type="text" id="exit-name" placeholder="שם מלא" aria-label="שם מלא" required>
                 <input type="email" id="exit-email" placeholder="אימייל לקבלת המדריך" aria-label="אימייל" dir="ltr" style="text-align:right" required>
                 <label class="consent">
                     <input type="checkbox" id="exit-consent" required>
-                    <span>אני מאשר/ת קבלת דיוור, טיפים והצעות שיווקיות (ניתן להסרה בכל עת).</span>
+                    <span>אני מצטרף/ת לרשימת התפוצה ומאשר/ת קבלת דיוור, טיפים והצעות שיווקיות (ניתן להסרה בכל עת).</span>
                 </label>
                 <button type="submit" class="solid" id="exit-btn">שלחו לי את המדריך</button>
+                <p class="form-note">הפרטים נשמרים אצל פשוט. אוטומט. רק כדי לחזור אליכם ולשלוח את המדריך. מסירתם אינה חובה, אבל בלעדיהם לא נוכל לשלוח את המדריך. <a href="./privacy.html">מדיניות פרטיות</a></p>
             </form>
             <div id="exit-msg" hidden></div>
             <button class="exit-no" onclick="closeExitPopup()">לא תודה, אני מעדיף להמשיך לעבוד קשה</button>
