@@ -190,6 +190,36 @@
         .story-bottom { display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: 20px; font-weight: 500; line-height: 1.35; }
         .gear { font: 82px/1 Arial, sans-serif; color: var(--teal); display: inline-block; }
 
+        /* ---------- הסרטון בחלק "הרעיון": אנימציה חיה (קוד, לא קובץ וידאו) בתוך מסגרת של טלפון ---------- */
+        .story-grid.with-promo { grid-template-columns: 19% 1fr auto; padding: 40px 0 30px; align-items: center; }
+        .promo { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+        .promo-frame { position: relative; height: min(58vh, 540px); aspect-ratio: 9 / 16; border-radius: 30px; overflow: hidden;
+            border: 7px solid var(--ink); background: var(--ink); box-shadow: 0 34px 60px -34px #0a1f44aa; }
+        .promo-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+        .promo-line { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: #ffffff40; pointer-events: none; }
+        .promo-line i { display: block; height: 100%; width: 0; background: var(--accent); }
+        .promo-bar { display: flex; gap: 8px; }
+        .promo-bar button { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 15px; border: 1px solid var(--line-ink);
+            border-radius: 999px; font-size: 15px; font-weight: 700; color: var(--ink); }
+        .promo-bar button.on { background: var(--ink); color: var(--paper); }
+        .promo-bar svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        /* "צפו" במסך הראשון: טבעת שמתרחבת לאט סביב סמל ההפעלה (בלי הבהוב) */
+        .watch b { position: relative; }
+        .watch b::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--amber); animation: watch-pulse 2.6s ease-out infinite; }
+        @keyframes watch-pulse { 0% { transform: scale(1); opacity: .9; } 70%, 100% { transform: scale(1.8); opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) { .watch b::after { animation: none; opacity: 0; } }
+        @media (max-width: 860px) {
+            .promo { margin-top: 34px; }
+            .promo-frame { height: min(72vh, 580px); }
+        }
+        .hero-foot .watch { display: inline-flex; align-items: center; gap: 10px; }
+        .hero-foot .watch-m { display: none; }
+        /* במחשב: מתחת ללוגו מנקודות (הצד הוויזואלי), כדי שייראה גם בלפטופ בלי לגלול */
+        .hero-watch { position: absolute; left: 9%; bottom: 122px; z-index: 4; display: inline-flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 700; }
+        .hero-watch b { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--amber); color: var(--amber); display: grid; place-items: center; font-size: 12px; }
+        @media (max-width: 860px) { .hero-watch { display: none; } .hero-foot .watch-m { display: inline-flex; } }
+        .hero-foot .watch b { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--amber); display: grid; place-items: center; font-size: 10px; }
+
         /* ---------- איך זה עובד: התרשים נשאר במקום, והגלילה מחליפה תרחיש ---------- */
         .flow { height: 320vh; background: var(--paper); color: var(--ink); }
         .sticky {
@@ -598,18 +628,31 @@
             </div>
             <button id="scatter-logo" class="scatter-target" aria-label="פיזור הנקודות של הלוגו" data-cursor="פזרו"></button>
             <p class="particle-hint">געו בנקודות</p>
+            <a href="#story" class="watch hero-watch" data-promo data-cursor="צפו"><b>▶</b>צפו: אוטומציה ב-21 שניות</a>
             <div class="hero-foot">
                 <span>שיחת אפיון ללא עלות · התאמה אישית לעסק</span>
-                <a href="#mail-phone-section"><b>חדש</b> · מייל פון: המייל שלך, בקול שלך ↓</a>
+                <a href="#mail-phone-section"><b>חדש</b> · מייל פון<span>: המייל שלך, בקול שלך</span> ↓</a>
                 <span>פשוט. אוטומט. © 2026</span>
+                <a href="#story" class="watch watch-m" data-promo data-cursor="צפו"><b>▶</b>אוטומציה ב-21 שניות</a>
             </div>
         </section>
 
         <section class="story on-light" id="story" data-tone="light">
             <div class="section-top"><span>הרעיון</span><span>במילים פשוטות</span></div>
-            <div class="story-grid">
+            <div class="story-grid with-promo">
                 <p class="side-note">שומעים "אוטומציה"<br>ושואלים מה זה?<br>ככה זה נראה.</p>
                 <h2 class="reading">לקוח משאיר פרטים.<br>הוא נרשם לבד.<br>ההודעה יוצאת לבד.<br><em>ואתם רק מגלים<br>שזה כבר קרה.</em></h2>
+                <figure class="promo" id="promo">
+                    <div class="promo-frame">
+                        <iframe src="promo.html" title="סרטון קצר: ככה נראית אוטומציה" loading="lazy"></iframe>
+                        <span class="promo-line"><i></i></span>
+                    </div>
+                    <div class="promo-bar">
+                        <button type="button" id="promo-play" data-cursor="נגנו"></button>
+                        <button type="button" id="promo-sound" data-cursor="קול"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg><span>הפעלת קול</span></button>
+                        <button type="button" id="promo-restart" data-cursor="שוב"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8"/><path d="M4 4v4h4"/></svg><span>מההתחלה</span></button>
+                    </div>
+                </figure>
             </div>
             <div class="story-bottom">
                 <span class="gear" aria-hidden="true">✳</span>
@@ -930,6 +973,76 @@
             el.addEventListener('pointerenter', () => { cursor.classList.add('active'); cursor.querySelector('span').textContent = el.dataset.cursor || (el.tagName === 'SUMMARY' ? '+' : '↗'); });
             el.addEventListener('pointerleave', () => { cursor.classList.remove('active'); cursor.querySelector('span').textContent = ''; });
         });
+
+        // ---------- הסרטון בחלק "הרעיון" ----------
+        // האנימציה עצמה ב-promo.html (בתוך iframe). כאן רק השעון: מתחיל לבד כשרואים אותו, נעצר כשגוללים הלאה.
+        // המוזיקה (promo-music.mp3) רק אחרי לחיצה - דפדפנים לא מרשים להשמיע קול לבד.
+        const promo = $('#promo'), promoFrame = promo.querySelector('iframe');
+        const promoAudio = new Audio('promo-music.mp3');
+        promoAudio.preload = 'none';
+        const PROMO_ICONS = { play: '<path d="M7 4l13 8-13 8z"/>', pause: '<path d="M8 5v14M16 5v14"/>' };
+        let promoT = 0, promoLast = 0, promoPlaying = false, promoEnded = false, promoSound = false, promoSeen = false, promoHeld = false;
+        const promoWin = () => promoFrame.contentWindow;
+        const promoReady = () => { try { return !!promoWin().seek; } catch (e) { return false; } };
+        function promoDraw() {
+            if (!promoReady()) return;
+            promoWin().seek(promoT);
+            promo.querySelector('.promo-line i').style.width = (promoT / promoWin().DURATION * 100) + '%';
+        }
+        function promoUi() {
+            $('#promo-play').innerHTML = '<svg viewBox="0 0 24 24">' + (promoPlaying ? PROMO_ICONS.pause : PROMO_ICONS.play) + '</svg>';
+            $('#promo-play').setAttribute('aria-label', promoPlaying ? 'השהיית הסרטון' : 'הפעלת הסרטון');
+            $('#promo-play').dataset.cursor = promoPlaying ? 'השהו' : 'נגנו';
+            $('#promo-sound').classList.toggle('on', promoSound);
+            $('#promo-sound span').textContent = promoSound ? 'השתקה' : 'הפעלת קול';
+        }
+        function promoTick(now) {
+            if (!promoPlaying) return;
+            // כשהמוזיקה מתנגנת היא השעון (כדי שהצלילים ייפלו בדיוק על התמונה). אם היא לא נטענה - שעון רגיל.
+            if (promoSound && !promoAudio.paused && promoAudio.readyState >= 3) promoT = promoAudio.currentTime;
+            else promoT += (now - promoLast) / 1000;
+            promoLast = now;
+            if (promoT >= promoWin().DURATION) { promoT = promoWin().DURATION; promoEnded = true; promoPause(); }
+            promoDraw();
+            if (promoPlaying) requestAnimationFrame(promoTick);
+        }
+        function promoPlay() {
+            if (promoPlaying || !promoReady()) return;
+            if (promoEnded) { promoT = 0; promoEnded = false; }
+            promoPlaying = true; promoLast = performance.now();
+            if (promoSound) { promoAudio.currentTime = promoT; promoAudio.play().catch(() => {}); }
+            requestAnimationFrame(promoTick);
+            promoUi();
+        }
+        function promoPause() { promoPlaying = false; promoAudio.pause(); promoUi(); }
+        function promoSetSound(on) {
+            promoSound = on;
+            if (on) {
+                promoAudio.currentTime = promoT;
+                promoAudio.play().then(() => { if (!promoPlaying) promoAudio.pause(); }).catch(() => {});
+            } else promoAudio.pause();
+            promoUi();
+        }
+        promoAudio.addEventListener('playing', () => { if (Math.abs(promoAudio.currentTime - promoT) > .15) promoAudio.currentTime = promoT; });
+        new IntersectionObserver(([e]) => {
+            promoSeen = e.isIntersecting;
+            if (promoSeen && !promoHeld && !promoEnded && !reducedMotion) promoPlay();
+            if (!promoSeen && promoPlaying) promoPause();
+        }, { threshold: .6 }).observe(promo.querySelector('.promo-frame'));
+        promoFrame.addEventListener('load', () => { promoDraw(); if (promoSeen && !promoHeld && !reducedMotion) promoPlay(); });
+        if (promoReady()) promoDraw();
+        $('#promo-play').addEventListener('click', () => { if (promoPlaying) { promoHeld = true; promoPause(); } else { promoHeld = false; promoPlay(); } });
+        $('#promo-sound').addEventListener('click', () => promoSetSound(!promoSound));
+        $('#promo-restart').addEventListener('click', () => { promoHeld = false; promoEnded = false; promoT = 0; promoPause(); promoPlay(); });
+        // "צפו" במסך הראשון: גוללים לסרטון ומתחילים מההתחלה עם קול (הלחיצה מאפשרת לדפדפן להשמיע)
+        $$('[data-promo]').forEach((a) => a.addEventListener('click', (e) => {
+            e.preventDefault();
+            promo.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+            promoHeld = false; promoEnded = false; promoT = 0; promoPause();
+            promoSetSound(true);
+            if (promoSeen) promoPlay();
+        }));
+        promoUi();
 
         // ---------- "הרעיון": פירוק המשפט למילים שנדלקות בגלילה ----------
         const reading = $('.reading');
