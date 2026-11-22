@@ -243,6 +243,115 @@ footer .brand .w { font-family: var(--f-display); font-weight: 400; font-size: 2
   .tree .note { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .bar i { animation: none; } }
+
+/* ---------- הדגמה: שירים ופודקאסטים ---------- */
+.demo-band { background: linear-gradient(180deg, #fff3f5 0%, #f1ecff 100%); border-block: 1px solid var(--line); }
+.flow { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 48px; align-items: center; margin-top: 52px; }
+.flow + .flow { margin-top: 72px; padding-top: 64px; border-top: 1px solid #e3dcf7; }
+.flow.rev .fl-steps { order: 2; }
+.fl-title { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.fl-title h3 { font-weight: 900; font-size: 28px; }
+.fl-title .ico { margin: 0; width: 46px; height: 46px; border-radius: 14px; }
+.fl-list { display: grid; gap: 8px; }
+.fs { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 14px 16px; border-radius: 16px; border: 1px solid transparent; transition: background .25s, border-color .25s; }
+.fs:hover { background: rgba(255,255,255,.6); }
+.fs:focus-visible { outline: 2px solid var(--c3); outline-offset: 2px; }
+.fs .n { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; font-family: var(--f-display); font-size: 20px; background: #fff; color: var(--mute); border: 1px solid var(--line); transition: .25s; }
+.fs b { display: block; font-size: 18px; font-weight: 800; line-height: 1.35; }
+.fs span.d { display: block; font-size: 15px; color: var(--ink2); margin-top: 2px; }
+.fs .tm { height: 3px; border-radius: 99px; background: #e8e2fa; margin-top: 10px; overflow: hidden; opacity: 0; }
+.fs .tm i { display: block; height: 100%; width: 0; background: var(--grad); }
+.fs.on { background: #fff; border-color: #e6e0fa; box-shadow: 0 14px 30px -22px rgba(60,30,120,.45); }
+.fs.on .n { background: var(--grad); color: #fff; border-color: transparent; }
+.fs.on .tm { opacity: 1; }
+.fs.on.run .tm i { animation: tm var(--dur, 4.5s) linear forwards; }
+@keyframes tm { to { width: 100%; } }
+
+.stage { display: grid; min-height: 360px; }
+.screen { grid-area: 1 / 1; padding: 18px; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .35s, transform .35s, visibility 0s .35s; min-width: 0; }
+.screen.on { opacity: 1; visibility: visible; transform: none; transition: opacity .35s, transform .35s; }
+.crumbs { font-size: 12.5px; color: var(--mute); margin-bottom: 12px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.crumbs b { color: var(--ink); font-weight: 800; }
+.search { display: flex; align-items: center; gap: 8px; border: 1.5px solid #e3ddfa; border-radius: 12px; padding: 9px 12px; background: #fff; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.search .cur { width: 2px; height: 16px; background: var(--c2); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.lbl { font-size: 12px; font-weight: 800; color: var(--mute); letter-spacing: .03em; margin: 4px 0 8px; }
+
+/* זמרים */
+.singers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.sgr { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 12px; background: #fff; border: 1px solid #ece8fb; font-size: 13px; font-weight: 700; min-width: 0; }
+.sgr span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.av { width: 30px; height: 30px; border-radius: 50%; flex: none; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 13px; }
+.sgr.pick { border-color: transparent; box-shadow: 0 0 0 2px var(--c3) inset; background: #f6f2ff; }
+
+/* אלבומים */
+.seg2 { display: flex; gap: 6px; margin-bottom: 12px; }
+.seg2 span { font-size: 12.5px; font-weight: 800; padding: 5px 12px; border-radius: 99px; background: #f1eefc; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.seg2 .on { background: var(--ink); color: #fff; }
+.albums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.alb { min-width: 0; }
+.cov { aspect-ratio: 1; border-radius: 12px; display: grid; place-items: end start; padding: 8px; color: rgba(255,255,255,.95); font-family: var(--f-display); font-size: 15px; line-height: 1.1; }
+.alb .t { font-size: 12.5px; font-weight: 800; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.alb .y { font-size: 11.5px; color: var(--mute); }
+.alb.pick .cov { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--c3); }
+
+/* רשימת שירים / פרקים */
+.alhead { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; }
+.alhead .cov { width: 64px; flex: none; font-size: 12px; padding: 6px; }
+.alhead .t { font-weight: 900; font-size: 16px; }
+.alhead .m { font-size: 12.5px; color: var(--mute); }
+.allbtn { margin-inline-start: auto; font-size: 12.5px; font-weight: 800; color: #fff; background: var(--grad); padding: 7px 12px; border-radius: 10px; white-space: nowrap; box-shadow: 0 8px 16px -10px rgba(255,61,139,.9); }
+.rows { display: grid; gap: 6px; }
+.rw { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 10px; background: #fff; border: 1px solid #ece8fb; border-radius: 11px; }
+.rw .t { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rw .t .num { color: var(--mute); font-variant-numeric: tabular-nums; }
+.rw .m { font-size: 11.5px; color: var(--mute); font-variant-numeric: tabular-nums; }
+.dlb { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: #fff0f3; color: var(--c2); }
+.st { font-size: 11.5px; font-weight: 800; white-space: nowrap; }
+.st.ok { color: var(--ok); }
+.st.have { color: var(--mute); }
+.rw .bar { margin: 5px 0 0; height: 5px; }
+.rw.active { border-color: #ffd0dc; }
+.saved { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: #eefaf5; border: 1px solid #c9eedf; font-size: 12.5px; color: #0b6b4c; display: flex; gap: 8px; align-items: flex-start; }
+.saved b { font-weight: 800; }
+.path { direction: rtl; unicode-bidi: plaintext; word-break: break-word; }
+
+/* פודקאסטים */
+.cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.cats span { font-size: 12px; font-weight: 800; padding: 5px 10px; border-radius: 99px; background: #f1eefc; color: var(--ink2); white-space: nowrap; }
+.cats .pin { background: #e6f7f1; color: #0b7a56; }
+.cats .hot { background: linear-gradient(120deg, rgba(255,159,28,.18), rgba(255,95,109,.18)); color: #c2410c; }
+.show { display: flex; gap: 10px; align-items: center; padding: 9px 10px; background: #fff; border: 1px solid #ece8fb; border-radius: 12px; }
+.show + .show { margin-top: 6px; }
+.show .cov { width: 46px; flex: none; border-radius: 10px; padding: 0; place-items: center; font-size: 11px; }
+.show .t { font-size: 13px; font-weight: 800; line-height: 1.35; }
+.show .m { font-size: 11.5px; color: var(--mute); }
+.show.pick { border-color: transparent; box-shadow: 0 0 0 2px #1a8fd6 inset; background: #f2f9ff; }
+.ep-rw .t { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.4; }
+.insearch { font-size: 12px; color: #1a6fa8; background: #eaf5ff; border-radius: 10px; padding: 6px 10px; margin-bottom: 8px; font-weight: 700; }
+
+@media (max-width: 960px) {
+  .flow { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .flow.rev .fl-steps { order: 0; }
+  .fl-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .fs { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 12px; }
+  .fs span.d { display: none; }
+  .fs b { font-size: 15.5px; }
+}
+@media (max-width: 520px) {
+  .fs .n { width: 32px; height: 32px; font-size: 17px; }
+  .fs b { font-size: 14px; }
+  .singers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage { min-height: 400px; }
+  .allbtn { padding: 6px 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screen, .screen.on { transition: none; transform: none; }
+  .search .cur { animation: none; }
+  .fs.on.run .tm i { animation: none; width: 100%; }
+}
+.flow .win-bar { gap: 10px; }
+@media (max-width: 520px) { .flow .win-bar .b { display: none; } .flow .win-bar .tabs { flex: 1 1 auto !important; } }
 </style>
 </head>
 <body>
@@ -383,6 +492,175 @@ footer .brand .w { font-family: var(--f-display); font-weight: 400; font-size: 2
     </div>
   </div>
 </section>
+
+<!-- ================= הדגמה: שירים ופודקאסטים ================= -->
+<section class="band demo-band" id="demo">
+  <div class="wrap">
+    <div class="band-head"><span class="k">ככה זה נראה</span><span class="s">לוחצים על שלב כדי לראות אותו</span></div>
+    <h2>שירים ופודקאסטים. בלי שום קישור.</h2>
+    <p class="intro">בשתי הלשוניות האלה לא צריך להביא קישור מיוטיוב. בוחרים מתוך הרשימה, ממש כמו בחנות מוזיקה.</p>
+
+    <!-- שירים -->
+    <div class="flow" data-flow>
+      <div class="fl-steps">
+        <div class="fl-title">
+          <div class="ico" style="background:#f0ebff"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7b5cff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#7b5cff"/><circle cx="18" cy="16" r="3" fill="#7b5cff"/></svg></div>
+          <h3>שירים</h3>
+        </div>
+        <div class="fl-list">
+          <button class="fs on" data-s="0" type="button"><span class="n">1</span><span><b>בוחרים זמר</b><span class="d">27 זמרים חרדיים מחכים ברשימה. אפשר גם לחפש לפי שם.</span><span class="tm"><i></i></span></span></button>
+          <button class="fs" data-s="1" type="button"><span class="n">2</span><span><b>בוחרים אלבום</b><span class="d">כל האלבומים והסינגלים הרשמיים, מהחדש לישן, עם השנה.</span><span class="tm"><i></i></span></span></button>
+          <button class="fs" data-s="2" type="button"><span class="n">3</span><span><b>מורידים</b><span class="d">שיר אחד בלחיצה, או כל האלבום בבת אחת. מה שכבר יש לכם מדולג.</span><span class="tm"><i></i></span></span></button>
+        </div>
+      </div>
+
+      <div class="win" aria-label="הדמיה: הורדת אלבום בלשונית השירים">
+        <div class="win-bar">
+          <span class="b"><span class="mk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span>פשוט. להוריד.</span>
+          <span class="tabs" style="padding:3px;flex:0 1 auto"><span>▶ יוטיוב</span><span class="on">🎵 שירים</span><span>🎧 פודקאסטים</span></span>
+        </div>
+        <div class="stage">
+          <!-- מסך 1: זמרים -->
+          <div class="screen on" data-screen="0">
+            <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b88a6" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span style="color:var(--mute)">חיפוש זמר</span></div>
+            <div class="lbl">⭐ זמרים חרדיים</div>
+            <div class="singers">
+              <div class="sgr pick"><span class="av" style="background:linear-gradient(135deg,#7b5cff,#ff3d8b)">מ</span><span>מיכאל שניצלער</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#3fb6ff,#7b5cff)">א</span><span>אברהם פריד</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#ff9f1c,#ff5f6d)">י</span><span>יעקב שוואקי</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#12b886,#3fb6ff)">ל</span><span>ליפא שמעלצער</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#ff5f6d,#7b5cff)">ב</span><span>בערי וובר</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#7b5cff,#3fb6ff)">ב</span><span>בני פרידמן</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#ff3d8b,#ff9f1c)">מ</span><span>מרדכי שפירא</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#3fb6ff,#12b886)">ש</span><span>שמילי אונגר</span></div>
+              <div class="sgr"><span class="av" style="background:linear-gradient(135deg,#7b5cff,#ff5f6d)">ש</span><span>שלום למר</span></div>
+            </div>
+          </div>
+          <!-- מסך 2: אלבומים -->
+          <div class="screen" data-screen="1">
+            <div class="crumbs"><span>זמרים</span><span>‹</span><b>מיכאל שניצלער</b></div>
+            <div class="seg2"><span class="on">💿 אלבומים · 26</span><span>🎵 סינגלים · 16</span></div>
+            <div class="albums">
+              <div class="alb"><div class="cov" style="background:linear-gradient(150deg,#ffb199,#ff5f6d)">נוסטלגיה</div><div class="t">נוסטלגיה</div><div class="y">2022</div></div>
+              <div class="alb pick"><div class="cov" style="background:linear-gradient(150deg,#b9a8ff,#7b5cff)">שבתון</div><div class="t">שבתון</div><div class="y">2022</div></div>
+              <div class="alb"><div class="cov" style="background:linear-gradient(150deg,#8fd0f5,#1a8fd6)">ליבעדיגע ספרי תורה</div><div class="t">ליבעדיגע ספרי תורה</div><div class="y">2021</div></div>
+              <div class="alb"><div class="cov" style="background:linear-gradient(150deg,#ffd27a,#ff9f1c)">מיין קינד, טרעפ מיך</div><div class="t">מיין קינד, טרעפ מיך</div><div class="y">2020</div></div>
+              <div class="alb"><div class="cov" style="background:linear-gradient(150deg,#ff9ec4,#ff3d8b)">יו די קענסט</div><div class="t">יו די קענסט</div><div class="y">2020</div></div>
+              <div class="alb"><div class="cov" style="background:linear-gradient(150deg,#86e3c3,#12a578)">ברכת הבנים</div><div class="t">ברכת הבנים</div><div class="y">2020</div></div>
+            </div>
+          </div>
+          <!-- מסך 3: שירים -->
+          <div class="screen" data-screen="2">
+            <div class="crumbs"><span>מיכאל שניצלער</span><span>‹</span><b>שבתון</b></div>
+            <div class="alhead">
+              <div class="cov" style="background:linear-gradient(150deg,#b9a8ff,#7b5cff)">שבתון</div>
+              <div><div class="t">שבתון</div><div class="m">מיכאל שניצלער · 2022 · 17 שירים</div></div>
+              <span class="allbtn">⬇ כל האלבום</span>
+            </div>
+            <div class="rows">
+              <div class="rw"><div><div class="t"><span class="num">1.</span> א גיט שבת טעניא (שבתון)</div><div class="m">1:28</div></div><span class="st have">כבר קיים במחשב</span></div>
+              <div class="rw active"><div><div class="t"><span class="num">2.</span> אליהו הנביא</div><div class="bar"><i></i></div></div><span class="st" style="color:var(--c2)">יורד…</span></div>
+              <div class="rw"><div><div class="t"><span class="num">3.</span> יום השישי</div><div class="m">11:26</div></div><span class="dlb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span></div>
+              <div class="rw"><div><div class="t"><span class="num">4.</span> קים קים</div><div class="m">4:30</div></div><span class="dlb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span></div>
+            </div>
+            <div class="saved"><span>✓</span><span class="path"><b>נשמר ב:</b> שולחן העבודה › שירים › מיכאל שניצלער › שבתון (2022) - אליהו הנביא.mp3</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- פודקאסטים -->
+    <div class="flow rev" data-flow>
+      <div class="fl-steps">
+        <div class="fl-title">
+          <div class="ico" style="background:#e7f5ff"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a8fd6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><rect x="2.5" y="14" width="5" height="7" rx="2" fill="#1a8fd6"/><rect x="16.5" y="14" width="5" height="7" rx="2" fill="#1a8fd6"/></svg></div>
+          <h3>פודקאסטים</h3>
+        </div>
+        <div class="fl-list">
+          <button class="fs on" data-s="0" type="button"><span class="n">1</span><span><b>מחפשים או בוחרים</b><span class="d">כותבים שם של פודקאסט, מגיש או נושא. או בוחרים מהמומלצים ומהכי מושמעים.</span><span class="tm"><i></i></span></span></button>
+          <button class="fs" data-s="1" type="button"><span class="n">2</span><span><b>בוחרים פרק</b><span class="d">כל הפרקים, מהחדש לישן, עם תאריך, אורך וגודל.</span><span class="tm"><i></i></span></span></button>
+          <button class="fs" data-s="2" type="button"><span class="n">3</span><span><b>מורידים</b><span class="d">הפרק נכנס לתיקייה בשם הפודקאסט בשולחן העבודה.</span><span class="tm"><i></i></span></span></button>
+        </div>
+      </div>
+
+      <div class="win" aria-label="הדמיה: הורדת פרק בלשונית הפודקאסטים">
+        <div class="win-bar">
+          <span class="b"><span class="mk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span>פשוט. להוריד.</span>
+          <span class="tabs" style="padding:3px;flex:0 1 auto"><span>▶ יוטיוב</span><span>🎵 שירים</span><span class="on">🎧 פודקאסטים</span></span>
+        </div>
+        <div class="stage">
+          <!-- מסך 1: חיפוש -->
+          <div class="screen on" data-screen="0">
+            <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b88a6" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>עתיקות</span><span class="cur"></span></div>
+            <div class="cats"><span class="pin">📌 משפחה</span><span class="pin">📌 תוכן אחד</span><span>📜 היסטוריה ויהדות</span><span>🗞️ אקטואליה</span><span class="hot">🔥 הכי מושמעים</span></div>
+            <div class="lbl">תוצאות</div>
+            <div class="show pick"><div class="cov" style="background:linear-gradient(150deg,#d9b38c,#8a5a33)">עתיקות</div><div style="min-width:0"><div class="t">עתיקות | בהגשת יהודה ברייער - מבית תוכן אחד</div><div class="m">יהודה ברייער · 53 פרקים</div></div></div>
+          </div>
+          <!-- מסך 2: פרקים -->
+          <div class="screen" data-screen="1">
+            <div class="crumbs"><span>פודקאסטים</span><span>‹</span><b>עתיקות</b></div>
+            <div class="search" style="padding:7px 12px;font-size:13px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b88a6" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span style="color:var(--mute)">חיפוש בתוך הפרקים</span></div>
+            <div class="rows">
+              <div class="rw ep-rw"><div><div class="t">עתיקות | עם ח"כ מאיר פרוש | על ההיסטוריה של אגודת ישראל לדורותיו | פרק 53</div><div class="m">25.10.2026 · 43:46 · 42 MB</div></div><span class="dlb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span></div>
+              <div class="rw ep-rw"><div><div class="t">עתיקות | עם החוקר הרב זאביק הראל | התעלומה סביב האדמו״ר מפיאסצנה | פרק 52</div><div class="m">25.10.2026 · 58:17 · 56 MB</div></div><span class="dlb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span></div>
+              <div class="rw ep-rw"><div><div class="t">עתיקות | עם יוסף צבי לידר | הבריחה הסודית של הרבי מרוז'ין | פרק 51</div><div class="m">25.10.2026 · 1:15:58 · 73 MB</div></div><span class="dlb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span></div>
+            </div>
+          </div>
+          <!-- מסך 3: הורדה -->
+          <div class="screen" data-screen="2">
+            <div class="list-h">ההורדות שלי</div>
+            <div class="job">
+              <div class="t">עתיקות | עם ח"כ מאיר פרוש | על ההיסטוריה של אגודת ישראל לדורותיו | פרק 53</div>
+              <div class="m"><span class="ok">✓ ירד</span><span>MP3 · 42 MB</span></div>
+            </div>
+            <div class="job">
+              <div class="t">עתיקות | עם החוקר הרב זאביק הראל | התעלומה סביב האדמו״ר מפיאסצנה | פרק 52</div>
+              <div class="bar"><i></i></div>
+              <div class="m"><span>9.8 MB/s</span><span>עוד 4 שניות</span></div>
+            </div>
+            <div class="saved"><span>✓</span><span class="path"><b>נשמר ב:</b> שולחן העבודה › פודקאסטים › התיקייה של עתיקות</span></div>
+            <div class="insearch" style="margin-top:12px">💡 חיפשתם מגיש או נושא? בתוך הפודקאסט מוצגים קודם רק הפרקים שמדברים עליו.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// הדגמה: כל "זרימה" עוברת לבד בין שלושת השלבים כשהיא על המסך; לחיצה על שלב עוצרת את המעבר האוטומטי
+(function () {
+  var DUR = 4500;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("[data-flow]").forEach(function (flow) {
+    var btns = flow.querySelectorAll(".fs");
+    var screens = flow.querySelectorAll(".screen");
+    var cur = 0, timer = null, auto = !reduce, visible = false;
+    function show(i) {
+      cur = i;
+      btns.forEach(function (b, k) { b.classList.toggle("on", k === i); b.classList.remove("run"); b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      screens.forEach(function (s, k) { s.classList.toggle("on", k === i); });
+      if (auto && visible) { void btns[i].offsetWidth; btns[i].classList.add("run"); }
+    }
+    function schedule() {
+      clearTimeout(timer);
+      if (!auto || !visible) return;
+      timer = setTimeout(function () { show((cur + 1) % screens.length); schedule(); }, DUR);
+    }
+    btns.forEach(function (b, k) {
+      b.style.setProperty("--dur", DUR + "ms");
+      b.addEventListener("click", function () { auto = false; clearTimeout(timer); show(k); });
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        visible = es[0].isIntersecting;
+        if (visible) { show(cur); schedule(); } else { clearTimeout(timer); btns.forEach(function (b) { b.classList.remove("run"); }); }
+      }, { threshold: 0.35 }).observe(flow);
+    }
+    show(0);
+  });
+})();
+</script>
 
 <!-- ================= איפה הקבצים ================= -->
 <section class="band white">
