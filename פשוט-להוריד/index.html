@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>פשוט. להוריד. - שירים, סרטונים ופודקאסטים ישר למחשב</title>
+<meta name="description" content="תוכנה למחשב שמורידה מיוטיוב שירים וסרטונים, אלבומים של זמרים חרדיים ופודקאסטים בעברית. עובדת עם נטפרי.">
+<meta property="og:title" content="פשוט. להוריד.">
+<meta property="og:description" content="שירים, סרטונים ופודקאסטים, ישר למחשב. מדביקים קישור, לוחצים, וזה בתיקייה.">
+<meta property="og:image" content="https://simpleautomatic.cloud/logo.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Secular+One&display=swap">
+<style>
+/* פריסה: פתיחה עם חלון התוכנה עצמו, ואחריה רצועות בהירות לסירוגין, קווים דקים במקום כרטיסים.
+   צבעים ושני הגופנים לקוחים מהתוכנה עצמה. עיצוב בהיר בלבד, בכוונה. */
+:root {
+  --bg: #f6f4ff;
+  --bg2: #ffffff;
+  --ink: #1d1b2f;
+  --ink2: #4b4866;
+  --mute: #7d7a99;
+  --line: #e4e0f5;
+  --c1: #ff5f6d;
+  --c2: #ff3d8b;
+  --c3: #7b5cff;
+  --c4: #3fb6ff;
+  --ok: #12a578;
+  --warn: #d97706;
+  --warnbg: #fff6e6;
+  --grad: linear-gradient(120deg, var(--c1) 0%, var(--c2) 45%, var(--c3) 100%);
+  --f-display: "Secular One", "Heebo", "Arial Hebrew", Arial, sans-serif;
+  --f-body: "Heebo", "Segoe UI", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; direction: rtl; font-family: var(--f-body); font-size: 17px; line-height: 1.65;
+  color: var(--ink); background: var(--bg);
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; }
+bdi { unicode-bidi: isolate; }
+.grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- פתיחה ---------- */
+.hero {
+  margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  padding-top: calc(env(safe-area-inset-top, 0px) + 40px); padding-bottom: 72px;
+  background:
+    radial-gradient(900px 520px at 100% -10%, #ffe3dc 0%, transparent 60%),
+    radial-gradient(800px 560px at -5% 100%, #e1efff 0%, transparent 60%),
+    radial-gradient(600px 420px at 45% 30%, #f1e9ff 0%, transparent 70%),
+    var(--bg);
+}
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 48px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--ink2); font-size: 15px; }
+.mk { width: 34px; height: 34px; border-radius: 10px; background: var(--grad); display: grid; place-items: center; box-shadow: 0 6px 16px -4px rgba(255, 61, 139, .5); flex: none; }
+.ver { font-size: 13px; font-weight: 700; color: var(--c3); background: #ece6ff; padding: 4px 12px; border-radius: 99px; white-space: nowrap; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
+.hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(52px, 8vw, 92px); line-height: 1; letter-spacing: -1px; }
+.lead { font-size: clamp(20px, 2.2vw, 25px); font-weight: 500; color: var(--ink2); margin-top: 22px; line-height: 1.45; max-width: 30ch; }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 99px; background: #fff; border: 1px solid var(--line); font-weight: 700; font-size: 15px; color: var(--ink2); }
+.dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+
+/* ---------- חלון התוכנה (הדמיה) ---------- */
+.win { background: rgba(255,255,255,.92); border: 1px solid #e8e3fb; border-radius: 22px; box-shadow: 0 40px 80px -40px rgba(60, 30, 120, .35), 0 2px 0 rgba(255,255,255,.8) inset; overflow: hidden; }
+.win-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #f0ecfb; font-size: 13px; font-weight: 700; color: var(--ink2); }
+.win-bar .b { display: flex; align-items: center; gap: 8px; }
+.win-bar .b .mk { width: 22px; height: 22px; border-radius: 7px; }
+.ctrls { display: flex; gap: 14px; color: var(--mute); font-size: 13px; direction: ltr; }
+.win-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.pane { padding: 18px; min-width: 0; }
+.pane + .pane { border-right: 1px solid #f0ecfb; background: #fbfaff; }
+.tabs { display: flex; gap: 6px; background: #f1eefc; padding: 4px; border-radius: 12px; }
+.tabs span { flex: 1; text-align: center; font-size: 13px; font-weight: 700; padding: 6px 4px; border-radius: 9px; color: var(--ink2); white-space: nowrap; }
+.tabs .on { background: #fff; color: var(--ink); box-shadow: 0 2px 6px -2px rgba(60,30,120,.2); }
+.field { margin-top: 14px; border: 1.5px solid #e3ddfa; border-radius: 12px; padding: 10px 12px; font-size: 13px; color: var(--ink2); direction: ltr; text-align: left; background: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.preview { display: flex; gap: 10px; margin-top: 12px; align-items: center; }
+.thumb { width: 86px; aspect-ratio: 16/9; border-radius: 9px; flex: none; background: linear-gradient(135deg, #ffd1dc, #d8ccff 60%, #c7e9ff); display: grid; place-items: center; }
+.preview .t { font-weight: 700; font-size: 13px; line-height: 1.35; }
+.preview .m { font-size: 12px; color: var(--mute); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+.seg span { text-align: center; font-size: 13px; font-weight: 800; padding: 7px; border-radius: 10px; border: 1.5px solid #e3ddfa; color: var(--ink2); }
+.seg .on { border-color: transparent; background: #fff0f3; color: var(--c2); box-shadow: 0 0 0 1.5px var(--c2) inset; }
+.q { display: flex; gap: 6px; margin-top: 8px; }
+.q span { flex: 1; text-align: center; font-size: 12px; font-weight: 700; padding: 5px; border-radius: 8px; background: #f3f1fb; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.q .on { background: var(--ink); color: #fff; }
+.cta { margin-top: 14px; height: 46px; border-radius: 13px; background: var(--grad); color: #fff; font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 12px 24px -12px rgba(255, 61, 139, .8); }
+.list-h { font-weight: 800; font-size: 14px; margin-bottom: 10px; }
+.job { background: #fff; border: 1px solid #ece8fb; border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; }
+.job .t { font-weight: 700; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.job .m { font-size: 12px; color: var(--mute); display: flex; justify-content: space-between; gap: 8px; font-variant-numeric: tabular-nums; }
+.bar { height: 6px; background: #f0ecfb; border-radius: 99px; margin: 7px 0 5px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 64%; background: var(--grad); border-radius: 99px; animation: fill 5s ease-in-out infinite alternate; }
+@keyframes fill { from { width: 38%; } to { width: 86%; } }
+.ok { color: var(--ok); font-weight: 700; }
+.job.blocked { background: var(--warnbg); border-color: #fde2b0; }
+.job.blocked .m { color: #9a5b06; }
+.srv { display: inline-block; margin-top: 7px; font-size: 12px; font-weight: 800; color: #fff; padding: 5px 11px; border-radius: 9px; background: linear-gradient(120deg, #ff9f1c, #ff5f6d); }
+
+/* ---------- רצועות ---------- */
+.band { padding-block: 84px; }
+.band.white { background: var(--bg2); border-block: 1px solid var(--line); }
+.band-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 40px; }
+.band-head .k { font-size: 14px; font-weight: 800; letter-spacing: .04em; color: var(--c3); }
+.band-head .s { font-size: 15px; color: var(--mute); }
+.band h2 { font-weight: 900; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.12; letter-spacing: -.5px; max-width: 20ch; }
+.band .intro { font-size: 19px; color: var(--ink2); margin-top: 14px; max-width: 58ch; }
+
+/* שלוש הלשוניות */
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 48px; }
+.col { padding: 4px 28px 8px; min-width: 0; }
+.col + .col { border-right: 1px solid var(--line); }
+.col:first-child { padding-right: 0; }
+.col:last-child { padding-left: 0; }
+.ico { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px; }
+.col h3 { font-weight: 900; font-size: 26px; }
+.col .tag { font-size: 14px; font-weight: 700; color: var(--mute); margin-top: 2px; }
+.col p { margin-top: 12px; color: var(--ink2); }
+.col ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 8px; }
+.col li { display: flex; gap: 10px; align-items: baseline; font-size: 16px; }
+.col li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; transform: translateY(-2px); opacity: .9; }
+.c-yt { color: var(--c1); } .c-mus { color: var(--c3); } .c-pod { color: #1a8fd6; }
+.col li span { color: var(--ink); }
+
+/* שלושה צעדים */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 48px; counter-reset: s; }
+.step { position: relative; padding: 0 0 0 32px; min-width: 0; }
+.step .n { font-family: var(--f-display); font-size: 64px; line-height: 1; }
+.step h3 { font-weight: 900; font-size: 24px; margin-top: 10px; }
+.step p { color: var(--ink2); margin-top: 8px; }
+.kbd { display: inline-block; direction: ltr; font-family: var(--f-body); font-weight: 800; font-size: 14px; border: 1px solid #d9d3f2; border-bottom-width: 3px; border-radius: 7px; padding: 0 7px; background: #fff; color: var(--ink); }
+.arrow { position: absolute; left: 4px; top: 22px; color: #cfc6f2; }
+
+/* איפה הקבצים */
+.files { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; margin-top: 44px; }
+.tree { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px 24px; font-size: 16px; overflow-x: auto; }
+.tree .row { display: flex; align-items: center; gap: 10px; padding: 6px 0; white-space: nowrap; }
+.tree .i1 { padding-right: 26px; } .tree .i2 { padding-right: 52px; } .tree .i3 { padding-right: 78px; }
+.tree .row + .grp { margin-top: 0; }
+.tree .grp { border-top: 1px dashed var(--line); margin-top: 8px; padding-top: 8px; }
+.tree .grp:first-child { border-top: 0; margin-top: 0; padding-top: 0; }
+.tree .nm { font-weight: 700; }
+.tree .note { font-size: 13px; color: var(--mute); margin-right: auto; padding-right: 16px; }
+.tree .file .nm { font-weight: 500; color: var(--ink2); }
+.why { display: grid; gap: 22px; }
+.why h3 { font-weight: 900; font-size: 21px; }
+.why p { color: var(--ink2); margin-top: 4px; }
+
+/* איכות */
+.quality { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin-top: 44px; border-top: 1px solid var(--line); }
+.qrow { padding: 26px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; align-items: center; }
+.quality .qcol + .qcol .qrow { padding-right: 32px; }
+.quality .qcol + .qcol { border-right: 1px solid var(--line); }
+.quality .qcol:first-child .qrow { padding-left: 32px; }
+.fmt { font-family: var(--f-display); font-size: 40px; line-height: 1; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-weight: 800; font-size: 15px; padding: 6px 14px; border-radius: 10px; background: #f3f1fb; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.chip.def { background: var(--ink); color: #fff; }
+.qtext { font-size: 15px; color: var(--mute); margin-top: 8px; }
+
+/* נטפרי */
+.nf { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; margin-top: 44px; }
+.nf-list { display: grid; gap: 0; }
+.nf-item { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.nf-item:first-child { padding-top: 0; }
+.nf-item h3 { font-weight: 900; font-size: 19px; }
+.nf-item p { color: var(--ink2); font-size: 16px; margin-top: 2px; }
+.nf-ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; }
+.demo { display: grid; gap: 12px; }
+.demo .job { padding: 16px 18px; border-radius: 16px; margin: 0; }
+.demo .job .t { font-size: 16px; white-space: normal; }
+.demo .job .m { font-size: 14px; }
+.demo .srv { font-size: 14px; padding: 8px 14px; border-radius: 11px; margin-top: 10px; }
+.demo-cap { font-size: 14px; color: var(--mute); text-align: center; }
+
+/* עוד דברים קטנים */
+.small-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 44px; border-top: 1px solid var(--line); }
+.sg { padding: 24px 24px 24px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.sg:not(:nth-child(3n+1)) { border-right: 1px solid var(--line); padding-right: 24px; }
+.sg h3 { font-weight: 800; font-size: 18px; }
+.sg p { font-size: 15.5px; color: var(--ink2); margin-top: 4px; }
+
+/* התקנה */
+.install { background: var(--grad); color: #fff; border-radius: 28px; padding: 48px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center; }
+.install h2 { color: #fff; max-width: 14ch; }
+.install .intro { color: rgba(255,255,255,.92); }
+.inst-steps { display: grid; gap: 12px; }
+.is { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: center; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); border-radius: 16px; padding: 14px 16px; }
+.is .n { width: 40px; height: 40px; border-radius: 12px; background: #fff; color: var(--c2); font-family: var(--f-display); font-size: 22px; display: grid; place-items: center; }
+.is b { display: block; font-size: 17px; }
+.is span { font-size: 15px; opacity: .92; }
+.req { margin-top: 18px; font-size: 15px; opacity: .92; }
+
+/* שאלות */
+.faq { margin-top: 40px; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 20px 0; font-weight: 800; font-size: 19px; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--f-display); font-size: 28px; line-height: 1; color: var(--c3); transition: transform .2s; flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary:focus-visible { outline: 2px solid var(--c3); outline-offset: 4px; border-radius: 6px; }
+.faq .a { padding: 0 0 22px; color: var(--ink2); max-width: 70ch; }
+
+footer { padding-block: 40px 56px; }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--mute); font-size: 14px; }
+footer .brand .w { font-family: var(--f-display); font-weight: 400; font-size: 22px; color: var(--ink); }
+
+/* ---------- מסכים צרים ---------- */
+@media (max-width: 960px) {
+  .hero-grid, .files, .nf, .install { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .lead { max-width: none; }
+  .cols, .steps { grid-template-columns: minmax(0, 1fr); }
+  .col, .col:first-child, .col:last-child { padding: 28px 0; }
+  .col + .col { border-right: 0; border-top: 1px solid var(--line); }
+  .step { padding: 0 0 32px; }
+  .arrow { display: none; }
+  .small-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sg, .sg:not(:nth-child(3n+1)) { border-right: 0; padding: 22px 0; }
+  .sg:nth-child(2n) { border-right: 1px solid var(--line); padding-right: 20px; }
+  .sg:nth-child(2n+1) { padding-left: 20px; }
+  .install { padding: 36px 28px; }
+}
+@media (max-width: 680px) {
+  body { font-size: 16px; }
+  .band { padding-block: 60px; }
+  .win-body { grid-template-columns: minmax(0, 1fr); }
+  .pane + .pane { border-right: 0; border-top: 1px solid #f0ecfb; }
+  .quality { grid-template-columns: minmax(0, 1fr); }
+  .quality .qcol + .qcol { border-right: 0; }
+  .quality .qcol + .qcol .qrow, .quality .qcol:first-child .qrow { padding-inline: 0; }
+  .qrow { grid-template-columns: 92px minmax(0, 1fr); }
+  .fmt { font-size: 32px; }
+  .small-grid { grid-template-columns: minmax(0, 1fr); }
+  .sg, .sg:nth-child(2n), .sg:nth-child(2n+1) { border-right: 0; padding: 20px 0; }
+  .install { padding: 30px 20px; border-radius: 22px; }
+  .tree { padding: 16px; font-size: 15px; }
+  .tree .note { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { animation: none; } }
+</style>
+</head>
+<body>
+
+<!-- ================= פתיחה ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="mk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span>
+        תוכנה למחשב · Windows
+      </div>
+      <span class="ver">גרסה 1.7</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1>פשוט.<br><span class="grad-text">להוריד.</span></h1>
+        <p class="lead">שירים, סרטונים ופודקאסטים, ישר למחשב. מדביקים קישור, לוחצים, וזה בתיקייה.</p>
+        <div class="pills">
+          <span class="pill"><span class="dot" style="background:var(--c1)"></span>יוטיוב</span>
+          <span class="pill"><span class="dot" style="background:var(--c3)"></span>שירים חרדיים</span>
+          <span class="pill"><span class="dot" style="background:var(--c4)"></span>פודקאסטים</span>
+          <span class="pill"><span class="dot" style="background:var(--ok)"></span>עובד עם נטפרי</span>
+        </div>
+      </div>
+
+      <!-- הדמיה של חלון התוכנה -->
+      <div class="win" aria-label="הדמיה של חלון התוכנה">
+        <div class="win-bar">
+          <span class="b"><span class="mk"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span>פשוט. להוריד.</span>
+          <span class="ctrls" aria-hidden="true"><span>—</span><span>☐</span><span>✕</span></span>
+        </div>
+        <div class="win-body">
+          <div class="pane">
+            <div class="tabs"><span class="on">▶ יוטיוב</span><span>🎵 שירים</span><span>🎧 פודקאסטים</span></div>
+            <div class="field">https://www.youtube.com/watch?v=…</div>
+            <div class="preview">
+              <div class="thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,.85)"/><path d="M10 8l6 4-6 4z" fill="#ff3d8b"/></svg></div>
+              <div style="min-width:0"><div class="t">ניגון לשבת קודש - הקלטה חיה</div><div class="m">ערוץ לדוגמה · <bdi>4:12</bdi></div></div>
+            </div>
+            <div class="seg"><span class="on">♪ שיר MP3</span><span>▶ סרטון MP4</span></div>
+            <div class="q"><span>128</span><span class="on">192</span><span>320</span></div>
+            <div class="cta"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>הורדה</div>
+          </div>
+          <div class="pane">
+            <div class="list-h">ההורדות שלי</div>
+            <div class="job">
+              <div class="t">ניגון לשבת קודש - הקלטה חיה</div>
+              <div class="bar"><i></i></div>
+              <div class="m"><span>3.1 MB/s</span><span>עוד 6 שניות</span></div>
+            </div>
+            <div class="job">
+              <div class="t">שיעור בפרשת השבוע</div>
+              <div class="m"><span class="ok">✓ ירד</span><span>MP3 · 38 MB</span></div>
+            </div>
+            <div class="job blocked">
+              <div class="t">סרטון שנטפרי לא פתחו להורדה</div>
+              <div class="m"><span>נטפרי חוסם הורדה של הסרטון הזה</span></div>
+              <span class="srv">🎧 נסה כשמע דרך השרת</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= שלוש לשוניות ================= -->
+<section class="band white">
+  <div class="wrap">
+    <div class="band-head"><span class="k">מה יש בתוכנה</span><span class="s">שלוש לשוניות, חלון אחד</span></div>
+    <h2>כל מה ששומעים ורואים. במקום אחד.</h2>
+    <p class="intro">לא צריך לחפש אתרי הורדה, לסגור פרסומות או להתקין תוספים. פותחים את התוכנה ובוחרים מה רוצים.</p>
+
+    <div class="cols">
+      <div class="col">
+        <div class="ico" style="background:#ffeef0"><svg width="26" height="26" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4" fill="#ff5f6d"/><path d="M10 9l5 3-5 3z" fill="#fff"/></svg></div>
+        <h3>יוטיוב</h3>
+        <div class="tag">כל קישור, שיר או סרטון</div>
+        <p>מדביקים קישור ורואים מיד תמונה, שם וערוץ. בוחרים אם להוריד כשיר או כסרטון.</p>
+        <ul class="c-yt">
+          <li><span>שיר MP3 או סרטון MP4</span></li>
+          <li><span>בחירת איכות</span></li>
+          <li><span>שתי הורדות במקביל</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="ico" style="background:#f0ebff"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7b5cff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="#7b5cff"/><circle cx="18" cy="16" r="3" fill="#7b5cff"/></svg></div>
+        <h3>שירים</h3>
+        <div class="tag">27 זמרים חרדיים, אלבומים מלאים</div>
+        <p>לוחצים על זמר, רואים את כל האלבומים והסינגלים שלו, ומורידים שיר אחד או את כל האלבום בלחיצה.</p>
+        <ul class="c-mus">
+          <li><span>האלבומים הרשמיים, לא רק מה שבערוץ</span></li>
+          <li><span>שמות השירים בעברית</span></li>
+          <li><span>עם עטיפה ופרטי האלבום</span></li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="ico" style="background:#e7f5ff"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a8fd6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><rect x="2.5" y="14" width="5" height="7" rx="2" fill="#1a8fd6"/><rect x="16.5" y="14" width="5" height="7" rx="2" fill="#1a8fd6"/></svg></div>
+        <h3>פודקאסטים</h3>
+        <div class="tag">בעברית וביידיש</div>
+        <p>מחפשים לפי שם או נושא, נכנסים לפודקאסט ומורידים פרק. אפשר לחפש גם בתוך הפרקים.</p>
+        <ul class="c-pod">
+          <li><span>מומלצים לבית חרדי</span></li>
+          <li><span>הכי מושמעים בישראל</span></li>
+          <li><span>כל הפודקאסטים של משפחה ושל תוכן אחד</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= איך זה עובד ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-head"><span class="k">איך מורידים</span><span class="s">שלוש פעולות, פחות מדקה</span></div>
+    <h2>מעתיקים. בוחרים. מורידים.</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="n grad-text">1</div>
+        <h3>מעתיקים קישור</h3>
+        <p>מיוטיוב, מהווטסאפ, ממייל. התוכנה מזהה לבד שהעתקתם קישור ומציעה אותו. אפשר גם <span class="kbd">Ctrl+V</span> מכל מקום בחלון.</p>
+        <svg class="arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </div>
+      <div class="step">
+        <div class="n grad-text">2</div>
+        <h3>בוחרים מה רוצים</h3>
+        <p>שיר או סרטון, ובאיזו איכות. אם לא נוגעים בכלום, ההגדרה הרגילה מתאימה כמעט לכל דבר.</p>
+        <svg class="arrow" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </div>
+      <div class="step">
+        <div class="n grad-text">3</div>
+        <h3>לוחצים "הורדה"</h3>
+        <p>רואים כמה ירד, באיזו מהירות וכמה זמן נשאר. בסוף אפשר לנגן מיד, או לפתוח את התיקייה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= איפה הקבצים ================= -->
+<section class="band white">
+  <div class="wrap">
+    <div class="band-head"><span class="k">איפה זה נשמר</span><span class="s">כל דבר בתיקייה שלו</span></div>
+    <h2>לא צריך לחפש את הקובץ.</h2>
+    <p class="intro">התוכנה מסדרת לבד: שירים לפי זמר ואלבום, פרקים לפי פודקאסט. ככה הכל מוכן לנגן או להעביר לנגן MP3.</p>
+
+    <div class="files">
+      <div class="tree" role="img" aria-label="מבנה התיקיות במחשב">
+        <div class="grp">
+          <div class="row"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#ff5f6d"/></svg><span class="nm">הורדות</span></div>
+          <div class="row i1"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#ffa3ab"/></svg><span class="nm">יוטיוב</span><span class="note">שירים וסרטונים מקישור</span></div>
+        </div>
+        <div class="grp">
+          <div class="row"><svg width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="#7b5cff"/><path d="M8 20h8M12 16v4" stroke="#7b5cff" stroke-width="2" stroke-linecap="round"/></svg><span class="nm">שולחן העבודה</span></div>
+          <div class="row i1"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#7b5cff"/></svg><span class="nm">שירים</span></div>
+          <div class="row i2"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#b9a8ff"/></svg><span class="nm">שם הזמר</span></div>
+          <div class="row i3"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#d9d0ff"/></svg><span class="nm">שם האלבום</span><span class="note">עם תמונת העטיפה</span></div>
+          <div class="row i1"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#1a8fd6"/></svg><span class="nm">פודקאסטים</span></div>
+          <div class="row i2"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="#8fd0f5"/></svg><span class="nm">שם הפודקאסט</span><span class="note">כל הפרקים שלו</span></div>
+        </div>
+      </div>
+
+      <div class="why">
+        <div>
+          <h3>שם הקובץ בעברית</h3>
+          <p>גם כשהאלבום הופיע ביוטיוב באותיות לועזיות, השם עובר לעברית. ביידיש הוא נשאר ביידיש, באותיות עבריות.</p>
+        </div>
+        <div>
+          <h3>כבר הורדתם? לא יורד שוב</h3>
+          <p>שיר שכבר נמצא במחשב מסומן "כבר קיים במחשב", וככה אפשר להוריד אלבום שלם בלי כפילויות.</p>
+        </div>
+        <div>
+          <h3>אפשר לשנות</h3>
+          <p>רוצים שההורדות מיוטיוב יגיעו לתיקייה אחרת? בוחרים אותה פעם אחת בהגדרות.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= איכות ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-head"><span class="k">איכות</span><span class="s">המודגש = ההגדרה הרגילה</span></div>
+    <h2>כמה טוב זה יישמע?</h2>
+    <p class="intro">מספר גבוה יותר נשמע ונראה טוב יותר, אבל הקובץ גדול יותר. לרוב ההגדרה הרגילה היא בדיוק מה שצריך.</p>
+
+    <div class="quality">
+      <div class="qcol">
+        <div class="qrow">
+          <div class="fmt grad-text">MP3</div>
+          <div>
+            <div class="chips"><span class="chip">128k</span><span class="chip def">192k</span><span class="chip">320k</span></div>
+            <p class="qtext">שיר, שיעור, הרצאה. מתנגן בכל טלפון, נגן ורכב.</p>
+          </div>
+        </div>
+      </div>
+      <div class="qcol">
+        <div class="qrow">
+          <div class="fmt grad-text">MP4</div>
+          <div>
+            <div class="chips"><span class="chip">480p</span><span class="chip def">720p</span><span class="chip">1080p</span></div>
+            <p class="qtext">סרטון עם תמונה. 720 מספיק למחשב ולטלפון.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= נטפרי ================= -->
+<section class="band white">
+  <div class="wrap">
+    <div class="band-head"><span class="k">נטפרי</span><span class="s">נבנה מאחורי הסינון, לא מסביב לו</span></div>
+    <h2>עובד עם נטפרי. בלי לעקוף כלום.</h2>
+    <p class="intro">ההורדה עוברת דרך הסינון כמו כל גלישה. מה שפתוח, יורד. מה שחסום, התוכנה אומרת בפשטות שהוא חסום.</p>
+
+    <div class="nf">
+      <div class="nf-list">
+        <div class="nf-item">
+          <div class="nf-ico" style="background:#e6f7f1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12a578" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+          <div><h3>מה שפתוח, יורד מיד</h3><p>סרטון שנטפרי פתחו יורד ישר למחשב, בלי שום הגדרה.</p></div>
+        </div>
+        <div class="nf-item">
+          <div class="nf-ico" style="background:var(--warnbg)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M3 14h4v6H5a2 2 0 0 1-2-2zM21 14h-4v6h2a2 2 0 0 0 2-2z"/></svg></div>
+          <div><h3>סרטון שנחסם להורדה? כשמע</h3><p>הכרטיס נצבע בכתום, ומופיע כפתור "נסה כשמע דרך השרת". השמע עובר בגלוי דרך נטפרי, בדרך שנטפרי אישרו.</p></div>
+        </div>
+        <div class="nf-item">
+          <div class="nf-ico" style="background:#f0ebff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7b5cff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+          <div><h3>פודקאסט חסום פשוט לא מופיע</h3><p>פודקאסט או פרק שנטפרי סיננו מוסתר מהרשימה, ולא מופיע עם שם מחוק או חצי שם.</p></div>
+        </div>
+      </div>
+
+      <div class="demo" aria-label="דוגמה לכרטיסים בתוכנה">
+        <div class="job">
+          <div class="t">שיעור בפרשת השבוע</div>
+          <div class="m"><span class="ok">✓ ירד</span><span>MP3 · 192k</span></div>
+        </div>
+        <div class="job blocked">
+          <div class="t">סרטון שנטפרי לא פתחו להורדה</div>
+          <div class="m"><span>נטפרי חוסם הורדה של הסרטון הזה</span></div>
+          <span class="srv">🎧 נסה כשמע דרך השרת</span>
+        </div>
+        <div class="job">
+          <div class="t">🔒 נטפרי חסם את הפודקאסט הזה</div>
+          <div class="m"><span>הפרקים שלו לא יוצגו</span></div>
+        </div>
+        <p class="demo-cap">ככה זה נראה בתוכנה</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= דברים קטנים ================= -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-head"><span class="k">ועוד</span><span class="s">הדברים הקטנים שחוסכים זמן</span></div>
+    <h2>חושבים בשבילכם.</h2>
+
+    <div class="small-grid">
+      <div class="sg"><h3>מזהה קישור שהעתקתם</h3><p>מעתיקים קישור בכל מקום במחשב, ובפתיחת התוכנה הוא כבר מחכה.</p></div>
+      <div class="sg"><h3>שתי הורדות במקביל</h3><p>לא צריך לחכות שהראשונה תסתיים. לכל אחת רואים התקדמות משלה.</p></div>
+      <div class="sg"><h3>נגן, פתח, נסה שוב</h3><p>ליד כל הורדה כפתורים לנגן, לפתוח את התיקייה, לנסות שוב או לבטל.</p></div>
+      <div class="sg"><h3>מתעדכנת לבד</h3><p>יוטיוב משתנה כל הזמן, ולכן רכיב ההורדה מתעדכן לבד, בשקט, כל 5 ימים.</p></div>
+      <div class="sg"><h3>שיר עם עטיפה</h3><p>בכל שיר שם השיר, הזמר, האלבום, השנה ותמונת העטיפה. רואים את זה בכל נגן.</p></div>
+      <div class="sg"><h3>חלון אחד, בלי דפדפן</h3><p>תוכנה רגילה עם אייקון בשולחן העבודה. בלי פרסומות ובלי חלונות קופצים.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= התקנה ================= -->
+<section class="band" style="padding-top:0">
+  <div class="wrap">
+    <div class="install">
+      <div>
+        <h2>מתקינים בדקה.</h2>
+        <p class="intro">אין התקנה מסובכת ואין מה להגדיר. מקבלים תיקייה אחת, וזהו.</p>
+        <p class="req">דרוש: Windows 10 או 11 (64 ביט). לא צריך להתקין שום דבר נוסף.</p>
+      </div>
+      <div class="inst-steps">
+        <div class="is"><span class="n">1</span><div><b>מקבלים את קובץ הזיפ</b><span>PashutLehorid-portable.zip</span></div></div>
+        <div class="is"><span class="n">2</span><div><b>מחלצים אותו</b><span>לחיצה ימנית ← "חלץ הכל", לכל תיקייה שנוחה לכם</span></div></div>
+        <div class="is"><span class="n">3</span><div><b>פותחים את התוכנה</b><span>לחיצה כפולה על PashutLehorid.exe</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= שאלות ================= -->
+<section class="band white">
+  <div class="wrap">
+    <div class="band-head"><span class="k">שאלות</span><span class="s">לוחצים על שאלה כדי לפתוח</span></div>
+    <h2>שאלות שחוזרות.</h2>
+    <div class="faq">
+      <details>
+        <summary>למה סרטון שאני רואה בדפדפן לא יורד?</summary>
+        <div class="a">לפעמים נטפרי מאשרים צפייה בסרטון אבל עוד לא בדקו אותו להורדה. במקרה כזה הכרטיס נצבע בכתום, ואפשר ללחוץ "נסה כשמע דרך השרת" ולקבל לפחות את השמע.</div>
+      </details>
+      <details>
+        <summary>הורדתי ולא מוצא את הקובץ</summary>
+        <div class="a">ליד כל הורדה שהסתיימה יש כפתור שפותח את התיקייה. שירים מקישור נמצאים ב"הורדות ← יוטיוב", שירים מלשונית השירים ב"שולחן העבודה ← שירים", ופרקים ב"שולחן העבודה ← פודקאסטים".</div>
+      </details>
+      <details>
+        <summary>אפשר להוריד אלבום שלם בבת אחת?</summary>
+        <div class="a">כן. בלשונית השירים נכנסים לאלבום ולוחצים "כל האלבום". שירים שכבר יש לכם במחשב לא יורדים שוב.</div>
+      </details>
+      <details>
+        <summary>זה עובד גם בטלפון?</summary>
+        <div class="a">לא. זו תוכנה למחשב עם Windows. את הקבצים שירדו אפשר להעביר לטלפון או לנגן כרגיל.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="mk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></span><span class="w">פשוט. להוריד.</span></div>
+    <span>שירים, סרטונים ופודקאסטים. ישר למחשב. · מבית <a href="https://simpleautomatic.cloud/" style="color:var(--c3);font-weight:700;text-decoration:none">פשוט. אוטומט.</a></span>
+  </div>
+</footer>
+</body>
+</html>
