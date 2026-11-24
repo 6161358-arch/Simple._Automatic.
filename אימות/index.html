@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>האימות המתוחכם של יוסי | Pro</title>
+    <!-- הוספת אייקון לכרטיסייה (Favicon) שתואם לעיצוב האתר -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230d9488' stroke-width='2'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' /%3e%3c/svg%3e">
+    <!-- טעינת Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f766e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 1rem center;
+            background-size: 1.2em;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05), 0 0 20px rgba(20, 184, 166, 0.05);
+        }
+
+        .input-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .input-transition:focus-within {
+            transform: translateY(-2px);
+        }
+
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8 text-slate-800">
+
+    <!-- התראת Toast (מוסתרת כברירת מחדל) -->
+    <div id="toast" class="fixed top-6 left-1/2 transform -translate-x-1/2 -translate-y-24 opacity-0 transition-all duration-500 ease-out z-50 pointer-events-none">
+        <div class="bg-rose-500 text-white px-5 py-3 rounded-2xl shadow-xl shadow-rose-500/20 flex items-center gap-3 border border-rose-400/50 backdrop-blur-md">
+            <div class="bg-white/20 p-1.5 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <span id="toastMessage" class="font-medium text-sm sm:text-base">אי אפשר למלאות את שניהם יחד</span>
+        </div>
+    </div>
+
+    <div class="glass-panel rounded-3xl max-w-lg w-full p-8 sm:p-10 relative overflow-hidden">
+        
+        <div class="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-primary-400 via-primary-600 to-primary-700"></div>
+
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-50 text-primary-600 mb-4 shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold tracking-tight text-slate-900 mb-2">מערכת האימות החכמה</h1>
+            <p class="text-primary-600 font-medium">תהליך אימות אוטומטי ומאובטח</p>
+        </div>
+
+        <div class="bg-primary-50 border border-primary-100 rounded-2xl p-5 mb-8">
+            <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-primary-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="text-sm text-primary-700 leading-relaxed space-y-1">
+                    <p class="font-semibold text-primary-800">הנחיות חשובות:</p>
+                    <ul class="list-disc list-inside space-y-0.5 opacity-90 marker:text-primary-400">
+                        <li>קוד האימות הינו שדה <span class="font-bold underline">חובה</span>.</li>
+                        <li>יש לבחור מקור אימות <span class="font-bold">או</span> להזין קוד חד-פעמי.</li>
+                        <li class="text-rose-600 font-medium">לא ניתן למלא את שניהם יחד.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <form id="authForm" class="space-y-6">
+            
+            <div class="input-transition group">
+                <label for="reason" class="block text-sm font-medium text-slate-600 mb-1.5 ml-1 transition-colors group-focus-within:text-primary-600">מקור האימות המבוקש</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 group-focus-within:text-primary-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <select id="reason" class="w-full bg-slate-50 border border-slate-200 rounded-xl pr-11 pl-10 py-3.5 text-slate-800 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 transition-all shadow-sm">
+                        <option value="" disabled selected>טוען רשימה...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-transition group">
+                <label for="authCode" class="block text-sm font-medium text-slate-600 mb-1.5 ml-1 transition-colors group-focus-within:text-primary-600">קוד אימות <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 group-focus-within:text-primary-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                    </div>
+                    
+                    <!-- שמתי פה pl-12 כדי שיהיה מקום לעינית מצד שמאל -->
+                    <input type="password" id="authCode" required placeholder="הזן את הקוד כאן..." 
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl pr-11 pl-12 py-3.5 text-slate-800 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 transition-all shadow-sm tracking-widest text-left" dir="ltr">
+                    
+                    <!-- כפתור העינית -->
+                    <button type="button" id="togglePasswordBtn" class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 hover:text-primary-600 focus:outline-none transition-colors" title="הצג קוד">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <!-- אייקון של עין סגורה כברירת מחדל -->
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex items-center py-2">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span class="flex-shrink-0 mx-4 text-xs font-medium text-slate-400 uppercase tracking-wider">או מילוי ידני</span>
+                <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <div class="input-transition group">
+                <label for="otpCode" class="block text-sm font-medium text-slate-600 mb-1.5 ml-1 transition-colors group-focus-within:text-primary-600">קוד חד-פעמי (OTP)</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 group-focus-within:text-primary-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" id="otpCode" placeholder="הזן קוד ח&quot;פ..." 
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl pr-11 pl-4 py-3.5 text-slate-800 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 transition-all shadow-sm text-left font-mono" dir="ltr">
+                </div>
+            </div>
+
+            <div class="input-transition group" id="siteNameContainer">
+                <label for="siteName" class="block text-sm font-medium text-slate-600 mb-1.5 ml-1 transition-colors group-focus-within:text-primary-600">
+                    שם האתר לשמירה קבועה <span class="text-xs font-normal text-slate-400">(אופציונלי)</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400 group-focus-within:text-primary-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                        </svg>
+                    </div>
+                    <input type="text" id="siteName" placeholder="לדוגמה: פורטל ארגוני..." 
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl pr-11 pl-4 py-3.5 text-slate-800 focus:bg-white focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10 transition-all shadow-sm">
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="group relative w-full flex justify-center py-4 px-4 border border-transparent text-base font-semibold rounded-xl text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-300 shadow-lg hover:shadow-primary-500/30 overflow-hidden mt-8">
+                <div class="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                
+                <span class="flex items-center gap-2 relative z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                    שלח נתונים לעיבוד
+                </span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const WEBHOOK_URL = "https://n8n.simpleautomatic.cloud/webhook/3aade355-0e28-472c-bafc-46a4af801542";
+
+        const form = document.getElementById('authForm');
+        const reasonSelect = document.getElementById('reason');
+        const otpCodeInput = document.getElementById('otpCode');
+        const siteNameInput = document.getElementById('siteName');
+        const submitBtn = document.getElementById('submitBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+        const authCodeInput = document.getElementById('authCode');
+        const eyeIcon = document.getElementById('eyeIcon');
+        let toastTimeout;
+
+        // ===== טעינת רשימת האתרים מ-N8N (אותו webhook, עם action=loadSites) =====
+        async function loadSites() {
+            try {
+                const res = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "action": "loadSites" })
+                });
+
+                if (!res.ok) throw new Error('status ' + res.status);
+
+                const data = await res.json();
+                // תומך גם ב-["גוגל","N8N"] וגם ב-[{name:"גוגל"},...] וגם ב-{sites:[...]}
+                let sites = Array.isArray(data) ? data : (data.sites || []);
+                sites = sites.map(s => (typeof s === 'string' ? s : (s.name || s.site || s.value)));
+
+                reasonSelect.innerHTML = '<option value="" disabled selected>בחר אפשרות מהרשימה...</option>';
+                sites.forEach(name => {
+                    if (!name) return;
+                    const opt = document.createElement('option');
+                    opt.value = name;
+                    opt.textContent = name;
+                    reasonSelect.appendChild(opt);
+                });
+            } catch (err) {
+                console.error("שגיאה בטעינת הרשימה:", err);
+                reasonSelect.innerHTML = '<option value="" disabled selected>שגיאה בטעינת הרשימה</option>';
+            }
+        }
+        loadSites();
+
+        // לוגיקת העינית (הצגה/הסתרה של הקוד)
+        togglePasswordBtn.addEventListener('click', function () {
+            // בדיקה אם השדה כרגע הוא מסוג סיסמה
+            const isPassword = authCodeInput.getAttribute('type') === 'password';
+            
+            // החלפת הסוג בהתאם
+            authCodeInput.setAttribute('type', isPassword ? 'text' : 'password');
+            
+            // החלפת האייקון
+            if (isPassword) {
+                // אייקון עין פתוחה
+                eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />`;
+                togglePasswordBtn.classList.add('text-primary-600');
+            } else {
+                // אייקון עין סגורה
+                eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />`;
+                togglePasswordBtn.classList.remove('text-primary-600');
+            }
+        });
+
+        // פונקציה להצגת ה-Toast
+        function showToast(message) {
+            toastMessage.textContent = message;
+            
+            // הצגה (מוריד אותו למטה ומעלה שקיפות)
+            toast.classList.remove('-translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            // הסתרה אחרי 3.5 שניות
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('-translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        // ברגע שמשנים את הרשימה, ואם יש כבר קוד ח"פ -> מאפסים את הח"פ ומקפיצים התראה
+        reasonSelect.addEventListener('change', function() {
+            if (this.value !== "" && otpCodeInput.value !== "") {
+                otpCodeInput.value = "";
+                siteNameInput.value = "";
+                showToast("אי אפשר למלאות את שניהם יחד. קוד הח\"פ שהוזן נאפס.");
+            }
+        });
+
+        // ברגע שמתחילים להקליד ח"פ, ואם כבר נבחרה אפשרות ברשימה -> מאפסים את הרשימה ומקפיצים התראה
+        otpCodeInput.addEventListener('input', function() {
+            if (this.value !== "" && reasonSelect.value !== "") {
+                reasonSelect.value = "";
+                showToast("אי אפשר למלאות את שניהם יחד. בחירת הרשימה התאפסה.");
+            }
+        });
+
+        // שליחת הטופס
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // אנימציית טעינה בכפתור
+            const originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.innerHTML = `<span class="flex items-center gap-2"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>מעבד נתונים...</span>`;
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+
+            const payload = {
+                "action": "submit",
+                "למה תרצה אימות?": reasonSelect.value || "",
+                "הזן קוד אימות": document.getElementById('authCode').value,
+                "הזנת קוד ח\"פ": otpCodeInput.value,
+                "במידה והזנת קוד ח\"פ ואתה רוצה לשומרו בצורה קבועה נא רשום את שם האתר": siteNameInput.value,
+                "submittedAt": new Date().toISOString(),
+                "formMode": "production"
+            };
+
+            console.log("🚀 Payload ready for N8N:", JSON.stringify(payload, null, 2));
+
+            try {
+                // שליחה ל-Webhook ב-N8N
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    const responseText = await response.text();
+                    
+                    // במידה ו-N8N מחזיר את דף ה-HTML של ההצלחה שיצרנו
+                    if (responseText.includes('<html') || responseText.includes('<!DOCTYPE')) {
+                        document.open();
+                        document.write(responseText);
+                        document.close();
+                    } else {
+                        // אם N8N מחזיר רק אישור רגיל/JSON
+                        submitBtn.innerHTML = originalBtnHtml;
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                        showToast("הקוד לא תקין!");
+                        form.reset();
+                    }
+                } else {
+                    throw new Error('שגיאה מהשרת: ' + response.status);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                submitBtn.innerHTML = originalBtnHtml;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                
+                // טיפול בשגיאת CORS במקום שימוש ב-alert
+                if (error.message.includes("Failed to fetch") || error.name === "TypeError") {
+                    showToast("שגיאת רשת (CORS). יש להפעיל 'Respond with CORS' בהגדרות צומת ה-Webhook ב-N8N.");
+                } else {
+                    showToast("שגיאה בשליחה. וודא ש-N8N במצב האזנה.");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
