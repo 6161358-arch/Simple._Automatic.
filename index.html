@@ -917,8 +917,7 @@
     </div>
 
     <!-- צ'אט וטפסים קופצים -->
-    <script src="https://chatrace.com/webchat/plugin.js?v=6"></script>
-    <script>try { ktt10.setup({id:"og0DyEV4tB7jCoZ1Y",accountId:"1133996",color:"#006dff"}); } catch (e) {}</script>
+    <script src="chat/widget.js" defer></script>
     <script src="https://server.fillout.com/embed/v1/"></script>
 
     <script>
@@ -1195,11 +1194,9 @@
         });
 
         // ---------- צ'אט ----------
+        // פותח את הצ'אט שלנו (chat/widget.js): עוזר AI + מעבר ליוסי
         function highlightChat() {
-            const chatPointer = $('#chat-pointer');
-            chatPointer.hidden = false;
-            if (typeof ktt10 !== 'undefined' && ktt10.openWidget) ktt10.openWidget();
-            setTimeout(() => { chatPointer.hidden = true; }, 5000);
+            if (window.SAChat) window.SAChat.open();
         }
 
         // ---------- מחולל הרעיונות ----------
